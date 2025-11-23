@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Lam - Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- DESIGN SYSTEM VARIABLES --- */
+        :root {
+            /* Common Variables */
+            --radius-card: 24px;
+            --radius-button: 100px;
+            --accent-blue: #2997FF;
+            --transition-speed: 0.3s;
+            
+            /* DARK MODE (Default) */
+            --bg-body: #050505;
+            --text-primary: #F5F5F7;
+            --text-secondary: #86868B;
+            --text-tertiary: #555555;
+            
+            --glass-bg: rgba(30, 30, 30, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.12);
+            
+            --card-bg: #161617;
+            --card-hover: #1c1c1e;
+            --card-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            
+            --nav-bg: rgba(20, 20, 20, 0.7);
+            --nav-border: rgba(255, 255, 255, 0.1);
+            
+            --hero-gradient: linear-gradient(135deg, #FFFFFF 0%, #999999 100%);
+            --stat-gradient: linear-gradient(180deg, #fff 0%, #666 100%);
+            
+            --pill-bg: transparent;
+            --pill-border: rgba(255, 255, 255, 0.15);
+            --pill-active-bg: #fff;
+            --pill-active-text: #000;
+
+            --hero-img-opacity: 0.3;
+        }
+
+        /* LIGHT MODE OVERRIDES */
+        [data-theme="light"] {
+            --bg-body: #F5F5F7;
+            --text-primary: #1D1D1F;
+            --text-secondary: #6e6e73;
+            --text-tertiary: #86868b;
+            
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --glass-hover: rgba(255, 255, 255, 0.8);
+            
+            --card-bg: #FFFFFF;
+            --card-hover: #FFFFFF;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            
+            --nav-bg: rgba(255, 255, 255, 0.7);
+            --nav-border: rgba(0, 0, 0, 0.05);
+            
+            --hero-gradient: linear-gradient(135deg, #1D1D1F 0%, #424245 100%);
+            --stat-gradient: linear-gradient(180deg, #1D1D1F 0%, #86868B 100%);
+            
+            --pill-bg: rgba(0,0,0,0.05);
+            --pill-border: transparent;
+            --pill-active-bg: #1D1D1F;
+            --pill-active-text: #fff;
+
+            /* FIX: Increased visibility for Light Mode */
+            --hero-img-opacity: 0.15; 
+        }
+
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            line-height: 1.5;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+
+        /* --- NAV --- */
+        .nav-wrapper {
+            position: fixed;
+            top: 24px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .nav-bar {
+            pointer-events: auto;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            padding: 6px;
+            border-radius: var(--radius-button);
+            border: 1px solid var(--nav-border);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all var(--transition-speed);
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: var(--radius-button);
+            transition: background 0.3s ease;
+        }
+
+        .nav-link:hover { background: rgba(128, 128, 128, 0.1); }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: var(--radius-button);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: background 0.3s ease;
+            margin-left: 4px;
+            border-left: 1px solid var(--nav-border);
+            border-radius: 0;
+        }
+        
+        .theme-toggle:first-child { border-radius: 100px 0 0 100px; }
+        .theme-toggle:last-child { border-radius: 0 100px 100px 0; border-left: 1px solid var(--nav-border); }
+        
+        .theme-toggle:hover { background: rgba(128, 128, 128, 0.1); }
+
+        /* --- HERO --- */
+        .hero-section {
+            position: relative;
+            height: 85vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: var(--hero-img-opacity);
+            z-index: 1;
+            /* Fade out bottom for seamless transition */
+            mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+            transition: opacity var(--transition-speed);
+            /* Removed grayscale filter so it shows in light mode */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            padding: 0 20px;
+            margin-top: 40px;
+        }
+
+        h1 {
+            font-size: 80px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 24px;
+            background: var(--hero-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: background var(--transition-speed);
+        }
+
+        .hero-sub {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: -0.01em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* --- SECTIONS --- */
+        .section {
+            position: relative;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            z-index: 10;
+        }
+
+        /* --- STATS --- */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            padding: 60px 0;
+            margin-bottom: 80px;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            transition: border-color var(--transition-speed);
+        }
+        .stat-item { text-align: center; }
+        
+        .stat-val { 
+            font-size: 96px; 
+            font-weight: 700; 
+            color: var(--text-primary); 
+            line-height: 1; 
+            margin-bottom: 12px; 
+            letter-spacing: -0.04em;
+            background: var(--stat-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all var(--transition-speed);
+        }
+        .stat-lbl { font-size: 14px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* --- GRID SYSTEM --- */
+        .grid {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(12, 1fr);
+        }
+        .span-6 { grid-column: span 6; }
+        .span-12 { grid-column: span 12; }
+
+        /* --- SCOPES (Static) --- */
+        .scope-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-card);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 300px;
+            backdrop-filter: blur(10px);
+            cursor: default;
+            transition: all var(--transition-speed);
+        }
+
+        .scope-num {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+            font-family: monospace;
+        }
+
+        .scope-title { 
+            font-size: 32px; 
+            font-weight: 600; 
+            margin-bottom: 16px; 
+            color: var(--text-primary); 
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        
+        .scope-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* --- FILTER PILLS --- */
+        .filter-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE */
+        }
+        .filter-container::-webkit-scrollbar { display: none; }
+
+        .filter-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            border-radius: 100px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .filter-pill:hover { background: var(--glass-hover); color: var(--text-primary); }
+        
+        .filter-pill.active {
+            background: var(--pill-active-bg);
+            color: var(--pill-active-text);
+            font-weight: 600;
+            border-color: transparent;
+        }
+
+        .filter-icon { font-size: 16px; }
+
+        /* --- BRAND CARD --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .brand-card {
+            position: relative;
+            border-radius: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            padding: 32px;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 0 0 transparent;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-6px);
+            background: var(--card-hover);
+            box-shadow: var(--card-shadow);
+            border-color: var(--accent-blue); /* Subtle highlight */
+        }
+
+        /* Brand Avatar */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .brand-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            background: #333;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Brand Specific Colors (Keep these vibrant) */
+        .bg-apple { background: linear-gradient(135deg, #000 0%, #333 100%); border: 1px solid #444; }
+        .bg-amazon { background: linear-gradient(135deg, #FF9900 0%, #CC7A00 100%); color: #000; }
+        .bg-sunlife { background: linear-gradient(135deg, #FFD400 0%, #E6BE00 100%); color: #000; }
+        .bg-muji { background: #7F0019; }
+        .bg-bakes { background: #E0583B; }
+        .bg-vero { background: #009688; }
+        .bg-mammam { background: #222; border: 1px solid #555; }
+        .bg-pmax { background: #0057FF; }
+        .bg-vero-green { background: #004D40; }
+        .bg-august { background: #D4AF37; color: #000; }
+        .bg-yingtao { background: #8B0000; }
+        .bg-lang { background: #D8C3A5; color: #5E4B35; }
+        .bg-bitis { background: #0054A6; }
+        .bg-shadow { background: #000; border: 1px solid #333; }
+        .bg-pikotaro { background: #D4AF37; color: #000; }
+        .bg-love { background: #FF0000; }
+
+        .card-title-group { display: flex; flex-direction: column; }
+        .card-title { font-size: 20px; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+        .card-client { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
+        /* Metadata Grid */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 16px;
+            padding-top: 24px;
+            border-top: 1px solid var(--glass-border);
+            margin-top: auto;
+        }
+
+        .meta-item { display: flex; flex-direction: column; }
+        
+        .meta-full {
+            grid-column: span 2;
+            margin-top: 8px;
+        }
+
+        .meta-label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); letter-spacing: 0.05em; margin-bottom: 6px; }
+        .meta-val { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            text-align: left;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        /* --- CAREER TABLE --- */
+        .career-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .career-row {
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.2s;
+        }
+        .career-row:hover { background: var(--glass-hover); }
+        
+        .career-cell {
+            padding: 24px 0;
+            vertical-align: top;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        
+        .c-role { color: var(--text-primary); font-weight: 600; font-size: 16px; width: 30%; }
+        .c-company { color: var(--text-primary); width: 25%; }
+        .c-date { text-align: right; font-family: monospace; font-size: 13px; opacity: 0.6; width: 15%; }
+        .c-desc { font-size: 14px; line-height: 1.6; }
+
+        .footer { text-align: center; padding: 100px 0; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--glass-border); margin-top: 100px; }
+        .footer a { color: var(--text-primary); margin: 0 10px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            .stats-row { flex-wrap: wrap; gap: 40px; }
+            .stat-val { font-size: 64px; }
+            .span-6, .span-12 { grid-column: span 12; }
+            .career-cell { display: block; width: 100%; padding: 8px 0; }
+            .career-row { padding: 20px 0; display: block; }
+            .c-date { text-align: left; margin-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-wrapper">
+        <nav class="nav-bar">
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#scopes" class="nav-link">Scopes</a>
+            <a href="#work" class="nav-link">Work</a>
+            <a href="#career" class="nav-link">Career</a>
+            
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Dark/Light Mode">
+                <span id="themeIcon">☀︎</span>
+            </button>
+        </nav>
+    </div>
+
+    <header class="hero-section" id="overview">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" class="hero-bg" alt="Abstract Background">
+        
+        <div class="hero-content">
+            <h1>Hi, I’m Dylan.</h1>
+            <div class="hero-sub">
+                A strategic thinker who thrives at the intersection of <br>
+                <span class="highlight">Structure</span> and <span class="highlight">Creativity</span>.<br>
+                <span style="display:block; margin-top: 12px;">Experienced Problem Solver.</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="section">
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="stat-val">4</div>
+                <div class="stat-lbl">Core Scopes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">25+</div>
+                <div class="stat-lbl">Projects Led</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">7+</div>
+                <div class="stat-lbl">Years Exp</div>
+            </div>
+        </div>
+
+        <div id="scopes" class="grid">
+            <div class="scope-card span-6">
+                <div class="scope-num">01</div>
+                <div>
+                    <div class="scope-title">Sales & Account<br>Management</div>
+                    <p class="scope-desc">I connect with people, build trust, and make sure deals don’t just close—but last. Expertise in high-value client retention.</p>
+                </div>
+            </div>
+            <div class="scope-card span-6">
+                <div class="scope-num">02</div>
+                <div>
+                    <div class="scope-title">Data & Business<br>Analytics</div>
+                    <p class="scope-desc">Making sense of messy data. Turning complex metrics into simple stories that help businesses grow with confidence.</p>
+                </div>
+            </div>
+            <div class="scope-card span-6">
+                <div class="scope-num">03</div>
+                <div>
+                    <div class="scope-title">Project<br>Management</div>
+                    <p class="scope-desc">I bring order to chaos. Managing cross-functional teams (Design, Build, Ops) to ensure ideas succeed in the real world.</p>
+                </div>
+            </div>
+            <div class="scope-card span-6">
+                <div class="scope-num">04</div>
+                <div>
+                    <div class="scope-title">Notion System<br>Design</div>
+                    <p class="scope-desc">Designing effortless digital ecosystems. I build tools for internal operations, CRM, and project tracking.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="work">
+        <h2 class="section-title">Selected Work</h2>
+        
+        <div class="filter-container">
+            <button class="filter-pill active" onclick="filterProjects('all')">
+                <span class="filter-icon">❖</span> Full Portfolio
+            </button>
+            <button class="filter-pill" onclick="filterProjects('sales')">
+                <span class="filter-icon">⊞</span> Sales & Account Management
+            </button>
+            <button class="filter-pill" onclick="filterProjects('pm')">
+                <span class="filter-icon">⊡</span> Project Management
+            </button>
+            <button class="filter-pill" onclick="filterProjects('notion')">
+                <span class="filter-icon">▤</span> Notion System
+            </button>
+            <button class="filter-pill" onclick="filterProjects('data')">
+                <span class="filter-icon">▦</span> Data & Business Analytics
+            </button>
+        </div>
+
+        <div class="project-grid">
+            
+            <a href="https://dylanlam.notion.site/Efficiency-Enhancement-Tool-2586f6c490838031a065ecff1714454d" target="_blank" class="brand-card" data-category="data sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-amazon">A</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Efficiency Enhancement Tool</div>
+                        <div class="card-client">Client: Amazon</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Data & Business Analytics</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Data Analytics</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://dylanlam.notion.site/Project-Management-System-on-Notion-2586f6c490838099a135fe48bd1ecf5d" target="_blank" class="brand-card" data-category="notion">
+                <div class="card-header">
+                    <div class="brand-avatar bg-pmax">PM</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Project Management System</div>
+                        <div class="card-client">Client: Filian TV</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Notion System</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Notion System Setup</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.thelabsaigon.com/work/muji-box" target="_blank" class="brand-card" data-category="sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-muji">M</div>
+                    <div class="card-title-group">
+                        <div class="card-title">MUJI Box</div>
+                        <div class="card-client">Client: MUJI</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Sales & Account Management</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/reel/DGyQDyRP71N/" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-apple"></div>
+                    <div class="card-title-group">
+                        <div class="card-title">Apple Social Video</div>
+                        <div class="card-client">Client: Apple</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Video Production</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/222633137/MAMMAM-Eatery-Lounge" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-mammam">MM</div>
+                    <div class="card-title-group">
+                        <div class="card-title">MÂMMÂM Eatery & Lounge</div>
+                        <div class="card-client">Client: Vietcetera</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity, Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/218543295/Lang-Spa" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-lang">LS</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Lang Spa</div>
+                        <div class="card-client">Client: Lang Spa</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity, Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://dylanlam.notion.site/Vero-Rebrand-Web-Identity-2576f6c490838000814afece833a9ea5" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-vero-green">V</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Vero Rebrand & Web Identity</div>
+                        <div class="card-client">Client: Vero ASEAN</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity, Website Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" target="_blank" class="brand-card" data-category="pm">
+                <div class="card-header">
+                    <div class="brand-avatar bg-bakes">B4</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Bakes Store #4</div>
+                        <div class="card-client">Client: The Lab Concepts</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/172040899/EVA-EXHIBITION" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-bitis">EE</div>
+                    <div class="card-title-group">
+                        <div class="card-title">EVA Exhibition</div>
+                        <div class="card-client">Client: Sunlife Insurance</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity, Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://transition.breakthroughenergy.org/" target="_blank" class="brand-card" data-category="notion">
+                <div class="card-header">
+                    <div class="brand-avatar bg-pmax">BE</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Breakthrough Energy Website</div>
+                        <div class="card-client">Client: GNS Studio</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Notion System</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Notion System Setup, Website Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/p/Cx5bjiJv2w5/" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-yingtao">Y櫻</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Yingtao 櫻桃 Brand Identity</div>
+                        <div class="card-client">Client: August Hospitality Group</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/173479823/BAKES-FLAGSHIP" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-bakes">BF</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Bakes Flagship Store</div>
+                        <div class="card-client">Client: The Lab Concepts</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity, Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/197607065/Mami-Cocktails" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-pmax">MC</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Mámi Cocktails</div>
+                        <div class="card-client">Client: 86Proof Hospitality Group</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity, Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/168537349/Bitis-40-Years-Exhibition" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-bitis">B4</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Biti’s 40Y Exhibition</div>
+                        <div class="card-client">Client: Biti's</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-bitis">D(</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Du (Enough) Exhibition</div>
+                        <div class="card-client">Client: Sunlife Insurance</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/189261513/Y-LOUNGE-SUNLIFE-HN-HQ" target="_blank" class="brand-card" data-category="pm">
+                <div class="card-header">
+                    <div class="brand-avatar bg-sunlife">SH</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Sunlife Hanoi Head Office</div>
+                        <div class="card-client">Client: Sunlife Insurance</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" target="_blank" class="brand-card" data-category="data">
+                <div class="card-header">
+                    <div class="brand-avatar bg-pmax">SS</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Sales System Setup (CRM, Cashflow, Dashboards, etc.)</div>
+                        <div class="card-client">Client: The Lab</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Data & Business Analytics</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Data Analytics</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" target="_blank" class="brand-card" data-category="pm">
+                <div class="card-header">
+                    <div class="brand-avatar bg-pmax">BN</div>
+                    <div class="card-title-group">
+                        <div class="card-title">B34CH NFT</div>
+                        <div class="card-client">Client: OP3N</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2022</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/165324263/SHADOW-LOUNGE-BRANDING" target="_blank" class="brand-card" data-category="pm">
+                <div class="card-header">
+                    <div class="brand-avatar bg-shadow">SL</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Shadow Lounge</div>
+                        <div class="card-client">Client: The Lab Concepts</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2022</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/139885003/LOVE-IS-HARD-HIV-PREVENTION-IS-EASY" target="_blank" class="brand-card" data-category="pm sales">
+                <div class="card-header">
+                    <div class="brand-avatar bg-bitis">LI</div>
+                    <div class="card-title-group">
+                        <div class="card-title">Love Is Hard. HIV Prevention Is Easy Exhibition</div>
+                        <div class="card-client">Client: HAIVN + US CDC</div>
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-val">2022</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Scope</span>
+                        <span class="meta-val">Project Management, Sales</span>
+                    </div>
+                    <div class="meta-item meta-full">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-val">Brand Identity, Interior Design</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="section" id="career">
+        <h2 class="section-title">Career History</h2>
+        <div class="scope-card" style="cursor: default; padding: 0 40px;">
+            <table class="career-table">
+                <tr class="career-row">
+                    <td class="career-cell c-role">Global Partnership Manager</td>
+                    <td class="career-cell c-company">Amazon Ads</td>
+                    <td class="career-cell c-desc">Exceeded revenue targets by 5% for two consecutive quarters. Built scalable lead-gen system integrated to Global Dashboard.</td>
+                    <td class="career-cell c-date">04/2024 — Present</td>
+                </tr>
+                <tr class="career-row">
+                    <td class="career-cell c-role">Strategic Partnership Manager</td>
+                    <td class="career-cell c-company">The Lab Creative</td>
+                    <td class="career-cell c-desc">Led F&B business launch in 4 months. Built CRM infrastructure and ran cross-team workshops.</td>
+                    <td class="career-cell c-date">01/2024 — 08/2024</td>
+                </tr>
+                <tr class="career-row">
+                    <td class="career-cell c-role">Senior Strategic Partnership</td>
+                    <td class="career-cell c-company">The Lab Creative</td>
+                    <td class="career-cell c-desc">Drove 40% of annual company revenue. Launched 1,000sqm bakery by coordinating 10+ teams. Employee of the Month (Nov 23).</td>
+                    <td class="career-cell c-date">11/2022 — 12/2023</td>
+                </tr>
+                <tr class="career-row">
+                    <td class="career-cell c-role">Account Executive</td>
+                    <td class="career-cell c-company">The Lab Creative</td>
+                    <td class="career-cell c-desc">Hit 180% of Q4 revenue KPIs. Onboarded US clients and developed in-house cash flow tools.</td>
+                    <td class="career-cell c-date">11/2021 — 10/2022</td>
+                </tr>
+                <tr class="career-row">
+                    <td class="career-cell c-role">Senior Account Executive</td>
+                    <td class="career-cell c-company">PMAX</td>
+                    <td class="career-cell c-desc">Spearheaded campaign launches for FE CREDIT & VPBank. Top 3 Accounts in Q2 2021.</td>
+                    <td class="career-cell c-date">04/2021 — 07/2021</td>
+                </tr>
+                <tr class="career-row">
+                    <td class="career-cell c-role">Account Executive</td>
+                    <td class="career-cell c-company">PMAX</td>
+                    <td class="career-cell c-desc">Co-managed digital ad campaigns and built real-time dashboards.</td>
+                    <td class="career-cell c-date">08/2020 — 03/2021</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="mailto:dylanlamwork@gmail.com">dylanlamwork@gmail.com</a> • 
+        <a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a>
+        <br><br>
+        © 2025 Dylan Lam • Portfolio
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle Logic
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlTag = document.documentElement;
+
+        // Check local storage
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlTag.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = htmlTag.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlTag.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀︎' : '☾';
+        }
+
+        // Project Filtering Logic
+        function filterProjects(category) {
+            // 1. Update Buttons active state
+            const buttons = document.querySelectorAll('.filter-pill');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // 2. Filter Cards
+            const cards = document.querySelectorAll('.brand-card');
+            cards.forEach(card => {
+                const categories = card.getAttribute('data-category').split(' ');
+                
+                if (category === 'all') {
+                    card.style.display = 'flex'; // Flex because brand-card uses flexbox
+                } else {
+                    if (categories.includes(category)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
