@@ -12,7 +12,6 @@
     <style>
         /* --- DESIGN SYSTEM VARIABLES --- */
         :root {
-            /* Common Variables */
             --radius-card: 30px;
             --radius-button: 100px;
             --accent-blue: #2997FF;
@@ -35,6 +34,7 @@
             
             --nav-bg: rgba(20, 20, 20, 0.7);
             --nav-border: rgba(255, 255, 255, 0.1);
+            --nav-mobile-bg: rgba(20, 20, 20, 0.95);
             
             --hero-gradient: linear-gradient(135deg, #FFFFFF 0%, #999999 100%);
             --stat-gradient: linear-gradient(180deg, #fff 0%, #666 100%);
@@ -67,6 +67,7 @@
             
             --nav-bg: rgba(255, 255, 255, 0.7);
             --nav-border: rgba(0, 0, 0, 0.05);
+            --nav-mobile-bg: rgba(255, 255, 255, 0.95);
             
             --hero-gradient: linear-gradient(135deg, #1D1D1F 0%, #424245 100%);
             --stat-gradient: linear-gradient(180deg, #1D1D1F 0%, #86868B 100%);
@@ -137,8 +138,23 @@
             border-radius: var(--radius-button);
             transition: background 0.3s ease;
         }
-
         .nav-link:hover { background: rgba(128, 128, 128, 0.1); }
+
+        /* Classes for Mobile Logic */
+        .desktop-only { display: block; }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            border-radius: 100px;
+            margin-left: 4px;
+        }
+        .mobile-menu-btn:hover { background: rgba(128, 128, 128, 0.1); }
+        .mobile-menu-btn.active { background: rgba(128, 128, 128, 0.2); }
 
         /* Theme Toggle */
         .theme-toggle {
@@ -158,58 +174,32 @@
         }
         .theme-toggle:hover { background: rgba(128, 128, 128, 0.1); }
 
-        /* Mobile Menu Toggle */
-        .mobile-menu-btn {
+        /* Mobile Dropdown */
+        .mobile-dropdown {
             display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 20px;
-            padding: 10px 16px;
-            cursor: pointer;
-            border-radius: 100px;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--nav-mobile-bg);
+            border: 1px solid var(--nav-border);
+            padding: 20px;
+            border-radius: 30px;
+            flex-direction: column;
+            align-items: center;
+            width: 260px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999;
         }
-        .mobile-menu-btn:hover { background: rgba(128, 128, 128, 0.1); }
-
-        /* --- MOBILE NAV STYLES --- */
-        @media (max-width: 768px) {
-            .nav-links-container {
-                display: none;
-                position: absolute;
-                top: 60px;
-                right: 0;
-                left: 0; /* Center horizontally */
-                margin: auto;
-                background: var(--nav-bg);
-                border: 1px solid var(--nav-border);
-                padding: 20px;
-                border-radius: 30px;
-                flex-direction: column;
-                align-items: center; /* Center Items */
-                width: 260px; /* Specific width */
-                box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-            }
-
-            .nav-links-container.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            /* Close state style */
-            .mobile-menu-btn.active {
-                background: rgba(128, 128, 128, 0.2);
-            }
-
-            .nav-link {
-                width: 100%;
-                text-align: center;
-                padding: 14px;
-            }
+        .mobile-dropdown.active { display: flex; }
+        
+        .mobile-dropdown .nav-link {
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            font-size: 15px;
         }
 
         /* --- HERO --- */
@@ -273,10 +263,7 @@
             line-height: 1.6;
         }
 
-        .highlight {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
+        .highlight { color: var(--text-primary); font-weight: 700; }
 
         /* --- SECTIONS --- */
         .section {
@@ -346,7 +333,6 @@
             cursor: default;
             transition: all var(--transition-speed);
         }
-
         .scope-num { font-size: 14px; font-weight: 700; color: var(--text-tertiary); letter-spacing: 0.05em; margin-bottom: 20px; font-family: monospace; }
         .scope-title { font-size: 32px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); letter-spacing: -0.02em; line-height: 1.1; }
         .scope-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; }
@@ -389,7 +375,7 @@
 
         .brand-card {
             position: relative;
-            border-radius: var(--radius-card);
+            border-radius: 30px;
             background: var(--card-bg);
             border: 1px solid var(--glass-border);
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -495,16 +481,15 @@
         .plus-btn:hover { background: var(--btn-hover); transform: scale(1.1); }
         .brand-card.active .plus-btn { background: var(--text-primary); color: var(--bg-body); transform: rotate(45deg); }
 
-        /* REVEAL PANEL */
+        /* REVEAL PANEL (NO OVERLAP) */
         .card-reveal {
             position: absolute;
             bottom: 0; 
             left: 0; 
             width: 100%;
-            height: 70%; /* Height to show description without scrolling */
+            height: calc(100% - 120px); /* Height = 100% minus Header+Meta height (~120px) */
             background: var(--reveal-bg);
             padding: 32px;
-            padding-top: 24px;
             padding-right: 70px;
             display: flex;
             flex-direction: column;
@@ -513,17 +498,12 @@
             transform: translateY(20px);
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            z-index: 25; /* Above standard content, Below Header */
+            z-index: 25; /* Covers bottom meta, but not top */
             border-top: 1px solid var(--glass-border);
             pointer-events: none;
         }
-
-        /* Z-Index layering:
-           Base Card: 1
-           Meta Grid & Header: 2
-           Reveal Panel: 25 (Covers Meta Grid)
-           Header stays visible because reveal only goes up 70%
-        */
+        /* Note: Meta Grid z-index is 2, so this z-index 25 will cover it, 
+           BUT the calculated height ensures it only physically covers the bottom section. */
 
         .brand-card.active .card-reveal {
             opacity: 1;
@@ -561,26 +541,6 @@
         .thought-item:hover .thought-arrow { opacity: 1; transform: translateX(0); }
         
         @media (max-width: 768px) {
-            .thought-item { flex-direction: column; gap: 12px; }
-            .thought-date { min-width: auto; }
-            .thought-arrow { display: none; }
-        }
-
-        /* --- CAREER TABLE --- */
-        .career-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .career-row { border-bottom: 1px solid var(--glass-border); transition: background 0.2s; }
-        .career-row:hover { background: var(--glass-hover); }
-        .career-cell { padding: 24px 0; vertical-align: top; color: var(--text-secondary); font-size: 15px; }
-        .c-role { color: var(--text-primary); font-weight: 600; font-size: 16px; width: 30%; }
-        .c-company { color: var(--text-primary); width: 25%; }
-        .c-date { text-align: right; font-family: monospace; font-size: 13px; opacity: 0.6; width: 15%; }
-        .c-desc { font-size: 14px; line-height: 1.6; }
-
-        .footer { text-align: center; padding: 100px 0; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--glass-border); margin-top: 100px; }
-        .footer a { color: var(--text-primary); margin: 0 10px; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) {
             h1 { font-size: 48px; }
             .stats-row { flex-wrap: wrap; gap: 40px; }
             .stat-val { font-size: 64px; }
@@ -590,6 +550,10 @@
             .c-date { text-align: left; margin-bottom: 10px; }
             .thought-item { flex-direction: column; gap: 12px; }
             .thought-date { min-width: auto; }
+            
+            /* Mobile Nav Hiding */
+            .desktop-only { display: none; }
+            .mobile-menu-btn { display: block; }
         }
     </style>
 </head>
@@ -597,20 +561,28 @@
 
     <div class="nav-wrapper">
         <nav class="nav-bar">
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
-            
-            <div class="nav-links-container" id="navLinks">
+            <div class="nav-links-container">
                 <a href="#overview" class="nav-link">Overview</a>
-                <a href="#scopes" class="nav-link">Scopes</a>
                 <a href="#work" class="nav-link">Work</a>
-                <a href="#thoughts" class="nav-link">Thoughts</a>
-                <a href="#career" class="nav-link">Career</a>
+                <a href="#scopes" class="nav-link desktop-only">Scopes</a>
+                <a href="#thoughts" class="nav-link desktop-only">Thoughts</a>
+                <a href="#career" class="nav-link desktop-only">Career</a>
             </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">+</button>
 
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Dark/Light Mode">
                 <span id="themeIcon">☀︎</span>
             </button>
         </nav>
+        
+        <div class="mobile-dropdown" id="mobileDropdown">
+            <a href="#overview" class="nav-link" onclick="toggleMobileMenu()">Overview</a>
+            <a href="#scopes" class="nav-link" onclick="toggleMobileMenu()">Scopes</a>
+            <a href="#work" class="nav-link" onclick="toggleMobileMenu()">Work</a>
+            <a href="#thoughts" class="nav-link" onclick="toggleMobileMenu()">Thoughts</a>
+            <a href="#career" class="nav-link" onclick="toggleMobileMenu()">Career</a>
+        </div>
     </div>
 
     <header class="hero-section" id="overview">
@@ -712,7 +684,7 @@
                 <button class="plus-btn" onclick="toggleCard(this)">+</button>
                 <div class="card-reveal">
                     <p class="reveal-desc">Built a lead-identification tool using Excel and advanced data analytics. Reduced qualification time by 80%, helping international teams pinpoint Ads Program prospects in minutes.</p>
-                </div>
+                    </div>
             </div>
 
             <div class="brand-card" data-category="notion">
@@ -737,7 +709,7 @@
                 <button class="plus-btn" onclick="toggleCard(this)">+</button>
                 <div class="card-reveal">
                     <p class="reveal-desc">Designed and implemented a comprehensive Project Management System on Notion, tailored for Filian TV's content production workflows.</p>
-                </div>
+                    </div>
             </div>
 
             <div class="brand-card" data-category="sales">
@@ -866,8 +838,7 @@
                 <button class="plus-btn" onclick="toggleCard(this)">+</button>
                 <div class="card-reveal">
                     <p class="reveal-desc">Led the strategic rebrand delivery and website update project for VERO, unifying their services portfolio across SE Asia.</p>
-                    <a href="https://dylanlam.notion.site/Vero-Rebrand-Web-Identity-2576f6c490838000814afece833a9ea5" target="_blank" class="learn-more-btn">Learn More ↗</a>
-                </div>
+                    </div>
             </div>
 
             <div class="brand-card" data-category="pm">
@@ -892,8 +863,7 @@
                 <button class="plus-btn" onclick="toggleCard(this)">+</button>
                 <div class="card-reveal">
                     <p class="reveal-desc">Managed the rollout of Bakes' first mall location. Coordinated between property stakeholders (Vincom) and internal design teams to ensure a smooth build-out.</p>
-                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7204748271401992192?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_multiple_media_viewer%3BIP%2F4Yoj%2FSQCl7g925THcDQ%3D%3D" target="_blank" class="learn-more-btn">Learn More ↗</a>
-                </div>
+                    </div>
             </div>
 
             <div class="brand-card" data-category="pm sales">
@@ -1315,7 +1285,7 @@
 
         // Mobile Menu Toggle
         function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
+            const navLinks = document.getElementById('mobileDropdown');
             const menuBtn = document.querySelector('.mobile-menu-btn');
             navLinks.classList.toggle('active');
             menuBtn.classList.toggle('active');
@@ -1323,7 +1293,7 @@
             if(navLinks.classList.contains('active')) {
                 menuBtn.innerHTML = '✕';
             } else {
-                menuBtn.innerHTML = '☰';
+                menuBtn.innerHTML = '+';
             }
         }
 
