@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dylan Lam - Portfolio</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@
             --card-shadow: 0 20px 40px rgba(0,0,0,0.5);
             --reveal-bg: #1E1E1E;
             
-            --nav-bg: rgba(20, 20, 20, 0.7);
+            --nav-bg: rgba(20, 20, 20, 0.85); /* More opaque for mobile */
             --nav-border: rgba(255, 255, 255, 0.1);
             
             --hero-gradient: linear-gradient(135deg, #FFFFFF 0%, #999999 100%);
@@ -65,18 +65,18 @@
             --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
             --reveal-bg: #F0F0F2;
             
-            --nav-bg: rgba(255, 255, 255, 0.7);
+            --nav-bg: rgba(255, 255, 255, 0.85);
             --nav-border: rgba(0, 0, 0, 0.05);
             
-            --hero-gradient: linear-gradient(135deg, #1D1D1F 0%, #424245 100%);
-            --stat-gradient: linear-gradient(180deg, #1D1D1F 0%, #86868B 100%);
+            --hero-gradient: linear-gradient(135deg, #000000 0%, #424245 100%);
+            --stat-gradient: linear-gradient(180deg, #000000 0%, #555555 100%);
             
             --pill-bg: rgba(0,0,0,0.05);
             --pill-border: transparent;
             --pill-active-bg: #1D1D1F;
             --pill-active-text: #fff;
 
-            --hero-img-opacity: 0.8; 
+            --hero-img-opacity: 0.6;
             --btn-bg: rgba(0, 0, 0, 0.05);
             --btn-hover: rgba(0, 0, 0, 0.1);
         }
@@ -106,6 +106,7 @@
             justify-content: center;
             z-index: 1000;
             pointer-events: none;
+            padding: 0 16px; /* Mobile safe area */
         }
 
         .nav-bar {
@@ -113,23 +114,31 @@
             background: var(--nav-bg);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            padding: 6px;
+            padding: 4px; /* Tighter padding */
             border-radius: var(--radius-button);
             border: 1px solid var(--nav-border);
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 2px; /* Tighter gap */
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all var(--transition-speed);
+            
+            /* Mobile Scroll */
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none; /* Hide scrollbar */
+            -ms-overflow-style: none;
         }
+        .nav-bar::-webkit-scrollbar { display: none; }
 
         .nav-link {
             color: var(--text-primary);
             font-size: 13px;
             font-weight: 500;
-            padding: 10px 20px;
+            padding: 10px 16px;
             border-radius: var(--radius-button);
             transition: background 0.3s ease;
+            white-space: nowrap;
         }
 
         .nav-link:hover { background: rgba(128, 128, 128, 0.1); }
@@ -138,7 +147,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 10px 14px;
+            padding: 10px 16px;
             border-radius: var(--radius-button);
             display: flex;
             align-items: center;
@@ -147,17 +156,16 @@
             transition: background 0.3s ease;
             margin-left: 4px;
             border-left: 1px solid var(--nav-border);
-            border-radius: 0;
+            border-radius: 0 100px 100px 0; /* Reset for desktop */
         }
         
-        .theme-toggle:first-child { border-radius: 100px 0 0 100px; }
-        .theme-toggle:last-child { border-radius: 0 100px 100px 0; border-left: 1px solid var(--nav-border); }
         .theme-toggle:hover { background: rgba(128, 128, 128, 0.1); }
 
         /* --- HERO --- */
         .hero-section {
             position: relative;
-            height: 85vh;
+            height: 85vh; /* Fallback */
+            height: 85dvh; /* Mobile viewport fix */
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -165,6 +173,7 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
+            padding-top: 60px; /* Nav clearance */
         }
 
         .hero-bg {
@@ -173,10 +182,9 @@
             object-fit: cover;
             opacity: var(--hero-img-opacity);
             z-index: 1;
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
             transition: opacity var(--transition-speed);
-            
             background-image: url('https://images.unsplash.com/photo-1630872146677-5a4cefb1afce?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             background-size: cover;
             background-position: center;
@@ -195,12 +203,11 @@
 
         h1 {
             font-family: "Inter", sans-serif;
-            font-size: 80px;
+            font-size: clamp(48px, 8vw, 80px); /* Responsive Font Size */
             font-weight: 700;
             letter-spacing: -0.03em;
-            line-height: 1.2; /* FIX: Increased line-height to prevent cutting off 'y' */
-            padding-bottom: 10px; /* Extra space for descenders */
-            margin-bottom: 14px;
+            line-height: 1.1;
+            margin-bottom: 24px;
             background: var(--hero-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -208,7 +215,7 @@
         }
 
         .hero-sub {
-            font-size: 26px;
+            font-size: clamp(18px, 4vw, 26px); /* Responsive Font Size */
             font-weight: 400;
             color: var(--text-secondary);
             letter-spacing: -0.01em;
@@ -227,12 +234,12 @@
             position: relative;
             max-width: 1280px;
             margin: 0 auto;
-            padding: 100px 20px;
+            padding: 80px 20px;
             z-index: 10;
         }
 
         .section-title {
-            font-size: 40px;
+            font-size: clamp(32px, 5vw, 40px);
             font-weight: 700;
             text-align: left;
             margin-bottom: 30px;
@@ -243,18 +250,19 @@
         .stats-row {
             display: flex;
             justify-content: center;
-            gap: 80px;
+            gap: clamp(30px, 5vw, 80px);
             padding: 60px 0;
             margin-bottom: 80px;
             border-top: 1px solid var(--glass-border);
             border-bottom: 1px solid var(--glass-border);
             transition: border-color var(--transition-speed);
+            flex-wrap: wrap; /* Stack on mobile */
         }
-        .stat-item { text-align: center; }
+        .stat-item { text-align: center; flex: 1 1 150px; /* Min width for mobile */ }
         
         .stat-val { 
             font-family: "Inter", sans-serif;
-            font-size: 96px; 
+            font-size: clamp(48px, 8vw, 96px);
             font-weight: 700; 
             color: var(--text-primary); 
             line-height: 1; 
@@ -265,7 +273,7 @@
             -webkit-text-fill-color: transparent;
             transition: all var(--transition-speed);
         }
-        .stat-lbl { font-size: 14px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
+        .stat-lbl { font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
 
         /* --- GRID SYSTEM --- */
         .grid {
@@ -281,7 +289,7 @@
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius-card);
-            padding: 40px;
+            padding: 32px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -291,24 +299,8 @@
             transition: all var(--transition-speed);
         }
 
-        .scope-num {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-tertiary);
-            letter-spacing: 0.05em;
-            margin-bottom: 20px;
-            font-family: monospace;
-        }
-
-        .scope-title { 
-            font-size: 32px; 
-            font-weight: 600; 
-            margin-bottom: 16px; 
-            color: var(--text-primary); 
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-        
+        .scope-num { font-size: 14px; font-weight: 700; color: var(--text-tertiary); letter-spacing: 0.05em; margin-bottom: 20px; font-family: monospace; }
+        .scope-title { font-size: 28px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); letter-spacing: -0.02em; line-height: 1.1; }
         .scope-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; }
 
         /* --- PROJECT NAVIGATION --- */
@@ -320,6 +312,7 @@
             margin-bottom: 30px;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            padding-right: 20px; /* End padding */
         }
         .filter-container::-webkit-scrollbar { display: none; }
 
@@ -327,33 +320,25 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 20px;
+            padding: 10px 20px;
             background: var(--pill-bg);
             border: 1px solid var(--pill-border);
             border-radius: 100px;
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             white-space: nowrap;
             transition: all 0.2s ease;
             cursor: pointer;
+            flex-shrink: 0; /* Don't squish */
         }
-
         .filter-pill:hover { background: var(--glass-hover); color: var(--text-primary); }
-        
-        .filter-pill.active {
-            background: var(--pill-active-bg);
-            color: var(--pill-active-text);
-            font-weight: 600;
-            border-color: transparent;
-        }
-
-        .filter-icon { font-size: 16px; }
+        .filter-pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); font-weight: 600; border-color: transparent; }
 
         /* --- BRAND CARD --- */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive Columns */
             gap: 24px;
         }
 
@@ -423,7 +408,7 @@
         .bg-love { background: #FF0000; }
 
         .card-title-group { display: flex; flex-direction: column; }
-        .card-title { font-size: 20px; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+        .card-title { font-size: 18px; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
         .card-client { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
 
         .meta-grid {
@@ -483,7 +468,7 @@
             z-index: 10;
             border-top: 1px solid var(--glass-border);
         }
-        .brand-card.active .card-reveal { height: 55%; opacity: 1; }
+        .brand-card.active .card-reveal { height: 60%; opacity: 1; }
         .reveal-desc { font-size: 14px; color: var(--text-primary); line-height: 1.6; margin-bottom: 20px; }
 
         .learn-more-btn {
@@ -527,16 +512,37 @@
         .footer a { color: var(--text-primary); margin: 0 10px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 900px) {
+             .span-6 { grid-column: span 12; }
+             .project-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        }
+
         @media (max-width: 768px) {
+            .nav-wrapper { top: 16px; padding: 0 10px; }
+            .nav-bar { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; justify-content: flex-start; }
+            .nav-link { font-size: 12px; padding: 8px 16px; }
+            
             h1 { font-size: 48px; }
-            .stats-row { flex-wrap: wrap; gap: 40px; }
-            .stat-val { font-size: 64px; }
-            .span-6, .span-12 { grid-column: span 12; }
-            .career-cell { display: block; width: 100%; padding: 8px 0; }
-            .career-row { padding: 20px 0; display: block; }
-            .c-date { text-align: left; margin-bottom: 10px; }
-            .thought-item { flex-direction: column; gap: 12px; }
-            .thought-date { min-width: auto; }
+            .hero-sub { font-size: 18px; padding: 0 20px; }
+            
+            .stats-row { gap: 30px; }
+            .stat-val { font-size: 56px; }
+            .stat-lbl { font-size: 11px; }
+            
+            .section { padding: 60px 16px; }
+            
+            .career-row { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
+            .career-cell { padding: 4px 0; width: 100%; }
+            .c-date { text-align: left; color: var(--text-tertiary); margin-bottom: 8px; order: -1; }
+            .c-role { font-size: 18px; }
+            
+            .thought-item { flex-direction: column; gap: 12px; padding: 20px; }
+            .thought-date { margin-bottom: 4px; opacity: 0.6; }
+            .thought-arrow { display: none; }
+            
+            .project-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -833,7 +839,8 @@
                 <button class="plus-btn" onclick="toggleCard(this)">+</button>
                 <div class="card-reveal">
                     <p class="reveal-desc">Managed the rollout of Bakes' first mall location. Coordinated between property stakeholders (Vincom) and internal design teams to ensure a smooth build-out.</p>
-                    </div>
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7204748271401992192?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_multiple_media_viewer%3BIP%2F4Yoj%2FSQCl7g925THcDQ%3D%3D" target="_blank" class="learn-more-btn">Learn More ↗</a>
+                </div>
             </div>
 
             <div class="brand-card" data-category="pm sales">
@@ -1014,7 +1021,8 @@
                 <button class="plus-btn" onclick="toggleCard(this)">+</button>
                 <div class="card-reveal">
                     <p class="reveal-desc">Coordinated artists and production for “Đủ” (Fulfillment), an interactive visual exhibition exploring life's necessities.</p>
-                    </div>
+                    <a href="https://www.behance.net/gallery/166677079/DU-EXHIBITION" target="_blank" class="learn-more-btn">Learn More ↗</a>
+                </div>
             </div>
 
             <div class="brand-card" data-category="pm">
