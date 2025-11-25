@@ -14,7 +14,6 @@
     <style>
         /* --- DESIGN SYSTEM VARIABLES --- */
         :root {
-            /* Common Variables */
             --radius-card: 30px;
             --radius-button: 100px;
             --accent-blue: #2997FF;
@@ -47,9 +46,12 @@
             --pill-active-bg: #fff;
             --pill-active-text: #000;
 
-            --hero-img-opacity: 0.5;
             --btn-bg: rgba(255, 255, 255, 0.1);
             --btn-hover: rgba(255, 255, 255, 0.2);
+
+            /* Mouse Glow Color */
+            --cursor-glow-color: rgba(255, 160, 80, 0.1); /* Warm Gold Glow */
+            --cursor-blend: screen;
         }
 
         /* LIGHT MODE OVERRIDES */
@@ -80,9 +82,12 @@
             --pill-active-bg: #1D1D1F;
             --pill-active-text: #fff;
 
-            --hero-img-opacity: 0.6; 
             --btn-bg: rgba(0, 0, 0, 0.05);
             --btn-hover: rgba(0, 0, 0, 0.1);
+
+            /* Mouse Glow Color (Light) */
+            --cursor-glow-color: rgba(41, 151, 255, 0.15);
+            --cursor-blend: multiply;
         }
 
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
@@ -100,6 +105,20 @@
 
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { font-family: inherit; }
+
+        /* --- MOUSE FOLLOW GLOW --- */
+        #cursor-glow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--cursor-glow-color) 0%, transparent 60%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: var(--cursor-blend); 
+            transition: opacity 0.3s ease;
+        }
 
         /* --- NAV --- */
         .nav-wrapper {
@@ -139,9 +158,14 @@
             font-weight: 500;
             padding: 10px 20px;
             border-radius: var(--radius-button);
-            transition: background 0.3s ease;
+            transition: all 0.2s ease;
+            opacity: 0.7;
         }
-        .nav-link:hover { background: rgba(128, 128, 128, 0.1); }
+
+        .nav-link:hover { 
+            background: var(--glass-hover);
+            opacity: 1;
+        }
 
         .desktop-only { display: block; }
         
@@ -201,34 +225,26 @@
         /* --- HERO --- */
         .hero-section {
             position: relative;
-            height: 85vh;
+            height: 90vh;
             width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* CHANGED: Center vertically */
             align-items: center;
             text-align: center;
             overflow: hidden;
+            background: var(--bg-body);
         }
 
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: var(--hero-img-opacity);
             z-index: 1;
-            mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
-            transition: opacity var(--transition-speed);
-            background-image: url('https://images.unsplash.com/photo-1630872146677-5a4cefb1afce?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            background-size: cover;
-            background-position: center;
-            animation: heroPulse 12s ease-in-out infinite alternate;
-        }
-
-        @keyframes heroPulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
+            background-color: var(--bg-body);
+            /* Linear fade to ensure seamless transition to content */
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            transition: background-color 0.5s ease;
         }
 
         .hero-content {
@@ -236,34 +252,51 @@
             z-index: 10;
             max-width: 1000px;
             padding: 0 20px;
-            margin-top: 40px;
+            /* CHANGED: Removed margin-top to allow centering */
+            margin-top: 0; 
             display: flex;
             flex-direction: column;
             align-items: center;
+            pointer-events: none; /* Allows clicking "through" to stars if needed */
         }
+        .hero-content * { pointer-events: auto; }
 
         h1 {
             font-family: "Inter", sans-serif;
-            font-size: 80px;
+            font-size: 64px; /* Elegant size */
             font-weight: 700;
             letter-spacing: -0.03em;
-            line-height: 1.3; 
+            line-height: 1.2; 
             padding-bottom: 0.1em; 
             margin-bottom: 20px;
             background: var(--hero-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             transition: background var(--transition-speed);
+            /* Clean Shadow in Dark Mode */
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)); 
         }
 
         .hero-sub {
-            font-size: 26px;
+            font-size: 20px; 
             font-weight: 400;
             color: var(--text-secondary);
             letter-spacing: -0.01em;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
+            /* Text shadow for separation */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        /* Light Mode Visibility Fixes */
+        [data-theme="light"] h1 {
+            filter: none; /* Remove heavy shadow in light mode */
+        }
+        [data-theme="light"] .hero-sub {
+            color: #444; 
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
         .highlight { color: var(--text-primary); font-weight: 700; }
@@ -379,7 +412,7 @@
         .filter-pill:hover { background: var(--glass-hover); color: var(--text-primary); }
         .filter-pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); font-weight: 600; border-color: transparent; }
 
-        /* --- BRAND CARD --- */
+        /* --- BRAND CARD & SPOTLIGHT EFFECT --- */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -390,8 +423,8 @@
             position: relative;
             border-radius: 30px;
             background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid var(--glass-border); /* Fallback */
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
             display: flex;
             flex-direction: column;
             padding: 32px;
@@ -402,11 +435,37 @@
             justify-content: flex-start;
         }
 
+        /* Spotlight Effect Logic */
+        .brand-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 30px;
+            padding: 1.5px; 
+            background: radial-gradient(
+                800px circle at var(--x) var(--y), 
+                rgba(255, 255, 255, 0.4), 
+                transparent 40%
+            );
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0; 
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .project-grid:hover .brand-card::before {
+            opacity: 1; /* Only show spotlight when entering grid */
+        }
+
         .brand-card:hover {
             transform: translateY(-6px);
             background: var(--card-hover);
             box-shadow: var(--card-shadow);
-            border-color: var(--accent-blue);
         }
 
         .card-header {
@@ -596,6 +655,8 @@
 </head>
 <body>
 
+    <div id="cursor-glow"></div>
+
     <div class="nav-wrapper">
         <nav class="nav-bar">
             <div class="nav-links-container">
@@ -621,7 +682,7 @@
     </div>
 
     <header class="hero-section" id="overview">
-        <div class="hero-bg"></div>
+        <div class="hero-bg" id="starfield"></div>
         <div class="hero-content">
             <h1>Hi, I’m Dylan.</h1>
             <div class="hero-sub">
@@ -1335,16 +1396,160 @@
         © 2025 Dylan Lam • Portfolio
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <script>
-        // Dark/Light Mode Toggle Logic
+        /* --- 1. MOUSE GLOW FOLLOWER --- */
+        const cursorGlow = document.getElementById('cursor-glow');
+        let glowX = window.innerWidth / 2;
+        let glowY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (e) => {
+            glowX = e.clientX;
+            glowY = e.clientY;
+            cursorGlow.style.left = `${glowX}px`;
+            cursorGlow.style.top = `${glowY}px`;
+        });
+
+        /* --- 2. HATOM-INSPIRED GLOBE & INTERACTION --- */
+        const container = document.getElementById('starfield');
+        let scene, camera, renderer, globeMesh, particlesMesh;
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function initGlobe() {
+            try {
+                scene = new THREE.Scene();
+                
+                // Camera setup
+                // Positioned slightly back to allow text to float in front
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 4.5; 
+
+                // Renderer setup
+                renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
+                container.appendChild(renderer.domElement);
+
+                // --- OBJECT 1: WIREFRAME GLOBE (ICOSAHEDRON) ---
+                // Replacing Galaxy with Geometry from Hatom1
+                const globeGeo = new THREE.IcosahedronGeometry(2.0, 20); // Size adapted for Hero
+                
+                // Material will be updated by Theme function
+                const globeMat = new THREE.MeshBasicMaterial({ 
+                    color: 0x333333,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.15
+                });
+
+                globeMesh = new THREE.Mesh(globeGeo, globeMat);
+                scene.add(globeMesh);
+
+                // --- OBJECT 2: PARTICLE CLOUD ---
+                // Logic extracted from Hatom1
+                const particlesGeo = new THREE.BufferGeometry();
+                const particleCount = 600; // Increased slightly for density
+                const posArray = new Float32Array(particleCount * 3);
+
+                for(let i = 0; i < particleCount * 3; i++) {
+                    // Scatter particles in a sphere shape around the wireframe
+                    const r = 2.4; // Radius slightly larger than wireframe
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos(2 * Math.random() - 1);
+                    
+                    posArray[i] = r * Math.sin(phi) * Math.cos(theta);
+                    posArray[i+1] = r * Math.sin(phi) * Math.sin(theta);
+                    posArray[i+2] = r * Math.cos(phi);
+                }
+
+                particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                
+                const particlesMat = new THREE.PointsMaterial({
+                    size: 0.02,
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: 0.6
+                });
+
+                particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+                scene.add(particlesMesh);
+
+                // Initialize Theme Colors immediately
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                updateGlobeTheme(currentTheme);
+
+                animate();
+
+            } catch (e) {
+                console.error("Three.js Globe Failed to Initialize:", e);
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if(globeMesh && particlesMesh) {
+                // Base Rotation (Slow Spin)
+                globeMesh.rotation.y += 0.002;
+                particlesMesh.rotation.y -= 0.001;
+
+                // Mouse Interaction (Tilt Physics from Hatom1)
+                // We use damping (0.05) to make it smooth
+                globeMesh.rotation.x += (mouseY * 0.5 - globeMesh.rotation.x) * 0.05;
+                globeMesh.rotation.y += (mouseX * 0.5 - globeMesh.rotation.y) * 0.05;
+                
+                particlesMesh.rotation.x += (mouseY * 0.5 - particlesMesh.rotation.x) * 0.02;
+            }
+            renderer.render(scene, camera);
+        }
+
+        // Mouse Tracking
+        document.addEventListener('mousemove', (event) => {
+            // Normalized coordinates (-1 to 1)
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            if(camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        });
+
+        // Init
+        initGlobe();
+
+
+        /* --- 3. SPOTLIGHT EFFECT FOR CARDS --- */
+        const projectGrid = document.querySelector('.project-grid');
+        const cards = document.querySelectorAll('.brand-card');
+
+        if(projectGrid) {
+            projectGrid.addEventListener('mousemove', e => {
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--x', `${x}px`);
+                    card.style.setProperty('--y', `${y}px`);
+                });
+            });
+        }
+
+        /* --- 4. THEME & UI LOGIC --- */
         const themeBtn = document.getElementById('themeBtn');
         const themeIcon = document.getElementById('themeIcon');
         const htmlTag = document.documentElement;
 
-        // Check local storage
         const savedTheme = localStorage.getItem('theme') || 'dark';
         htmlTag.setAttribute('data-theme', savedTheme);
         updateIcon(savedTheme);
+        updateGlobeTheme(savedTheme);
 
         themeBtn.addEventListener('click', () => {
             const currentTheme = htmlTag.getAttribute('data-theme');
@@ -1353,10 +1558,36 @@
             htmlTag.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
+            updateGlobeTheme(newTheme);
         });
 
         function updateIcon(theme) {
             themeIcon.textContent = theme === 'dark' ? '☀︎' : '☾';
+        }
+
+        // Theme Switcher for Globe Materials
+        function updateGlobeTheme(theme) {
+            if(!globeMesh || !particlesMesh) return;
+            
+            if(theme === 'light') {
+                // LIGHT MODE: Blueprint / Technical Look
+                globeMesh.material.color.setHex(0x1a1a1a); // Dark Grey Wireframe
+                globeMesh.material.opacity = 0.1;
+                
+                particlesMesh.material.color.setHex(0x000000); // Black dots
+                particlesMesh.material.opacity = 0.4;
+                
+                container.style.opacity = "0.6"; // softer background
+            } else {
+                // DARK MODE: Glowing / Space Look
+                globeMesh.material.color.setHex(0xffffff); // White Wireframe
+                globeMesh.material.opacity = 0.15;
+                
+                particlesMesh.material.color.setHex(0xffffff); // White dots
+                particlesMesh.material.opacity = 0.8;
+                
+                container.style.opacity = "1";
+            }
         }
 
         // Mobile Menu Toggle
