@@ -225,13 +225,8 @@
         /* --- HERO --- */
         .hero-section {
             position: relative;
-            height: 90vh;
+            height: 100vh; /* Full Height */
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* CHANGED: Center vertically */
-            align-items: center;
-            text-align: center;
             overflow: hidden;
             background: var(--bg-body);
         }
@@ -241,65 +236,122 @@
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
             background-color: var(--bg-body);
-            /* Linear fade to ensure seamless transition to content */
-            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
             transition: background-color 0.5s ease;
         }
 
+        /* APPLE STYLE LAYOUT:
+           Content pinned to bottom. Flex container separating Left (Text) and Right (Buttons).
+        */
         .hero-content {
-            position: relative;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
             z-index: 10;
-            max-width: 1000px;
-            padding: 0 20px;
-            /* CHANGED: Removed margin-top to allow centering */
-            margin-top: 0; 
+            padding: 60px;
+            padding-bottom: 80px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            pointer-events: none; /* Allows clicking "through" to stars if needed */
+            justify-content: space-between; /* Push items to edges */
+            align-items: flex-end; /* Align to bottom */
+            pointer-events: none;
+            /* Gradient fade to make text readable over the bottom of the globe */
+            background: linear-gradient(to top, var(--bg-body) 10%, transparent 100%);
         }
-        .hero-content * { pointer-events: auto; }
+        
+        .hero-text-side {
+            text-align: left;
+            pointer-events: auto;
+            max-width: 600px;
+        }
+
+        .hero-action-side {
+            pointer-events: auto;
+            display: flex;
+            gap: 16px;
+        }
 
         h1 {
             font-family: "Inter", sans-serif;
-            font-size: 64px; /* Elegant size */
+            font-size: 72px; /* Massive Title */
             font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.2; 
-            padding-bottom: 0.1em; 
-            margin-bottom: 20px;
+            letter-spacing: -0.04em;
+            line-height: 1; 
+            margin: 0;
+            margin-bottom: 24px;
             background: var(--hero-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             transition: background var(--transition-speed);
-            /* Clean Shadow in Dark Mode */
-            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)); 
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5)); 
         }
 
         .hero-sub {
-            font-size: 20px; 
+            font-size: 22px; 
             font-weight: 400;
             color: var(--text-secondary);
             letter-spacing: -0.01em;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-            /* Text shadow for separation */
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.5;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* Apple Style Buttons (Pills) */
+        .hero-btn {
+            padding: 14px 28px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .hero-btn.primary {
+            background: var(--text-primary);
+            color: var(--bg-body);
+            border: 1px solid transparent;
+        }
+        .hero-btn.primary:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-btn.secondary {
+            background: rgba(128,128,128,0.15);
+            color: var(--text-primary);
+            border: 1px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+        .hero-btn.secondary:hover {
+            background: rgba(128,128,128,0.25);
         }
         
         /* Light Mode Visibility Fixes */
         [data-theme="light"] h1 {
-            filter: none; /* Remove heavy shadow in light mode */
+            filter: none;
         }
         [data-theme="light"] .hero-sub {
-            color: #444; 
-            font-weight: 500;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+            color: #333; 
+            text-shadow: 0 0 20px rgba(255,255,255,1);
+        }
+        [data-theme="light"] .hero-content {
+             background: linear-gradient(to top, var(--bg-body) 30%, transparent 100%);
         }
 
         .highlight { color: var(--text-primary); font-weight: 700; }
+
+        @media (max-width: 900px) {
+            .hero-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 40px;
+                padding: 30px;
+                padding-bottom: 120px; /* Space for mobile nav if needed */
+            }
+            h1 { font-size: 48px; }
+            .hero-action-side { width: 100%; justify-content: flex-start; }
+        }
 
         /* --- SECTIONS --- */
         .section {
@@ -635,7 +687,6 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         @media (max-width: 768px) {
-            h1 { font-size: 48px; }
             .stats-row { flex-wrap: wrap; gap: 40px; }
             .stat-val { font-size: 64px; }
             .span-6, .span-12 { grid-column: span 12; }
@@ -683,12 +734,19 @@
 
     <header class="hero-section" id="overview">
         <div class="hero-bg" id="starfield"></div>
+        
         <div class="hero-content">
-            <h1>Hi, I’m Dylan.</h1>
-            <div class="hero-sub">
-                A strategic thinker who thrives at the intersection of <br>
-                <span class="highlight">Structure</span> and <span class="highlight">Creativity</span>.<br>
-                <span style="display:block; margin-top: 12px;">Experienced Problem Solver.</span>
+            <div class="hero-text-side">
+                <h1>Hi, I’m Dylan.</h1>
+                <div class="hero-sub">
+                    A strategic thinker who thrives at the intersection of <br>
+                    <span class="highlight">Structure</span> and <span class="highlight">Creativity</span>.
+                </div>
+            </div>
+            
+            <div class="hero-action-side">
+                <a href="#work" class="hero-btn primary">View Work</a>
+                <a href="#career" class="hero-btn secondary">About Me</a>
             </div>
         </div>
     </header>
@@ -1572,19 +1630,19 @@
             if(theme === 'light') {
                 // LIGHT MODE: Blueprint / Technical Look
                 globeMesh.material.color.setHex(0x1a1a1a); // Dark Grey Wireframe
-                globeMesh.material.opacity = 0.1;
+                globeMesh.material.opacity = 0.08; 
                 
                 particlesMesh.material.color.setHex(0x000000); // Black dots
-                particlesMesh.material.opacity = 0.4;
+                particlesMesh.material.opacity = 0.3; 
                 
-                container.style.opacity = "0.6"; // softer background
+                container.style.opacity = "0.5"; 
             } else {
                 // DARK MODE: Glowing / Space Look
                 globeMesh.material.color.setHex(0xffffff); // White Wireframe
-                globeMesh.material.opacity = 0.15;
+                globeMesh.material.opacity = 0.12; 
                 
                 particlesMesh.material.color.setHex(0xffffff); // White dots
-                particlesMesh.material.opacity = 0.8;
+                particlesMesh.material.opacity = 0.6; 
                 
                 container.style.opacity = "1";
             }
