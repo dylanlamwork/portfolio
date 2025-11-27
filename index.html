@@ -117,24 +117,16 @@
             width: 32px; 
             height: 32px;
             border-radius: 50%;
-            
-            /* Dynamic Colors based on Theme */
             background-color: rgba(var(--cursor-bg), var(--cursor-opacity));
             box-shadow: var(--cursor-shadow);
             mix-blend-mode: var(--cursor-blend);
-            
             pointer-events: none;
             z-index: 9999;
-            
-            /* Instant movement via GPU */
             will-change: transform;
             transform: translate(-50%, -50%);
-            
-            /* Smooth transition only for hover states */
             transition: width 0.2s, height 0.2s, background-color 0.3s;
         }
 
-        /* Hover State: Expands slightly */
         body:has(a:hover) #cursor-glow,
         body:has(button:hover) #cursor-glow {
             width: 60px;
@@ -150,7 +142,7 @@
             width: 100%;
             height: 100vh;
             z-index: 1; /* Sits behind content */
-            pointer-events: none; /* Let clicks pass through */
+            pointer-events: none;
         }
         
         #starfield canvas {
@@ -240,7 +232,6 @@
         }
         .theme-toggle:hover { background: rgba(128, 128, 128, 0.1); }
 
-        /* Mobile Dropdown */
         .mobile-dropdown {
             display: none;
             position: absolute;
@@ -265,11 +256,11 @@
         /* --- HERO --- */
         .hero-section {
             position: relative;
-            height: 100vh; /* Full Height */
+            height: 100vh;
             width: 100%;
             overflow: hidden;
-            background: transparent; /* Changed from var(--bg-body) to see stars */
-            z-index: 10; /* Above stars */
+            background: transparent;
+            z-index: 10;
         }
 
         .hero-content {
@@ -281,7 +272,6 @@
             z-index: 10;
             padding: 60px;
             padding-bottom: 80px;
-            /* Center Align Everything */
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -323,28 +313,15 @@
             margin: 0 auto;
         }
 
-        /* Light Mode Visibility Fixes */
-        [data-theme="light"] h1 {
-            filter: none;
-        }
-        [data-theme="light"] .hero-sub {
-            color: #333; 
-            text-shadow: 0 0 20px rgba(255,255,255,1);
-        }
-        [data-theme="light"] .hero-content {
-             background: linear-gradient(to top, var(--bg-body) 30%, transparent 100%);
-        }
+        [data-theme="light"] h1 { filter: none; }
+        [data-theme="light"] .hero-sub { color: #333; text-shadow: 0 0 20px rgba(255,255,255,1); }
+        [data-theme="light"] .hero-content { background: linear-gradient(to top, var(--bg-body) 30%, transparent 100%); }
 
         .highlight { color: var(--text-primary); font-weight: 700; }
 
         @media (max-width: 900px) {
-            .hero-content {
-                padding: 30px;
-                padding-bottom: 120px; 
-            }
+            .hero-content { padding: 30px; padding-bottom: 120px; }
             h1 { font-size: 48px; }
-            
-            /* On mobile, show default cursor */
             body { cursor: auto; }
             #cursor-glow { display: none; }
         }
@@ -355,7 +332,7 @@
             max-width: 1280px;
             margin: 0 auto;
             padding: 100px 20px;
-            z-index: 10; /* Ensure above stars */
+            z-index: 10;
         }
 
         .section-title {
@@ -376,7 +353,7 @@
             border-top: 1px solid var(--glass-border);
             border-bottom: 1px solid var(--glass-border);
             transition: border-color var(--transition-speed);
-            background: var(--bg-body); /* Ensure readability */
+            background: var(--bg-body);
         }
         .stat-item { text-align: center; }
         
@@ -404,9 +381,9 @@
         .span-6 { grid-column: span 6; }
         .span-12 { grid-column: span 12; }
 
-        /* --- SCOPES --- */
+        /* --- SCOPES (UPDATED WITH SPOTLIGHT) --- */
         .scope-card {
-            background: var(--glass-bg);
+            background: var(--card-bg); /* Matched to Work cards */
             border: 1px solid var(--glass-border);
             border-radius: var(--radius-card);
             padding: 40px;
@@ -414,10 +391,44 @@
             flex-direction: column;
             justify-content: space-between;
             min-height: 300px;
-            backdrop-filter: blur(10px);
             cursor: default;
-            transition: all var(--transition-speed);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Spotlight Logic for Scopes */
+        .scope-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: var(--radius-card);
+            padding: 1.5px; 
+            background: radial-gradient(
+                800px circle at var(--x) var(--y), 
+                rgba(255, 255, 255, 0.4), 
+                transparent 40%
+            );
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0; 
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        /* Show light on hover */
+        .grid:hover .scope-card::before { opacity: 1; }
+
+        .scope-card:hover {
+            transform: translateY(-6px);
+            background: var(--card-hover);
+            box-shadow: var(--card-shadow);
+        }
+
         .scope-num { 
             font-size: 16px; 
             font-weight: 700; 
@@ -472,7 +483,7 @@
             position: relative;
             border-radius: 30px;
             background: var(--card-bg);
-            border: 1px solid var(--glass-border); /* Fallback */
+            border: 1px solid var(--glass-border);
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
             display: flex;
             flex-direction: column;
@@ -507,9 +518,7 @@
             z-index: 2;
         }
 
-        .project-grid:hover .brand-card::before {
-            opacity: 1; /* Only show spotlight when entering grid */
-        }
+        .project-grid:hover .brand-card::before { opacity: 1; }
 
         .brand-card:hover {
             transform: translateY(-6px);
@@ -523,7 +532,7 @@
             gap: 16px;
             margin-bottom: 24px;
             position: relative;
-            z-index: 50; /* Keep on top */
+            z-index: 50; 
             pointer-events: none;
         }
 
@@ -573,7 +582,7 @@
             border-top: 1px solid var(--glass-border);
             margin-top: auto;
             position: relative;
-            z-index: 1; /* Below reveal */
+            z-index: 1;
         }
 
         .meta-item { display: flex; flex-direction: column; }
@@ -597,20 +606,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 60; /* Highest */
+            z-index: 60;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
         }
         .plus-btn:hover { background: var(--btn-hover); transform: scale(1.1); }
         .brand-card.active .plus-btn { background: var(--text-primary); color: var(--bg-body); transform: rotate(45deg); }
 
-        /* REVEAL PANEL */
         .card-reveal {
             position: absolute;
             bottom: 0; 
             left: 0; 
             width: 100%;
-            height: calc(100% - 110px); /* No overlap with header */
+            height: calc(100% - 110px);
             background: var(--reveal-bg);
             padding: 32px;
             padding-top: 40px;
@@ -622,17 +630,12 @@
             transform: translateY(20px);
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            z-index: 40; /* Middle layer */
+            z-index: 40;
             border-top: 1px solid var(--glass-border);
             pointer-events: none;
         }
 
-        .brand-card.active .card-reveal {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
+        .brand-card.active .card-reveal { opacity: 1; transform: translateY(0); pointer-events: auto; }
         .reveal-desc { font-size: 14px; color: var(--text-primary); line-height: 1.6; margin-bottom: 20px; overflow-y: auto; }
 
         .learn-more-btn {
@@ -693,10 +696,8 @@
             .thought-item { flex-direction: column; gap: 12px; }
             .thought-date { min-width: auto; }
             .thought-arrow { display: none; }
-            
             .desktop-only { display: none; }
             .mobile-menu-btn { display: block; }
-
             .card-reveal { height: calc(100% - 100px); }
         }
     </style>
@@ -1452,29 +1453,40 @@
         /* --- 1. MOUSE GLOW FOLLOWER (SINGLE DOT) --- */
         const cursorGlow = document.getElementById('cursor-glow');
         
-        // BẮT SỰ KIỆN CHUỘT DI CHUYỂN
         document.addEventListener('mousemove', (e) => {
-            // Gán trực tiếp vị trí chuột vào đốm sáng => KHÔNG CÓ ĐỘ TRỄ
             cursorGlow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
         });
 
         /* --- 2. HATOM-INSPIRED GLOBE & INTERACTION --- */
         const container = document.getElementById('starfield');
         let scene, camera, renderer, globeMesh, particlesMesh;
-        
-        // Use separate normalized mouse coordinates for 3D tilt
         let normMouseX = 0;
         let normMouseY = 0;
+
+        // HELPER: Create a Circle Texture on the fly
+        function createCircleTexture() {
+            const size = 64;
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            
+            const ctx = canvas.getContext('2d');
+            const center = size / 2;
+            
+            ctx.beginPath();
+            ctx.arc(center, center, center / 2, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fill();
+            
+            return new THREE.CanvasTexture(canvas);
+        }
 
         function initGlobe() {
             try {
                 scene = new THREE.Scene();
-                
-                // Camera setup
                 camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
                 camera.position.z = 4.5; 
 
-                // Renderer setup
                 renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
@@ -1482,26 +1494,21 @@
 
                 // --- OBJECT 1: WIREFRAME GLOBE ---
                 const globeGeo = new THREE.SphereGeometry(2.0, 32, 32); 
-                
                 const globeMat = new THREE.MeshBasicMaterial({ 
                     color: 0x333333,
                     wireframe: true,
                     transparent: true,
                     opacity: 0.15
                 });
-
                 globeMesh = new THREE.Mesh(globeGeo, globeMat);
                 scene.add(globeMesh);
 
-                // --- OBJECT 2: PARTICLE CLOUD ---
+                // --- OBJECT 2: CIRCULAR STARS ---
                 const particlesGeo = new THREE.BufferGeometry();
-                
                 const particleCount = 1800; 
                 const posArray = new Float32Array(particleCount * 3);
 
                 for(let i = 0; i < particleCount * 3; i+=3) {
-                    // NEW LOGIC: Distribute stars in a LARGE 3D BOX to fill the screen corners
-                    // X, Y, Z coordinates spread from -20 to 20
                     posArray[i] = (Math.random() - 0.5) * 40; 
                     posArray[i+1] = (Math.random() - 0.5) * 40;
                     posArray[i+2] = (Math.random() - 0.5) * 40;
@@ -1509,11 +1516,14 @@
 
                 particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
                 
+                // UPDATED MATERIAL: Uses map (texture) and increased size slightly
                 const particlesMat = new THREE.PointsMaterial({
-                    size: 0.08,
+                    size: 0.12, 
                     color: 0xffffff,
+                    map: createCircleTexture(), // APPLY CIRCLE TEXTURE
                     transparent: true,
-                    opacity: 0.6
+                    alphaTest: 0.1, // Helps remove black box edges
+                    opacity: 0.8
                 });
 
                 particlesMesh = new THREE.Points(particlesGeo, particlesMat);
@@ -1521,7 +1531,6 @@
 
                 const currentTheme = document.documentElement.getAttribute('data-theme');
                 updateGlobeTheme(currentTheme);
-
                 animateGlobe();
 
             } catch (e) {
@@ -1531,28 +1540,21 @@
 
         function animateGlobe() {
             requestAnimationFrame(animateGlobe);
-
             if(globeMesh && particlesMesh) {
-                // Base Rotation (Slow Spin)
                 globeMesh.rotation.y += 0.002;
                 particlesMesh.rotation.y -= 0.001;
-
-                // Mouse Interaction (Tilt Physics)
                 globeMesh.rotation.x += (normMouseY * 0.5 - globeMesh.rotation.x) * 0.05;
                 globeMesh.rotation.y += (normMouseX * 0.5 - globeMesh.rotation.y) * 0.05;
-                
                 particlesMesh.rotation.x += (normMouseY * 0.5 - particlesMesh.rotation.x) * 0.02;
             }
             renderer.render(scene, camera);
         }
 
-        // Separate Listener for 3D Normalization
         document.addEventListener('mousemove', (event) => {
             normMouseX = (event.clientX / window.innerWidth) * 2 - 1;
             normMouseY = -(event.clientY / window.innerHeight) * 2 + 1;
         });
 
-        // Resize Handler
         window.addEventListener('resize', () => {
             if(camera && renderer) {
                 camera.aspect = window.innerWidth / window.innerHeight;
@@ -1561,46 +1563,34 @@
             }
         });
 
-        // Init
         initGlobe();
 
-        /* --- 3. SCROLL FADE LOGIC (NEW) --- */
+        /* --- 3. SCROLL FADE LOGIC --- */
         window.addEventListener('scroll', () => {
             if (!globeMesh) return;
-
             const scrollY = window.scrollY;
-            const fadePoint = 500; // Pixels down where globe disappears completely
-
-            // Calculate opacity based on scroll: 1 at top, 0 at fadePoint
+            const fadePoint = 500;
             let opacity = 1 - (scrollY / fadePoint);
             if (opacity < 0) opacity = 0;
-            
-            // Get max opacity based on current theme
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             const maxOpacity = isDark ? 0.15 : 0.08;
-            
-            // Apply opacity to the globe material only
             globeMesh.material.opacity = opacity * maxOpacity;
-            
-            // Subtle parallax for the globe (moves down slightly as you scroll)
             globeMesh.position.y = -scrollY * 0.002; 
         });
 
-        /* --- 4. SPOTLIGHT EFFECT FOR CARDS --- */
-        const projectGrid = document.querySelector('.project-grid');
-        const cards = document.querySelectorAll('.brand-card');
-
-        if(projectGrid) {
-            projectGrid.addEventListener('mousemove', e => {
-                cards.forEach(card => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--x', `${x}px`);
-                    card.style.setProperty('--y', `${y}px`);
-                });
+        /* --- 4. SPOTLIGHT EFFECT (UPDATED FOR SCOPES & WORK) --- */
+        // We track mouse on the document, so we can light up any card anywhere
+        document.addEventListener('mousemove', e => {
+            const allCards = document.querySelectorAll('.brand-card, .scope-card');
+            
+            allCards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
             });
-        }
+        });
 
         /* --- 5. THEME & UI LOGIC --- */
         const themeBtn = document.getElementById('themeBtn');
@@ -1615,7 +1605,6 @@
         themeBtn.addEventListener('click', () => {
             const currentTheme = htmlTag.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
             htmlTag.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
@@ -1626,38 +1615,28 @@
             themeIcon.textContent = theme === 'dark' ? '☀︎' : '☾';
         }
 
-        // Theme Switcher for Globe Materials
         function updateGlobeTheme(theme) {
             if(!globeMesh || !particlesMesh) return;
-            
             if(theme === 'light') {
-                // LIGHT MODE: Blueprint / Technical Look
                 globeMesh.material.color.setHex(0x1a1a1a); 
                 globeMesh.material.opacity = 0.08; 
-                
                 particlesMesh.material.color.setHex(0x000000); 
                 particlesMesh.material.opacity = 0.3; 
-                
                 container.style.opacity = "0.5"; 
             } else {
-                // DARK MODE: Glowing / Space Look
                 globeMesh.material.color.setHex(0xffffff); 
                 globeMesh.material.opacity = 0.12; 
-                
                 particlesMesh.material.color.setHex(0xffffff); 
-                particlesMesh.material.opacity = 0.6; 
-                
+                particlesMesh.material.opacity = 0.8; 
                 container.style.opacity = "1";
             }
         }
 
-        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const navLinks = document.getElementById('mobileDropdown');
             const menuBtn = document.querySelector('.mobile-menu-btn');
             navLinks.classList.toggle('active');
             menuBtn.classList.toggle('active');
-            
             if(navLinks.classList.contains('active')) {
                 menuBtn.innerHTML = '✕';
             } else {
@@ -1665,18 +1644,15 @@
             }
         }
 
-        // Project Filtering Logic
         function filterProjects(category) {
             const buttons = document.querySelectorAll('.filter-pill');
             buttons.forEach(btn => {
                 btn.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
-
             const cards = document.querySelectorAll('.brand-card');
             cards.forEach(card => {
                 const categories = card.getAttribute('data-category').split(' ');
-                
                 if (category === 'all') {
                     card.style.display = 'flex'; 
                 } else {
@@ -1689,11 +1665,9 @@
             });
         }
 
-        // Card Reveal Logic
         function toggleCard(btn) {
             const card = btn.parentElement;
             card.classList.toggle('active');
-            
             if (card.classList.contains('active')) {
                 btn.innerHTML = '×'; 
                 btn.style.transform = 'rotate(0deg)';
