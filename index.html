@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Lam - Portfolio</title>
+    <title>DYLAN</title>
     
     <meta name="description" content="Portfolio of Dylan Lam. Strategic thinker thriving at the intersection of business structure and creative design.">
     <meta property="og:title" content="Dylan Lam - Structure & Creativity">
-    <meta property="og:description" content="Portfolio of Dylan Lam. Strategic thinker thriving at the intersection of business structure and creative design.">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="#000000">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='30' fill='%23111111'/><text x='50' y='70' font-family='Arial, sans-serif' font-size='70' font-weight='bold' fill='%23ffffff' text-anchor='middle'>D</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&display=swap" rel="stylesheet">
 
     <style>
         /* --- DESIGN SYSTEM VARIABLES --- */
@@ -25,8 +23,8 @@
             --accent-blue: #2997FF;
             --transition-speed: 0.3s;
             
-            /* DARK MODE (Default) */
-            --bg-body: #050505;
+            /* DARK MODE (Default) - PURE BLACK */
+            --bg-body: #000000; 
             --text-primary: #F5F5F7;
             --text-secondary: #86868B;
             --text-tertiary: #555555;
@@ -44,7 +42,6 @@
             --nav-border: rgba(255, 255, 255, 0.1);
             --nav-mobile-bg: rgba(20, 20, 20, 0.95);
             
-            /* Animated Gradient Variables */
             --hero-gradient: linear-gradient(120deg, #FFFFFF 0%, #999999 50%, #FFFFFF 100%);
             --stat-gradient: linear-gradient(180deg, #fff 0%, #666 100%);
             
@@ -56,16 +53,13 @@
             --btn-bg: rgba(255, 255, 255, 0.1);
             --btn-hover: rgba(255, 255, 255, 0.2);
 
-            /* --- CURSOR GLOW (Dark Mode) --- */
-            --cursor-bg: 255, 255, 255; 
-            --cursor-blend: difference; 
-            --cursor-opacity: 1;
-            --cursor-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.4);
+            /* Particle Color */
+            --particle-color: #ffffff;
         }
 
-        /* LIGHT MODE OVERRIDES */
+        /* LIGHT MODE OVERRIDES - PURE WHITE */
         [data-theme="light"] {
-            --bg-body: #F5F5F7;
+            --bg-body: #FFFFFF; 
             --text-primary: #1D1D1F;
             --text-secondary: #6e6e73;
             --text-tertiary: #86868b;
@@ -94,15 +88,13 @@
             --btn-bg: rgba(0, 0, 0, 0.05);
             --btn-hover: rgba(0, 0, 0, 0.1);
 
-            --cursor-bg: 41, 151, 255; 
-            --cursor-blend: multiply; 
-            --cursor-opacity: 0.6;
-            --cursor-shadow: 0 0 30px 10px rgba(41, 151, 255, 0.3);
+            /* Particle Color */
+            --particle-color: #1D1D1F;
         }
 
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
 
-        /* Hide Scrollbar for Lenis (Lenis handles scrolling) */
+        /* Hide Scrollbar for Lenis */
         html.lenis { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
@@ -112,16 +104,16 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-primary);
-            font-family: "Inter", -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
+            font-family: "Inter", sans-serif; letter-spacing: -0.02em;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
             line-height: 1.5;
             transition: background-color var(--transition-speed), color var(--transition-speed);
-            cursor: none; 
+            cursor: auto; /* Restored Default Cursor */
         }
 
-        a, button { cursor: none; text-decoration: none !important; }
+        a, button { cursor: pointer; text-decoration: none !important; }
 
         /* --- PRELOADER --- */
         #preloader {
@@ -166,17 +158,6 @@
             text-shadow: 0 0 10px rgba(41, 151, 255, 0.8);
         }
 
-        /* --- FILM GRAIN OVERLAY --- */
-        .noise-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9000;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
         /* --- CLICK RIPPLE --- */
         .ripple {
             position: absolute;
@@ -191,39 +172,15 @@
             to { transform: scale(4); opacity: 0; }
         }
 
-        /* --- MAIN CURSOR GLOW --- */
-        #cursor-glow {
-            position: fixed;
-            top: 0; left: 0;
-            width: 32px; 
-            height: 32px;
-            border-radius: 50%;
-            background-color: rgba(var(--cursor-bg), var(--cursor-opacity));
-            box-shadow: var(--cursor-shadow);
-            mix-blend-mode: var(--cursor-blend);
-            pointer-events: none;
-            z-index: 9999;
-            will-change: transform;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background-color 0.3s;
-        }
-
-        body:has(a:hover) #cursor-glow,
-        body:has(button:hover) #cursor-glow {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(var(--cursor-bg), 0.2);
-        }
-
-        /* --- BACKGROUND STARFIELD --- */
-        #starfield {
+        /* --- PARTICLE CANVAS --- */
+        #particle-canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100vh;
             z-index: 1; 
-            pointer-events: none;
+            pointer-events: auto; /* Allows interaction */
+            display: block;
         }
-        #starfield canvas { display: block; width: 100%; height: 100%; }
 
         /* --- NAV --- */
         .nav-wrapper {
@@ -363,29 +320,6 @@
         .hacker-text { display: inline-block; cursor: default; }
         .hacker-text.scrambling { color: var(--accent-blue); font-family: monospace; }
 
-        h1 {
-            font-family: "Inter", sans-serif;
-            font-size: 72px; 
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 1.2; 
-            padding-bottom: 0.1em; 
-            margin: 0;
-            margin-bottom: 8px;
-            background: var(--hero-gradient);
-            background-size: 200% auto; /* For breathing animation */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5)); 
-            animation: gradientMove 5s ease infinite; /* Breathing Gradient */
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         .hero-sub {
             font-size: 20px; 
             font-weight: 400;
@@ -397,7 +331,6 @@
             margin: 0 auto;
         }
 
-        [data-theme="light"] h1 { filter: none; }
         [data-theme="light"] .hero-sub { color: #333; text-shadow: 0 0 20px rgba(255,255,255,1); }
         [data-theme="light"] .hero-content { background: linear-gradient(to top, var(--bg-body) 30%, transparent 100%); }
 
@@ -405,9 +338,6 @@
 
         @media (max-width: 900px) {
             .hero-content { padding: 30px; padding-bottom: 120px; }
-            h1 { font-size: 48px; }
-            body { cursor: auto; }
-            #cursor-glow { display: none; }
         }
 
         /* --- SECTIONS --- */
@@ -590,8 +520,8 @@
 
         /* Brand Colors */
         .bg-apple { background: linear-gradient(135deg, #000 0%, #333 100%); border: 1px solid #444; }
-        .bg-amazon { background: linear-gradient(135deg, #FF9900 0%, #CC7A00 100%); color: #000; }
-        .bg-sunlife { background: linear-gradient(135deg, #FFD400 0%, #E6BE00 100%); color: #000; }
+        .bg-amazon { background: #F55600 0%; }
+        .bg-sunlife { background: #FFD400 0%; }
         .bg-muji { background: #7F0019; }
         .bg-bakes { background: #E0583B; }
         .bg-vero { background: #009688; }
@@ -607,7 +537,7 @@
         .bg-love { background: #FF0000; }
 
         .card-title-group { display: flex; flex-direction: column; }
-        .card-title { font-size: 20px; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+        .card-title { font-size: 20px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
         .card-client { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
 
         .meta-grid {
@@ -747,10 +677,7 @@
         <div id="progress-bar"></div>
     </div>
 
-    <div class="noise-overlay"></div>
-    <div id="cursor-glow"></div>
-
-    <div id="starfield"></div>
+    <canvas id="particle-canvas"></canvas>
 
     <div class="nav-wrapper">
         <nav class="nav-bar">
@@ -779,7 +706,6 @@
     <header class="hero-section" id="overview">
         <div class="hero-content">
             <div class="hero-text-side">
-                <h1 class="hacker-text animate-in delay-1">Hi, I’m Dylan.</h1>
                 <div class="hero-sub animate-in delay-2">
                     A strategic thinker who thrives at the intersection of <br>
                     <span class="highlight">Structure</span> and <span class="highlight">Creativity</span>.
@@ -839,7 +765,7 @@
         </div>
     </div>
 
-    <div class="section" id="work">
+<div class="section" id="work">
         <h2 class="section-title hacker-text">Selected Work</h2>
         
         <div class="filter-container">
@@ -851,6 +777,89 @@
         </div>
 
         <div class="project-grid">
+            
+            <div class="brand-card" data-category="data sales">
+                <div class="card-top-section">
+                    <div class="card-header">
+                        <div class="brand-avatar bg-amazon">A</div>
+                        <div class="card-title-group">
+                            <div class="card-title">AI Agent for Program Pitch Deck</div>
+                            <div class="card-client">Client: Amazon</div>
+                        </div>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-item">
+                            <span class="meta-label">Year</span><span class="meta-val">2025</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span>
+                        </div>
+                        <div class="meta-item meta-full">
+                            <span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="plus-btn" onclick="toggleCard(this)">+</button>
+                <div class="card-reveal">
+                    <p class="reveal-desc">Built an AI Agent to generate Pitch Deck for one of the biggest Annual Advertiser Program of Amazon Ads, adopted by VN & CN folks.</p>
+                </div>
+            </div>
+
+            <div class="brand-card" data-category="data sales">
+                <div class="card-top-section">
+                    <div class="card-header">
+                        <div class="brand-avatar bg-amazon">A</div>
+                        <div class="card-title-group">
+                            <div class="card-title">Visual Generation AI Prompt Agent</div>
+                            <div class="card-client">Client: Amazon</div>
+                        </div>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-item">
+                            <span class="meta-label">Year</span><span class="meta-val">2025</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span>
+                        </div>
+                        <div class="meta-item meta-full">
+                            <span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="plus-btn" onclick="toggleCard(this)">+</button>
+                <div class="card-reveal">
+                    <p class="reveal-desc">Built an AI Agent to generate concepts & prompts for visual generation in any AI Gen tools, adopted in Vietnam, Singapore & Taiwan markets</p>
+                    <a href="https://partyrock.aws/u/dylanvn/W5zqTBkL7/AdPrompt-Lab-Advanced-V4.2%253A-Creative-AI-for-Amazon-Ads-(Beta)" target="_blank" class="learn-more-btn">Learn More ↗</a>
+                </div>
+            </div>
+
+            <div class="brand-card" data-category="data sales">
+                <div class="card-top-section">
+                    <div class="card-header">
+                        <div class="brand-avatar bg-amazon">A</div>
+                        <div class="card-title-group">
+                            <div class="card-title">Business Dashboard</div>
+                            <div class="card-client">Client: Amazon</div>
+                        </div>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-item">
+                            <span class="meta-label">Year</span><span class="meta-val">2025</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span>
+                        </div>
+                        <div class="meta-item meta-full">
+                            <span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="plus-btn" onclick="toggleCard(this)">+</button>
+                <div class="card-reveal">
+                    <p class="reveal-desc">Co-built a business dashboard on PowerBI and Amazon Quicksight, integrating with AI Agent to analyze and provide business insights for actions.</p>
+                </div>
+            </div>
+
             <div class="brand-card" data-category="data sales">
                 <div class="card-top-section">
                     <div class="card-header">
@@ -1407,8 +1416,7 @@
                 </div>
             </div>
 
-        </div>
-    </div>
+        </div> </div>
 
     <div class="section" id="thoughts">
         <h2 class="section-title hacker-text">Thoughts</h2>
@@ -1483,7 +1491,7 @@
             </table>
         </div>
     </div>
-
+    
     <div class="footer">
         <div style="margin-bottom: 8px;">
             <span id="time-display" style="font-variant-numeric: tabular-nums;">--:--</span> • Ho Chi Minh City
@@ -1494,7 +1502,6 @@
         © 2025 Dylan Lam • Portfolio
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
 
     <script>
@@ -1519,23 +1526,137 @@
             }, 500);
         });
 
-        /* --- 2. MOUSE & RIPPLE --- */
-        const cursorGlow = document.getElementById('cursor-glow');
-        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+        /* --- 2. INTERACTIVE PARTICLE BACKGROUND (DYLAN EFFECT) --- */
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particleArray = [];
+        
+        // Radius set to 40 for smaller, precise explosion
+        const pMouse = { x: null, y: null, radius: 40 };
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            createRipple(e.clientX, e.clientY);
+        window.addEventListener('mousemove', function(event) {
+            pMouse.x = event.x;
+            pMouse.y = event.y;
+            createRipple(event.clientX, event.clientY);
         });
 
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.2;
-            cursorY += (mouseY - cursorY) * 0.2;
-            cursorGlow.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
-            requestAnimationFrame(animateCursor);
+        // Theme-aware particle color
+        function getParticleColor() {
+            return getComputedStyle(document.body).getPropertyValue('--particle-color').trim();
         }
-        animateCursor();
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = 2.4; 
+                this.baseX = this.x; 
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1; 
+            }
+            draw() {
+                ctx.fillStyle = getParticleColor();
+                ctx.beginPath();
+                ctx.rect(this.x, this.y, this.size, this.size); 
+                ctx.closePath();
+                ctx.fill();
+            }
+            update() {
+                let dx = pMouse.x - this.x;
+                let dy = pMouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                let forceDirectionX = dx / distance;
+                let forceDirectionY = dy / distance;
+                let maxDistance = pMouse.radius;
+                let force = (maxDistance - distance) / maxDistance;
+                let directionX = forceDirectionX * force * this.density;
+                let directionY = forceDirectionY * force * this.density;
+
+                if (distance < pMouse.radius) {
+                    this.x -= directionX * 3;
+                    this.y -= directionY * 3;
+                } else {
+                    if (this.x !== this.baseX) {
+                        let dx = this.x - this.baseX;
+                        this.x -= dx / 10;
+                    }
+                    if (this.y !== this.baseY) {
+                        let dy = this.y - this.baseY;
+                        this.y -= dy / 10;
+                    }
+                }
+            }
+        }
+
+        function initParticles() {
+            particleArray = [];
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // 1. DYNAMIC FONT SIZING
+            let baseSize = 100;
+            ctx.font = '900 ' + baseSize + 'px "Inter", sans-serif';
+            let text = "DYLAN";
+            let measurements = ctx.measureText(text);
+            let textWidth = measurements.width;
+            
+            // Calculate size to fill 80% of screen width
+            let targetWidth = canvas.width * 0.8; 
+            let fontSize = (targetWidth / textWidth) * baseSize;
+
+            if (fontSize > canvas.height * 0.5) {
+                fontSize = canvas.height * 0.5;
+            }
+
+            // 2. DRAW TEXT
+            ctx.fillStyle = 'white';
+            ctx.font = '900 ' + fontSize + 'px "Inter", sans-serif'; 
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Vertical Scale (1.5x) for tall look
+            ctx.save();
+            ctx.scale(1, 1.5); 
+            
+            // Offset Y to avoid Nav Bar
+            let offsetY = 60; 
+            ctx.fillText(text, canvas.width / 2, (canvas.height / 2 + offsetY) / 1.5);
+            ctx.restore();
+
+            // 3. SCAN PIXELS
+            const textCoordinates = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            // OPTIMIZATION: Increased step to 8 to reduce lag (fewer particles)
+            let step = 8; 
+            if(window.innerWidth < 768) step = 5; 
+
+            for (let y = 0, y2 = textCoordinates.height; y < y2; y += step) {
+                for (let x = 0, x2 = textCoordinates.width; x < x2; x += step) {
+                    if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4) + 3] > 128) {
+                        let positionX = x;
+                        let positionY = y;
+                        particleArray.push(new Particle(positionX, positionY));
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particleArray.length; i++) {
+                particleArray[i].draw();
+                particleArray[i].update();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Wait for fonts to load
+        document.fonts.ready.then(function() {
+            initParticles();
+            animateParticles();
+        });
+
+        window.addEventListener('resize', initParticles);
 
         function createRipple(x, y) {
             if (Math.random() > 0.1) return; 
@@ -1548,176 +1669,45 @@
             document.body.appendChild(ripple);
             setTimeout(() => ripple.remove(), 600);
         }
-        
-        document.addEventListener('click', (e) => {
-            const ripple = document.createElement('div');
-            ripple.classList.add('ripple');
-            ripple.style.left = `${e.clientX}px`;
-            ripple.style.top = `${e.clientY}px`;
-            ripple.style.width = '20px';
-            ripple.style.height = '20px';
-            document.body.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-        });
 
-        /* --- 3. 3D TILT EFFECT --- */
-        // Applies a subtle 3D tilt to cards based on mouse position relative to the card center
+        /* --- 4. 3D TILT EFFECT --- */
         const tiltCards = document.querySelectorAll('.brand-card, .scope-card');
-        
         tiltCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
-                // Spotlight logic
                 card.style.setProperty('--x', `${x}px`);
                 card.style.setProperty('--y', `${y}px`);
-
-                // 3D Tilt Logic
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -2; // Max 2deg rotation
+                const rotateX = ((y - centerY) / centerY) * -2; 
                 const rotateY = ((x - centerX) / centerX) * 2;
-
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
             });
-
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
             });
         });
 
-        /* --- 4. HATOM GLOBE --- */
-        const container = document.getElementById('starfield');
-        let scene, camera, renderer, globeMesh, particlesMesh;
-        let normMouseX = 0, normMouseY = 0;
-
-        function createCircleTexture() {
-            const size = 64;
-            const canvas = document.createElement('canvas');
-            canvas.width = size; canvas.height = size;
-            const ctx = canvas.getContext('2d');
-            const center = size / 2;
-            ctx.beginPath();
-            ctx.arc(center, center, center / 2, 0, Math.PI * 2);
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fill();
-            return new THREE.CanvasTexture(canvas);
-        }
-
-        function initGlobe() {
-            try {
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.z = 4.5; 
-                renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
-                container.appendChild(renderer.domElement);
-
-                const globeGeo = new THREE.SphereGeometry(2.0, 32, 32); 
-                const globeMat = new THREE.MeshBasicMaterial({ color: 0x333333, wireframe: true, transparent: true, opacity: 0.15 });
-                globeMesh = new THREE.Mesh(globeGeo, globeMat);
-                scene.add(globeMesh);
-
-                const particlesGeo = new THREE.BufferGeometry();
-                const particleCount = 1800; 
-                const posArray = new Float32Array(particleCount * 3);
-                for(let i = 0; i < particleCount * 3; i+=3) {
-                    posArray[i] = (Math.random() - 0.5) * 40; 
-                    posArray[i+1] = (Math.random() - 0.5) * 40;
-                    posArray[i+2] = (Math.random() - 0.5) * 40;
-                }
-                particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-                const particlesMat = new THREE.PointsMaterial({ size: 0.12, color: 0xffffff, map: createCircleTexture(), transparent: true, alphaTest: 0.1, opacity: 0.8 });
-                particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-                scene.add(particlesMesh);
-
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                updateGlobeTheme(currentTheme);
-                animateGlobe();
-            } catch (e) { console.error(e); }
-        }
-
-        function animateGlobe() {
-            requestAnimationFrame(animateGlobe);
-            if(globeMesh && particlesMesh) {
-                globeMesh.rotation.y += 0.002;
-                particlesMesh.rotation.y -= 0.001;
-                globeMesh.rotation.x += (normMouseY * 0.5 - globeMesh.rotation.x) * 0.05;
-                globeMesh.rotation.y += (normMouseX * 0.5 - globeMesh.rotation.y) * 0.05;
-                particlesMesh.rotation.x += (normMouseY * 0.5 - particlesMesh.rotation.x) * 0.02;
-            }
-            renderer.render(scene, camera);
-        }
-
-        document.addEventListener('mousemove', (event) => {
-            normMouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            normMouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        window.addEventListener('resize', () => {
-            if(camera && renderer) {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-        });
-
-        initGlobe();
-
-        /* --- 5. SCROLL FX --- */
-        let lastScrollY = 0;
-        let ticking = false;
+        /* --- 5. PROGRESS BAR & FADE --- */
         const progressBar = document.getElementById('progress-bar');
-
         window.addEventListener('scroll', () => {
-            lastScrollY = window.scrollY;
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateScrollEffects(lastScrollY);
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-
-        function updateScrollEffects(scrollY) {
-            if (globeMesh) {
+            window.requestAnimationFrame(() => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progressBar.style.width = scrolled + "%";
+                
+                // Fade out particles on scroll
                 const fadePoint = 500;
-                let opacity = 1 - (scrollY / fadePoint);
+                let opacity = 1 - (winScroll / fadePoint);
                 if (opacity < 0) opacity = 0;
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                const maxOpacity = isDark ? 0.15 : 0.08;
-                globeMesh.material.opacity = opacity * maxOpacity;
-                globeMesh.position.y = -scrollY * 0.002; 
-            }
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            progressBar.style.width = scrolled + "%";
-        }
-
-        const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
-                    if (activeLink) {
-                        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-                        activeLink.classList.add('active');
-                    }
-                }
+                canvas.style.opacity = opacity;
             });
-        }, observerOptions);
-
-        document.querySelectorAll('header, .section').forEach((section) => {
-            if(section.id) observer.observe(section);
         });
 
-        /* --- 6. HACKER TEXT & MAGNET --- */
+        /* --- 6. HACKER TEXT & UTILS --- */
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~`|}{[]:;?><,./-=";
         function enableTextScramble(selector) {
             const elements = document.querySelectorAll(selector);
@@ -1758,7 +1748,6 @@
             });
         });
 
-        /* --- 7. UTILS --- */
         function updateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Ho_Chi_Minh' });
@@ -1781,9 +1770,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             enableTextScramble(".hacker-text");
-            enableTextScramble("h1"); 
             enableTextScramble(".section-title"); 
-            console.log("%c Directed by Dylan Lam. \n%c Co-authored by AI.", "font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; color: #fff; background: #000; padding: 10px; border-radius: 5px;", "font-family: monospace; color: #888; margin-top: 5px;");
         });
 
         const themeBtn = document.getElementById('themeBtn');
@@ -1792,7 +1779,6 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         htmlTag.setAttribute('data-theme', savedTheme);
         updateIcon(savedTheme);
-        updateGlobeTheme(savedTheme);
 
         themeBtn.addEventListener('click', () => {
             const currentTheme = htmlTag.getAttribute('data-theme');
@@ -1800,21 +1786,9 @@
             htmlTag.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
-            updateGlobeTheme(newTheme);
         });
 
         function updateIcon(theme) { themeIcon.textContent = theme === 'dark' ? '☀︎' : '☾'; }
-
-        function updateGlobeTheme(theme) {
-            if(!globeMesh || !particlesMesh) return;
-            if(theme === 'light') {
-                globeMesh.material.color.setHex(0x1a1a1a); globeMesh.material.opacity = 0.08; 
-                particlesMesh.material.color.setHex(0x000000); particlesMesh.material.opacity = 0.3; container.style.opacity = "0.5"; 
-            } else {
-                globeMesh.material.color.setHex(0xffffff); globeMesh.material.opacity = 0.12; 
-                particlesMesh.material.color.setHex(0xffffff); particlesMesh.material.opacity = 0.8; container.style.opacity = "1";
-            }
-        }
 
         function toggleMobileMenu() {
             const navLinks = document.getElementById('mobileDropdown');
@@ -1842,6 +1816,25 @@
             card.classList.toggle('active');
             if (card.classList.contains('active')) { btn.innerHTML = '×'; btn.style.transform = 'rotate(0deg)'; } else { btn.innerHTML = '+'; btn.style.transform = 'rotate(0deg)'; }
         }
+
+        /* --- SCROLL OBSERVER --- */
+        const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    if (activeLink) {
+                        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('header, .section').forEach((section) => {
+            if(section.id) observer.observe(section);
+        });
     </script>
 
 </body>
