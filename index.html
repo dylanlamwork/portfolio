@@ -13,72 +13,60 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* --- DESIGN SYSTEM VARIABLES --- */
         :root {
             --radius-card: 30px;
             --radius-button: 100px;
-            --accent-blue: #2997FF;
-            --transition-speed: 0.3s;
+            --transition-speed: 0.4s;
             
-            /* DARK MODE (Default) - PURE BLACK */
+            /* DARK MODE (Default) */
             --bg-body: #000000; 
             --text-primary: #F5F5F7;
             --text-secondary: #86868B;
             --text-tertiary: #555555;
             
-            --glass-bg: rgba(30, 30, 30, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-hover: rgba(255, 255, 255, 0.12);
+            --glass-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(255, 255, 255, 0.15);
             
-            --card-bg: #161617;
+            --card-bg: #111111;
             --card-hover: #1c1c1e;
-            --card-shadow: 0 30px 60px rgba(0,0,0,0.6);
             --reveal-bg: #1E1E1E;
             
-            --nav-bg: rgba(20, 20, 20, 0.7);
-            --nav-border: rgba(255, 255, 255, 0.1);
-            --nav-mobile-bg: rgba(20, 20, 20, 0.95);
-            
-            --hero-gradient: linear-gradient(120deg, #FFFFFF 0%, #999999 50%, #FFFFFF 100%);
-            --stat-gradient: linear-gradient(180deg, #fff 0%, #666 100%);
+            --nav-bg: rgba(15, 15, 15, 0.85);
+            --nav-border: rgba(255, 255, 255, 0.15);
+            --nav-mobile-bg: rgba(10, 10, 10, 0.95);
             
             --pill-bg: transparent;
-            --pill-border: rgba(255, 255, 255, 0.15);
+            --pill-border: rgba(255, 255, 255, 0.2);
             --pill-active-bg: #fff;
             --pill-active-text: #000;
 
             --btn-bg: rgba(255, 255, 255, 0.1);
             --btn-hover: rgba(255, 255, 255, 0.2);
-
-            /* Particle Color */
-            --particle-color: #ffffff;
         }
 
-        /* LIGHT MODE OVERRIDES - PURE WHITE */
+        /* LIGHT MODE OVERRIDES */
         [data-theme="light"] {
             --bg-body: #FFFFFF; 
             --text-primary: #1D1D1F;
             --text-secondary: #6e6e73;
             --text-tertiary: #86868b;
             
-            --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(0, 0, 0, 0.05);
-            --glass-hover: rgba(255, 255, 255, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.9);
             
             --card-bg: #FFFFFF;
             --card-hover: #FFFFFF;
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
             --reveal-bg: #F0F0F2;
             
-            --nav-bg: rgba(255, 255, 255, 0.7);
-            --nav-border: rgba(0, 0, 0, 0.05);
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --nav-border: rgba(0, 0, 0, 0.08);
             --nav-mobile-bg: rgba(255, 255, 255, 0.95);
-            
-            --hero-gradient: linear-gradient(120deg, #1D1D1F 0%, #424245 50%, #1D1D1F 100%);
-            --stat-gradient: linear-gradient(180deg, #1D1D1F 0%, #86868B 100%);
             
             --pill-bg: rgba(0,0,0,0.05);
             --pill-border: transparent;
@@ -87,14 +75,10 @@
 
             --btn-bg: rgba(0, 0, 0, 0.05);
             --btn-hover: rgba(0, 0, 0, 0.1);
-
-            /* Particle Color */
-            --particle-color: #1D1D1F;
         }
 
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
 
-        /* Hide Scrollbar for Lenis */
         html.lenis { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
@@ -104,527 +88,284 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-primary);
-            font-family: "Inter", sans-serif; letter-spacing: -0.02em;
-            margin: 0;
-            padding: 0;
+            font-family: "Inter", sans-serif;
+            letter-spacing: -0.02em;
+            margin: 0; padding: 0;
             overflow-x: hidden;
             line-height: 1.5;
             transition: background-color var(--transition-speed), color var(--transition-speed);
-            cursor: auto; /* Restored Default Cursor */
         }
 
         a, button { cursor: pointer; text-decoration: none !important; }
 
         /* --- PRELOADER --- */
         #preloader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-body);
             z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             transition: opacity 0.8s ease, visibility 0.8s ease;
         }
         #preloader.hidden { opacity: 0; visibility: hidden; }
         .loader-spinner {
             width: 40px; height: 40px;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 2px solid rgba(125,125,125,0.2);
             border-top-color: var(--text-primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* --- PROGRESS BAR --- */
         #progress-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 2px;
-            z-index: 100000;
-            background: transparent;
+            position: fixed; top: 0; left: 0; width: 100%; height: 3px;
+            z-index: 100000; background: transparent;
         }
         #progress-bar {
-            height: 100%;
-            background: var(--accent-blue);
-            width: 0%;
-            box-shadow: 0 0 10px var(--accent-blue);
-            transition: width 0.1s;
+            height: 100%; background: var(--text-primary); width: 0%; transition: width 0.1s;
         }
 
-        /* --- CUSTOM SELECTION --- */
-        ::selection {
-            background: rgba(41, 151, 255, 0.3);
-            color: #fff;
-            text-shadow: 0 0 10px rgba(41, 151, 255, 0.8);
-        }
-
-        /* --- CLICK RIPPLE --- */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(0);
-            animation: ripple-anim 0.6s linear;
-            pointer-events: none;
-            z-index: 9998;
-        }
-        @keyframes ripple-anim {
-            to { transform: scale(4); opacity: 0; }
-        }
-
-        /* --- PARTICLE CANVAS --- */
-        #particle-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100vh;
-            z-index: 1; 
-            pointer-events: auto; /* Allows interaction */
-            display: block;
-        }
-
-        /* --- NAV --- */
+        /* --- NAV (MOBILE OPTIMIZED) --- */
         .nav-wrapper {
-            position: fixed;
-            top: 24px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            z-index: 1000;
+            position: fixed; top: 24px; left: 0; width: 100%;
+            display: flex; justify-content: center; 
+            z-index: 9999; 
+            pointer-events: none;
         }
-
         .nav-bar {
             pointer-events: auto;
             background: var(--nav-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            padding: 6px;
-            border-radius: var(--radius-button);
-            border: 1px solid var(--nav-border);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all var(--transition-speed);
-            position: relative;
-        }
-
-        .nav-links-container { display: flex; align-items: center; gap: 4px; }
-
-        .nav-link {
-            color: var(--text-primary);
-            font-size: 13px;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: var(--radius-button);
-            transition: all 0.2s ease;
-            opacity: 0.7;
-            text-decoration: none; 
-            display: inline-block;
-        }
-
-        .nav-link:hover { background: var(--glass-hover); opacity: 1; }
-        .nav-link.active { background: var(--text-primary); color: var(--bg-body); opacity: 1; }
-
-        .desktop-only { display: block; }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 20px;
-            padding: 10px 16px;
-            cursor: pointer;
-            border-radius: 100px;
-            margin-left: 4px;
-        }
-        .mobile-menu-btn:hover { background: rgba(128, 128, 128, 0.1); }
-        .mobile-menu-btn.active { background: rgba(128, 128, 128, 0.2); }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px 14px;
-            border-radius: var(--radius-button);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            transition: background 0.3s ease;
-            margin-left: 4px;
-            border-left: 1px solid var(--nav-border);
-            border-radius: 0 100px 100px 0;
-        }
-        .theme-toggle:hover { background: rgba(128, 128, 128, 0.1); }
-
-        .mobile-dropdown {
-            display: none;
-            position: absolute;
-            top: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--nav-mobile-bg);
-            border: 1px solid var(--nav-border);
-            padding: 20px;
-            border-radius: 30px;
-            flex-direction: column;
-            align-items: center;
-            width: 260px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            z-index: 999;
+            /* Responsive Width */
+            padding: 10px 32px; 
+            width: auto;
+            min-width: 320px;
+            max-width: 90%; 
+            border-radius: 100px;
+            border: 1px solid var(--nav-border);
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all var(--transition-speed);
         }
+        .nav-links-container { display: flex; align-items: center; gap: 4px; }
+        
+        .nav-link {
+            color: var(--text-primary);
+            font-size: 13px; font-weight: 600;
+            padding: 10px 20px;
+            border-radius: var(--radius-button);
+            transition: all 0.2s ease; opacity: 0.7;
+            text-decoration: none; display: inline-block;
+        }
+        .nav-link:hover { background: var(--glass-hover); opacity: 1; }
+        .nav-link.active { background: var(--text-primary); color: var(--bg-body); opacity: 1; }
+        
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 20px; padding: 10px 16px; cursor: pointer; border-radius: 100px; margin-left: 4px; }
+        .theme-toggle { background: none; border: none; cursor: pointer; padding: 10px 14px; border-radius: var(--radius-button); display: flex; align-items: center; justify-content: center; color: var(--text-primary); transition: background 0.3s ease; margin-left: 4px; border-left: 1px solid var(--nav-border); border-radius: 0 100px 100px 0; }
+        
+        .mobile-dropdown { display: none; position: absolute; top: 70px; left: 50%; transform: translateX(-50%); background: var(--nav-mobile-bg); border: 1px solid var(--nav-border); padding: 20px; border-radius: 30px; flex-direction: column; align-items: center; width: 90%; max-width: 300px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); backdrop-filter: blur(20px); z-index: 999; pointer-events: auto; }
         .mobile-dropdown.active { display: flex; }
         .mobile-dropdown .nav-link { width: 100%; text-align: center; padding: 14px; font-size: 15px; }
 
-        /* --- HERO & ANIMATIONS --- */
+        /* --- HERO --- */
         .hero-section {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 100vh; width: 100%; text-align: center; padding: 0 20px; 
+            z-index: 10;
+            padding-top: 80px; 
             position: relative;
-            height: 100vh;
-            width: 100%;
             overflow: hidden;
-            background: transparent;
-            z-index: 10;
+            border-bottom: 1px solid var(--glass-border);
         }
 
-        .hero-content {
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: auto;
-            z-index: 10;
-            padding: 60px;
-            padding-bottom: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center; 
-            text-align: center;
-            pointer-events: none;
-            background: linear-gradient(to top, var(--bg-body) 10%, transparent 100%);
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1540198163009-7afda7da2945?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            filter: grayscale(20%) contrast(1.1); 
+            animation: bgZoom 30s infinite alternate linear;
         }
+
+        @keyframes bgZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            background: 
+                radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%),
+                linear-gradient(to bottom, rgba(0,0,0,0) 60%, var(--bg-body) 100%),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+        }
+
+        .hero-title-lab {
+            font-family: "Inter", sans-serif;
+            font-weight: 600; 
+            font-size: clamp(50px, 17vw, 240px); /* Slightly smaller min for mobile */
+            line-height: 0.9; letter-spacing: -0.06em;
+            color: #FFFFFF; 
+            margin: 0; padding: 0;
+            margin-bottom: 24px; 
+            opacity: 0; transform: translateY(40px);
+            animation: labReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative; z-index: 2;
+        }
+        .hero-sub-lab {
+            font-family: "Inter", sans-serif;
+            font-size: clamp(16px, 2vw, 22px);
+            font-weight: 500; line-height: 1.4; letter-spacing: -0.02em;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 680px; margin: 0 auto;
+            opacity: 0; transform: translateY(20px);
+            animation: labReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+            position: relative; z-index: 2;
+        }
+        .highlight { color: #FFFFFF; font-weight: 600; }
         
-        .hero-text-side {
-            pointer-events: auto;
-            max-width: 800px;
+        @keyframes labReveal {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-
-        .animate-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease forwards; }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.3s; }
-        .delay-3 { animation-delay: 0.5s; }
-
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
         .hacker-text { display: inline-block; cursor: default; }
         .hacker-text.scrambling { color: var(--accent-blue); font-family: monospace; }
 
-        .hero-sub {
-            font-size: 20px; 
-            font-weight: 400;
-            color: var(--text-secondary);
-            letter-spacing: -0.01em;
-            line-height: 1.6;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        [data-theme="light"] .hero-sub { color: #333; text-shadow: 0 0 20px rgba(255,255,255,1); }
-        [data-theme="light"] .hero-content { background: linear-gradient(to top, var(--bg-body) 30%, transparent 100%); }
-
-        .highlight { color: var(--text-primary); font-weight: 700; }
-
-        @media (max-width: 900px) {
-            .hero-content { padding: 30px; padding-bottom: 120px; }
-        }
-
         /* --- SECTIONS --- */
-        .section {
-            position: relative;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 100px 20px;
-            z-index: 10;
-        }
-
-        .section-title {
-            font-size: 40px;
-            font-weight: 700;
-            text-align: left;
-            margin-bottom: 30px;
-            color: var(--text-primary);
-        }
+        .section { position: relative; max-width: 1280px; margin: 0 auto; padding: 100px 20px; z-index: 10; }
+        .section-title { font-size: 40px; font-weight: 600; letter-spacing: -0.03em; text-align: left; margin-bottom: 30px; color: var(--text-primary); }
 
         /* --- STATS --- */
-        .stats-row {
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            padding: 60px 0;
-            margin-bottom: 80px;
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-            transition: border-color var(--transition-speed);
-            background: var(--bg-body);
-        }
+        .stats-row { display: flex; justify-content: center; gap: 80px; padding: 60px 0; margin-bottom: 80px; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); background: var(--bg-body); }
         .stat-item { text-align: center; }
-        
-        .stat-val { 
-            font-family: "Inter", sans-serif;
-            font-size: 96px; 
-            font-weight: 700; 
-            color: var(--text-primary); 
-            line-height: 1; 
-            margin-bottom: 12px; 
-            letter-spacing: -0.04em;
-            background: var(--stat-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: all var(--transition-speed);
-        }
-        .stat-lbl { font-size: 14px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
+        .stat-val { font-family: "Inter", sans-serif; font-size: 96px; font-weight: 600; color: var(--text-primary); line-height: 1; margin-bottom: 12px; letter-spacing: -0.05em; }
+        .stat-lbl { font-size: 14px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
 
-        /* --- GRID SYSTEM --- */
-        .grid {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: repeat(12, 1fr);
-        }
+        /* --- SCOPES --- */
+        .grid { display: grid; gap: 24px; grid-template-columns: repeat(12, 1fr); }
         .span-6 { grid-column: span 6; }
-        .span-12 { grid-column: span 12; }
-
-        /* --- CARDS (SHARED 3D TILT STYLES) --- */
-        /* Common base for tilt effect */
-        .brand-card, .scope-card {
+        
+        .scope-card {
             background: var(--card-bg); 
             border: 1px solid var(--glass-border);
             border-radius: var(--radius-card);
             padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display: flex; flex-direction: column; justify-content: space-between;
             min-height: 300px;
             cursor: default;
+            transition: transform 0.1s ease, box-shadow 0.4s ease;
+        }
+        .scope-num { 
+            font-size: 14px; font-weight: 700; 
+            color: var(--text-tertiary); 
+            letter-spacing: 0.05em; margin-bottom: 24px; 
+            font-family: monospace;
+        }
+        .scope-title { font-size: 32px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); letter-spacing: -0.03em; line-height: 1.1; }
+        .scope-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; font-weight: 500; }
+
+        /* --- WORK CARD DESIGN --- */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+
+        .brand-card {
+            background: var(--card-bg); 
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-card);
+            padding: 40px;
+            min-height: 420px;
+            cursor: pointer;
             position: relative;
             overflow: hidden;
-            
-            /* KEY FOR TILT */
+            display: flex;
             transform-style: preserve-3d;
             perspective: 1000px;
             transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
-            transition: transform 0.1s ease, box-shadow 0.4s ease; /* Fast transform for mouse */
+            transition: transform 0.1s ease, box-shadow 0.4s ease, background-color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .brand-card { padding: 32px; justify-content: flex-start; height: 440px; }
-
-        /* Spotlight Logic */
-        .brand-card::before, .scope-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: var(--radius-card);
-            padding: 1.5px; 
-            background: radial-gradient(
-                800px circle at var(--x) var(--y), 
-                rgba(255, 255, 255, 0.4), 
-                transparent 40%
-            );
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0; 
-            transition: opacity 0.3s ease;
-            z-index: 2;
+        .card-top-section {
+            width: 100%; display: flex; flex-direction: column; z-index: 2; transition: opacity 0.3s ease;
         }
 
-        .grid:hover .scope-card::before, .project-grid:hover .brand-card::before { opacity: 1; }
-
-        .scope-num { 
-            font-size: 16px; 
-            font-weight: 700; 
-            color: var(--text-tertiary); 
-            letter-spacing: 0.05em; 
-            margin-bottom: 20px; 
-            font-family: monospace;
-            background: var(--stat-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .scope-title { font-size: 32px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); letter-spacing: -0.02em; line-height: 1.1; }
-        .scope-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; }
-
-        /* --- PROJECT NAVIGATION --- */
-        .filter-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 12px;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            scrollbar-width: none;
-        }
-        .filter-container::-webkit-scrollbar { display: none; }
-
-        .filter-pill {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background: var(--pill-bg);
-            border: 1px solid var(--pill-border);
-            border-radius: 100px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-        .filter-pill:hover { background: var(--glass-hover); color: var(--text-primary); }
-        .filter-pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); font-weight: 600; border-color: transparent; }
-
-        /* --- PROJECT GRID --- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 24px;
+        .meta-grid { 
+            display: grid; grid-template-columns: 1fr 2fr; gap: 16px; 
+            padding-top: 24px; padding-bottom: 10px; border-top: 1px solid var(--glass-border); margin-top: auto; 
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 50; 
-            pointer-events: none;
-            transform: translateZ(20px); /* 3D pop */
+        .card-hover-content {
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; padding: 40px;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 3; pointer-events: none; 
         }
 
-        .brand-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: 700;
-            color: #fff;
-            background: #333;
-            flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        .card-watermark {
+            position: absolute; bottom: -40px; right: -40px;
+            font-size: 300px; font-weight: 900; font-family: "Inter", sans-serif;
+            color: var(--text-primary); opacity: 0.03; line-height: 1;
+            pointer-events: none; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: rotate(-10deg) translateZ(0); z-index: 0;
         }
 
-        /* Brand Colors */
-        .bg-apple { background: linear-gradient(135deg, #000 0%, #333 100%); border: 1px solid #444; }
-        .bg-amazon { background: #F55600 0%; }
-        .bg-sunlife { background: #FFD400 0%; }
-        .bg-muji { background: #7F0019; }
-        .bg-bakes { background: #E0583B; }
-        .bg-vero { background: #009688; }
-        .bg-mammam { background: #222; border: 1px solid #555; }
-        .bg-pmax { background: #0057FF; }
-        .bg-vero-green { background: #004D40; }
-        .bg-august { background: #D4AF37; color: #000; }
-        .bg-yingtao { background: #8B0000; }
-        .bg-lang { background: #D8C3A5; color: #5E4B35; }
-        .bg-bitis { background: #0054A6; }
-        .bg-shadow { background: #000; border: 1px solid #333; }
-        .bg-pikotaro { background: #D4AF37; color: #000; }
-        .bg-love { background: #FF0000; }
+        /* HOVER STATES */
+        .brand-card:hover { background-color: var(--brand-color, #333); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .brand-card:hover .meta-grid { opacity: 0; transform: translateY(10px); }
+        .brand-card:hover .card-hover-content { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .brand-card:hover .card-watermark { opacity: 0.15; transform: rotate(0deg) scale(1.1) translate(-20px, -20px); color: #000; }
 
+        /* COLORS (DEFAULT BRIGHT BRAND) -> BLACK TEXT */
+        .brand-card:hover .card-title, .brand-card:hover .card-client, .brand-card:hover .reveal-desc { color: #000000 !important; }
+        .brand-card:hover .brand-avatar { background: #000; color: var(--brand-color); }
+        .brand-card:hover .learn-more-btn { background-color: #000000 !important; color: #FFFFFF !important; }
+
+        /* DARK BRAND OVERRIDES -> WHITE TEXT */
+        .brand-card.dark-brand:hover .card-title, .brand-card.dark-brand:hover .card-client, .brand-card.dark-brand:hover .reveal-desc, .brand-card.dark-brand:hover .card-watermark { color: #FFFFFF !important; }
+        .brand-card.dark-brand:hover .brand-avatar { background: #FFFFFF; color: #000000; }
+        .brand-card.dark-brand:hover .learn-more-btn { background-color: #FFFFFF !important; color: #000000 !important; }
+
+        /* Typography */
+        .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+        .brand-avatar { width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 600; color: #fff; background: #333; flex-shrink: 0; transition: all 0.3s ease; }
         .card-title-group { display: flex; flex-direction: column; }
-        .card-title { font-size: 20px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
-        .card-client { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
-
-        .meta-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 16px;
-            padding-top: 24px;
-            padding-bottom: 10px;
-            border-top: 1px solid var(--glass-border);
-            margin-top: auto;
-            position: relative;
-            z-index: 1;
-            transform: translateZ(10px); /* 3D pop */
-        }
+        .card-title { font-size: 20px; font-weight: 600; color: var(--text-primary); line-height: 1.2; letter-spacing: -0.01em; transition: color 0.3s ease; }
+        .card-client { font-size: 13px; color: var(--text-secondary); margin-top: 2px; transition: color 0.3s ease; }
 
         .meta-item { display: flex; flex-direction: column; }
         .meta-full { grid-column: span 2; margin-top: 8px; }
         .meta-label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); letter-spacing: 0.05em; margin-bottom: 6px; }
-        .meta-val { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+        .meta-val { font-size: 14px; color: var(--text-primary); font-weight: 600; }
 
-        .plus-btn {
-            position: absolute;
-            bottom: 24px;
-            right: 24px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--btn-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            font-size: 24px;
-            font-weight: 300;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 60;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            transform: translateZ(30px); /* 3D pop high */
-        }
-        .plus-btn:hover { background: var(--btn-hover); transform: translateZ(30px) scale(1.1); }
-        .brand-card.active .plus-btn { background: var(--text-primary); color: var(--bg-body); transform: translateZ(30px) rotate(45deg); }
-
-        .card-reveal {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%;
-            height: calc(100% - 110px);
-            background: var(--reveal-bg);
-            padding: 32px;
-            padding-top: 40px;
-            padding-right: 70px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            opacity: 0;
-            transform: translateY(20px) translateZ(5px);
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            z-index: 40;
-            border-top: 1px solid var(--glass-border);
-            pointer-events: none;
-        }
-
-        .brand-card.active .card-reveal { opacity: 1; transform: translateY(0) translateZ(5px); pointer-events: auto; }
-        .reveal-desc { font-size: 14px; color: var(--text-primary); line-height: 1.6; margin-bottom: 20px; overflow-y: auto; }
-
+        .reveal-desc { font-size: 17px; line-height: 1.5; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 24px; }
+        
         .learn-more-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 16px;
-            background: var(--text-primary);
-            color: var(--bg-body);
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 600;
-            transition: transform 0.2s;
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 10px 24px; margin-top: 24px;
+            background: var(--text-primary); color: var(--bg-body);
+            border-radius: 100px; font-size: 13px; font-weight: 600;
+            transition: transform 0.2s, background-color 0.3s, color 0.3s; 
             align-self: flex-start;
-            margin-top: auto;
         }
         .learn-more-btn:hover { transform: translateY(-2px); }
+
+        /* Filter Pills */
+        .filter-container { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 20px; margin-bottom: 30px; scrollbar-width: none; }
+        .filter-container::-webkit-scrollbar { display: none; }
+        .filter-pill { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--pill-bg); border: 1px solid var(--pill-border); border-radius: 100px; color: var(--text-secondary); font-size: 14px; font-weight: 600; white-space: nowrap; transition: all 0.2s ease; cursor: pointer; }
+        .filter-pill:hover { background: var(--glass-hover); color: var(--text-primary); }
+        .filter-pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); font-weight: 600; border-color: transparent; }
 
         /* --- THOUGHTS SECTION --- */
         .thought-list { display: flex; flex-direction: column; gap: 16px; }
         .thought-item { display: flex; align-items: baseline; gap: 32px; padding: 24px; border-radius: var(--radius-card); border: 1px solid var(--glass-border); background: var(--glass-bg); transition: all 0.3s ease; text-decoration: none; }
-        .thought-item:hover { background: var(--glass-hover); border-color: var(--accent-blue); transform: translateX(4px); }
+        .thought-item:hover { background: var(--glass-hover); border-color: var(--text-primary); transform: translateX(4px); }
         .thought-date { min-width: 120px; font-family: monospace; font-size: 13px; color: var(--text-tertiary); }
         .thought-content { flex-grow: 1; }
         .thought-title { font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; display: block; }
@@ -632,12 +373,6 @@
         .thought-arrow { opacity: 0; color: var(--text-primary); transform: translateX(-10px); transition: all 0.3s ease; }
         .thought-item:hover .thought-arrow { opacity: 1; transform: translateX(0); }
         
-        @media (max-width: 768px) {
-            .thought-item { flex-direction: column; gap: 12px; }
-            .thought-date { min-width: auto; }
-            .thought-arrow { display: none; }
-        }
-
         /* --- CAREER TABLE --- */
         .career-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .career-row { border-bottom: 1px solid var(--glass-border); transition: background 0.2s; }
@@ -651,19 +386,27 @@
         .footer { position: relative; z-index: 10; text-align: center; padding: 100px 0; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--glass-border); margin-top: 100px; background: var(--bg-body); }
         .footer a { color: var(--text-primary); margin: 0 10px; }
 
-        @media (max-width: 768px) {
-            .stats-row { flex-wrap: wrap; gap: 40px; }
-            .stat-val { font-size: 64px; }
-            .span-6, .span-12 { grid-column: span 12; }
-            .career-cell { display: block; width: 100%; padding: 8px 0; }
-            .career-row { padding: 20px 0; display: block; }
-            .c-date { text-align: left; margin-bottom: 10px; }
+        /* Mobile */
+        .desktop-only { display: block; }
+        @media (max-width: 900px) {
+            .desktop-only { display: none; }
+            .mobile-menu-btn { display: block; }
+            .grid { grid-template-columns: 1fr; }
+            .span-6 { grid-column: span 1; }
+            .hero-title-lab { font-size: 18vw; }
             .thought-item { flex-direction: column; gap: 12px; }
             .thought-date { min-width: auto; }
             .thought-arrow { display: none; }
-            .desktop-only { display: none; }
-            .mobile-menu-btn { display: block; }
-            .card-reveal { height: calc(100% - 100px); }
+            .stats-row { flex-wrap: wrap; gap: 40px; }
+            .stat-val { font-size: 64px; }
+            .career-cell { display: block; width: 100%; padding: 8px 0; }
+            .career-row { padding: 20px 0; display: block; }
+            .c-date { text-align: left; margin-bottom: 10px; }
+            
+            /* Responsive Cards */
+            .brand-card { min-height: 320px; padding: 24px; }
+            .card-title { font-size: 18px; }
+            .scope-card { padding: 24px; min-height: 240px; }
         }
     </style>
 </head>
@@ -676,8 +419,6 @@
     <div id="progress-container">
         <div id="progress-bar"></div>
     </div>
-
-    <canvas id="particle-canvas"></canvas>
 
     <div class="nav-wrapper">
         <nav class="nav-bar">
@@ -704,13 +445,14 @@
     </div>
 
     <header class="hero-section" id="overview">
-        <div class="hero-content">
-            <div class="hero-text-side">
-                <div class="hero-sub animate-in delay-2">
-                    A strategic thinker who thrives at the intersection of <br>
-                    <span class="highlight">Structure</span> and <span class="highlight">Creativity</span>.
-                </div>
-            </div>
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <h1 class="hero-title-lab">DYLAN</h1>
+        
+        <div class="hero-sub-lab">
+            A strategic thinker who thrives at the intersection of<br>
+            <span class="highlight">Structure</span> and <span class="highlight">Creativity</span>.
         </div>
     </header>
 
@@ -765,7 +507,7 @@
         </div>
     </div>
 
-<div class="section" id="work">
+    <div class="section" id="work">
         <h2 class="section-title hacker-text">Selected Work</h2>
         
         <div class="filter-container">
@@ -778,641 +520,549 @@
 
         <div class="project-grid">
             
-            <div class="brand-card" data-category="data sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-amazon">A</div>
-                        <div class="card-title-group">
-                            <div class="card-title">AI Agent for Program Pitch Deck</div>
-                            <div class="card-client">Client: Amazon</div>
+            <div class="brand-card" data-category="data sales" style="--brand-color: #FF9900;">
+                <div class="card-watermark">A</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-amazon">A</div>
+                            <div class="card-title-group">
+                                <div class="card-title">AI Agent for Program Pitch Deck</div>
+                                <div class="card-client">Client: Amazon</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2025</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Built an AI Agent to generate Pitch Deck for one of the biggest Annual Advertiser Program of Amazon Ads, adopted by VN & CN folks.</p>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="data sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-amazon">A</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Visual Generation AI Prompt Agent</div>
-                            <div class="card-client">Client: Amazon</div>
+            <div class="brand-card" data-category="data sales" style="--brand-color: #FF9900;">
+                <div class="card-watermark">A</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-amazon">A</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Visual Generation AI Prompt Agent</div>
+                                <div class="card-client">Client: Amazon</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2025</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Built an AI Agent to generate concepts & prompts for visual generation in any AI Gen tools, adopted in Vietnam, Singapore & Taiwan markets</p>
-                    <a href="https://partyrock.aws/u/dylanvn/W5zqTBkL7/AdPrompt-Lab-Advanced-V4.2%253A-Creative-AI-for-Amazon-Ads-(Beta)" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://partyrock.aws/u/dylanvn/W5zqTBkL7/AdPrompt-Lab-Advanced-V4.2%253A-Creative-AI-for-Amazon-Ads-(Beta)" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="data sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-amazon">A</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Business Dashboard</div>
-                            <div class="card-client">Client: Amazon</div>
+            <div class="brand-card" data-category="data sales" style="--brand-color: #FF9900;">
+                <div class="card-watermark">A</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-amazon">A</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Business Dashboard</div>
+                                <div class="card-client">Client: Amazon</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2025</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Co-built a business dashboard on PowerBI and Amazon Quicksight, integrating with AI Agent to analyze and provide business insights for actions.</p>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="data sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-amazon">A</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Efficiency Enhancement Tool</div>
-                            <div class="card-client">Client: Amazon</div>
+            <div class="brand-card" data-category="data sales" style="--brand-color: #FF9900;">
+                <div class="card-watermark">A</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-amazon">A</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Efficiency Enhancement Tool</div>
+                                <div class="card-client">Client: Amazon</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2025</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Built a lead-identification tool using Excel and advanced data analytics. Reduced qualification time by 80%, helping international teams pinpoint Ads Program prospects in minutes.</p>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="notion">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-pmax">P</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Project Management System</div>
-                            <div class="card-client">Client: Filian TV</div>
+            <div class="brand-card" data-category="notion" style="--brand-color: #9146FF;">
+                <div class="card-watermark">F</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-pmax">F</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Project Management System</div>
+                                <div class="card-client">Client: Filian TV</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2025</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Notion System</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Notion System Setup</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Notion System</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Notion System Setup</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Designed and implemented a comprehensive Project Management System on Notion, tailored for Filian TV's content production workflows.</p>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-muji">M</div>
-                        <div class="card-title-group">
-                            <div class="card-title">MUJI Box</div>
-                            <div class="card-client">Client: MUJI</div>
+            <div class="brand-card dark-brand" data-category="sales" style="--brand-color: #7F0019;">
+                <div class="card-watermark">M</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-muji">M</div>
+                            <div class="card-title-group">
+                                <div class="card-title">MUJI Box</div>
+                                <div class="card-client">Client: MUJI</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Sales & Account Management</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Sales & Account Management</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Led strategic partnership negotiations to secure the MUJI Box project. Managed client expectations and timeline, closing the deal in 1 month to deliver a display unit shaped by simplicity.</p>
-                    <a href="https://www.thelabsaigon.com/work/muji-box" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.thelabsaigon.com/work/muji-box" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-apple">A</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Apple Social Video</div>
-                            <div class="card-client">Client: Apple</div>
+            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #1A1A1A;">
+                <div class="card-watermark">A</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-apple">A</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Apple Social Video</div>
+                                <div class="card-client">Client: Apple</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Video Production</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Video Production</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Managed the project lifecycle for an Apple commission, ensuring strict brand compliance while coordinating production teams to deliver the "Shot on iPhone" campaign featuring the Đông Tảo chicken.</p>
-                    <a href="https://www.instagram.com/reel/DGyQDyRP71N/" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.instagram.com/reel/DGyQDyRP71N/" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
             
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-mammam">M</div>
-                        <div class="card-title-group">
-                            <div class="card-title">MÂMMÂM Eatery & Lounge</div>
-                            <div class="card-client">Client: Vietcetera</div>
+            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #191919;">
+                <div class="card-watermark">V</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-mammam">V</div>
+                            <div class="card-title-group">
+                                <div class="card-title">MÂMMÂM Eatery & Lounge</div>
+                                <div class="card-client">Client: Vietcetera</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Oversaw the end-to-end launch of a new F&B concept. Coordinated design, build, and operational teams to deliver a cohesive brand experience within a 6-month timeline.</p>
-                    <a href="https://www.behance.net/gallery/222633137/MAMMAM-Eatery-Lounge" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/222633137/MAMMAM-Eatery-Lounge" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-lang">L</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Lang Spa</div>
-                            <div class="card-client">Client: Lang Spa</div>
+            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #2c180d;">
+                <div class="card-watermark">L</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-lang">L</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Lang Spa</div>
+                                <div class="card-client">Client: Lang Spa</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Managed partnership and design delivery for Lang Spa, ensuring the brand vision of relaxation and community was met.</p>
-                    <a href="https://www.behance.net/gallery/218543295/Lang-Spa" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/218543295/Lang-Spa" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-vero-green">V</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Vero Rebrand & Web Identity</div>
-                            <div class="card-client">Client: Vero ASEAN</div>
+            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #0161b7;">
+                <div class="card-watermark">V</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-vero-green">V</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Vero Rebrand & Web Identity</div>
+                                <div class="card-client">Client: Vero ASEAN</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Website Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Website Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Led the strategic rebrand delivery and website update project for VERO, unifying their services portfolio across SE Asia.</p>
-                    <a href="https://www.behance.net/gallery/205330085/Vero-Rebrand-Web-Identity" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/205330085/Vero-Rebrand-Web-Identity" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-bakes">B</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Bakes Store #4</div>
-                            <div class="card-client">Client: The Lab Concepts</div>
+            <div class="brand-card" data-category="pm" style="--brand-color: #e2e3cd;">
+                <div class="card-watermark">T</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-bakes">T</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Bakes Store #4</div>
+                                <div class="card-client">Client: The Lab Concepts</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Managed the rollout of Bakes' first mall location. Coordinated between property stakeholders (Vincom) and internal design teams to ensure a smooth build-out.</p>
-                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7204748271401992192?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_multiple_media_viewer%3BIP%2F4Yoj%2FSQCl7g925THcDQ%3D%3D" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7204748271401992192?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_multiple_media_viewer%3BIP%2F4Yoj%2FSQCl7g925THcDQ%3D%3D" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-bitis">E</div>
-                        <div class="card-title-group">
-                            <div class="card-title">EVA Exhibition</div>
-                            <div class="card-client">Client: Sunlife Insurance</div>
+            <div class="brand-card" data-category="pm sales" style="--brand-color: #FFD400;">
+                <div class="card-watermark">S</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-bitis">S</div>
+                            <div class="card-title-group">
+                                <div class="card-title">EVA Exhibition</div>
+                                <div class="card-client">Client: Sunlife Insurance</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Orchestrated the logistics and artist coordination for the EVA exhibition. Managed partner relationships to deliver an experiential event on Virtual Identity.</p>
-                    <a href="https://www.behance.net/gallery/172040899/EVA-EXHIBITION" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/172040899/EVA-EXHIBITION" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="notion">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-pmax">B</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Breakthrough Energy Website</div>
-                            <div class="card-client">Client: GNS Studio</div>
+            <div class="brand-card" data-category="notion" style="--brand-color: #fece7c;">
+                <div class="card-watermark">G</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-pmax">G</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Breakthrough Energy Website</div>
+                                <div class="card-client">Client: GNS Studio</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Notion System</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Notion System Setup, Website Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Notion System</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Notion System Setup, Website Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Created a comprehensive Project Management system on Notion to streamline the workflow for GNS Studio's Breakthrough Energy project.</p>
-                    <a href="https://transition.breakthroughenergy.org/" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://transition.breakthroughenergy.org/" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-yingtao">Y</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Yingtao 櫻桃 Brand Identity</div>
-                            <div class="card-client">Client: August Hospitality Group</div>
+            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #5b0a06;">
+                <div class="card-watermark">A</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-yingtao">A</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Yingtao 櫻桃 Brand Identity</div>
+                                <div class="card-client">Client: August Hospitality Group</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Led project delivery for a high-stakes brand identity project in NYC. Ensured all deliverables met the premium standards required for a Michelin-star contender.</p>
-                    <a href="https://www.instagram.com/p/Cx5bjiJv2w5/" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.instagram.com/p/Cx5bjiJv2w5/" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-bakes">B</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Bakes Flagship Store</div>
-                            <div class="card-client">Client: The Lab Concepts</div>
+            <div class="brand-card" data-category="pm sales" style="--brand-color: #e2e3cd;">
+                <div class="card-watermark">T</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-bakes">T</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Bakes Flagship Store</div>
+                                <div class="card-client">Client: The Lab Concepts</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Directed the design rollout for the Bakes Flagship in Thao Dien, ensuring the new design system balanced everyday warmth with special occasion flair.</p>
-                    <a href="https://www.behance.net/gallery/173479823/BAKES-FLAGSHIP" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/173479823/BAKES-FLAGSHIP" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-pmax">M</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Mámi Cocktails</div>
-                            <div class="card-client">Client: 86Proof Hospitality Group</div>
+            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #ef4023;">
+                <div class="card-watermark">8</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-pmax">8</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Mámi Cocktails</div>
+                                <div class="card-client">Client: 86Proof Hospitality Group</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Managed client communications and project timelines for a bold hospitality concept. Facilitated the successful delivery of a complex interior and brand identity package.</p>
-                    <a href="https://www.behance.net/gallery/197607065/Mami-Cocktails" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/197607065/Mami-Cocktails" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-bitis">B</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Biti’s 40Y Exhibition</div>
-                            <div class="card-client">Client: Biti's</div>
+            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #034ea0;">
+                <div class="card-watermark">B</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-bitis">B</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Biti’s 40Y Exhibition</div>
+                                <div class="card-client">Client: Biti's</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Commissioned by Dentsu to manage the design and build of Biti’s 40 Years Anniversary exhibition, A Step Forward, featuring 40 creations.</p>
-                    <a href="https://www.behance.net/gallery/168537349/Bitis-40-Years-Exhibition" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/168537349/Bitis-40-Years-Exhibition" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-bitis">D</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Du (Enough) Exhibition</div>
-                            <div class="card-client">Client: Sunlife Insurance</div>
+            <div class="brand-card" data-category="pm sales" style="--brand-color: #FFD400;">
+                <div class="card-watermark">S</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-bitis">S</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Du (Enough) Exhibition</div>
+                                <div class="card-client">Client: Sunlife Insurance</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Coordinated artists and production for “Đủ” (Fulfillment), an interactive visual exhibition exploring life's necessities.</p>
-                    <a href="https://www.behance.net/gallery/166677079/DU-EXHIBITION" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/166677079/DU-EXHIBITION" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-sunlife">S</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Sunlife Hanoi Head Office</div>
-                            <div class="card-client">Client: Sunlife Insurance</div>
+            <div class="brand-card" data-category="pm" style="--brand-color: #FFD400;">
+                <div class="card-watermark">S</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-sunlife">S</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Sunlife Hanoi Head Office</div>
+                                <div class="card-client">Client: Sunlife Insurance</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Led the project management for Sunlife's flagship Hanoi HQ build. Coordinated diverse teams to deliver a high-end, lounge-inspired workspace on schedule.</p>
-                    <a href="https://www.behance.net/gallery/189261513/Y-LOUNGE-SUNLIFE-HN-HQ" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/189261513/Y-LOUNGE-SUNLIFE-HN-HQ" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="data">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-pmax">S</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Sales System Setup</div>
-                            <div class="card-client">Client: The Lab</div>
+            <div class="brand-card" data-category="data" style="--brand-color: #e2e3cd;">
+                <div class="card-watermark">T</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-pmax">T</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Sales System Setup</div>
+                                <div class="card-client">Client: The Lab</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Developed in-house tools for cash flow and CRM that scaled internal operations, co-built dashboards, and analyzed sales strategy data.</p>
-                    </div>
+                </div>
             </div>
 
-            <div class="brand-card" data-category="pm">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-pmax">B</div>
-                        <div class="card-title-group">
-                            <div class="card-title">B34CH NFT</div>
-                            <div class="card-client">Client: OP3N</div>
+            <div class="brand-card dark-brand" data-category="pm" style="--brand-color: #4C4CFF;">
+                <div class="card-watermark">O</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-pmax">O</div>
+                            <div class="card-title-group">
+                                <div class="card-title">B34CH NFT</div>
+                                <div class="card-client">Client: OP3N</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2022</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2022</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Managed the launch of a generative art NFT project, coordinating between code artists and partners to create digital beach landscapes.</p>
-                    </div>
+                </div>
             </div>
 
-            <div class="brand-card" data-category="pm">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-shadow">S</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Shadow Lounge</div>
-                            <div class="card-client">Client: The Lab Concepts</div>
+            <div class="brand-card" data-category="pm" style="--brand-color: #e2e3cd;">
+                <div class="card-watermark">T</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-shadow">T</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Shadow Lounge</div>
+                                <div class="card-client">Client: The Lab Concepts</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2022</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2022</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Managed brand identity development for Shadow Lounge, a concept highlighting the unseen creativity behind processes like cooking and design.</p>
-                    <a href="https://www.behance.net/gallery/165324263/SHADOW-LOUNGE-BRANDING" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/165324263/SHADOW-LOUNGE-BRANDING" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
-            <div class="brand-card" data-category="pm sales">
-                <div class="card-top-section">
-                    <div class="card-header">
-                        <div class="brand-avatar bg-bitis">L</div>
-                        <div class="card-title-group">
-                            <div class="card-title">Love Is Hard. HIV Prevention Is Easy Exhibition</div>
-                            <div class="card-client">Client: HAIVN + US CDC</div>
+            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #0054A6;">
+                <div class="card-watermark">H</div>
+                <div class="card-default-content">
+                    <div class="card-top-section">
+                        <div class="card-header">
+                            <div class="brand-avatar bg-bitis">H</div>
+                            <div class="card-title-group">
+                                <div class="card-title">Love Is Hard. HIV Prevention Is Easy Exhibition</div>
+                                <div class="card-client">Client: HAIVN + US CDC</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <span class="meta-label">Year</span><span class="meta-val">2022</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span>
-                        </div>
-                        <div class="meta-item meta-full">
-                            <span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span>
+                        <div class="meta-grid">
+                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2022</span></div>
+                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
+                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
                         </div>
                     </div>
                 </div>
-                <button class="plus-btn" onclick="toggleCard(this)">+</button>
-                <div class="card-reveal">
+                <div class="card-hover-content">
                     <p class="reveal-desc">Managed social campaigns and supported exhibition components for the US CDC & HAIVN partnership, highlighting the contrast between the complexity of love and the simplicity of HIV prevention.</p>
-                    <a href="https://www.behance.net/gallery/139885003/LOVE-IS-HARD-HIV-PREVENTION-IS-EASY" target="_blank" class="learn-more-btn">Learn More</a>
+                    <a href="https://www.behance.net/gallery/139885003/LOVE-IS-HARD-HIV-PREVENTION-IS-EASY" target="_blank" class="learn-more-btn">Learn More +</a>
                 </div>
             </div>
 
@@ -1526,163 +1176,19 @@
             }, 500);
         });
 
-        /* --- 2. INTERACTIVE PARTICLE BACKGROUND (DYLAN EFFECT) --- */
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particleArray = [];
-        
-        // Radius set to 40 for smaller, precise explosion
-        const pMouse = { x: null, y: null, radius: 40 };
-
-        window.addEventListener('mousemove', function(event) {
-            pMouse.x = event.x;
-            pMouse.y = event.y;
-            createRipple(event.clientX, event.clientY);
-        });
-
-        // Theme-aware particle color
-        function getParticleColor() {
-            return getComputedStyle(document.body).getPropertyValue('--particle-color').trim();
-        }
-
-        class Particle {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.size = 2.4; 
-                this.baseX = this.x; 
-                this.baseY = this.y;
-                this.density = (Math.random() * 30) + 1; 
-            }
-            draw() {
-                ctx.fillStyle = getParticleColor();
-                ctx.beginPath();
-                ctx.rect(this.x, this.y, this.size, this.size); 
-                ctx.closePath();
-                ctx.fill();
-            }
-            update() {
-                let dx = pMouse.x - this.x;
-                let dy = pMouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                let forceDirectionX = dx / distance;
-                let forceDirectionY = dy / distance;
-                let maxDistance = pMouse.radius;
-                let force = (maxDistance - distance) / maxDistance;
-                let directionX = forceDirectionX * force * this.density;
-                let directionY = forceDirectionY * force * this.density;
-
-                if (distance < pMouse.radius) {
-                    this.x -= directionX * 3;
-                    this.y -= directionY * 3;
-                } else {
-                    if (this.x !== this.baseX) {
-                        let dx = this.x - this.baseX;
-                        this.x -= dx / 10;
-                    }
-                    if (this.y !== this.baseY) {
-                        let dy = this.y - this.baseY;
-                        this.y -= dy / 10;
-                    }
-                }
-            }
-        }
-
-        function initParticles() {
-            particleArray = [];
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            // 1. DYNAMIC FONT SIZING
-            let baseSize = 100;
-            ctx.font = '900 ' + baseSize + 'px "Inter", sans-serif';
-            let text = "DYLAN";
-            let measurements = ctx.measureText(text);
-            let textWidth = measurements.width;
-            
-            // Calculate size to fill 80% of screen width
-            let targetWidth = canvas.width * 0.8; 
-            let fontSize = (targetWidth / textWidth) * baseSize;
-
-            if (fontSize > canvas.height * 0.5) {
-                fontSize = canvas.height * 0.5;
-            }
-
-            // 2. DRAW TEXT
-            ctx.fillStyle = 'white';
-            ctx.font = '900 ' + fontSize + 'px "Inter", sans-serif'; 
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            
-            // Vertical Scale (1.5x) for tall look
-            ctx.save();
-            ctx.scale(1, 1.5); 
-            
-            // Offset Y to avoid Nav Bar
-            let offsetY = 60; 
-            ctx.fillText(text, canvas.width / 2, (canvas.height / 2 + offsetY) / 1.5);
-            ctx.restore();
-
-            // 3. SCAN PIXELS
-            const textCoordinates = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            
-            // OPTIMIZATION: Increased step to 8 to reduce lag (fewer particles)
-            let step = 8; 
-            if(window.innerWidth < 768) step = 5; 
-
-            for (let y = 0, y2 = textCoordinates.height; y < y2; y += step) {
-                for (let x = 0, x2 = textCoordinates.width; x < x2; x += step) {
-                    if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4) + 3] > 128) {
-                        let positionX = x;
-                        let positionY = y;
-                        particleArray.push(new Particle(positionX, positionY));
-                    }
-                }
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particleArray.length; i++) {
-                particleArray[i].draw();
-                particleArray[i].update();
-            }
-            requestAnimationFrame(animateParticles);
-        }
-
-        // Wait for fonts to load
-        document.fonts.ready.then(function() {
-            initParticles();
-            animateParticles();
-        });
-
-        window.addEventListener('resize', initParticles);
-
-        function createRipple(x, y) {
-            if (Math.random() > 0.1) return; 
-            const ripple = document.createElement('div');
-            ripple.classList.add('ripple');
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            ripple.style.width = '20px';
-            ripple.style.height = '20px';
-            document.body.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-        }
-
-        /* --- 4. 3D TILT EFFECT --- */
+        /* --- 2. 3D TILT EFFECT --- */
         const tiltCards = document.querySelectorAll('.brand-card, .scope-card');
         tiltCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
+                
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -2; 
-                const rotateY = ((x - centerX) / centerX) * 2;
+                const rotateX = ((y - centerY) / centerY) * -3; 
+                const rotateY = ((x - centerX) / centerX) * 3;
+                
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
             });
             card.addEventListener('mouseleave', () => {
@@ -1690,24 +1196,27 @@
             });
         });
 
-        /* --- 5. PROGRESS BAR & FADE --- */
+        /* --- 3. SCROLL FX --- */
         const progressBar = document.getElementById('progress-bar');
+        const heroTitle = document.querySelector('.hero-title-lab');
+
         window.addEventListener('scroll', () => {
             window.requestAnimationFrame(() => {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
-                progressBar.style.width = scrolled + "%";
                 
-                // Fade out particles on scroll
-                const fadePoint = 500;
-                let opacity = 1 - (winScroll / fadePoint);
-                if (opacity < 0) opacity = 0;
-                canvas.style.opacity = opacity;
+                progressBar.style.width = scrolled + "%";
+
+                // Parallax for Title
+                if (heroTitle) {
+                    heroTitle.style.transform = `translateY(${winScroll * 0.2}px)`;
+                    heroTitle.style.opacity = 1 - (winScroll / 700);
+                }
             });
         });
 
-        /* --- 6. HACKER TEXT & UTILS --- */
+        /* --- 4. HACKER TEXT & UTILS --- */
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~`|}{[]:;?><,./-=";
         function enableTextScramble(selector) {
             const elements = document.querySelectorAll(selector);
@@ -1811,12 +1320,6 @@
             });
         }
 
-        function toggleCard(btn) {
-            const card = btn.parentElement;
-            card.classList.toggle('active');
-            if (card.classList.contains('active')) { btn.innerHTML = '×'; btn.style.transform = 'rotate(0deg)'; } else { btn.innerHTML = '+'; btn.style.transform = 'rotate(0deg)'; }
-        }
-
         /* --- SCROLL OBSERVER --- */
         const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
@@ -1839,4 +1342,3 @@
 
 </body>
 </html>
-
