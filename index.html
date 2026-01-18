@@ -407,6 +407,16 @@
             .brand-card { min-height: 320px; padding: 24px; }
             .card-title { font-size: 18px; }
             .scope-card { padding: 24px; min-height: 240px; }
+
+            /* --- FIX: HIDE TITLE ON MOBILE HOVER TO PREVENT OVERLAP --- */
+            .brand-card:hover .card-top-section {
+                opacity: 0;
+                transform: translateY(-10px);
+                pointer-events: none; /* Prevents clicks on hidden elements */
+            }
+            .brand-card:hover .card-hover-content {
+                padding: 24px;
+            }
         }
     </style>
 </head>
