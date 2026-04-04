@@ -3,1352 +3,754 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DYLAN</title>
-    
-    <meta name="description" content="Portfolio of Dylan Lam. Strategic thinker thriving at the intersection of business structure and creative design.">
-    <meta property="og:title" content="Dylan Lam - Structure & Creativity">
-    <meta name="theme-color" content="#000000">
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='30' fill='%23111111'/><text x='50' y='70' font-family='Arial, sans-serif' font-size='70' font-weight='bold' fill='%23ffffff' text-anchor='middle'>D</text></svg>">
-
+    <title>Dylan Lam</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
-        /* --- DESIGN SYSTEM VARIABLES --- */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --radius-card: 30px;
-            --radius-button: 100px;
-            --transition-speed: 0.4s;
-            
-            /* DARK MODE (Default) */
-            --bg-body: #000000; 
-            --text-primary: #F5F5F7;
-            --text-secondary: #86868B;
-            --text-tertiary: #555555;
-            
-            --glass-bg: rgba(20, 20, 20, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-hover: rgba(255, 255, 255, 0.15);
-            
-            --card-bg: #111111;
-            --card-hover: #1c1c1e;
-            --reveal-bg: #1E1E1E;
-            
-            --nav-bg: rgba(15, 15, 15, 0.85);
-            --nav-border: rgba(255, 255, 255, 0.15);
-            --nav-mobile-bg: rgba(10, 10, 10, 0.95);
-            
-            --pill-bg: transparent;
-            --pill-border: rgba(255, 255, 255, 0.2);
-            --pill-active-bg: #fff;
-            --pill-active-text: #000;
-
-            --btn-bg: rgba(255, 255, 255, 0.1);
-            --btn-hover: rgba(255, 255, 255, 0.2);
+            --bg: #000000; --fg: #ffffff;
+            --fg-muted: rgba(255,255,255,0.5);
+            --fg-dim: rgba(255,255,255,0.25);
+            --fg-faint: rgba(255,255,255,0.08);
+            --font-sans: "General Sans", -apple-system, sans-serif;
+            --font-serif: "Instrument Serif", Georgia, serif;
         }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: var(--font-sans); background: var(--bg); color: var(--fg); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        a { color: inherit; text-decoration: none; }
+        ::selection { background: rgba(255,255,255,0.15); }
 
-        /* LIGHT MODE OVERRIDES */
-        [data-theme="light"] {
-            --bg-body: #FFFFFF; 
-            --text-primary: #1D1D1F;
-            --text-secondary: #6e6e73;
-            --text-tertiary: #86868b;
-            
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(0, 0, 0, 0.08);
-            --glass-hover: rgba(255, 255, 255, 0.9);
-            
-            --card-bg: #FFFFFF;
-            --card-hover: #FFFFFF;
-            --reveal-bg: #F0F0F2;
-            
-            --nav-bg: rgba(255, 255, 255, 0.9);
-            --nav-border: rgba(0, 0, 0, 0.08);
-            --nav-mobile-bg: rgba(255, 255, 255, 0.95);
-            
-            --pill-bg: rgba(0,0,0,0.05);
-            --pill-border: transparent;
-            --pill-active-bg: #1D1D1F;
-            --pill-active-text: #fff;
+        /* Noise */
+        body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 256px; }
 
-            --btn-bg: rgba(0, 0, 0, 0.05);
-            --btn-hover: rgba(0, 0, 0, 0.1);
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; transition: all 0.5s cubic-bezier(0.16,1,0.3,1); }
+        nav.scrolled { padding: 18px 60px; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--fg-faint); }
+        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; letter-spacing: -0.02em; }
+        .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--fg-muted); transition: color 0.3s; }
+        .nav-links a:hover { color: var(--fg); }
+
+        /* Pill button */
+        .pill { position: relative; border-radius: 980px; border: 0.6px solid rgba(255,255,255,0.35); padding: 1px; display: inline-flex; overflow: hidden; }
+        .pill::before { content: ''; position: absolute; top: -1px; left: 20%; right: 20%; height: 10px; background: radial-gradient(ellipse at center, rgba(255,255,255,0.25) 0%, transparent 70%); filter: blur(4px); z-index: 1; pointer-events: none; }
+        .pill-inner { position: relative; z-index: 2; background: #000; color: #fff; font-family: var(--font-sans); font-size: 0.82rem; font-weight: 500; padding: 10px 26px; border-radius: 980px; white-space: nowrap; transition: all 0.3s; }
+        .pill:hover .pill-inner { background: #111; }
+        .pill-white .pill-inner { background: #fff; color: #000; }
+        .pill-white:hover .pill-inner { background: #e8e8e8; }
+
+        .menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .menu-btn span { display: block; width: 22px; height: 1.5px; background: #fff; margin: 5px 0; }
+
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 60px 80px; position: relative; }
+        .hero-aurora { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+        .hero-aurora canvas { width: 100%; height: 100%; }
+        .hero-scroll { position: absolute; top: 50%; right: 60px; transform: translateY(-50%); writing-mode: vertical-rl; font-size: 0.72rem; font-weight: 500; color: var(--fg-dim); letter-spacing: 0.15em; text-transform: uppercase; }
+        .hero-scroll::after { content: ''; display: block; width: 1px; height: 48px; background: var(--fg-dim); margin: 16px auto 0; animation: scrollLine 2s ease-in-out infinite; }
+        @keyframes scrollLine { 0%,100% { opacity: 0.3; transform: scaleY(0.5); } 50% { opacity: 1; transform: scaleY(1); } }
+        
+        .hero-content { position: relative; z-index: 1; }
+        .hero-heading { font-family: var(--font-serif); font-size: clamp(2.6rem, 5.5vw, 5rem); font-weight: 400; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 48px; max-width: 100%; }
+        .hero-heading em { font-style: italic; color: var(--fg-muted); }
+        .hero-heading .word { display: inline-block; overflow: visible; vertical-align: bottom; padding-bottom: 0.08em; }
+        .hero-heading .word-inner { display: inline-block; transform: translateY(110%); animation: wordUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        @keyframes wordUp { to { transform: translateY(0); } }
+        .hero-actions { display: flex; align-items: center; gap: 24px; }
+        .hero-sub { font-size: 0.95rem; color: var(--fg-muted); line-height: 1.75; max-width: 560px; margin-top: 48px; position: relative; z-index: 1; }
+
+        /* SECTIONS */
+        .section { padding: 160px 60px; }
+        .section-eyebrow { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--fg-dim); margin-bottom: 40px; }
+        .section-heading { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -2px; margin-bottom: 32px; }
+        .section-heading em { font-style: italic; color: var(--fg-muted); }
+        .section-body { font-size: 0.95rem; color: var(--fg-muted); line-height: 1.8; max-width: 600px; }
+        .divider { height: 1px; background: var(--fg-faint); margin: 0 60px; }
+
+        /* ABOUT */
+        .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+
+        /* EXPERTISE */
+        .expertise-list { margin-top: 80px; }
+        .expertise-item { padding: 40px 0; border-top: 1px solid var(--fg-faint); display: grid; grid-template-columns: 60px 240px 1fr; gap: 40px; align-items: start; }
+        .expertise-num { font-family: var(--font-serif); font-size: 1rem; color: var(--fg-dim); font-style: italic; }
+        .expertise-item h3 { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.2px; }
+        .expertise-item p { font-size: 0.88rem; color: var(--fg-muted); line-height: 1.7; max-width: 420px; }
+
+        /* WORK */
+        .work-list { margin-top: 64px; }
+        .work-item { padding: 32px 0; border-top: 1px solid var(--fg-faint); display: grid; grid-template-columns: 1fr auto auto; gap: 32px; align-items: center; cursor: pointer; transition: all 0.3s; }
+        .work-item:last-child { border-bottom: 1px solid var(--fg-faint); }
+        .work-item:hover { padding-left: 16px; }
+        .work-item:hover .work-title { color: var(--fg); }
+        .work-item:hover .work-arrow { opacity: 1; transform: translateX(0); }
+        .work-title { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 400; color: var(--fg-muted); transition: color 0.3s; letter-spacing: -0.3px; }
+        .work-client { font-size: 0.78rem; color: var(--fg-dim); min-width: 120px; text-align: right; }
+        .work-arrow { font-size: 0.9rem; color: var(--fg-dim); opacity: 0; transform: translateX(-8px); transition: all 0.3s; }
+
+        /* Hover detail (follows mouse) */
+        .work-detail { position: fixed; z-index: 500; width: 360px; padding: 28px; background: #111; border: 1px solid var(--fg-faint); border-radius: 16px; pointer-events: none; opacity: 0; transition: opacity 0.25s; }
+        .work-detail.visible { opacity: 1; }
+        .work-detail .wd-scope { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); margin-bottom: 8px; }
+        .work-detail .wd-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+        .work-detail .wd-meta { font-size: 0.78rem; color: var(--fg-muted); margin-bottom: 14px; }
+        .work-detail .wd-desc { font-size: 0.82rem; color: var(--fg-muted); line-height: 1.7; }
+        .work-detail .wd-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 500; color: var(--fg); margin-top: 14px; transition: gap 0.3s; }
+        .work-detail .wd-link:hover { gap: 10px; }
+
+        /* CTA */
+        .cta-section { padding: 200px 60px; text-align: center; }
+        .cta-heading { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 5.5rem); font-weight: 400; line-height: 1.0; letter-spacing: -2.5px; margin-bottom: 48px; }
+        .cta-heading em { font-style: italic; color: var(--fg-muted); }
+
+        /* FOOTER */
+        footer { padding: 80px 60px 40px; border-top: 1px solid var(--fg-faint); }
+        .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 80px; }
+        .footer-brand { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; }
+        .footer-cta { max-width: 360px; }
+        .footer-cta p { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; line-height: 1.35; margin-bottom: 24px; letter-spacing: -0.5px; }
+        .footer-email { font-size: 0.9rem; color: var(--fg-muted); cursor: pointer; transition: color 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .footer-email:hover { color: var(--fg); }
+        .footer-email-copied { font-size: 0.7rem; font-weight: 500; color: var(--fg-dim); opacity: 0; transition: opacity 0.3s; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--fg-faint); }
+        .footer-copy { font-size: 0.72rem; color: var(--fg-dim); }
+        .footer-nav { display: flex; gap: 28px; list-style: none; }
+        .footer-nav a { font-size: 0.75rem; color: var(--fg-dim); transition: color 0.3s; }
+        .footer-nav a:hover { color: var(--fg); }
+
+        
+        /* WORK FILTERS */
+        .work-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 48px; margin-bottom: 12px; }
+        .filter-tab {
+            font-family: var(--font-sans); font-size: 0.78rem; font-weight: 500;
+            color: var(--fg-dim); background: transparent;
+            border: 1px solid var(--fg-faint); border-radius: 980px;
+            padding: 8px 20px; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
         }
+        .filter-tab:hover { color: var(--fg-muted); border-color: var(--fg-dim); }
+        .filter-tab.active { color: var(--fg); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); }
 
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+        .work-count { font-size: 0.72rem; color: var(--fg-dim); margin-bottom: 8px; letter-spacing: 0.05em; }
 
-        html.lenis { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto; }
-        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-        .lenis.lenis-stopped { overflow: hidden; }
-        .lenis.lenis-scrolling iframe { pointer-events: none; }
+        /* Work item hide/show animation */
+        .work-item { max-height: 100px; overflow: hidden; transition: all 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s, max-height 0.4s; }
+        .work-item.hidden { opacity: 0; max-height: 0; padding: 0; border-top-color: transparent; margin: 0; }
 
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            font-family: "Inter", sans-serif;
-            letter-spacing: -0.02em;
-            margin: 0; padding: 0;
-            overflow-x: hidden;
-            line-height: 1.5;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+        /* ANIMATIONS */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .rd1 { transition-delay: 0.1s; } .rd2 { transition-delay: 0.2s; }
+        .rd3 { transition-delay: 0.3s; } .rd4 { transition-delay: 0.4s; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .about-section { grid-template-columns: 1fr; gap: 40px; }
+            .expertise-item { grid-template-columns: 40px 1fr; gap: 20px; }
+            .expertise-item p { grid-column: 1 / -1; margin-left: 60px; }
         }
+        @media (max-width: 768px) {
+            nav { padding: 20px 24px; }
+            nav.scrolled { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .menu-btn { display: block; }
+            .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--fg-faint); }
+            .hero { padding: 0 24px 60px; }
+            .hero-scroll { display: none; }
+            .hero-heading { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+            .section { padding: 100px 24px; }
+            .divider { margin: 0 24px; }
+            .expertise-item { grid-template-columns: 1fr; gap: 8px; }
+            .expertise-item p { margin-left: 0; grid-column: auto; }
+            .expertise-num { display: none; }
+            .work-item { grid-template-columns: 1fr auto; }
+            .work-client { display: none; }
+            .work-detail { display: none !important; }
+            .thought-item { grid-template-columns: 70px 1fr auto; gap: 16px; }
+            .thought-title { font-size: 1.05rem; }
+            .cta-section { padding: 120px 24px; }
+            footer { padding: 60px 24px 32px; }
+            .footer-top { flex-direction: column; gap: 48px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+        }
+    
+        /* Theme toggle button */
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+        .theme-toggle {
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 0.6px solid rgba(255,255,255,0.25); background: transparent;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; color: rgba(255,255,255,0.5); transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
 
-        a, button { cursor: pointer; text-decoration: none !important; }
+        /* Smooth transitions for theme switch */
+        body, .hero, nav, .pill-inner, .work-detail, footer, .divider,
+        .section-heading, .section-eyebrow, .section-body,
+        .expertise-item, .work-item, .thought-item, .cta-heading,
+        .footer-brand, .footer-cta p, .footer-email, .footer-copy,
+        .nav-brand, .nav-links a, .filter-tab { transition: color 0.4s, background 0.4s, border-color 0.4s; }
 
-        /* --- PRELOADER --- */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-body);
-            z-index: 99999;
-            display: flex; align-items: center; justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+        /* Thoughts section */
+        .thoughts-list { margin-top: 64px; }
+        .thought-item {
+            display: grid; grid-template-columns: 100px 1fr auto;
+            gap: 32px; align-items: center;
+            padding: 32px 0; border-top: 1px solid var(--fg-faint);
+            transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit;
         }
-        #preloader.hidden { opacity: 0; visibility: hidden; }
-        .loader-spinner {
-            width: 40px; height: 40px;
-            border: 2px solid rgba(125,125,125,0.2);
-            border-top-color: var(--text-primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .thought-item:last-child { border-bottom: 1px solid var(--fg-faint); }
+        .thought-item:hover { padding-left: 16px; }
+        .thought-item:hover .thought-title { color: var(--fg); }
+        .thought-item:hover .thought-arrow { opacity: 1; transform: translateX(0); }
+        .thought-date { font-size: 0.75rem; color: var(--fg-dim); font-weight: 500; }
+        .thought-title {
+            font-family: var(--font-serif); font-size: 1.25rem; font-weight: 400;
+            color: var(--fg-muted); transition: color 0.3s; letter-spacing: -0.3px;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .thought-arrow { font-size: 0.9rem; color: var(--fg-dim); opacity: 0; transform: translateX(-8px); transition: all 0.3s; }
 
-        #progress-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 3px;
-            z-index: 100000; background: transparent;
-        }
-        #progress-bar {
-            height: 100%; background: var(--text-primary); width: 0%; transition: width 0.1s;
-        }
+        /* ===== LIGHT MODE ===== */
 
-        /* --- NAV (MOBILE OPTIMIZED) --- */
-        .nav-wrapper {
-            position: fixed; top: 24px; left: 0; width: 100%;
-            display: flex; justify-content: center; 
-            z-index: 9999; 
-            pointer-events: none;
+        /* ===== LIGHT MODE ===== */
+        [data-theme="light"] { --bg: #fafaf8; --fg: #1d1d1f; --fg-muted: rgba(29,29,31,0.55); --fg-dim: rgba(29,29,31,0.3); --fg-faint: rgba(29,29,31,0.08); }
+
+        /* Hero STAYS DARK in light mode */
+        [data-theme="light"] .hero { background: #000; }
+        [data-theme="light"] .hero-heading { color: #fff; }
+        [data-theme="light"] .hero-heading em { color: rgba(255,255,255,0.5); }
+        [data-theme="light"] .hero-sub { color: rgba(255,255,255,0.5); }
+        [data-theme="light"] .hero-scroll { color: rgba(255,255,255,0.25); }
+        [data-theme="light"] .hero-scroll::after { background: rgba(255,255,255,0.25); }
+        [data-theme="light"] .hero .pill { border-color: rgba(255,255,255,0.35); }
+        [data-theme="light"] .hero .pill-inner { background: #000; color: #fff; }
+        [data-theme="light"] .hero .pill:hover .pill-inner { background: #111; }
+        [data-theme="light"] .hero .pill-white .pill-inner { background: #fff; color: #000; }
+        [data-theme="light"] .hero .pill-white:hover .pill-inner { background: #e8e8e8; }
+
+        /* Nav: white text over dark hero, then dark text when scrolled past */
+        [data-theme="light"] .nav-brand { color: #fff; }
+        [data-theme="light"] .nav-links a { color: rgba(255,255,255,0.5); }
+        [data-theme="light"] .nav-links a:hover { color: #fff; }
+        [data-theme="light"] nav.scrolled { background: rgba(250,250,248,0.92); border-bottom-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] nav.scrolled .nav-brand { color: #1d1d1f; }
+        [data-theme="light"] nav.scrolled .nav-links a { color: rgba(29,29,31,0.5); }
+        [data-theme="light"] nav.scrolled .nav-links a:hover { color: #1d1d1f; }
+        [data-theme="light"] nav.scrolled .pill { border-color: rgba(0,0,0,0.15); }
+        [data-theme="light"] nav.scrolled .pill-inner { background: #fafaf8; color: #1d1d1f; }
+        [data-theme="light"] nav.scrolled .pill:hover .pill-inner { background: #f0f0ee; }
+        [data-theme="light"] nav.scrolled .theme-toggle { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.35); }
+        [data-theme="light"] nav.scrolled .theme-toggle:hover { border-color: rgba(0,0,0,0.25); color: #1d1d1f; }
+
+        /* Content sections */
+        [data-theme="light"] .section-eyebrow { color: #0071e3; }
+        [data-theme="light"] .section-heading { color: #1d1d1f; }
+        [data-theme="light"] .section-heading em { color: rgba(29,29,31,0.4); }
+        [data-theme="light"] .section-body { color: rgba(29,29,31,0.6); }
+        [data-theme="light"] .divider { background: rgba(0,0,0,0.06); }
+
+        /* Expertise */
+        [data-theme="light"] .expertise-item { border-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .expertise-num { color: #0071e3; }
+        [data-theme="light"] .expertise-item h3 { color: #1d1d1f; }
+        [data-theme="light"] .expertise-item p { color: rgba(29,29,31,0.55); }
+
+        /* Work filters */
+        [data-theme="light"] .filter-tab { color: rgba(29,29,31,0.35); border-color: rgba(0,0,0,0.1); }
+        [data-theme="light"] .filter-tab:hover { color: rgba(29,29,31,0.6); border-color: rgba(0,0,0,0.2); }
+        [data-theme="light"] .filter-tab.active { color: #0071e3; background: rgba(0,113,227,0.06); border-color: rgba(0,113,227,0.2); }
+        [data-theme="light"] .work-count { color: rgba(29,29,31,0.3); }
+        [data-theme="light"] .work-item { border-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .work-title { color: rgba(29,29,31,0.55); }
+        [data-theme="light"] .work-item:hover .work-title { color: #1d1d1f; }
+        [data-theme="light"] .work-client { color: rgba(29,29,31,0.3); }
+        [data-theme="light"] .work-arrow { color: rgba(29,29,31,0.2); }
+        [data-theme="light"] .work-item:hover .work-arrow { color: #0071e3; }
+        [data-theme="light"] .work-detail { background: #fff; border-color: rgba(0,0,0,0.08); box-shadow: 0 24px 80px rgba(0,0,0,0.1); }
+        [data-theme="light"] .work-detail .wd-title { color: #1d1d1f; }
+        [data-theme="light"] .work-detail .wd-scope { color: #0071e3; }
+        [data-theme="light"] .work-detail .wd-meta { color: rgba(29,29,31,0.45); }
+        [data-theme="light"] .work-detail .wd-desc { color: rgba(29,29,31,0.6); }
+        [data-theme="light"] .work-detail .wd-link { color: #0071e3; }
+
+        /* Thoughts */
+        [data-theme="light"] .thought-item { border-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .thought-date { color: rgba(29,29,31,0.3); }
+        [data-theme="light"] .thought-title { color: rgba(29,29,31,0.55); }
+        [data-theme="light"] .thought-item:hover .thought-title { color: #1d1d1f; }
+        [data-theme="light"] .thought-arrow { color: rgba(29,29,31,0.2); }
+
+        /* CTA */
+        [data-theme="light"] .cta-heading { color: #1d1d1f; }
+        [data-theme="light"] .cta-heading em { color: rgba(29,29,31,0.4); }
+        [data-theme="light"] .cta-section .pill-white .pill-inner { background: #1d1d1f; color: #fff; }
+        [data-theme="light"] .cta-section .pill-white:hover .pill-inner { background: #333; }
+
+        /* Footer */
+        [data-theme="light"] footer { border-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .footer-brand { color: #1d1d1f; }
+        [data-theme="light"] .footer-cta p { color: #1d1d1f; }
+        [data-theme="light"] .footer-email { color: rgba(29,29,31,0.5); }
+        [data-theme="light"] .footer-email:hover { color: #1d1d1f; }
+        [data-theme="light"] .footer-copy { color: rgba(29,29,31,0.3); }
+        [data-theme="light"] .footer-nav a { color: rgba(29,29,31,0.3); }
+        [data-theme="light"] .footer-nav a:hover { color: #1d1d1f; }
+        [data-theme="light"] .footer-bottom { border-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .menu-btn span { background: #fff; }
+        [data-theme="light"] nav.scrolled .menu-btn span { background: #1d1d1f; }
+
+        /* Theme toggle */
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+        .theme-toggle {
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 0.6px solid rgba(255,255,255,0.25); background: transparent;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; color: rgba(255,255,255,0.5); transition: all 0.3s;
         }
-        .nav-bar {
-            pointer-events: auto;
-            background: var(--nav-bg);
+        .theme-toggle:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+        /* Smooth transitions */
+        body, nav, .divider, .pill-inner, .work-detail, footer { transition: background 0.4s, color 0.4s, border-color 0.4s; }
+    
+    
+        /* Mobile menu - light mode fix */
+        [data-theme="light"] .nav-links.active {
+            background: rgba(255,255,255,0.97);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            /* Responsive Width */
-            padding: 10px 32px; 
-            width: auto;
-            min-width: 320px;
-            max-width: 90%; 
-            border-radius: 100px;
-            border: 1px solid var(--nav-border);
-            display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all var(--transition-speed);
+            border-bottom-color: rgba(0,0,0,0.06);
         }
-        .nav-links-container { display: flex; align-items: center; gap: 4px; }
-        
-        .nav-link {
-            color: var(--text-primary);
-            font-size: 13px; font-weight: 600;
-            padding: 10px 20px;
-            border-radius: var(--radius-button);
-            transition: all 0.2s ease; opacity: 0.7;
-            text-decoration: none; display: inline-block;
+        [data-theme="light"] .nav-links.active a {
+            color: rgba(29,29,31,0.6) !important;
         }
-        .nav-link:hover { background: var(--glass-hover); opacity: 1; }
-        .nav-link.active { background: var(--text-primary); color: var(--bg-body); opacity: 1; }
-        
-        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 20px; padding: 10px 16px; cursor: pointer; border-radius: 100px; margin-left: 4px; }
-        .theme-toggle { background: none; border: none; cursor: pointer; padding: 10px 14px; border-radius: var(--radius-button); display: flex; align-items: center; justify-content: center; color: var(--text-primary); transition: background 0.3s ease; margin-left: 4px; border-left: 1px solid var(--nav-border); border-radius: 0 100px 100px 0; }
-        
-        .mobile-dropdown { display: none; position: absolute; top: 70px; left: 50%; transform: translateX(-50%); background: var(--nav-mobile-bg); border: 1px solid var(--nav-border); padding: 20px; border-radius: 30px; flex-direction: column; align-items: center; width: 90%; max-width: 300px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); backdrop-filter: blur(20px); z-index: 999; pointer-events: auto; }
-        .mobile-dropdown.active { display: flex; }
-        .mobile-dropdown .nav-link { width: 100%; text-align: center; padding: 14px; font-size: 15px; }
-
-        /* --- HERO --- */
-        .hero-section {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            height: 100vh; width: 100%; text-align: center; padding: 0 20px; 
-            z-index: 10;
-            padding-top: 80px; 
-            position: relative;
-            overflow: hidden;
-            border-bottom: 1px solid var(--glass-border);
+        [data-theme="light"] .nav-links.active a:hover {
+            color: #1d1d1f !important;
+        }
+        [data-theme="light"] .nav-links.active .pill {
+            border-color: rgba(0,0,0,0.15);
+        }
+        [data-theme="light"] .nav-links.active .pill-inner {
+            background: #f5f5f5;
+            color: #1d1d1f;
         }
 
-        .hero-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1540198163009-7afda7da2945?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            z-index: 0;
-            filter: grayscale(20%) contrast(1.1); 
-            animation: bgZoom 30s infinite alternate linear;
-        }
-
-        @keyframes bgZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
-        }
-
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-            background: 
-                radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%),
-                linear-gradient(to bottom, rgba(0,0,0,0) 60%, var(--bg-body) 100%),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
-        }
-
-        .hero-title-lab {
-            font-family: "Inter", sans-serif;
-            font-weight: 600; 
-            font-size: clamp(50px, 17vw, 240px); /* Slightly smaller min for mobile */
-            line-height: 0.9; letter-spacing: -0.06em;
-            color: #FFFFFF; 
-            margin: 0; padding: 0;
-            margin-bottom: 24px; 
-            opacity: 0; transform: translateY(40px);
-            animation: labReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            position: relative; z-index: 2;
-        }
-        .hero-sub-lab {
-            font-family: "Inter", sans-serif;
-            font-size: clamp(16px, 2vw, 22px);
-            font-weight: 500; line-height: 1.4; letter-spacing: -0.02em;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 680px; margin: 0 auto;
-            opacity: 0; transform: translateY(20px);
-            animation: labReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
-            position: relative; z-index: 2;
-        }
-        .highlight { color: #FFFFFF; font-weight: 600; }
-        
-        @keyframes labReveal {
-            0% { opacity: 0; transform: translateY(40px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .hacker-text { display: inline-block; cursor: default; }
-        .hacker-text.scrambling { color: var(--accent-blue); font-family: monospace; }
-
-        /* --- SECTIONS --- */
-        .section { position: relative; max-width: 1280px; margin: 0 auto; padding: 100px 20px; z-index: 10; }
-        .section-title { font-size: 40px; font-weight: 600; letter-spacing: -0.03em; text-align: left; margin-bottom: 30px; color: var(--text-primary); }
-
-        /* --- STATS --- */
-        .stats-row { display: flex; justify-content: center; gap: 80px; padding: 60px 0; margin-bottom: 80px; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); background: var(--bg-body); }
-        .stat-item { text-align: center; }
-        .stat-val { font-family: "Inter", sans-serif; font-size: 96px; font-weight: 600; color: var(--text-primary); line-height: 1; margin-bottom: 12px; letter-spacing: -0.05em; }
-        .stat-lbl { font-size: 14px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
-
-        /* --- SCOPES --- */
-        .grid { display: grid; gap: 24px; grid-template-columns: repeat(12, 1fr); }
-        .span-6 { grid-column: span 6; }
-        
-        .scope-card {
-            background: var(--card-bg); 
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-card);
-            padding: 40px;
-            display: flex; flex-direction: column; justify-content: space-between;
-            min-height: 300px;
-            cursor: default;
-            transition: transform 0.1s ease, box-shadow 0.4s ease;
-        }
-        .scope-num { 
-            font-size: 14px; font-weight: 700; 
-            color: var(--text-tertiary); 
-            letter-spacing: 0.05em; margin-bottom: 24px; 
-            font-family: monospace;
-        }
-        .scope-title { font-size: 32px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); letter-spacing: -0.03em; line-height: 1.1; }
-        .scope-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; font-weight: 500; }
-
-        /* --- WORK CARD DESIGN --- */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
-
-        .brand-card {
-            background: var(--card-bg); 
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-card);
-            padding: 40px;
-            min-height: 420px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
-            transition: transform 0.1s ease, box-shadow 0.4s ease, background-color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .card-top-section {
-            width: 100%; display: flex; flex-direction: column; z-index: 2; transition: opacity 0.3s ease;
-        }
-
-        .meta-grid { 
-            display: grid; grid-template-columns: 1fr 2fr; gap: 16px; 
-            padding-top: 24px; padding-bottom: 10px; border-top: 1px solid var(--glass-border); margin-top: auto; 
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .card-hover-content {
-            position: absolute; bottom: 0; left: 0;
-            width: 100%; padding: 40px;
-            display: flex; flex-direction: column; justify-content: flex-end;
-            opacity: 0; transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            z-index: 3; pointer-events: none; 
-        }
-
-        .card-watermark {
-            position: absolute; bottom: -40px; right: -40px;
-            font-size: 300px; font-weight: 900; font-family: "Inter", sans-serif;
-            color: var(--text-primary); opacity: 0.03; line-height: 1;
-            pointer-events: none; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            transform: rotate(-10deg) translateZ(0); z-index: 0;
-        }
-
-        /* HOVER STATES */
-        .brand-card:hover { background-color: var(--brand-color, #333); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        .brand-card:hover .meta-grid { opacity: 0; transform: translateY(10px); }
-        .brand-card:hover .card-hover-content { opacity: 1; transform: translateY(0); pointer-events: auto; }
-        .brand-card:hover .card-watermark { opacity: 0.15; transform: rotate(0deg) scale(1.1) translate(-20px, -20px); color: #000; }
-
-        /* COLORS (DEFAULT BRIGHT BRAND) -> BLACK TEXT */
-        .brand-card:hover .card-title, .brand-card:hover .card-client, .brand-card:hover .reveal-desc { color: #000000 !important; }
-        .brand-card:hover .brand-avatar { background: #000; color: var(--brand-color); }
-        .brand-card:hover .learn-more-btn { background-color: #000000 !important; color: #FFFFFF !important; }
-
-        /* DARK BRAND OVERRIDES -> WHITE TEXT */
-        .brand-card.dark-brand:hover .card-title, .brand-card.dark-brand:hover .card-client, .brand-card.dark-brand:hover .reveal-desc, .brand-card.dark-brand:hover .card-watermark { color: #FFFFFF !important; }
-        .brand-card.dark-brand:hover .brand-avatar { background: #FFFFFF; color: #000000; }
-        .brand-card.dark-brand:hover .learn-more-btn { background-color: #FFFFFF !important; color: #000000 !important; }
-
-        /* Typography */
-        .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-        .brand-avatar { width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 600; color: #fff; background: #333; flex-shrink: 0; transition: all 0.3s ease; }
-        .card-title-group { display: flex; flex-direction: column; }
-        .card-title { font-size: 20px; font-weight: 600; color: var(--text-primary); line-height: 1.2; letter-spacing: -0.01em; transition: color 0.3s ease; }
-        .card-client { font-size: 13px; color: var(--text-secondary); margin-top: 2px; transition: color 0.3s ease; }
-
-        .meta-item { display: flex; flex-direction: column; }
-        .meta-full { grid-column: span 2; margin-top: 8px; }
-        .meta-label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); letter-spacing: 0.05em; margin-bottom: 6px; }
-        .meta-val { font-size: 14px; color: var(--text-primary); font-weight: 600; }
-
-        .reveal-desc { font-size: 17px; line-height: 1.5; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 24px; }
-        
-        .learn-more-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 10px 24px; margin-top: 24px;
-            background: var(--text-primary); color: var(--bg-body);
-            border-radius: 100px; font-size: 13px; font-weight: 600;
-            transition: transform 0.2s, background-color 0.3s, color 0.3s; 
-            align-self: flex-start;
-        }
-        .learn-more-btn:hover { transform: translateY(-2px); }
-
-        /* Filter Pills */
-        .filter-container { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 20px; margin-bottom: 30px; scrollbar-width: none; }
-        .filter-container::-webkit-scrollbar { display: none; }
-        .filter-pill { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--pill-bg); border: 1px solid var(--pill-border); border-radius: 100px; color: var(--text-secondary); font-size: 14px; font-weight: 600; white-space: nowrap; transition: all 0.2s ease; cursor: pointer; }
-        .filter-pill:hover { background: var(--glass-hover); color: var(--text-primary); }
-        .filter-pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); font-weight: 600; border-color: transparent; }
-
-        /* --- THOUGHTS SECTION --- */
-        .thought-list { display: flex; flex-direction: column; gap: 16px; }
-        .thought-item { display: flex; align-items: baseline; gap: 32px; padding: 24px; border-radius: var(--radius-card); border: 1px solid var(--glass-border); background: var(--glass-bg); transition: all 0.3s ease; text-decoration: none; }
-        .thought-item:hover { background: var(--glass-hover); border-color: var(--text-primary); transform: translateX(4px); }
-        .thought-date { min-width: 120px; font-family: monospace; font-size: 13px; color: var(--text-tertiary); }
-        .thought-content { flex-grow: 1; }
-        .thought-title { font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; display: block; }
-        .thought-summary { font-size: 14px; color: var(--text-secondary); line-height: 1.5; max-width: 800px; }
-        .thought-arrow { opacity: 0; color: var(--text-primary); transform: translateX(-10px); transition: all 0.3s ease; }
-        .thought-item:hover .thought-arrow { opacity: 1; transform: translateX(0); }
-        
-        /* --- CAREER TABLE --- */
-        .career-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .career-row { border-bottom: 1px solid var(--glass-border); transition: background 0.2s; }
-        .career-row:hover { background: var(--glass-hover); }
-        .career-cell { padding: 24px 0; vertical-align: top; color: var(--text-secondary); font-size: 15px; }
-        .c-role { color: var(--text-primary); font-weight: 600; font-size: 16px; width: 30%; }
-        .c-company { color: var(--text-primary); width: 25%; }
-        .c-date { text-align: right; font-family: monospace; font-size: 13px; opacity: 0.6; width: 15%; }
-        .c-desc { font-size: 14px; line-height: 1.6; }
-
-        .footer { position: relative; z-index: 10; text-align: center; padding: 100px 0; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--glass-border); margin-top: 100px; background: var(--bg-body); }
-        .footer a { color: var(--text-primary); margin: 0 10px; }
-
-        /* Mobile */
-        .desktop-only { display: block; }
-        @media (max-width: 900px) {
-            .desktop-only { display: none; }
-            .mobile-menu-btn { display: block; }
-            .grid { grid-template-columns: 1fr; }
-            .span-6 { grid-column: span 1; }
-            .hero-title-lab { font-size: 18vw; }
-            .thought-item { flex-direction: column; gap: 12px; }
-            .thought-date { min-width: auto; }
-            .thought-arrow { display: none; }
-            .stats-row { flex-wrap: wrap; gap: 40px; }
-            .stat-val { font-size: 64px; }
-            .career-cell { display: block; width: 100%; padding: 8px 0; }
-            .career-row { padding: 20px 0; display: block; }
-            .c-date { text-align: left; margin-bottom: 10px; }
-            
-            /* Responsive Cards */
-            .brand-card { min-height: 320px; padding: 24px; }
-            .card-title { font-size: 18px; }
-            .scope-card { padding: 24px; min-height: 240px; }
-
-            /* --- FIX: HIDE TITLE ON MOBILE HOVER TO PREVENT OVERLAP --- */
-            .brand-card:hover .card-top-section {
-                opacity: 0;
-                transform: translateY(-10px);
-                pointer-events: none; /* Prevents clicks on hidden elements */
-            }
-            .brand-card:hover .card-hover-content {
-                padding: 24px;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="loader-spinner"></div>
+    <!-- Floating detail card -->
+    <div class="work-detail" id="workDetail">
+        <div class="wd-scope" id="wdScope"></div>
+        <div class="wd-title" id="wdTitle"></div>
+        <div class="wd-meta" id="wdMeta"></div>
+        <div class="wd-desc" id="wdDesc"></div>
+        <a href="#" class="wd-link" id="wdLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
     </div>
 
-    <div id="progress-container">
-        <div id="progress-bar"></div>
-    </div>
-
-    <div class="nav-wrapper">
-        <nav class="nav-bar">
-            <div class="nav-links-container">
-                <a href="#overview" class="nav-link active">Overview</a>
-                <a href="#scopes" class="nav-link desktop-only">Scopes</a>
-                <a href="#work" class="nav-link">Work</a>
-                <a href="#thoughts" class="nav-link desktop-only">Thoughts</a>
-                <a href="#career" class="nav-link desktop-only">Career</a>
-            </div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">+</button>
-            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Dark/Light Mode">
-                <span id="themeIcon">☀︎</span>
-            </button>
-        </nav>
-        
-        <div class="mobile-dropdown" id="mobileDropdown">
-            <a href="#overview" class="nav-link" onclick="toggleMobileMenu()">Overview</a>
-            <a href="#scopes" class="nav-link" onclick="toggleMobileMenu()">Scopes</a>
-            <a href="#work" class="nav-link" onclick="toggleMobileMenu()">Work</a>
-            <a href="#thoughts" class="nav-link" onclick="toggleMobileMenu()">Thoughts</a>
-            <a href="#career" class="nav-link" onclick="toggleMobileMenu()">Career</a>
+    <!-- NAV -->
+    <nav id="navbar">
+        <a href="#hero" class="nav-brand">Dylan Lam.</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#thoughts">Thoughts</a></li>
+            <li><a href="#contact">Contact</a></li>
+            </ul>
+        <div class="nav-right">
+            <a href="#contact" class="pill"><span class="pill-inner">Get in Touch</span></a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">&#9788;</button>
+            <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
-    </div>
+    </nav>
 
-    <header class="hero-section" id="overview">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-
-        <h1 class="hero-title-lab">DYLAN</h1>
-        
-        <div class="hero-sub-lab">
-            A strategic thinker who thrives at the intersection of<br>
-            <span class="highlight">Structure</span> and <span class="highlight">Creativity</span>.
-        </div>
-    </header>
-
-    <div class="section">
-        <div class="stats-row animate-in delay-3">
-            <div class="stat-item">
-                <div class="stat-val hacker-text">4</div>
-                <div class="stat-lbl">Core Scopes</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-val hacker-text">25+</div>
-                <div class="stat-lbl">Projects Led</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-val hacker-text">7+</div>
-                <div class="stat-lbl">Years Exp</div>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-aurora"><canvas id="auroraCanvas"></canvas></div>
+        <div class="hero-scroll">Scroll down</div>
+        <div class="hero-content">
+            <h1 class="hero-heading" id="heroHeading">Building the<br>next generation<br>of <em>business systems.</em></h1>
+            <div class="hero-actions">
+                <a href="#contact" class="pill pill-white"><span class="pill-inner">Get in Touch</span></a>
+                <a href="#about" class="pill"><span class="pill-inner">Learn More</span></a>
             </div>
         </div>
-    </div>
+        <p class="hero-sub reveal rd3">I connect strategy, data, and operations to help businesses scale with confidence. Currently driving advertiser growth at Amazon Ads across Southeast Asia.</p>
+    </section>
 
-    <div class="section" id="scopes">
-        <h2 class="section-title hacker-text">Scopes</h2>
-        <div class="grid">
-            <div class="scope-card span-6">
-                <div class="scope-num">01</div>
-                <div>
-                    <div class="scope-title">Sales & Account<br>Management</div>
-                    <p class="scope-desc">I connect with people, build trust, and make sure deals don’t just close—but last. Expertise in high-value client retention.</p>
-                </div>
+    <div class="divider"></div>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="about-section">
+            <div class="reveal">
+                <p class="section-eyebrow">About</p>
+                <h2 class="section-heading">A strategic thinker<br>who thrives at the<br>intersection of <em>structure</em><br>and <em>creativity.</em></h2>
             </div>
-            <div class="scope-card span-6">
-                <div class="scope-num">02</div>
-                <div>
-                    <div class="scope-title">Data & Business<br>Analytics</div>
-                    <p class="scope-desc">Making sense of messy data. Turning complex metrics into simple stories that help businesses grow with confidence.</p>
-                </div>
-            </div>
-            <div class="scope-card span-6">
-                <div class="scope-num">03</div>
-                <div>
-                    <div class="scope-title">Project<br>Management</div>
-                    <p class="scope-desc">I bring order to chaos. Managing cross-functional teams (Design, Build, Ops) to ensure ideas succeed in the real world.</p>
-                </div>
-            </div>
-            <div class="scope-card span-6">
-                <div class="scope-num">04</div>
-                <div>
-                    <div class="scope-title">Notion System<br>Design</div>
-                    <p class="scope-desc">Designing effortless digital ecosystems. I build tools for internal operations, CRM, and project tracking.</p>
-                </div>
+            <div class="reveal rd2">
+                <p class="section-body">I operate across sales, data, project management, and system design. From building AI agents adopted across markets to launching flagship stores coordinating 10+ teams - I bring order to chaos and turn insights into action.</p>
             </div>
         </div>
-    </div>
+        <div class="expertise-list">
+            <div class="expertise-item reveal"><span class="expertise-num">01</span><h3>Sales &amp; Account Management</h3><p>Building trust, closing deals, and making partnerships last. Expertise in high-value client retention and revenue growth.</p></div>
+            <div class="expertise-item reveal rd1"><span class="expertise-num">02</span><h3>Data &amp; Business Analytics</h3><p>Turning messy data into simple stories. Dashboards, models, and reporting that power confident decisions.</p></div>
+            <div class="expertise-item reveal rd2"><span class="expertise-num">03</span><h3>Project Management</h3><p>Managing cross-functional teams across Design, Build, and Ops to ensure ideas succeed in the real world.</p></div>
+            <div class="expertise-item reveal rd3"><span class="expertise-num">04</span><h3>Notion System Design</h3><p>Designing effortless digital ecosystems for internal operations, CRM, and project tracking.</p></div>
+        </div>
+    </section>
 
-    <div class="section" id="work">
-        <h2 class="section-title hacker-text">Selected Work</h2>
-        
-        <div class="filter-container">
-            <button class="filter-pill active" onclick="filterProjects('all')">❖ Full Portfolio</button>
-            <button class="filter-pill" onclick="filterProjects('sales')">⊞ Sales & Account Management</button>
-            <button class="filter-pill" onclick="filterProjects('pm')">⊡ Project Management</button>
-            <button class="filter-pill" onclick="filterProjects('notion')">▤ Notion System</button>
-            <button class="filter-pill" onclick="filterProjects('data')">▦ Data & Business Analytics</button>
+    <div class="divider"></div>
+
+    <!-- WORK -->
+    <section class="section" id="work">
+        <div class="reveal">
+            <p class="section-eyebrow">Selected Work</p>
+            <h2 class="section-heading">Trusted by<br><em>leading brands</em><br>across industries.</h2>
         </div>
 
-        <div class="project-grid">
-            
-            <div class="brand-card" data-category="data sales" style="--brand-color: #FF9900;">
-                <div class="card-watermark">A</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-amazon">A</div>
-                            <div class="card-title-group">
-                                <div class="card-title">AI Agent for Program Pitch Deck</div>
-                                <div class="card-client">Client: Amazon</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Built an AI Agent to generate Pitch Deck for one of the biggest Annual Advertiser Program of Amazon Ads, adopted by VN & CN folks.</p>
-                </div>
-            </div>
+        <!-- Filter tabs -->
+        <div class="work-filters reveal rd1">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="data">Data &amp; Analytics</button>
+            <button class="filter-tab" data-filter="pm">Project Management</button>
+            <button class="filter-tab" data-filter="sales">Sales</button>
+            <button class="filter-tab" data-filter="notion">Notion System</button>
+        </div>
 
-            <div class="brand-card" data-category="data sales" style="--brand-color: #FF9900;">
-                <div class="card-watermark">A</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-amazon">A</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Visual Generation AI Prompt Agent</div>
-                                <div class="card-client">Client: Amazon</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Built an AI Agent to generate concepts & prompts for visual generation in any AI Gen tools, adopted in Vietnam, Singapore & Taiwan markets</p>
-                    <a href="https://partyrock.aws/u/dylanvn/W5zqTBkL7/AdPrompt-Lab-Advanced-V4.2%253A-Creative-AI-for-Amazon-Ads-(Beta)" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
+        <div class="work-count reveal rd2"><span id="visibleCount">23</span> projects</div>
 
-            <div class="brand-card" data-category="data sales" style="--brand-color: #FF9900;">
-                <div class="card-watermark">A</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-amazon">A</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Business Dashboard</div>
-                                <div class="card-client">Client: Amazon</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Co-built a business dashboard on PowerBI and Amazon Quicksight, integrating with AI Agent to analyze and provide business insights for actions.</p>
-                </div>
-            </div>
+        <div class="work-list" id="workList">
+            <div class="work-item" data-idx="0" data-cat="data"><span class="work-title">AI Agent for Program Pitch Deck</span><span class="work-client">Amazon, 2025</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="1" data-cat="data"><span class="work-title">Visual Generation AI Prompt Agent</span><span class="work-client">Amazon, 2025</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="2" data-cat="data"><span class="work-title">Business Dashboard</span><span class="work-client">Amazon, 2025</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="3" data-cat="data"><span class="work-title">Efficiency Enhancement Tool</span><span class="work-client">Amazon, 2025</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="4" data-cat="pm sales"><span class="work-title">Apple Social Video</span><span class="work-client">Apple, 2024</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="5" data-cat="notion"><span class="work-title">Project Management System</span><span class="work-client">Filian TV, 2025</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="6" data-cat="sales"><span class="work-title">MUJI Box</span><span class="work-client">MUJI, 2024</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="7" data-cat="pm sales"><span class="work-title">MAMMAM Eatery &amp; Lounge</span><span class="work-client">Vietcetera, 2024</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="8" data-cat="pm sales"><span class="work-title">Lang Spa</span><span class="work-client">Lang Spa, 2024</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="9" data-cat="pm sales"><span class="work-title">Vero Rebrand &amp; Web Identity</span><span class="work-client">Vero ASEAN, 2024</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="10" data-cat="pm"><span class="work-title">Bakes Store #4</span><span class="work-client">The Lab Concepts, 2024</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="11" data-cat="pm sales"><span class="work-title">EVA Exhibition</span><span class="work-client">Sunlife Insurance, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="12" data-cat="notion"><span class="work-title">Breakthrough Energy Website</span><span class="work-client">GNS Studio, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="13" data-cat="pm sales"><span class="work-title">Yingtao Brand Identity</span><span class="work-client">August Hospitality, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="14" data-cat="pm sales"><span class="work-title">Bakes Flagship Store</span><span class="work-client">The Lab Concepts, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="15" data-cat="pm sales"><span class="work-title">Mami Cocktails</span><span class="work-client">86Proof Hospitality, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="16" data-cat="pm sales"><span class="work-title">Bitis 40Y Exhibition</span><span class="work-client">Bitis / Dentsu, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="17" data-cat="pm sales"><span class="work-title">Du (Enough) Exhibition</span><span class="work-client">Sunlife Insurance, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="18" data-cat="pm"><span class="work-title">Sunlife Hanoi Head Office</span><span class="work-client">Sunlife Insurance, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="19" data-cat="data"><span class="work-title">Sales System Setup</span><span class="work-client">The Lab, 2023</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="20" data-cat="pm"><span class="work-title">B34CH NFT</span><span class="work-client">OP3N, 2022</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="21" data-cat="pm"><span class="work-title">Shadow Lounge</span><span class="work-client">The Lab Concepts, 2022</span><span class="work-arrow">&nearr;</span></div>
+            <div class="work-item" data-idx="22" data-cat="pm sales"><span class="work-title">Love Is Hard. HIV Prevention Is Easy.</span><span class="work-client">HAIVN + US CDC, 2022</span><span class="work-arrow">&nearr;</span></div>
+        </div>
+    </section>
 
-            <div class="brand-card" data-category="data sales" style="--brand-color: #FF9900;">
-                <div class="card-watermark">A</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-amazon">A</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Efficiency Enhancement Tool</div>
-                                <div class="card-client">Client: Amazon</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Built a lead-identification tool using Excel and advanced data analytics. Reduced qualification time by 80%, helping international teams pinpoint Ads Program prospects in minutes.</p>
-                </div>
-            </div>
+    <div class="divider"></div>
 
-            <div class="brand-card" data-category="notion" style="--brand-color: #9146FF;">
-                <div class="card-watermark">F</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-pmax">F</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Project Management System</div>
-                                <div class="card-client">Client: Filian TV</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2025</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Notion System</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Notion System Setup</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Designed and implemented a comprehensive Project Management System on Notion, tailored for Filian TV's content production workflows.</p>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="sales" style="--brand-color: #7F0019;">
-                <div class="card-watermark">M</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-muji">M</div>
-                            <div class="card-title-group">
-                                <div class="card-title">MUJI Box</div>
-                                <div class="card-client">Client: MUJI</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Sales & Account Management</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Led strategic partnership negotiations to secure the MUJI Box project. Managed client expectations and timeline, closing the deal in 1 month to deliver a display unit shaped by simplicity.</p>
-                    <a href="https://www.thelabsaigon.com/work/muji-box" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #1A1A1A;">
-                <div class="card-watermark">A</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-apple">A</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Apple Social Video</div>
-                                <div class="card-client">Client: Apple</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Video Production</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Managed the project lifecycle for an Apple commission, ensuring strict brand compliance while coordinating production teams to deliver the "Shot on iPhone" campaign featuring the Đông Tảo chicken.</p>
-                    <a href="https://www.instagram.com/reel/DGyQDyRP71N/" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-            
-            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #191919;">
-                <div class="card-watermark">V</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-mammam">V</div>
-                            <div class="card-title-group">
-                                <div class="card-title">MÂMMÂM Eatery & Lounge</div>
-                                <div class="card-client">Client: Vietcetera</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Oversaw the end-to-end launch of a new F&B concept. Coordinated design, build, and operational teams to deliver a cohesive brand experience within a 6-month timeline.</p>
-                    <a href="https://www.behance.net/gallery/222633137/MAMMAM-Eatery-Lounge" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #2c180d;">
-                <div class="card-watermark">L</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-lang">L</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Lang Spa</div>
-                                <div class="card-client">Client: Lang Spa</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Managed partnership and design delivery for Lang Spa, ensuring the brand vision of relaxation and community was met.</p>
-                    <a href="https://www.behance.net/gallery/218543295/Lang-Spa" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #0161b7;">
-                <div class="card-watermark">V</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-vero-green">V</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Vero Rebrand & Web Identity</div>
-                                <div class="card-client">Client: Vero ASEAN</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Website Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Led the strategic rebrand delivery and website update project for VERO, unifying their services portfolio across SE Asia.</p>
-                    <a href="https://www.behance.net/gallery/205330085/Vero-Rebrand-Web-Identity" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card" data-category="pm" style="--brand-color: #e2e3cd;">
-                <div class="card-watermark">T</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-bakes">T</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Bakes Store #4</div>
-                                <div class="card-client">Client: The Lab Concepts</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2024</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Managed the rollout of Bakes' first mall location. Coordinated between property stakeholders (Vincom) and internal design teams to ensure a smooth build-out.</p>
-                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7204748271401992192?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_multiple_media_viewer%3BIP%2F4Yoj%2FSQCl7g925THcDQ%3D%3D" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card" data-category="pm sales" style="--brand-color: #FFD400;">
-                <div class="card-watermark">S</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-bitis">S</div>
-                            <div class="card-title-group">
-                                <div class="card-title">EVA Exhibition</div>
-                                <div class="card-client">Client: Sunlife Insurance</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Orchestrated the logistics and artist coordination for the EVA exhibition. Managed partner relationships to deliver an experiential event on Virtual Identity.</p>
-                    <a href="https://www.behance.net/gallery/172040899/EVA-EXHIBITION" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card" data-category="notion" style="--brand-color: #fece7c;">
-                <div class="card-watermark">G</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-pmax">G</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Breakthrough Energy Website</div>
-                                <div class="card-client">Client: GNS Studio</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Notion System</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Notion System Setup, Website Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Created a comprehensive Project Management system on Notion to streamline the workflow for GNS Studio's Breakthrough Energy project.</p>
-                    <a href="https://transition.breakthroughenergy.org/" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #5b0a06;">
-                <div class="card-watermark">A</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-yingtao">A</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Yingtao 櫻桃 Brand Identity</div>
-                                <div class="card-client">Client: August Hospitality Group</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Led project delivery for a high-stakes brand identity project in NYC. Ensured all deliverables met the premium standards required for a Michelin-star contender.</p>
-                    <a href="https://www.instagram.com/p/Cx5bjiJv2w5/" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card" data-category="pm sales" style="--brand-color: #e2e3cd;">
-                <div class="card-watermark">T</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-bakes">T</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Bakes Flagship Store</div>
-                                <div class="card-client">Client: The Lab Concepts</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Directed the design rollout for the Bakes Flagship in Thao Dien, ensuring the new design system balanced everyday warmth with special occasion flair.</p>
-                    <a href="https://www.behance.net/gallery/173479823/BAKES-FLAGSHIP" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #ef4023;">
-                <div class="card-watermark">8</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-pmax">8</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Mámi Cocktails</div>
-                                <div class="card-client">Client: 86Proof Hospitality Group</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Managed client communications and project timelines for a bold hospitality concept. Facilitated the successful delivery of a complex interior and brand identity package.</p>
-                    <a href="https://www.behance.net/gallery/197607065/Mami-Cocktails" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #034ea0;">
-                <div class="card-watermark">B</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-bitis">B</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Biti’s 40Y Exhibition</div>
-                                <div class="card-client">Client: Biti's</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Commissioned by Dentsu to manage the design and build of Biti’s 40 Years Anniversary exhibition, A Step Forward, featuring 40 creations.</p>
-                    <a href="https://www.behance.net/gallery/168537349/Bitis-40-Years-Exhibition" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card" data-category="pm sales" style="--brand-color: #FFD400;">
-                <div class="card-watermark">S</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-bitis">S</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Du (Enough) Exhibition</div>
-                                <div class="card-client">Client: Sunlife Insurance</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Coordinated artists and production for “Đủ” (Fulfillment), an interactive visual exhibition exploring life's necessities.</p>
-                    <a href="https://www.behance.net/gallery/166677079/DU-EXHIBITION" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card" data-category="pm" style="--brand-color: #FFD400;">
-                <div class="card-watermark">S</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-sunlife">S</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Sunlife Hanoi Head Office</div>
-                                <div class="card-client">Client: Sunlife Insurance</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Led the project management for Sunlife's flagship Hanoi HQ build. Coordinated diverse teams to deliver a high-end, lounge-inspired workspace on schedule.</p>
-                    <a href="https://www.behance.net/gallery/189261513/Y-LOUNGE-SUNLIFE-HN-HQ" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card" data-category="data" style="--brand-color: #e2e3cd;">
-                <div class="card-watermark">T</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-pmax">T</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Sales System Setup</div>
-                                <div class="card-client">Client: The Lab</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2023</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Data & Business Analytics</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Data Analytics</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Developed in-house tools for cash flow and CRM that scaled internal operations, co-built dashboards, and analyzed sales strategy data.</p>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="pm" style="--brand-color: #4C4CFF;">
-                <div class="card-watermark">O</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-pmax">O</div>
-                            <div class="card-title-group">
-                                <div class="card-title">B34CH NFT</div>
-                                <div class="card-client">Client: OP3N</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2022</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Managed the launch of a generative art NFT project, coordinating between code artists and partners to create digital beach landscapes.</p>
-                </div>
-            </div>
-
-            <div class="brand-card" data-category="pm" style="--brand-color: #e2e3cd;">
-                <div class="card-watermark">T</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-shadow">T</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Shadow Lounge</div>
-                                <div class="card-client">Client: The Lab Concepts</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2022</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Managed brand identity development for Shadow Lounge, a concept highlighting the unseen creativity behind processes like cooking and design.</p>
-                    <a href="https://www.behance.net/gallery/165324263/SHADOW-LOUNGE-BRANDING" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-            <div class="brand-card dark-brand" data-category="pm sales" style="--brand-color: #0054A6;">
-                <div class="card-watermark">H</div>
-                <div class="card-default-content">
-                    <div class="card-top-section">
-                        <div class="card-header">
-                            <div class="brand-avatar bg-bitis">H</div>
-                            <div class="card-title-group">
-                                <div class="card-title">Love Is Hard. HIV Prevention Is Easy Exhibition</div>
-                                <div class="card-client">Client: HAIVN + US CDC</div>
-                            </div>
-                        </div>
-                        <div class="meta-grid">
-                            <div class="meta-item"><span class="meta-label">Year</span><span class="meta-val">2022</span></div>
-                            <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-val">Project Management, Sales</span></div>
-                            <div class="meta-item meta-full"><span class="meta-label">Project Type</span><span class="meta-val">Brand Identity, Interior Design</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-content">
-                    <p class="reveal-desc">Managed social campaigns and supported exhibition components for the US CDC & HAIVN partnership, highlighting the contrast between the complexity of love and the simplicity of HIV prevention.</p>
-                    <a href="https://www.behance.net/gallery/139885003/LOVE-IS-HARD-HIV-PREVENTION-IS-EASY" target="_blank" class="learn-more-btn">Learn More +</a>
-                </div>
-            </div>
-
-        </div> </div>
-
-    <div class="section" id="thoughts">
-        <h2 class="section-title hacker-text">Thoughts</h2>
-        <div class="thought-list">
-            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-customerobsession-biasforaction-activity-7394932105178308608-IKBq" target="_blank" class="thought-item">
-                <div class="thought-date">Nov 2025</div>
-                <div class="thought-content">
-                    <span class="thought-title">Making AI creative generation accessible for everyone</span>
-                    <p class="thought-summary">Two months of experiments to answer one question: can I make AI creativity simple for sellers? Introducing AdPrompt Lab.</p>
-                </div>
-                <div class="thought-arrow">→</div>
+    <!-- THOUGHTS -->
+    <section class="section" id="thoughts">
+        <div class="reveal">
+            <p class="section-eyebrow">Thoughts</p>
+            <h2 class="section-heading">Recent<br><em>writing.</em></h2>
+        </div>
+        <div class="thoughts-list">
+            <a href="https://www.linkedin.com/posts/dylanlamwork_amazonads-generativeai-creativestrategy-activity-7435508959567945729-hKDL?utm_source=share&utm_medium=member_desktop&rcm=ACoAACjdIvkBs1YMGILOE-pjm8-i0-P32d-tMF4" target="_blank" class="thought-item reveal">
+                <span class="thought-date">Nov 2025</span>
+                <span class="thought-title">Making AI creative generation accessible for everyone</span>
+                <span class="thought-arrow">&nearr;</span>
             </a>
-            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-ownership-earntrust-activity-7359058206247018496-xImq" target="_blank" class="thought-item">
-                <div class="thought-date">Aug 2025</div>
-                <div class="thought-content">
-                    <span class="thought-title">Interview vs. Reality: My first year at Amazon</span>
-                    <p class="thought-summary">A look back at what I promised during my interview vs what actually happened, guided by Leadership Principles like Invent & Simplify and Earn Trust.</p>
-                </div>
-                <div class="thought-arrow">→</div>
+            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-ownership-earntrust-activity-7359058206247018496-xImq?utm_source=share&utm_medium=member_desktop&rcm=ACoAACjdIvkBs1YMGILOE-pjm8-i0-P32d-tMF4" target="_blank" class="thought-item reveal rd1">
+                <span class="thought-date">Aug 2025</span>
+                <span class="thought-title">Interview vs. Reality: My first year at Amazon</span>
+                <span class="thought-arrow">&nearr;</span>
             </a>
-            <a href="https://www.linkedin.com/posts/dylanlamwork_sales-diarypov-advertising-activity-7320280215987851264-UuWm" target="_blank" class="thought-item">
-                <div class="thought-date">Apr 22, 2025</div>
-                <div class="thought-content">
-                    <span class="thought-title">POV: You are reading my diary</span>
-                    <p class="thought-summary">"Making other people's jobs easier" isn't just a philosophy—it’s the most consistent thread in my career.</p>
-                </div>
-                <div class="thought-arrow">→</div>
+            <a href="https://www.linkedin.com/posts/dylanlamwork_sales-diarypov-advertising-activity-7320280215987851264-UuWm" target="_blank" class="thought-item reveal rd2">
+                <span class="thought-date">Apr 2025</span>
+                <span class="thought-title">Making others' jobs sasier</span>
+                <span class="thought-arrow">&nearr;</span>
             </a>
         </div>
-    </div>
+    </section>
 
-    <div class="section" id="career">
-        <h2 class="section-title hacker-text">Career History</h2>
-        <div class="scope-card" style="cursor: default; padding: 0 40px;">
-            <table class="career-table">
-                <tr class="career-row">
-                    <td class="career-cell c-role">Global Partnership Manager</td>
-                    <td class="career-cell c-company">Amazon Ads</td>
-                    <td class="career-cell c-desc">Exceeded revenue targets by 5% for two consecutive quarters. Built scalable lead-gen system integrated to Global Dashboard.</td>
-                    <td class="career-cell c-date">09/2024 — Present</td>
-                </tr>
-                <tr class="career-row">
-                    <td class="career-cell c-role">Strategic Partnership Manager</td>
-                    <td class="career-cell c-company">The Lab Creative</td>
-                    <td class="career-cell c-desc">Led F&B business launch in 4 months. Built CRM infrastructure and ran cross-team workshops.</td>
-                    <td class="career-cell c-date">01/2024 — 08/2024</td>
-                </tr>
-                <tr class="career-row">
-                    <td class="career-cell c-role">Senior Strategic Partnership</td>
-                    <td class="career-cell c-company">The Lab Creative</td>
-                    <td class="career-cell c-desc">Drove 40% of annual company revenue. Launched 1,000sqm bakery by coordinating 10+ teams. Employee of the Month (Nov 23).</td>
-                    <td class="career-cell c-date">11/2022 — 12/2023</td>
-                </tr>
-                <tr class="career-row">
-                    <td class="career-cell c-role">Account Executive</td>
-                    <td class="career-cell c-company">The Lab Creative</td>
-                    <td class="career-cell c-desc">Hit 180% of Q4 revenue KPIs. Onboarded US clients and developed in-house cash flow tools.</td>
-                    <td class="career-cell c-date">11/2021 — 10/2022</td>
-                </tr>
-                <tr class="career-row">
-                    <td class="career-cell c-role">Senior Account Executive</td>
-                    <td class="career-cell c-company">PMAX</td>
-                    <td class="career-cell c-desc">Spearheaded campaign launches for FE CREDIT & VPBank. Top 3 Accounts in Q2 2021.</td>
-                    <td class="career-cell c-date">04/2021 — 07/2021</td>
-                </tr>
-                <tr class="career-row">
-                    <td class="career-cell c-role">Account Executive</td>
-                    <td class="career-cell c-company">PMAX</td>
-                    <td class="career-cell c-desc">Co-managed digital ad campaigns and built real-time dashboards.</td>
-                    <td class="career-cell c-date">08/2020 — 03/2021</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <div style="margin-bottom: 8px;">
-            <span id="time-display" style="font-variant-numeric: tabular-nums;">--:--</span> • Ho Chi Minh City
-        </div>
-        <a href="#" onclick="copyEmail(this, event)">dylanlamwork@gmail.com</a> • 
-        <a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a>
-        <br><br>
-        © 2025 Dylan Lam • Portfolio
-    </div>
+    <div class="divider"></div>
 
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <!-- CTA -->
+    <section class="cta-section" id="contact">
+        <div class="reveal">
+            <h2 class="cta-heading">Ready to<br><em>build something</em><br>that matters?</h2>
+            <a href="mailto:dylanlamwork@gmail.com" class="pill pill-white"><span class="pill-inner">Get in Touch</span></a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">Dylan Lam.</div>
+            <div class="footer-cta">
+                <p>Speak to your next<br>strategic partner today.</p>
+                <span class="footer-email" id="copyEmail">
+                    dylanlamwork@gmail.com
+                    <span class="footer-email-copied" id="copiedLabel">Copied</span>
+                </span>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copy">&copy; 2025 Dylan Lam. All rights reserved.</span>
+            <ul class="footer-nav">
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a></li>
+                <li><a href="mailto:dylanlamwork@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </footer>
 
     <script>
-        /* --- 0. INERTIA SCROLL (LENIS) --- */
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smooth: true
+    const P = [{"t": "AI Agent for Program Pitch Deck", "c": "Amazon", "y": "2025", "s": "Data & Business Analytics", "d": "Built an AI Agent to generate Pitch Deck for one of the biggest Annual Advertiser Program of Amazon Ads, adopted by VN & CN folks.", "l": null}, {"t": "Visual Generation AI Prompt Agent", "c": "Amazon", "y": "2025", "s": "Data & Business Analytics", "d": "Built an AI Agent to generate concepts & prompts for visual generation in any AI Gen tools, adopted in Vietnam, Singapore & Taiwan markets.", "l": "https://partyrock.aws/u/dylanvn/W5zqTBkL7/AdPrompt-Lab-Advanced-V4.2%253A-Creative-AI-for-Amazon-Ads-(Beta)"}, {"t": "Business Dashboard", "c": "Amazon", "y": "2025", "s": "Data & Business Analytics", "d": "Co-built a business dashboard on PowerBI and Amazon Quicksight, integrating with AI Agent to analyze and provide business insights for actions.", "l": null}, {"t": "Efficiency Enhancement Tool", "c": "Amazon", "y": "2025", "s": "Data & Business Analytics", "d": "Built a lead-identification tool using Excel and advanced data analytics. Reduced qualification time by 80%.", "l": null}, {"t": "Apple Social Video", "c": "Apple", "y": "2024", "s": "Project Management, Sales", "d": "Managed the project lifecycle for an Apple commission, ensuring strict brand compliance for the Shot on iPhone campaign.", "l": "https://www.instagram.com/reel/DGyQDyRP71N/"}, {"t": "Project Management System", "c": "Filian TV", "y": "2025", "s": "Notion System", "d": "Designed and implemented a comprehensive Project Management System on Notion for content production workflows.", "l": null}, {"t": "MUJI Box", "c": "MUJI", "y": "2024", "s": "Sales & Account Management", "d": "Led strategic partnership negotiations to secure the MUJI Box project, closing the deal in 1 month.", "l": "https://www.thelabsaigon.com/work/muji-box"}, {"t": "MAMMAM Eatery & Lounge", "c": "Vietcetera", "y": "2024", "s": "Project Management, Sales", "d": "Oversaw the end-to-end launch of a new F&B concept within a 6-month timeline.", "l": "https://www.behance.net/gallery/222633137/MAMMAM-Eatery-Lounge"}, {"t": "Lang Spa", "c": "Lang Spa", "y": "2024", "s": "Project Management, Sales", "d": "Managed partnership and design delivery, ensuring the brand vision of relaxation and community.", "l": "https://www.behance.net/gallery/218543295/Lang-Spa"}, {"t": "Vero Rebrand & Web Identity", "c": "Vero ASEAN", "y": "2024", "s": "Project Management, Sales", "d": "Led the strategic rebrand delivery and website update, unifying services across SE Asia.", "l": "https://www.behance.net/gallery/205330085/Vero-Rebrand-Web-Identity"}, {"t": "Bakes Store #4", "c": "The Lab Concepts", "y": "2024", "s": "Project Management", "d": "Managed the rollout of Bakes first mall location, coordinating between Vincom and internal design teams.", "l": "https://www.linkedin.com/feed/update/urn:li:activity:7204748271401992192"}, {"t": "EVA Exhibition", "c": "Sunlife Insurance", "y": "2023", "s": "Project Management, Sales", "d": "Orchestrated logistics and artist coordination for an experiential event on Virtual Identity.", "l": "https://www.behance.net/gallery/172040899/EVA-EXHIBITION"}, {"t": "Breakthrough Energy Website", "c": "GNS Studio", "y": "2023", "s": "Notion System", "d": "Created a comprehensive Project Management system on Notion for the Breakthrough Energy project.", "l": "https://transition.breakthroughenergy.org/"}, {"t": "Yingtao Brand Identity", "c": "August Hospitality", "y": "2023", "s": "Project Management, Sales", "d": "Led project delivery for a high-stakes brand identity project in NYC for a Michelin-star contender.", "l": "https://www.instagram.com/p/Cx5bjiJv2w5/"}, {"t": "Bakes Flagship Store", "c": "The Lab Concepts", "y": "2023", "s": "Project Management, Sales", "d": "Directed the design rollout for the Bakes Flagship in Thao Dien.", "l": "https://www.behance.net/gallery/173479823/BAKES-FLAGSHIP"}, {"t": "Mami Cocktails", "c": "86Proof Hospitality", "y": "2023", "s": "Project Management, Sales", "d": "Managed client communications and project timelines for a bold hospitality concept.", "l": "https://www.behance.net/gallery/197607065/Mami-Cocktails"}, {"t": "Bitis 40Y Exhibition", "c": "Bitis / Dentsu", "y": "2023", "s": "Project Management, Sales", "d": "Commissioned by Dentsu to manage the design and build of Bitis 40 Years Anniversary exhibition.", "l": "https://www.behance.net/gallery/168537349/Bitis-40-Years-Exhibition"}, {"t": "Du (Enough) Exhibition", "c": "Sunlife Insurance", "y": "2023", "s": "Project Management, Sales", "d": "Coordinated artists and production for an interactive visual exhibition exploring life necessities.", "l": "https://www.behance.net/gallery/166677079/DU-EXHIBITION"}, {"t": "Sunlife Hanoi Head Office", "c": "Sunlife Insurance", "y": "2023", "s": "Project Management", "d": "Led the project management for Sunlife flagship Hanoi HQ build.", "l": "https://www.behance.net/gallery/189261513/Y-LOUNGE-SUNLIFE-HN-HQ"}, {"t": "Sales System Setup", "c": "The Lab", "y": "2023", "s": "Data & Business Analytics", "d": "Developed in-house tools for cash flow and CRM that scaled internal operations.", "l": null}, {"t": "B34CH NFT", "c": "OP3N", "y": "2022", "s": "Project Management", "d": "Managed the launch of a generative art NFT project with code artists and partners.", "l": null}, {"t": "Shadow Lounge", "c": "The Lab Concepts", "y": "2022", "s": "Project Management", "d": "Managed brand identity development highlighting the unseen creativity behind processes.", "l": "https://www.behance.net/gallery/165324263/SHADOW-LOUNGE-BRANDING"}, {"t": "Love Is Hard. HIV Prevention Is Easy.", "c": "HAIVN + US CDC", "y": "2022", "s": "Project Management, Sales", "d": "Managed social campaigns and exhibition components for the US CDC & HAIVN partnership.", "l": "https://www.behance.net/gallery/139885003/LOVE-IS-HARD-HIV-PREVENTION-IS-EASY"}];
+
+    // NAV
+    const nb = document.getElementById('navbar');
+    window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 80));
+    document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active')));
+
+    // HERO WORD REVEAL
+    const heroH = document.getElementById('heroHeading');
+    if (heroH) {
+        let wordIdx = 0;
+        heroH.innerHTML = heroH.innerHTML.replace(/(<br>|<\/?em>)|([^\s<]+)/g, (match, tag, word) => {
+            if (tag) return tag;
+            const delay = 0.06 * wordIdx++;
+            return '<span class="word"><span class="word-inner" style="animation-delay:' + delay.toFixed(2) + 's">' + word + '</span></span>';
         });
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
+    }
 
-        /* --- 1. PRELOADER LOGIC --- */
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            setTimeout(() => {
-                preloader.classList.add('hidden');
-                setTimeout(() => preloader.style.display = 'none', 800);
-            }, 500);
-        });
+    // SCROLL REVEAL
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-        /* --- 2. 3D TILT EFFECT --- */
-        const tiltCards = document.querySelectorAll('.brand-card, .scope-card');
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -3; 
-                const rotateY = ((x - centerX) / centerX) * 3;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-            });
-        });
-
-        /* --- 3. SCROLL FX --- */
-        const progressBar = document.getElementById('progress-bar');
-        const heroTitle = document.querySelector('.hero-title-lab');
-
-        window.addEventListener('scroll', () => {
-            window.requestAnimationFrame(() => {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                
-                progressBar.style.width = scrolled + "%";
-
-                // Parallax for Title
-                if (heroTitle) {
-                    heroTitle.style.transform = `translateY(${winScroll * 0.2}px)`;
-                    heroTitle.style.opacity = 1 - (winScroll / 700);
-                }
-            });
-        });
-
-        /* --- 4. HACKER TEXT & UTILS --- */
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~`|}{[]:;?><,./-=";
-        function enableTextScramble(selector) {
-            const elements = document.querySelectorAll(selector);
-            elements.forEach(element => {
-                element.dataset.value = element.innerText;
-                element.onmouseover = event => {
-                    let iterations = 0;
-                    const target = event.target;
-                    if (target.dataset.animating === "true") return;
-                    target.dataset.animating = "true";
-                    target.classList.add('scrambling');
-                    const interval = setInterval(() => {
-                        target.innerText = target.innerText.split("").map((letter, index) => {
-                            if (index < iterations) return target.dataset.value[index];
-                            return letters[Math.floor(Math.random() * 26)];
-                        }).join("");
-                        if (iterations >= target.dataset.value.length) { 
-                            clearInterval(interval);
-                            target.dataset.animating = "false";
-                            target.classList.remove('scrambling');
-                        }
-                        iterations += 1 / 3; 
-                    }, 30);
-                }
-            });
-        }
-
-        const magneticBtns = document.querySelectorAll('.nav-link, .mobile-menu-btn, .theme-toggle');
-        magneticBtns.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const position = btn.getBoundingClientRect();
-                const x = e.clientX - position.left - position.width / 2;
-                const y = e.clientY - position.top - position.height / 2;
-                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px)`;
-            });
-            btn.addEventListener('mouseout', () => {
-                btn.style.transform = 'translate(0px, 0px)';
-            });
-        });
-
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Ho_Chi_Minh' });
-            const display = document.getElementById('time-display');
-            if(display) display.textContent = timeString;
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-
-        function copyEmail(el, e) {
+    // SMOOTH SCROLL
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
             e.preventDefault();
-            const email = "dylanlamwork@gmail.com";
-            navigator.clipboard.writeText(email).then(() => {
-                const originalText = el.innerText;
-                el.innerText = "Copied to clipboard!";
-                el.style.color = "#2997FF"; 
-                setTimeout(() => { el.innerText = originalText; el.style.color = ""; }, 2000);
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            enableTextScramble(".hacker-text");
-            enableTextScramble(".section-title"); 
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
+    });
 
-        const themeBtn = document.getElementById('themeBtn');
-        const themeIcon = document.getElementById('themeIcon');
-        const htmlTag = document.documentElement;
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        htmlTag.setAttribute('data-theme', savedTheme);
-        updateIcon(savedTheme);
+    // COPY EMAIL
+    document.getElementById('copyEmail').addEventListener('click', () => {
+        navigator.clipboard.writeText('dylanlamwork@gmail.com');
+        const label = document.getElementById('copiedLabel');
+        label.style.opacity = '1';
+        setTimeout(() => { label.style.opacity = '0'; }, 2000);
+    });
 
-        themeBtn.addEventListener('click', () => {
-            const currentTheme = htmlTag.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            htmlTag.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcon(newTheme);
+    // WORK HOVER DETAIL (follows mouse)
+    const detail = document.getElementById('workDetail');
+    let currentIdx = -1;
+    document.querySelectorAll('.work-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const idx = parseInt(item.dataset.idx);
+            if (idx === currentIdx) return;
+            currentIdx = idx;
+            const p = P[idx];
+            document.getElementById('wdScope').textContent = p.s;
+            document.getElementById('wdTitle').textContent = p.t;
+            document.getElementById('wdMeta').textContent = p.c + ' - ' + p.y;
+            document.getElementById('wdDesc').textContent = p.d;
+            const link = document.getElementById('wdLink');
+            if (p.l) { link.href = p.l; link.style.display = 'inline-flex'; }
+            else { link.style.display = 'none'; }
+            detail.classList.add('visible');
         });
+        item.addEventListener('mousemove', e => {
+            const x = e.clientX + 24;
+            const y = e.clientY - 20;
+            detail.style.left = Math.min(x, window.innerWidth - 400) + 'px';
+            detail.style.top = Math.min(y, window.innerHeight - 280) + 'px';
+        });
+        item.addEventListener('mouseleave', () => { detail.classList.remove('visible'); currentIdx = -1; });
+        item.addEventListener('click', () => { const p = P[parseInt(item.dataset.idx)]; if (p.l) window.open(p.l, '_blank'); });
+    });
 
-        function updateIcon(theme) { themeIcon.textContent = theme === 'dark' ? '☀︎' : '☾'; }
+    // ===== THEME TOGGLE =====
+    (function() {
+        var h = document.documentElement;
+        var b = document.getElementById('themeToggle');
+        var s = localStorage.getItem('theme');
+        if (s) h.setAttribute('data-theme', s);
+        function ic() { if (b) b.innerHTML = h.getAttribute('data-theme') === 'light' ? '&#9790;' : '&#9788;'; }
+        ic();
+        if (b) b.addEventListener('click', function() {
+            var n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            h.setAttribute('data-theme', n);
+            localStorage.setItem('theme', n);
+            ic();
+        });
+    })();
 
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('mobileDropdown');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            navLinks.classList.toggle('active');
-            menuBtn.classList.toggle('active');
-            if(navLinks.classList.contains('active')) { menuBtn.innerHTML = '✕'; } else { menuBtn.innerHTML = '+'; }
+    // ===== AURORA GRADIENTS (Apple palette) =====
+    (function() {
+        var canvas = document.getElementById('auroraCanvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var dpr = window.devicePixelRatio || 1;
+        var W, H, time = 0;
+        var mouseX = 0.5, mouseY = 0.5, targetMX = 0.5, targetMY = 0.5, mouseActive = false;
+
+        function resize() {
+            var r = canvas.parentElement.getBoundingClientRect();
+            W = r.width; H = r.height;
+            canvas.width = W * dpr; canvas.height = H * dpr;
+            canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
+        resize();
+        window.addEventListener('resize', resize);
 
-        function filterProjects(category) {
-            const buttons = document.querySelectorAll('.filter-pill');
-            buttons.forEach(btn => { btn.classList.remove('active'); });
-            event.currentTarget.classList.add('active');
-            const cards = document.querySelectorAll('.brand-card');
-            cards.forEach(card => {
-                const categories = card.getAttribute('data-category').split(' ');
-                if (category === 'all') { card.style.display = 'flex'; } else {
-                    if (categories.includes(category)) { card.style.display = 'flex'; } else { card.style.display = 'none'; }
+        var blobs = [
+            // Warm Amber & Gold palette
+            { hue:45,  sat:85, li:55, x:0.25, y:0.35, rx:0.6,  ry:0.35, sx:0.7,  sy:0.5,  ph:0,   a:0.28, dr:0.2  },
+            { hue:30,  sat:75, li:48, x:0.75, y:0.25, rx:0.5,  ry:0.4,  sx:0.5,  sy:0.6,  ph:1.8, a:0.22, dr:0.18 },
+            { hue:38,  sat:80, li:52, x:0.5,  y:0.55, rx:0.55, ry:0.35, sx:0.8,  sy:0.4,  ph:3.2, a:0.20, dr:0.22 },
+            { hue:20,  sat:60, li:42, x:0.15, y:0.65, rx:0.4,  ry:0.3,  sx:0.6,  sy:0.7,  ph:4.8, a:0.15, dr:0.15 },
+            { hue:50,  sat:90, li:58, x:0.85, y:0.5,  rx:0.45, ry:0.5,  sx:0.4,  sy:0.55, ph:2.5, a:0.24, dr:0.2  },
+            { hue:25,  sat:70, li:45, x:0.4,  y:0.2,  rx:0.3,  ry:0.2,  sx:1.2,  sy:0.9,  ph:0.5, a:0.16, dr:0.25 },
+            { hue:42,  sat:82, li:50, x:0.6,  y:0.7,  rx:0.35, ry:0.25, sx:1.0,  sy:1.1,  ph:3.8, a:0.14, dr:0.28 },
+            { hue:15,  sat:55, li:40, x:0.3,  y:0.8,  rx:0.25, ry:0.3,  sx:0.9,  sy:0.8,  ph:5.5, a:0.12, dr:0.2  }
+        ];
+
+        function draw() {
+            time += 0.012;
+            mouseX += (targetMX - mouseX) * 0.04;
+            mouseY += (targetMY - mouseY) * 0.04;
+
+            ctx.clearRect(0, 0, W, H);
+
+            // Background - theme aware
+            var isLight = false; // hero stays dark in both modes
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, W, H);
+
+            ctx.globalCompositeOperation = 'screen';
+
+            for (var i = 0; i < blobs.length; i++) {
+                var b = blobs[i];
+                var t = time + b.ph;
+
+                var cx = b.x + Math.sin(t*b.sx*0.7)*b.dr + Math.cos(t*b.sx*0.4+1.3)*b.dr*0.6 + Math.sin(t*b.sx*1.1+2.7)*b.dr*0.3;
+                var cy = b.y + Math.cos(t*b.sy*0.6)*b.dr*0.8 + Math.sin(t*b.sy*0.35+0.8)*b.dr*0.5 + Math.cos(t*b.sy*0.9+1.9)*b.dr*0.3;
+
+                if (mouseActive) { cx += (mouseX-cx)*0.12; cy += (mouseY-cy)*0.10; }
+                cx = Math.max(-0.2, Math.min(1.2, cx));
+                cy = Math.max(-0.2, Math.min(1.2, cy));
+
+                var breathe = 1 + Math.sin(t*1.5)*0.22 + Math.sin(t*2.3)*0.12;
+                var rx = b.rx * W * breathe;
+                var ry = b.ry * H * breathe;
+                var hue = b.hue + Math.sin(t*0.4)*25 + Math.cos(t*0.7)*12;
+                var alpha = b.a * (0.8 + Math.sin(t*0.9+b.ph)*0.3) * (isLight ? 0.4 : 1);
+
+                var gx = cx*W, gy = cy*H, maxR = Math.max(rx, ry);
+                var grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, maxR);
+                var col = 'hsla('+Math.round(hue)+','+b.sat+'%,'+b.li+'%,';
+                grad.addColorStop(0, col+(alpha*1.5)+')');
+                grad.addColorStop(0.2, col+(alpha*1.2)+')');
+                grad.addColorStop(0.5, col+(alpha*0.6)+')');
+                grad.addColorStop(0.8, col+(alpha*0.2)+')');
+                grad.addColorStop(1, col+'0)');
+
+                ctx.save();
+                ctx.translate(gx, gy);
+                ctx.rotate(t*0.15 + b.ph);
+                ctx.scale(1, ry/Math.max(rx,1));
+                ctx.translate(-gx, -gy);
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(gx, gy, rx, 0, Math.PI*2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            ctx.globalCompositeOperation = 'source-over';
+
+            // Radial vignette
+            var vig = ctx.createRadialGradient(W*0.5,H*0.5,W*0.2,W*0.5,H*0.5,W*0.8);
+            vig.addColorStop(0, 'rgba(0,0,0,0)');
+            vig.addColorStop(1, 'rgba(0,0,0,0.3)');
+            ctx.fillStyle = vig;
+            ctx.fillRect(0,0,W,H);
+
+            // Subtle horizontal striations
+            for (var j = 0; j < 3; j++) {
+                var bandY = H*(0.25+j*0.2) + Math.sin(time*0.5+j*2)*H*0.08;
+                var bandH = H*0.12 + Math.sin(time*0.7+j)*H*0.04;
+                var bg = ctx.createLinearGradient(0, bandY-bandH, 0, bandY+bandH);
+                bg.addColorStop(0,'rgba(255,255,255,0)');
+                bg.addColorStop(0.5,'rgba(255,255,255,0.018)');
+                bg.addColorStop(1,'rgba(255,255,255,0)');
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, bandY-bandH, W, bandH*2);
+            }
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+
+        var parent = canvas.parentElement;
+        parent.addEventListener('mousemove', function(e) {
+            var r = parent.getBoundingClientRect();
+            targetMX = (e.clientX-r.left)/r.width;
+            targetMY = (e.clientY-r.top)/r.height;
+            mouseActive = true;
+        });
+        parent.addEventListener('mouseleave', function() { mouseActive = false; });
+        parent.addEventListener('touchmove', function(e) {
+            var r = parent.getBoundingClientRect();
+            targetMX = (e.touches[0].clientX-r.left)/r.width;
+            targetMY = (e.touches[0].clientY-r.top)/r.height;
+            mouseActive = true;
+        }, { passive: true });
+        parent.addEventListener('touchend', function() { mouseActive = false; });
+    })();
+    
+    // WORK FILTER TABS
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const workItems = document.querySelectorAll('.work-item');
+    const visibleCount = document.getElementById('visibleCount');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Update active tab
+            filterTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const filter = tab.dataset.filter;
+            let count = 0;
+
+            workItems.forEach((item, i) => {
+                const cats = item.dataset.cat || '';
+                const show = filter === 'all' || cats.includes(filter);
+
+                if (show) {
+                    item.classList.remove('hidden');
+                    count++;
+                } else {
+                    item.classList.add('hidden');
                 }
             });
-        }
 
-        /* --- SCROLL OBSERVER --- */
-        const observerOptions = { root: null, rootMargin: '-20% 0px -20% 0px', threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
-                    if (activeLink) {
-                        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-                        activeLink.classList.add('active');
-                    }
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('header, .section').forEach((section) => {
-            if(section.id) observer.observe(section);
+            visibleCount.textContent = count;
         });
+    });
+
     </script>
-
 </body>
 </html>
