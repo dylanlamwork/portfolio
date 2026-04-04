@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dylan Lam</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%231d1d1f%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2222%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2220%22%20font-weight%3D%22400%22%20fill%3D%22%23D4A04A%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%231d1d1f%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2223%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22600%22%20fill%3D%22%23D4A04A%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
@@ -339,6 +339,48 @@
             color: #1d1d1f;
         }
 
+    
+        /* Mobile bottom sheet for project details */
+        .mobile-sheet-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            z-index: 2000; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .mobile-sheet-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .mobile-sheet {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: #111; border-top: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px 20px 0 0; z-index: 2001;
+            padding: 32px 28px 40px; max-height: 70vh; overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .mobile-sheet-overlay.active .mobile-sheet { transform: translateY(0); }
+        [data-theme="light"] .mobile-sheet { background: #fff; border-color: rgba(0,0,0,0.08); }
+
+        .mobile-sheet-handle {
+            width: 36px; height: 4px; background: rgba(255,255,255,0.2);
+            border-radius: 2px; margin: 0 auto 24px;
+        }
+        [data-theme="light"] .mobile-sheet-handle { background: rgba(0,0,0,0.15); }
+
+        .mobile-sheet .ms-scope {
+            font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--fg-dim); margin-bottom: 10px;
+        }
+        .mobile-sheet .ms-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
+        .mobile-sheet .ms-meta { font-size: 0.82rem; color: var(--fg-muted); margin-bottom: 18px; }
+        .mobile-sheet .ms-desc { font-size: 0.9rem; color: var(--fg-muted); line-height: 1.75; margin-bottom: 20px; }
+        .mobile-sheet .ms-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 0.85rem; font-weight: 500; color: var(--fg);
+            transition: gap 0.3s;
+        }
+        .mobile-sheet .ms-link:hover { gap: 10px; }
+        [data-theme="light"] .mobile-sheet .ms-title { color: #1d1d1f; }
+        [data-theme="light"] .mobile-sheet .ms-link { color: #0071e3; }
+
     </style>
 </head>
 <body>
@@ -617,15 +659,15 @@
         window.addEventListener('resize', resize);
 
         var blobs = [
-            // Warm Amber & Gold palette
-            { hue:45,  sat:85, li:55, x:0.25, y:0.35, rx:0.6,  ry:0.35, sx:0.7,  sy:0.5,  ph:0,   a:0.28, dr:0.2  },
-            { hue:30,  sat:75, li:48, x:0.75, y:0.25, rx:0.5,  ry:0.4,  sx:0.5,  sy:0.6,  ph:1.8, a:0.22, dr:0.18 },
-            { hue:38,  sat:80, li:52, x:0.5,  y:0.55, rx:0.55, ry:0.35, sx:0.8,  sy:0.4,  ph:3.2, a:0.20, dr:0.22 },
-            { hue:20,  sat:60, li:42, x:0.15, y:0.65, rx:0.4,  ry:0.3,  sx:0.6,  sy:0.7,  ph:4.8, a:0.15, dr:0.15 },
-            { hue:50,  sat:90, li:58, x:0.85, y:0.5,  rx:0.45, ry:0.5,  sx:0.4,  sy:0.55, ph:2.5, a:0.24, dr:0.2  },
-            { hue:25,  sat:70, li:45, x:0.4,  y:0.2,  rx:0.3,  ry:0.2,  sx:1.2,  sy:0.9,  ph:0.5, a:0.16, dr:0.25 },
-            { hue:42,  sat:82, li:50, x:0.6,  y:0.7,  rx:0.35, ry:0.25, sx:1.0,  sy:1.1,  ph:3.8, a:0.14, dr:0.28 },
-            { hue:15,  sat:55, li:40, x:0.3,  y:0.8,  rx:0.25, ry:0.3,  sx:0.9,  sy:0.8,  ph:5.5, a:0.12, dr:0.2  }
+            // Sunset Gradient: peach -> magenta -> violet
+            { hue:15,  sat:80, li:60, x:0.25, y:0.35, rx:0.6,  ry:0.35, sx:0.7,  sy:0.5,  ph:0,   a:0.28, dr:0.2  },
+            { hue:340, sat:70, li:48, x:0.75, y:0.25, rx:0.5,  ry:0.4,  sx:0.5,  sy:0.6,  ph:1.8, a:0.22, dr:0.18 },
+            { hue:280, sat:65, li:45, x:0.5,  y:0.55, rx:0.55, ry:0.35, sx:0.8,  sy:0.4,  ph:3.2, a:0.20, dr:0.22 },
+            { hue:350, sat:75, li:55, x:0.15, y:0.65, rx:0.4,  ry:0.3,  sx:0.6,  sy:0.7,  ph:4.8, a:0.15, dr:0.15 },
+            { hue:25,  sat:85, li:58, x:0.85, y:0.5,  rx:0.45, ry:0.5,  sx:0.4,  sy:0.55, ph:2.5, a:0.24, dr:0.2  },
+            { hue:310, sat:60, li:42, x:0.4,  y:0.2,  rx:0.3,  ry:0.2,  sx:1.2,  sy:0.9,  ph:0.5, a:0.16, dr:0.25 },
+            { hue:0,   sat:70, li:52, x:0.6,  y:0.7,  rx:0.35, ry:0.25, sx:1.0,  sy:1.1,  ph:3.8, a:0.14, dr:0.28 },
+            { hue:265, sat:55, li:40, x:0.3,  y:0.8,  rx:0.25, ry:0.3,  sx:0.9,  sy:0.8,  ph:5.5, a:0.12, dr:0.2  }
         ];
 
         function draw() {
@@ -752,6 +794,55 @@
         });
     });
 
+    
+
+    // ===== MOBILE BOTTOM SHEET =====
+    (function() {
+        var sheet = document.getElementById('mobileSheet');
+        if (!sheet) return;
+        var isMobile = window.innerWidth <= 1024;
+        window.addEventListener('resize', function() { isMobile = window.innerWidth <= 1024; });
+
+        document.querySelectorAll('.work-item').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                if (!isMobile) return; // desktop uses hover detail
+                var idx = parseInt(item.dataset.idx);
+                var p = P[idx];
+                if (!p) return;
+                document.getElementById('msScope').textContent = p.s;
+                document.getElementById('msTitle').textContent = p.t;
+                document.getElementById('msMeta').textContent = p.c + ' - ' + p.y;
+                document.getElementById('msDesc').textContent = p.d;
+                var link = document.getElementById('msLink');
+                if (p.l) { link.href = p.l; link.style.display = 'inline-flex'; }
+                else { link.style.display = 'none'; }
+                sheet.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+
+        // Close on overlay tap or swipe down
+        sheet.addEventListener('click', function(e) {
+            if (e.target === sheet) sheet.classList.remove('active');
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') sheet.classList.remove('active');
+        });
+    })();
+
     </script>
-</body>
+
+    <!-- Mobile bottom sheet -->
+    <div class="mobile-sheet-overlay" id="mobileSheet">
+        <div class="mobile-sheet">
+            <div class="mobile-sheet-handle"></div>
+            <div class="ms-scope" id="msScope"></div>
+            <div class="ms-title" id="msTitle"></div>
+            <div class="ms-meta" id="msMeta"></div>
+            <div class="ms-desc" id="msDesc"></div>
+            <a href="#" class="ms-link" id="msLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
+        </div>
+    </div>
+
+    </body>
 </html>
