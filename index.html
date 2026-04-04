@@ -620,7 +620,7 @@
             detail.style.top = Math.min(y, window.innerHeight - 280) + 'px';
         });
         item.addEventListener('mouseleave', () => { detail.classList.remove('visible'); currentIdx = -1; });
-        item.addEventListener('click', () => { const p = P[parseInt(item.dataset.idx)]; if (p.l) window.open(p.l, '_blank'); });
+        item.addEventListener('click', function() { if (window.innerWidth <= 1024) return; var p = P[parseInt(item.dataset.idx)]; if (p.l) window.open(p.l, '_blank'); });
     });
 
     // ===== THEME TOGGLE =====
