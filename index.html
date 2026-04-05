@@ -200,8 +200,9 @@
         .mobile-sheet .ms-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
         .mobile-sheet .ms-meta { font-size: 0.82rem; color: var(--fg-muted); margin-bottom: 18px; }
         .mobile-sheet .ms-desc { font-size: 0.9rem; color: var(--fg-muted); line-height: 1.75; margin-bottom: 20px; }
-        .mobile-sheet .ms-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 500; color: var(--fg); transition: gap 0.3s; }
+        .mobile-sheet .ms-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 500; color: var(--fg); transition: gap 0.3s; pointer-events: auto; position: relative; z-index: 10; padding: 12px 0; }
         .mobile-sheet .ms-link:hover { gap: 10px; }
+        .mobile-sheet .ms-link::after { content: ''; position: absolute; inset: -8px; }
 
         /* Theme toggle */
         .nav-right { display: flex; align-items: center; gap: 12px; }
@@ -344,7 +345,7 @@
         <div class="wd-title" id="wdTitle"></div>
         <div class="wd-meta" id="wdMeta"></div>
         <div class="wd-desc" id="wdDesc"></div>
-        <a href="#" class="wd-link" id="wdLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
+        <a href="javascript:void(0)" class="wd-link" id="wdLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
     </div>
 
     <!-- NAV -->
@@ -482,7 +483,7 @@
             <div class="ms-title" id="msTitle"></div>
             <div class="ms-meta" id="msMeta"></div>
             <div class="ms-desc" id="msDesc"></div>
-            <a href="#" class="ms-link" id="msLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
+            <a href="javascript:void(0)" class="ms-link" id="msLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
         </div>
     </div>
 
@@ -545,9 +546,12 @@
 
     // SMOOTH SCROLL
     document.querySelectorAll('a[href^="#"]').forEach(a => {
+        if (a.getAttribute('target') === '_blank') return;
         a.addEventListener('click', e => {
+            var href = a.getAttribute('href');
+            if (!href || href.length < 2 || !href.startsWith('#')) return;
             e.preventDefault();
-            const t = document.querySelector(a.getAttribute('href'));
+            var t = document.querySelector(href);
             if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
@@ -620,6 +624,8 @@
         var sheet = document.getElementById('mobileSheet');
         if (!sheet) return;
         sheet.addEventListener('click', function(e) { if (e.target === sheet) sheet.classList.remove('active'); });
+        var innerSheet = sheet.querySelector('.mobile-sheet');
+        if (innerSheet) innerSheet.addEventListener('click', function(e) { e.stopPropagation(); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') sheet.classList.remove('active'); });
     })();
 
