@@ -88,7 +88,7 @@
         .work-item:hover { padding-left: 16px; }
         .work-item:hover .work-title { color: var(--fg); }
         .work-item:hover .work-arrow { opacity: 1; transform: translateX(0); }
-        .work-title { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 400; color: var(--fg-muted); transition: color 0.3s; letter-spacing: -0.3px; }
+        .work-title { font-family: var(--font-sans); font-size: 1.15rem; font-weight: 600; color: var(--fg-muted); transition: color 0.3s; letter-spacing: -0.2px; }
         .work-client { font-size: 0.78rem; color: var(--fg-dim); min-width: 120px; text-align: right; }
         .work-arrow { font-size: 0.9rem; color: var(--fg-dim); opacity: 0; transform: translateX(-8px); transition: all 0.3s; }
 
@@ -179,61 +179,43 @@
             .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
         }
     
-        /* Theme toggle button */
-        .nav-right { display: flex; align-items: center; gap: 12px; }
-        .theme-toggle {
-            width: 36px; height: 36px; border-radius: 50%;
-            border: 0.6px solid rgba(255,255,255,0.25); background: transparent;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; color: rgba(255,255,255,0.5); transition: all 0.3s;
-        }
-        .theme-toggle:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
-
-        /* Smooth transitions for theme switch */
-        body, .hero, nav, .pill-inner, .work-detail, footer, .divider,
-        .section-heading, .section-eyebrow, .section-body,
-        .expertise-item, .work-item, .thought-item, .cta-heading,
-        .footer-brand, .footer-cta p, .footer-email, .footer-copy,
-        .nav-brand, .nav-links a, .filter-tab { transition: color 0.4s, background 0.4s, border-color 0.4s; }
-
-        /* Thoughts section */
+        /* Thoughts */
         .thoughts-list { margin-top: 64px; }
-        .thought-item {
-            display: grid; grid-template-columns: 100px 1fr auto;
-            gap: 32px; align-items: center;
-            padding: 32px 0; border-top: 1px solid var(--fg-faint);
-            transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit;
-        }
+        .thought-item { display: grid; grid-template-columns: 100px 1fr auto; gap: 32px; align-items: center; padding: 32px 0; border-top: 1px solid var(--fg-faint); transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit; }
         .thought-item:last-child { border-bottom: 1px solid var(--fg-faint); }
         .thought-item:hover { padding-left: 16px; }
         .thought-item:hover .thought-title { color: var(--fg); }
         .thought-item:hover .thought-arrow { opacity: 1; transform: translateX(0); }
         .thought-date { font-size: 0.75rem; color: var(--fg-dim); font-weight: 500; }
-        .thought-title {
-            font-family: var(--font-serif); font-size: 1.25rem; font-weight: 400;
-            color: var(--fg-muted); transition: color 0.3s; letter-spacing: -0.3px;
-        }
+        .thought-title { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 600; color: var(--fg-muted); transition: color 0.3s; letter-spacing: -0.2px; }
         .thought-arrow { font-size: 0.9rem; color: var(--fg-dim); opacity: 0; transform: translateX(-8px); transition: all 0.3s; }
 
-        /* ===== LIGHT MODE ===== */
+        /* Mobile bottom sheet */
+        .mobile-sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .mobile-sheet-overlay.active { opacity: 1; pointer-events: auto; }
+        .mobile-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-top: 1px solid rgba(255,255,255,0.08); border-radius: 20px 20px 0 0; z-index: 2001; padding: 32px 28px 40px; max-height: 70vh; overflow-y: auto; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .mobile-sheet-overlay.active .mobile-sheet { transform: translateY(0); }
+        .mobile-sheet-handle { width: 36px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 auto 24px; }
+        .mobile-sheet .ms-scope { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); margin-bottom: 10px; }
+        .mobile-sheet .ms-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
+        .mobile-sheet .ms-meta { font-size: 0.82rem; color: var(--fg-muted); margin-bottom: 18px; }
+        .mobile-sheet .ms-desc { font-size: 0.9rem; color: var(--fg-muted); line-height: 1.75; margin-bottom: 20px; }
+        .mobile-sheet .ms-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 500; color: var(--fg); transition: gap 0.3s; }
+        .mobile-sheet .ms-link:hover { gap: 10px; }
+
+        /* Theme toggle */
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+        .theme-toggle { width: 36px; height: 36px; border-radius: 50%; border: 0.6px solid rgba(255,255,255,0.25); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: rgba(255,255,255,0.5); transition: all 0.3s; }
+        .theme-toggle:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
 
         /* ===== LIGHT MODE ===== */
         [data-theme="light"] { --bg: #fafaf8; --fg: #1d1d1f; --fg-muted: rgba(29,29,31,0.55); --fg-dim: rgba(29,29,31,0.3); --fg-faint: rgba(29,29,31,0.08); }
-
-        /* Hero STAYS DARK in light mode */
         [data-theme="light"] .hero { background: #000; }
         [data-theme="light"] .hero-heading { color: #fff; }
         [data-theme="light"] .hero-heading em { color: rgba(255,255,255,0.5); }
         [data-theme="light"] .hero-sub { color: rgba(255,255,255,0.5); }
         [data-theme="light"] .hero-scroll { color: rgba(255,255,255,0.25); }
         [data-theme="light"] .hero-scroll::after { background: rgba(255,255,255,0.25); }
-        [data-theme="light"] .hero .pill { border-color: rgba(255,255,255,0.35); }
-        [data-theme="light"] .hero .pill-inner { background: #000; color: #fff; }
-        [data-theme="light"] .hero .pill:hover .pill-inner { background: #111; }
-        [data-theme="light"] .hero .pill-white .pill-inner { background: #fff; color: #000; }
-        [data-theme="light"] .hero .pill-white:hover .pill-inner { background: #e8e8e8; }
-
-        /* Nav: white text over dark hero, then dark text when scrolled past */
         [data-theme="light"] .nav-brand { color: #fff; }
         [data-theme="light"] .nav-links a { color: rgba(255,255,255,0.5); }
         [data-theme="light"] .nav-links a:hover { color: #fff; }
@@ -243,24 +225,17 @@
         [data-theme="light"] nav.scrolled .nav-links a:hover { color: #1d1d1f; }
         [data-theme="light"] nav.scrolled .pill { border-color: rgba(0,0,0,0.15); }
         [data-theme="light"] nav.scrolled .pill-inner { background: #fafaf8; color: #1d1d1f; }
-        [data-theme="light"] nav.scrolled .pill:hover .pill-inner { background: #f0f0ee; }
         [data-theme="light"] nav.scrolled .theme-toggle { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.35); }
         [data-theme="light"] nav.scrolled .theme-toggle:hover { border-color: rgba(0,0,0,0.25); color: #1d1d1f; }
-
-        /* Content sections */
         [data-theme="light"] .section-eyebrow { color: #0071e3; }
         [data-theme="light"] .section-heading { color: #1d1d1f; }
         [data-theme="light"] .section-heading em { color: rgba(29,29,31,0.4); }
         [data-theme="light"] .section-body { color: rgba(29,29,31,0.6); }
         [data-theme="light"] .divider { background: rgba(0,0,0,0.06); }
-
-        /* Expertise */
         [data-theme="light"] .expertise-item { border-color: rgba(0,0,0,0.06); }
         [data-theme="light"] .expertise-num { color: #0071e3; }
         [data-theme="light"] .expertise-item h3 { color: #1d1d1f; }
         [data-theme="light"] .expertise-item p { color: rgba(29,29,31,0.55); }
-
-        /* Work filters */
         [data-theme="light"] .filter-tab { color: rgba(29,29,31,0.35); border-color: rgba(0,0,0,0.1); }
         [data-theme="light"] .filter-tab:hover { color: rgba(29,29,31,0.6); border-color: rgba(0,0,0,0.2); }
         [data-theme="light"] .filter-tab.active { color: #0071e3; background: rgba(0,113,227,0.06); border-color: rgba(0,113,227,0.2); }
@@ -277,21 +252,13 @@
         [data-theme="light"] .work-detail .wd-meta { color: rgba(29,29,31,0.45); }
         [data-theme="light"] .work-detail .wd-desc { color: rgba(29,29,31,0.6); }
         [data-theme="light"] .work-detail .wd-link { color: #0071e3; }
-
-        /* Thoughts */
         [data-theme="light"] .thought-item { border-color: rgba(0,0,0,0.06); }
         [data-theme="light"] .thought-date { color: rgba(29,29,31,0.3); }
         [data-theme="light"] .thought-title { color: rgba(29,29,31,0.55); }
         [data-theme="light"] .thought-item:hover .thought-title { color: #1d1d1f; }
-        [data-theme="light"] .thought-arrow { color: rgba(29,29,31,0.2); }
-
-        /* CTA */
         [data-theme="light"] .cta-heading { color: #1d1d1f; }
         [data-theme="light"] .cta-heading em { color: rgba(29,29,31,0.4); }
         [data-theme="light"] .cta-section .pill-white .pill-inner { background: #1d1d1f; color: #fff; }
-        [data-theme="light"] .cta-section .pill-white:hover .pill-inner { background: #333; }
-
-        /* Footer */
         [data-theme="light"] footer { border-color: rgba(0,0,0,0.06); }
         [data-theme="light"] .footer-brand { color: #1d1d1f; }
         [data-theme="light"] .footer-cta p { color: #1d1d1f; }
@@ -303,84 +270,70 @@
         [data-theme="light"] .footer-bottom { border-color: rgba(0,0,0,0.06); }
         [data-theme="light"] .menu-btn span { background: #fff; }
         [data-theme="light"] nav.scrolled .menu-btn span { background: #1d1d1f; }
-
-        /* Theme toggle */
-        .nav-right { display: flex; align-items: center; gap: 12px; }
-        .theme-toggle {
-            width: 36px; height: 36px; border-radius: 50%;
-            border: 0.6px solid rgba(255,255,255,0.25); background: transparent;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; color: rgba(255,255,255,0.5); transition: all 0.3s;
-        }
-        .theme-toggle:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
-
-        /* Smooth transitions */
-        body, nav, .divider, .pill-inner, .work-detail, footer { transition: background 0.4s, color 0.4s, border-color 0.4s; }
-    
-    
-        /* Mobile menu - light mode fix */
-        [data-theme="light"] .nav-links.active {
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom-color: rgba(0,0,0,0.06);
-        }
-        [data-theme="light"] .nav-links.active a {
-            color: rgba(29,29,31,0.6) !important;
-        }
-        [data-theme="light"] .nav-links.active a:hover {
-            color: #1d1d1f !important;
-        }
-        [data-theme="light"] .nav-links.active .pill {
-            border-color: rgba(0,0,0,0.15);
-        }
-        [data-theme="light"] .nav-links.active .pill-inner {
-            background: #f5f5f5;
-            color: #1d1d1f;
-        }
-
-    
-        /* Mobile bottom sheet for project details */
-        .mobile-sheet-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-            z-index: 2000; opacity: 0; pointer-events: none;
-            transition: opacity 0.3s;
-        }
-        .mobile-sheet-overlay.active { opacity: 1; pointer-events: auto; }
-
-        .mobile-sheet {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: #111; border-top: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px 20px 0 0; z-index: 2001;
-            padding: 32px 28px 40px; max-height: 70vh; overflow-y: auto;
-            transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-        }
-        .mobile-sheet-overlay.active .mobile-sheet { transform: translateY(0); }
         [data-theme="light"] .mobile-sheet { background: #fff; border-color: rgba(0,0,0,0.08); }
-
-        .mobile-sheet-handle {
-            width: 36px; height: 4px; background: rgba(255,255,255,0.2);
-            border-radius: 2px; margin: 0 auto 24px;
-        }
         [data-theme="light"] .mobile-sheet-handle { background: rgba(0,0,0,0.15); }
-
-        .mobile-sheet .ms-scope {
-            font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 0.12em; color: var(--fg-dim); margin-bottom: 10px;
-        }
-        .mobile-sheet .ms-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
-        .mobile-sheet .ms-meta { font-size: 0.82rem; color: var(--fg-muted); margin-bottom: 18px; }
-        .mobile-sheet .ms-desc { font-size: 0.9rem; color: var(--fg-muted); line-height: 1.75; margin-bottom: 20px; }
-        .mobile-sheet .ms-link {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 0.85rem; font-weight: 500; color: var(--fg);
-            transition: gap 0.3s;
-        }
-        .mobile-sheet .ms-link:hover { gap: 10px; }
         [data-theme="light"] .mobile-sheet .ms-title { color: #1d1d1f; }
         [data-theme="light"] .mobile-sheet .ms-link { color: #0071e3; }
+        [data-theme="light"] .nav-links.active { background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        [data-theme="light"] .nav-links.active a { color: rgba(29,29,31,0.6) !important; }
+        [data-theme="light"] .nav-links.active a:hover { color: #1d1d1f !important; }
+        body, nav, .divider, footer { transition: background 0.4s, color 0.4s, border-color 0.4s; }
+    
+    
+        /* Section depth - alternating dark tones */
+        .section:nth-of-type(odd) { background: rgba(255,255,255,0.025); }
+        .section:nth-of-type(even) { background: transparent; }
 
+        /* Gradient-tinted dividers */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255,160,80,0.3) 20%, 
+                rgba(255,100,60,0.35) 50%, 
+                rgba(180,80,160,0.25) 80%, 
+                transparent 100%) !important;
+        }
+
+        /* Section edge glows */
+        .section-glow {
+            position: relative;
+        }
+        .section-glow::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            opacity: 0.12;
+        }
+        .glow-right::before {
+            right: -150px; top: 15%;
+            background: radial-gradient(circle, rgba(255,140,50,1) 0%, transparent 65%);
+        }
+        .glow-left::before {
+            left: -150px; bottom: 5%;
+            background: radial-gradient(circle, rgba(200,80,120,0.9) 0%, transparent 65%);
+        }
+        .glow-center::before {
+            left: 50%; top: -100px;
+            transform: translateX(-50%);
+            width: 800px; height: 400px;
+            background: radial-gradient(ellipse, rgba(255,120,60,0.8) 0%, transparent 65%);
+        }
+    
+    
+        [data-theme="light"] .divider {
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(200,120,50,0.2) 20%, 
+                rgba(180,80,60,0.25) 50%, 
+                rgba(140,60,120,0.18) 80%, 
+                transparent 100%) !important;
+        }
+        [data-theme="light"] .section-glow::before { opacity: 0.08; }
+    
     </style>
 </head>
 <body>
@@ -427,7 +380,7 @@
     <div class="divider"></div>
 
     <!-- ABOUT -->
-    <section class="section" id="about">
+    <section class="section section-glow glow-right" id="about">
         <div class="about-section">
             <div class="reveal">
                 <p class="section-eyebrow">About</p>
@@ -448,7 +401,7 @@
     <div class="divider"></div>
 
     <!-- WORK -->
-    <section class="section" id="work">
+    <section class="section section-glow glow-left" id="work">
         <div class="reveal">
             <p class="section-eyebrow">Selected Work</p>
             <h2 class="section-heading">Trusted by<br><em>leading brands</em><br>across industries.</h2>
@@ -495,25 +448,25 @@
     <div class="divider"></div>
 
     <!-- THOUGHTS -->
-    <section class="section" id="thoughts">
+    <section class="section section-glow glow-center" id="thoughts">
         <div class="reveal">
             <p class="section-eyebrow">Thoughts</p>
             <h2 class="section-heading">Recent<br><em>writing.</em></h2>
         </div>
         <div class="thoughts-list">
-            <a href="https://www.linkedin.com/posts/dylanlamwork_amazonads-generativeai-creativestrategy-activity-7435508959567945729-hKDL?utm_source=share&utm_medium=member_desktop&rcm=ACoAACjdIvkBs1YMGILOE-pjm8-i0-P32d-tMF4" target="_blank" class="thought-item reveal">
+            <a href="https://www.linkedin.com/posts/dylanlamwork_amazonads-generativeai-creativestrategy-activity-7435508959567945729-hKDL?utm_source=share&utm_medium=member_desktop" target="_blank" class="thought-item reveal">
                 <span class="thought-date">Nov 2025</span>
                 <span class="thought-title">Making AI creative generation accessible for everyone</span>
                 <span class="thought-arrow">&nearr;</span>
             </a>
-            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-ownership-earntrust-activity-7359058206247018496-xImq?utm_source=share&utm_medium=member_desktop&rcm=ACoAACjdIvkBs1YMGILOE-pjm8-i0-P32d-tMF4" target="_blank" class="thought-item reveal rd1">
+            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-ownership-earntrust-activity-7359058206247018496-xImq?utm_source=share&utm_medium=member_desktop" target="_blank" class="thought-item reveal rd1">
                 <span class="thought-date">Aug 2025</span>
                 <span class="thought-title">Interview vs. Reality: My first year at Amazon</span>
                 <span class="thought-arrow">&nearr;</span>
             </a>
             <a href="https://www.linkedin.com/posts/dylanlamwork_sales-diarypov-advertising-activity-7320280215987851264-UuWm" target="_blank" class="thought-item reveal rd2">
                 <span class="thought-date">Apr 2025</span>
-                <span class="thought-title">Making others' jobs sasier</span>
+                <span class="thought-title">Making others' jobs easier</span>
                 <span class="thought-arrow">&nearr;</span>
             </a>
         </div>
@@ -521,8 +474,20 @@
 
     <div class="divider"></div>
 
+    <!-- Mobile bottom sheet -->
+    <div class="mobile-sheet-overlay" id="mobileSheet">
+        <div class="mobile-sheet">
+            <div class="mobile-sheet-handle"></div>
+            <div class="ms-scope" id="msScope"></div>
+            <div class="ms-title" id="msTitle"></div>
+            <div class="ms-meta" id="msMeta"></div>
+            <div class="ms-desc" id="msDesc"></div>
+            <a href="#" class="ms-link" id="msLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
+        </div>
+    </div>
+
     <!-- CTA -->
-    <section class="cta-section" id="contact">
+    <section class="cta-section section-glow glow-center" id="contact">
         <div class="reveal">
             <h2 class="cta-heading">Ready to<br><em>build something</em><br>that matters?</h2>
             <a href="mailto:dylanlamwork@gmail.com" class="pill pill-white"><span class="pill-inner">Get in Touch</span></a>
@@ -620,26 +585,45 @@
             detail.style.top = Math.min(y, window.innerHeight - 280) + 'px';
         });
         item.addEventListener('mouseleave', () => { detail.classList.remove('visible'); currentIdx = -1; });
-        item.addEventListener('click', function() { if (window.innerWidth <= 1024) return; var p = P[parseInt(item.dataset.idx)]; if (p.l) window.open(p.l, '_blank'); });
+        item.addEventListener('click', function() {
+                var idx = parseInt(item.dataset.idx);
+                var p = P[idx]; if (!p) return;
+                if (window.innerWidth <= 1024) {
+                    var sheet = document.getElementById('mobileSheet');
+                    if (!sheet) return;
+                    document.getElementById('msScope').textContent = p.s;
+                    document.getElementById('msTitle').textContent = p.t;
+                    document.getElementById('msMeta').textContent = p.c + ' - ' + p.y;
+                    document.getElementById('msDesc').textContent = p.d;
+                    var lnk = document.getElementById('msLink');
+                    if (p.l) { lnk.href = p.l; lnk.style.display = 'inline-flex'; } else { lnk.style.display = 'none'; }
+                    sheet.classList.add('active');
+                } else { if (p.l) window.open(p.l, '_blank'); }
+            });
     });
 
     // ===== THEME TOGGLE =====
     (function() {
-        var h = document.documentElement;
-        var b = document.getElementById('themeToggle');
+        var h = document.documentElement, b = document.getElementById('themeToggle');
         var s = localStorage.getItem('theme');
         if (s) h.setAttribute('data-theme', s);
         function ic() { if (b) b.innerHTML = h.getAttribute('data-theme') === 'light' ? '&#9790;' : '&#9788;'; }
         ic();
         if (b) b.addEventListener('click', function() {
             var n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            h.setAttribute('data-theme', n);
-            localStorage.setItem('theme', n);
-            ic();
+            h.setAttribute('data-theme', n); localStorage.setItem('theme', n); ic();
         });
     })();
 
-    // ===== AURORA GRADIENTS (Apple palette) =====
+    // ===== MOBILE SHEET CLOSE =====
+    (function() {
+        var sheet = document.getElementById('mobileSheet');
+        if (!sheet) return;
+        sheet.addEventListener('click', function(e) { if (e.target === sheet) sheet.classList.remove('active'); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') sheet.classList.remove('active'); });
+    })();
+
+    // ===== AURORA GRADIENTS (Sunset) =====
     (function() {
         var canvas = document.getElementById('auroraCanvas');
         if (!canvas) return;
@@ -659,109 +643,69 @@
         window.addEventListener('resize', resize);
 
         var blobs = [
-            // Sunset Gradient: peach -> magenta -> violet
-            { hue:15,  sat:80, li:60, x:0.25, y:0.35, rx:0.6,  ry:0.35, sx:0.7,  sy:0.5,  ph:0,   a:0.28, dr:0.2  },
-            { hue:340, sat:70, li:48, x:0.75, y:0.25, rx:0.5,  ry:0.4,  sx:0.5,  sy:0.6,  ph:1.8, a:0.22, dr:0.18 },
-            { hue:280, sat:65, li:45, x:0.5,  y:0.55, rx:0.55, ry:0.35, sx:0.8,  sy:0.4,  ph:3.2, a:0.20, dr:0.22 },
-            { hue:350, sat:75, li:55, x:0.15, y:0.65, rx:0.4,  ry:0.3,  sx:0.6,  sy:0.7,  ph:4.8, a:0.15, dr:0.15 },
-            { hue:25,  sat:85, li:58, x:0.85, y:0.5,  rx:0.45, ry:0.5,  sx:0.4,  sy:0.55, ph:2.5, a:0.24, dr:0.2  },
-            { hue:310, sat:60, li:42, x:0.4,  y:0.2,  rx:0.3,  ry:0.2,  sx:1.2,  sy:0.9,  ph:0.5, a:0.16, dr:0.25 },
-            { hue:0,   sat:70, li:52, x:0.6,  y:0.7,  rx:0.35, ry:0.25, sx:1.0,  sy:1.1,  ph:3.8, a:0.14, dr:0.28 },
-            { hue:265, sat:55, li:40, x:0.3,  y:0.8,  rx:0.25, ry:0.3,  sx:0.9,  sy:0.8,  ph:5.5, a:0.12, dr:0.2  }
+            // True sunrise: warm horizon bottom, gold mid, navy top
+            { hue:20,  sat:90, li:50, x:0.3,  y:0.7,  rx:0.7,  ry:0.3,  sx:0.5,  sy:0.3,  ph:0,   a:0.30, dr:0.15 },
+            { hue:35,  sat:85, li:55, x:0.6,  y:0.6,  rx:0.6,  ry:0.3,  sx:0.6,  sy:0.4,  ph:1.5, a:0.26, dr:0.18 },
+            { hue:10,  sat:80, li:45, x:0.8,  y:0.75, rx:0.5,  ry:0.25, sx:0.4,  sy:0.35, ph:3.0, a:0.22, dr:0.12 },
+            { hue:45,  sat:88, li:58, x:0.5,  y:0.5,  rx:0.55, ry:0.35, sx:0.7,  sy:0.5,  ph:2.2, a:0.24, dr:0.2  },
+            { hue:5,   sat:75, li:40, x:0.15, y:0.8,  rx:0.4,  ry:0.25, sx:0.5,  sy:0.6,  ph:4.0, a:0.18, dr:0.1  },
+            { hue:220, sat:50, li:25, x:0.4,  y:0.15, rx:0.6,  ry:0.3,  sx:0.3,  sy:0.25, ph:1.0, a:0.16, dr:0.15 },
+            { hue:240, sat:40, li:20, x:0.7,  y:0.1,  rx:0.5,  ry:0.25, sx:0.35, sy:0.3,  ph:5.0, a:0.12, dr:0.12 },
+            { hue:30,  sat:82, li:52, x:0.2,  y:0.55, rx:0.35, ry:0.2,  sx:0.9,  sy:0.7,  ph:3.5, a:0.20, dr:0.22 }
         ];
 
         function draw() {
             time += 0.012;
             mouseX += (targetMX - mouseX) * 0.04;
             mouseY += (targetMY - mouseY) * 0.04;
-
             ctx.clearRect(0, 0, W, H);
-
-            // Background - theme aware
-            var isLight = false; // hero stays dark in both modes
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, W, H);
-
             ctx.globalCompositeOperation = 'screen';
 
             for (var i = 0; i < blobs.length; i++) {
-                var b = blobs[i];
-                var t = time + b.ph;
-
+                var b = blobs[i], t = time + b.ph;
                 var cx = b.x + Math.sin(t*b.sx*0.7)*b.dr + Math.cos(t*b.sx*0.4+1.3)*b.dr*0.6 + Math.sin(t*b.sx*1.1+2.7)*b.dr*0.3;
                 var cy = b.y + Math.cos(t*b.sy*0.6)*b.dr*0.8 + Math.sin(t*b.sy*0.35+0.8)*b.dr*0.5 + Math.cos(t*b.sy*0.9+1.9)*b.dr*0.3;
-
                 if (mouseActive) { cx += (mouseX-cx)*0.12; cy += (mouseY-cy)*0.10; }
                 cx = Math.max(-0.2, Math.min(1.2, cx));
                 cy = Math.max(-0.2, Math.min(1.2, cy));
-
                 var breathe = 1 + Math.sin(t*1.5)*0.22 + Math.sin(t*2.3)*0.12;
-                var rx = b.rx * W * breathe;
-                var ry = b.ry * H * breathe;
+                var rx = b.rx*W*breathe, ry = b.ry*H*breathe;
                 var hue = b.hue + Math.sin(t*0.4)*25 + Math.cos(t*0.7)*12;
-                var alpha = b.a * (0.8 + Math.sin(t*0.9+b.ph)*0.3) * (isLight ? 0.4 : 1);
-
-                var gx = cx*W, gy = cy*H, maxR = Math.max(rx, ry);
-                var grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, maxR);
+                var alpha = b.a * (0.8 + Math.sin(t*0.9+b.ph)*0.3);
+                var gx=cx*W, gy=cy*H, maxR=Math.max(rx,ry);
+                var grad = ctx.createRadialGradient(gx,gy,0,gx,gy,maxR);
                 var col = 'hsla('+Math.round(hue)+','+b.sat+'%,'+b.li+'%,';
                 grad.addColorStop(0, col+(alpha*1.5)+')');
                 grad.addColorStop(0.2, col+(alpha*1.2)+')');
                 grad.addColorStop(0.5, col+(alpha*0.6)+')');
                 grad.addColorStop(0.8, col+(alpha*0.2)+')');
                 grad.addColorStop(1, col+'0)');
-
                 ctx.save();
-                ctx.translate(gx, gy);
-                ctx.rotate(t*0.15 + b.ph);
-                ctx.scale(1, ry/Math.max(rx,1));
-                ctx.translate(-gx, -gy);
-                ctx.fillStyle = grad;
-                ctx.beginPath();
-                ctx.arc(gx, gy, rx, 0, Math.PI*2);
-                ctx.fill();
+                ctx.translate(gx,gy); ctx.rotate(t*0.15+b.ph); ctx.scale(1,ry/Math.max(rx,1)); ctx.translate(-gx,-gy);
+                ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(gx,gy,rx,0,Math.PI*2); ctx.fill();
                 ctx.restore();
             }
-
             ctx.globalCompositeOperation = 'source-over';
-
-            // Radial vignette
             var vig = ctx.createRadialGradient(W*0.5,H*0.5,W*0.2,W*0.5,H*0.5,W*0.8);
-            vig.addColorStop(0, 'rgba(0,0,0,0)');
-            vig.addColorStop(1, 'rgba(0,0,0,0.3)');
-            ctx.fillStyle = vig;
-            ctx.fillRect(0,0,W,H);
-
-            // Subtle horizontal striations
-            for (var j = 0; j < 3; j++) {
-                var bandY = H*(0.25+j*0.2) + Math.sin(time*0.5+j*2)*H*0.08;
-                var bandH = H*0.12 + Math.sin(time*0.7+j)*H*0.04;
-                var bg = ctx.createLinearGradient(0, bandY-bandH, 0, bandY+bandH);
-                bg.addColorStop(0,'rgba(255,255,255,0)');
-                bg.addColorStop(0.5,'rgba(255,255,255,0.018)');
-                bg.addColorStop(1,'rgba(255,255,255,0)');
-                ctx.fillStyle = bg;
-                ctx.fillRect(0, bandY-bandH, W, bandH*2);
+            vig.addColorStop(0,'rgba(0,0,0,0)'); vig.addColorStop(1,'rgba(0,0,0,0.3)');
+            ctx.fillStyle = vig; ctx.fillRect(0,0,W,H);
+            for (var j=0;j<3;j++) {
+                var bandY=H*(0.25+j*0.2)+Math.sin(time*0.5+j*2)*H*0.08;
+                var bandH=H*0.12+Math.sin(time*0.7+j)*H*0.04;
+                var bg=ctx.createLinearGradient(0,bandY-bandH,0,bandY+bandH);
+                bg.addColorStop(0,'rgba(255,255,255,0)'); bg.addColorStop(0.5,'rgba(255,255,255,0.018)'); bg.addColorStop(1,'rgba(255,255,255,0)');
+                ctx.fillStyle=bg; ctx.fillRect(0,bandY-bandH,W,bandH*2);
             }
-
             requestAnimationFrame(draw);
         }
         draw();
-
         var parent = canvas.parentElement;
-        parent.addEventListener('mousemove', function(e) {
-            var r = parent.getBoundingClientRect();
-            targetMX = (e.clientX-r.left)/r.width;
-            targetMY = (e.clientY-r.top)/r.height;
-            mouseActive = true;
-        });
-        parent.addEventListener('mouseleave', function() { mouseActive = false; });
-        parent.addEventListener('touchmove', function(e) {
-            var r = parent.getBoundingClientRect();
-            targetMX = (e.touches[0].clientX-r.left)/r.width;
-            targetMY = (e.touches[0].clientY-r.top)/r.height;
-            mouseActive = true;
-        }, { passive: true });
-        parent.addEventListener('touchend', function() { mouseActive = false; });
+        parent.addEventListener('mousemove', function(e) { var r=parent.getBoundingClientRect(); targetMX=(e.clientX-r.left)/r.width; targetMY=(e.clientY-r.top)/r.height; mouseActive=true; });
+        parent.addEventListener('mouseleave', function() { mouseActive=false; });
+        parent.addEventListener('touchmove', function(e) { var r=parent.getBoundingClientRect(); targetMX=(e.touches[0].clientX-r.left)/r.width; targetMY=(e.touches[0].clientY-r.top)/r.height; mouseActive=true; }, {passive:true});
+        parent.addEventListener('touchend', function() { mouseActive=false; });
     })();
     
     // WORK FILTER TABS
@@ -794,55 +738,6 @@
         });
     });
 
-    
-
-    // ===== MOBILE BOTTOM SHEET =====
-    (function() {
-        var sheet = document.getElementById('mobileSheet');
-        if (!sheet) return;
-        var isMobile = window.innerWidth <= 1024;
-        window.addEventListener('resize', function() { isMobile = window.innerWidth <= 1024; });
-
-        document.querySelectorAll('.work-item').forEach(function(item) {
-            item.addEventListener('click', function(e) {
-                if (!isMobile) return; // desktop uses hover detail
-                var idx = parseInt(item.dataset.idx);
-                var p = P[idx];
-                if (!p) return;
-                document.getElementById('msScope').textContent = p.s;
-                document.getElementById('msTitle').textContent = p.t;
-                document.getElementById('msMeta').textContent = p.c + ' - ' + p.y;
-                document.getElementById('msDesc').textContent = p.d;
-                var link = document.getElementById('msLink');
-                if (p.l) { link.href = p.l; link.style.display = 'inline-flex'; }
-                else { link.style.display = 'none'; }
-                sheet.classList.add('active');
-                e.stopPropagation();
-            });
-        });
-
-        // Close on overlay tap or swipe down
-        sheet.addEventListener('click', function(e) {
-            if (e.target === sheet) sheet.classList.remove('active');
-        });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') sheet.classList.remove('active');
-        });
-    })();
-
     </script>
-
-    <!-- Mobile bottom sheet -->
-    <div class="mobile-sheet-overlay" id="mobileSheet">
-        <div class="mobile-sheet">
-            <div class="mobile-sheet-handle"></div>
-            <div class="ms-scope" id="msScope"></div>
-            <div class="ms-title" id="msTitle"></div>
-            <div class="ms-meta" id="msMeta"></div>
-            <div class="ms-desc" id="msDesc"></div>
-            <a href="#" class="ms-link" id="msLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
-        </div>
-    </div>
-
-    </body>
+</body>
 </html>
