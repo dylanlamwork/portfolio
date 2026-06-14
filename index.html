@@ -1,987 +1,582 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head><style id="qw-theme">:root {
+  --color-bg: #faf9fc;
+  --color-text: #1a1a1a;
+  --color-navbar-bg: #f9f9fb;
+  --color-bg-chat-view: #fcfcfd;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f9fafb;
+  --color-bg-hover: #f3f4f6;
+  --color-surface: #f9fafb;
+  --color-surface-hover: #f3f4f6;
+  --color-surface-active: #e5e7eb;
+  --color-border: rgba(0, 0, 0, .12);
+  --color-border-light: rgba(0, 0, 0, .06);
+  --color-border-strong: #d1d5db;
+  --color-primary: #4200db;
+  --color-primary-dark: #35009e;
+  --color-primary-light: #8575ff;
+  --color-primary-bg: #e8e6ff;
+  --color-primary-hover-border: #35009e;
+  --color-nav-icon-active: #4200db;
+  --color-nav-hover-border: #4200db;
+  --color-primary-alpha-3: color-mix(in srgb, #4200db 3%, transparent);
+  --color-primary-alpha-5: color-mix(in srgb, #4200db 5%, transparent);
+  --color-primary-alpha-8: color-mix(in srgb, #4200db 8%, transparent);
+  --color-primary-alpha-12: color-mix(in srgb, #4200db 12%, transparent);
+  --color-primary-alpha-15: color-mix(in srgb, #4200db 15%, transparent);
+  --color-primary-alpha-20: color-mix(in srgb, #4200db 20%, transparent);
+  --color-primary-alpha-25: color-mix(in srgb, #4200db 25%, transparent);
+  --color-primary-alpha-30: color-mix(in srgb, #4200db 30%, transparent);
+  --color-primary-alpha-40: color-mix(in srgb, #4200db 40%, transparent);
+  --color-primary-alpha-50: color-mix(in srgb, #4200db 50%, transparent);
+  --color-primary-alpha-60: color-mix(in srgb, #4200db 60%, transparent);
+  --color-primary-subtle: color-mix(in srgb, #4200db 12%, transparent);
+  --color-primary-border: color-mix(in srgb, #4200db 30%, transparent);
+  --color-focus-ring: color-mix(in srgb, #4200db 50%, transparent);
+  --color-sidebar-hover: color-mix(in srgb, #4200db 12%, transparent);
+  --color-accent: #4200db;
+  --color-accent-foreground: #4200db;
+  --color-accent-dark: #35009e;
+  --color-accent-light: #e8e6ff;
+  --color-accent-inverse: #ffffff;
+  --color-link: #4200db;
+  --color-primary-gradient-end: #e8e6ff;
+  --color-primary-bg-solid: #e8e6ff;
+  --color-user-bubble: #F3F3F7;
+  --color-text-secondary: #5e5e5e;
+  --color-text-tertiary: #656871;
+  --color-text-muted: #9ca3af;
+  --color-text-on-primary: #ffffff;
+  --color-success: #00802f;
+  --color-success-dark: #00471e;
+  --color-success-light: #d9ffd6;
+  --color-success-hover: #005c26;
+  --color-success-bg: #e6f5eb;
+  --color-success-border: #b3d9bf;
+  --color-success-foreground: #00802f;
+  --color-success-dark-foreground: #00471e;
+  --color-success-text: #00471e;
+  --color-error: #db0000;
+  --color-error-dark: #700000;
+  --color-error-light: #ffe0e0;
+  --color-error-hover: #ffe0e0;
+  --color-error-bg: #fceaea;
+  --color-error-border: #f2cccc;
+  --color-error-active-border: #db0000;
+  --color-error-foreground: #db0000;
+  --color-error-dark-foreground: #700000;
+  --color-error-inverse: #ffffff;
+  --color-error-text: #700000;
+  --color-warning: #f2b100;
+  --color-warning-dark: #573a00;
+  --color-warning-light: #fffbbd;
+  --color-warning-hover: #db9200;
+  --color-warning-bg: #fef7e6;
+  --color-warning-border: #f9dfa3;
+  --color-warning-foreground: #f2b100;
+  --color-warning-dark-foreground: #573a00;
+  --color-warning-inverse: #573a00;
+  --color-surface-warning: #fffbbd;
+  --color-text-warning: #573a00;
+  --color-info: #006ce0;
+  --color-info-dark: #002a66;
+  --color-info-light: #d1f1ff;
+  --color-info-hover: #003b8f;
+  --color-info-bg: #ebf3fc;
+  --color-info-border: #b3d1f0;
+  --color-info-foreground: #006ce0;
+  --color-info-dark-foreground: #002a66;
+  --color-info-inverse: #ffffff;
+  --color-overlay: rgba(0, 0, 0, .5);
+  --color-shadow: rgba(0, 0, 0, .08);
+  --color-hover: rgba(0, 0, 0, .05);
+  --color-tooltip-bg: rgba(0, 0, 0, .85);
+  --color-tooltip-text: #ffffff;
+  --color-voice-purple: #8575ff;
+  --color-voice-purple-dark: #4200db;
+  --color-voice-purple-light: #8575ff;
+  --color-voice-red: #db0000;
+  --color-voice-red-dark: #700000;
+  --color-voice-amber: #f2b100;
+  --color-voice-purple-glow: rgba(66, 0, 219, .4);
+  --color-voice-red-glow: rgba(219, 0, 0, .4);
+  --font-sans: "Amazon Ember", "Helvetica Neue", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "Monaco", "Menlo", "Consolas", monospace;
+  --text-2xs: .5625rem;
+  --text-xs: .625rem;
+  --text-sm: .6875rem;
+  --text-base: .75rem;
+  --text-md: .8125rem;
+  --text-lg: .875rem;
+  --text-xl: 1rem;
+  --text-2xl: 1.125rem;
+  --text-3xl: 1.25rem;
+  --text-4xl: 1.5rem;
+  --text-5xl: 2rem;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-card: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 8px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, .08);
+  --color-success-bg-solid: #d9ffd6;
+  --color-error-bg-solid: #ffe0e0;
+  --color-error-border-solid: #ffe0e0;
+  --color-warning-bg-solid: #fffbbd;
+  --color-warning-text: #573a00;
+  --color-info-bg-solid: #d1f1ff;
+  --color-info-bg-solid-alt: #d1f1ff;
+  --color-info-text: #002a66;
+  --color-info-text-alt: #002a66;
+  --color-emerald: #10b981;
+  --color-teal: #4ecdc4;
+  --color-code-bg: #F3F3F7;
+  --color-code-header-bg: #f1f3f5;
+  --color-code-text: #24292e;
+  --color-code-border: #e1e4e8;
+  --color-code-muted: #6a737d;
+  --color-inline-code-bg: #F3F3F7;
+  --color-inline-code-text: #24292e;
+  --color-inline-code-border: #e1e4e8;
+  --color-scrollbar-thumb: #d1d5db;
+  --color-scrollbar-track: transparent;
+  --color-graph-node-text: #333333;
+  --color-graph-node-text-dim: #7F8C8D;
+  --color-graph-edge-default: #95A5A6;
+  --color-graph-edge-cross: #E67E22;
+  --color-graph-edge-text: #666666;
+  --color-graph-edge-stroke: #ffffff;
+  --color-graph-highlight-bg: #FF6B6B;
+  --color-graph-highlight-border: #E74C3C;
+  --color-graph-search-bg: #FFD700;
+  --color-graph-search-border: #FFA500;
+  --color-graph-focus-border: #C0392B;
+  --color-graph-external-border: #95A5A6;
+  --color-graph-cat-file: #3498DB;
+  --color-graph-cat-folder: #7F8C8D;
+  --color-graph-cat-file-aggregate: #2980B9;
+  --color-graph-cat-class: #9B59B6;
+  --color-graph-cat-function: #2ECC71;
+  --color-graph-cat-method: #1ABC9C;
+  --color-graph-cat-variable: #F39C12;
+  --color-graph-cat-import: #D35400;
+  --color-graph-cat-module: #5B6ABF;
+  --color-graph-cat-concept: #E74C3C;
+  --color-graph-cat-person: #FF6B6B;
+  --color-graph-cat-org: #4ECDC4;
+  --color-graph-cat-organization: #4ECDC4;
+  --color-graph-cat-product: #A29BFE;
+  --color-graph-cat-metric: #FD79A8;
+  --color-graph-cat-location: #34495E;
+  --color-graph-cat-date: #E056A0;
+  --color-graph-cat-code: #3498DB;
+  --color-graph-cat-doc: #7F8C8D;
+  --color-graph-cat-url: #00B894;
+  --color-graph-cat-email: #6C5CE7;
+  --color-graph-cat-unknown: #BDC3C7;
+  --color-graph-rel-contains: #BDC3C7;
+  --color-graph-rel-extends: #9B59B6;
+  --color-graph-rel-implements: #3498DB;
+  --color-graph-rel-imports: #E67E22;
+  --color-graph-rel-uses: #2ECC71;
+  --color-graph-rel-calls: #27AE60;
+  --color-graph-rel-references: #F39C12;
+  --color-graph-rel-related-to: #95A5A6;
+  --color-graph-rel-works-on: #E74C3C;
+  --color-graph-rel-owns: #1ABC9C;
+  --color-graph-rel-depends-on: #E67E22;
+  --color-graph-rel-parent-of: #BDC3C7;
+  --qs-content: #fff;
+  --qs-main: #fff;
+  --qs-primary-foreground: #131920;
+  --qs-secondary-foreground: #656871;
+  --qs-tertiary-foreground: #9ca3af;
+  --qs-placeholder-foreground: #8c8c94;
+  --qs-divider: #dedee3;
+  --qs-default-border: #8c8c94;
+  --qs-neutral-soft: #b4b4bb;
+  --qs-neutral-gray-50: #f9fafb;
+  --qs-tertiary-background: #f9fafb;
+  --qs-action-hover: #f3f3f7;
+  --qs-primary-default: #4200db;
+  --qs-primary-dark: #35009e;
+  --qs-primary-light: #e8e6ff;
+  --qs-success-default: #00802f;
+  --qs-error-default: #db0000;
+  --qs-font-sans: "Amazon Ember", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  --qs-font-family: "Amazon Ember", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  --qs-font-base-letter-spacing: .15px;
+  --qs-shadow-sm: 0 0 2px 0 #00000029, 0 0 4px 0 #00000029;
+  --qs-shadow-md: 0 0 2px 0 #00000029, 0 2px 8px 1px #00000029;
+  --qs-shadow-lg: 0 4px 16px 4px #00000029, 0 2px 6px 1px #00000029;
+  --qs-shadow-xl: 0 4px 8px 2px #00000029, 0 6px 20px 4px #00000029;
+  --qs-width-modal-sm: 384px;
+  --qs-width-modal-md: 600px;
+  --qs-width-modal-lg: 1136px;
+  --qs-grid-gap: 16px;
+  --qs-grid-gap-xl: 24px;
+  --qs-primary-medium: #8575ff;
+  --qs-primary-inverse: #fff;
+  --qs-neutral-lightest: #f9f9fb;
+  --qs-neutral-light: #f3f3f7;
+  --qs-neutral-default: #dedee3;
+  --qs-neutral-medium: #8c8c94;
+  --qs-neutral-deep: #656871;
+  --qs-neutral-dark: #333843;
+  --qs-neutral-strong: #131920;
+  --qs-neutral-white: #fff;
+  --qs-neutral-black: #000;
+  --qs-success-medium: #005c26;
+  --qs-success-dark: #00471e;
+  --qs-success-light: #d9ffd6;
+  --qs-success-inverse: #fff;
+  --qs-info-default: #006ce0;
+  --qs-info-medium: #003b8f;
+  --qs-info-dark: #002a66;
+  --qs-info-light: #d1f1ff;
+  --qs-info-inverse: #fff;
+  --qs-warning-default: #f2b100;
+  --qs-warning-medium: #db9200;
+  --qs-warning-dark: #573a00;
+  --qs-warning-light: #fffbbd;
+  --qs-warning-inverse: #573a00;
+  --qs-warning-experimental: #f2b100;
+  --qs-warning-experimental-light: #fffbbd;
+  --qs-warning-experimental-light-foreground: #fffbbd;
+  --qs-error-medium: #900;
+  --qs-error-dark: #700000;
+  --qs-error-light: #ffe0e0;
+  --qs-error-inverse: #fff;
+  --qs-connection-default: #db3300;
+  --qs-connection-soft: #ff997a;
+  --qs-connection-light: #ffe0d6;
+  --qs-connection-dark: #661800;
+  --qs-automation-default: #b3008f;
+  --qs-automation-medium: #d600ba;
+  --qs-automation-soft: #ff94f1;
+  --qs-automation-light: #ffe0fb;
+  --qs-automation-dark: #660052;
+  --qs-insight-default: #a000b8;
+  --qs-insight-soft: #f299ff;
+  --qs-insight-light: #fce6ff;
+  --qs-insight-dark: #590066;
+  --qs-visualization-default: #7300e5;
+  --qs-visualization-soft: #d4a8ff;
+  --qs-visualization-light: #f2e5ff;
+  --qs-visualization-dark: #45008a;
+  --qs-spice: #ff9800;
+  --qs-coachmark: #006ce0;
+  --qs-brand: #fff;
+  --qs-brand-foreground: #131920;
+  --qs-brand-navbar: #131920;
+  --qs-brand-navbar-foreground: #fff;
+  --qs-brand-navbar-light: #dedee3;
+  --qs-brand-navbar-dark: #000;
+  --qs-application-navbar: #4200db;
+  --qs-application-navbar-foreground: #fff;
+  --qs-application-navbar-light: #e8e6ff;
+  --qs-application-navbar-dark: #35009e;
+  --qs-dimension: #4200db;
+  --qs-dimension-foreground: #fff;
+  --qs-dimension-experimental: #4200db;
+  --qs-dimension-experimental-foreground: #4200db;
+  --qs-measure: #00802f;
+  --qs-measure-foreground: #fff;
+  --qs-measure-experimental: #f2b100;
+  --qs-measure-experimental-foreground: #f2b100;
+  --qs-content-inverse: #333843;
+  --qs-content-inverse-active: #131920;
+  --qs-secondary: #dedee3;
+  --qs-disabled: #8c8c94;
+  --qs-divider-light: #f3f3f7;
+  --qs-hover-border: #333843;
+  --qs-active-border: #4200db;
+  --qs-disabled-border: #dedee3;
+  --qs-error-border: #ffe0e0;
+  --qs-error-active-border: #db0000;
+  --qs-disabled-foreground: #b4b4bb;
+  --qs-primary-inverse-foreground: #fff;
+  --qs-error-foreground: #db0000;
+  --qs-contrast-foreground: #131920;
+  --qs-main-foreground: #131920;
+  --qs-action-disabled: #f3f3f7;
+  --qs-action-active: #e8e6ff;
+  --qs-default-badge: #b4b4bb;
+  --qs-tag-default: #dedee3;
+  --qs-tag-soft-border: #b4b4bb;
+  --qs-focus-offset: 1px;
+  --qs-toggle-tile-sm: calc(.25rem * 8);
+  --qs-toggle-tile-md: calc(.25rem * 12);
+  --qs-toggle-tile-lg: calc(.25rem * 15);
+  --qs-shadow-pin-right: inset 4px 0 4px -4px #00000029;
+  --qs-shadow-pin-left: inset -4px 0 4px -4px #00000029;
+  --react-pdf-text-layer: 1;
+  --highlight-bg-color: rgba(180, 0, 170, 1);
+  --highlight-selected-bg-color: rgba(0, 100, 0, 1);
+  --react-pdf-annotation-layer: 1;
+  --annotation-unfocused-field-background: url("data:image/svg+xml;charset=UTF-8,<svg width='1px' height='1px' xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' style='fill:rgba(0, 54, 255, 0.13);'/></svg>");
+  --input-focus-border-color: Highlight;
+  --input-focus-outline: 1px solid Canvas;
+  --input-unfocused-border-color: transparent;
+  --input-disabled-border-color: transparent;
+  --input-hover-border-color: black;
+  --link-outline: none;
+  color-scheme: light;
+}
+body { background: var(--color-bg); color: var(--color-text); }
+a { color: var(--color-link, var(--color-primary)); }</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dylan Lam</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%231d1d1f%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2223%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2221%22%20font-weight%3D%22600%22%20fill%3D%22%23D4A04A%22%20text-anchor%3D%22middle%22%3ED%3C%2Ftext%3E%3C%2Fsvg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="[REDACTED_CONN_STRING]://300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="[REDACTED_CONN_STRING]://300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg: #000000; --fg: #ffffff;
-            --fg-muted: rgba(255,255,255,0.5);
-            --fg-dim: rgba(255,255,255,0.25);
-            --fg-faint: rgba(255,255,255,0.08);
-            --font-sans: "General Sans", -apple-system, sans-serif;
-            --font-serif: "Instrument Serif", Georgia, serif;
-        }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
-        body { font-family: var(--font-sans); background: var(--bg); color: var(--fg); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-        a { color: inherit; text-decoration: none; }
-        ::selection { background: rgba(255,255,255,0.15); }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--fg:#111;--fg-80:#111c;--fg-60:#1119;--fg-40:#1116;--fg-20:#1113;--fg-10:#1111111a;--white:#fff;--bg:#f6f7f9;--blue:#0047cc;--blue-light:#e8f0ff;--font:"Inter",sans-serif;--heading:"DM Sans","Inter",sans-serif}
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font);color:var(--fg);background:var(--white);line-height:1.4;-webkit-font-smoothing:antialiased}
+        a{color:inherit;text-decoration:none}::selection{background:var(--blue-light)}
+        .container{max-width:1100px;margin:0 auto;padding:0 48px}
+        .nav-wrap{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--fg-10)}
+        nav{max-width:1100px;margin:0 auto;padding:18px 48px;display:flex;align-items:center;justify-content:space-between}
+        .nav-brand{font-size:18px;font-weight:600;letter-spacing:-0.03em}
+        .nav-links{display:flex;gap:28px;list-style:none}
+        .nav-links a{font-size:14px;font-weight:500;color:var(--fg-60);transition:color 0.2s}
+        .nav-links a:hover{color:var(--fg)}
+        .btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--font);font-size:14px;font-weight:500;padding:11px 22px;border-radius:100px;border:none;cursor:pointer;transition:all 0.2s}
+        .btn-primary{background:var(--blue);color:var(--white)}.btn-primary:hover{background:#003aa3}
+        .btn-secondary{background:var(--white);color:var(--fg);border:1.5px solid var(--fg-10)}.btn-secondary:hover{background:var(--bg)}
+        .btn-dark{background:var(--fg);color:var(--white)}.btn-dark:hover{background:#333}
+        .btn-sm{padding:9px 18px;font-size:13px}
+        .menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+        .menu-btn span{display:block;width:20px;height:2px;background:var(--fg);margin:4px 0;border-radius:1px}
+        .badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:6px 16px;border:1.5px solid var(--fg-20);border-radius:100px;margin-bottom:24px;color:var(--fg)}
+        .hero{padding:72px 0 56px;max-width:580px}
+        .hero h1{font-family:var(--heading);font-size:54px;font-weight:500;line-height:115%;letter-spacing:-0.03em;margin-bottom:20px}
+        .hero h1 span{color:var(--fg-40)}
+        .hero p{font-size:15px;line-height:150%;color:var(--fg-60);max-width:440px;margin-bottom:28px}
+        .hero-actions{display:flex;gap:10px}
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0}
+        .stat-value{font-family:var(--heading);font-size:44px;font-weight:500;letter-spacing:-0.03em;line-height:120%;margin-bottom:4px}
+        .stat-label{font-size:13px;color:var(--fg-60);line-height:140%;max-width:160px}
+        .section{padding:88px 0}
+        .section-heading{font-family:var(--heading);font-size:36px;font-weight:500;line-height:125%;letter-spacing:-0.03em;margin-bottom:14px;max-width:440px}
+        .section-desc{font-size:15px;line-height:150%;color:var(--fg-60);max-width:400px}
+        .expertise-top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-bottom:32px}
+        .expertise-img{width:100%;aspect-ratio:16/8;border-radius:20px;background:var(--bg);overflow:hidden;margin-bottom:28px;position:relative}
+        .expertise-btn{text-align:center}
 
-        /* Noise */
-        body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 256px; }
+        /* SILK FABRIC — Expertise */
+        .silk-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:linear-gradient(160deg,#f8f9fc,#eef1f8)}
+        .silk-canvas svg{position:absolute;width:200%;height:100%;animation:silkFlow 12s ease-in-out infinite}
+        .silk-canvas svg:nth-child(2){animation-duration:15s;animation-delay:1.5s}
+        .silk-canvas svg:nth-child(3){animation-duration:18s;animation-delay:3s}
+        @keyframes silkFlow{0%{transform:translateX(0) rotate(0deg)}50%{transform:translateX(-12%) rotate(0.3deg)}100%{transform:translateX(0) rotate(0deg)}}
 
-        /* NAV */
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; transition: all 0.5s cubic-bezier(0.16,1,0.3,1); }
-        nav.scrolled { padding: 18px 60px; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--fg-faint); }
-        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; letter-spacing: -0.02em; }
-        .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
-        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--fg-muted); transition: color 0.3s; }
-        .nav-links a:hover { color: var(--fg); }
+        /* GRADIENT BLOOM — Portfolio */
+        .bloom-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:#fafbfd}
+        .bloom-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:bloomFloat 8s ease infinite;mix-blend-mode:multiply}
+        @keyframes bloomFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(15px,-20px) scale(1.05)}66%{transform:translate(-10px,10px) scale(0.95)}}
+        .bloom-canvas-alt{background:#fafaff}
 
-        /* Pill button */
-        .pill { position: relative; border-radius: 980px; border: 0.6px solid rgba(255,255,255,0.35); padding: 1px; display: inline-flex; overflow: hidden; }
-        .pill::before { content: ''; position: absolute; top: -1px; left: 20%; right: 20%; height: 10px; background: radial-gradient(ellipse at center, rgba(255,255,255,0.25) 0%, transparent 70%); filter: blur(4px); z-index: 1; pointer-events: none; }
-        .pill-inner { position: relative; z-index: 2; background: #000; color: #fff; font-family: var(--font-sans); font-size: 0.82rem; font-weight: 500; padding: 10px 26px; border-radius: 980px; white-space: nowrap; transition: all 0.3s; }
-        .pill:hover .pill-inner { background: #111; }
-        .pill-white .pill-inner { background: #fff; color: #000; }
-        .pill-white:hover .pill-inner { background: #e8e8e8; }
+        /* SERVICES */
+        .services-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
+        .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .service-card{background:var(--bg);border-radius:20px;padding:28px 24px;transition:all 0.4s}
+        .service-card.highlight{background:var(--blue);color:#fff}
+        .service-card.highlight .service-icon{background:rgba(255,255,255,0.2)}
+        .service-card.highlight p{color:rgba(255,255,255,0.75)}
+        .service-icon{width:40px;height:40px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+        .service-icon svg{width:18px;height:18px;fill:#fff}
+        .service-card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+        .service-card p{font-size:13px;line-height:140%;color:var(--fg-60)}
+        .services-left .btn{margin-top:24px}
 
-        .menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-        .menu-btn span { display: block; width: 22px; height: 1.5px; background: #fff; margin: 5px 0; }
+        /* PORTFOLIO */
+        .portfolio-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px}
+        .portfolio-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+        .portfolio-card-img{width:100%;aspect-ratio:4/3;border-radius:20px;overflow:hidden;margin-bottom:16px}
+        .portfolio-card h3{font-size:16px;font-weight:600;margin-bottom:8px}
+        .portfolio-card p{font-size:13px;color:var(--fg-60);line-height:145%;margin-bottom:12px}
+        .portfolio-tags{display:flex;gap:8px;flex-wrap:wrap}
+        .portfolio-tag{font-size:11px;font-weight:500;color:var(--fg-60);border:1.5px solid var(--fg-10);padding:5px 12px;border-radius:100px}
 
-        /* HERO */
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 60px 80px; position: relative; z-index: 1; }
-        .page-aurora { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-        .page-aurora canvas { width: 100%; height: 100%; }
-        .hero-scroll { position: absolute; top: 50%; right: 60px; transform: translateY(-50%); writing-mode: vertical-rl; font-size: 0.72rem; font-weight: 500; color: var(--fg-dim); letter-spacing: 0.15em; text-transform: uppercase; }
-        .hero-scroll::after { content: ''; display: block; width: 1px; height: 48px; background: var(--fg-dim); margin: 16px auto 0; animation: scrollLine 2s ease-in-out infinite; }
-        @keyframes scrollLine { 0%,100% { opacity: 0.3; transform: scaleY(0.5); } 50% { opacity: 1; transform: scaleY(1); } }
-        
-        .hero-content { position: relative; z-index: 1; }
-        .hero-heading { font-family: var(--font-serif); font-size: clamp(2.6rem, 5.5vw, 5rem); font-weight: 400; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 48px; max-width: 100%; }
-        .hero-heading em { font-style: italic; color: var(--fg-muted); }
-        .hero-heading .word { display: inline-block; overflow: visible; vertical-align: bottom; padding-bottom: 0.08em; }
-        .hero-heading .word-inner { display: inline-block; transform: translateY(110%); animation: wordUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
-        @keyframes wordUp { to { transform: translateY(0); } }
-        .hero-actions { display: flex; align-items: center; gap: 24px; }
-        .hero-sub { font-size: 0.95rem; color: var(--fg-muted); line-height: 1.75; max-width: 560px; margin-top: 48px; position: relative; z-index: 1; }
+        /* TESTIMONIAL */
+        .testimonial{padding:72px 0}
+        .testimonial-text{font-family:var(--heading);font-size:20px;font-weight:400;line-height:160%;letter-spacing:-0.01em;color:var(--fg-80);max-width:700px;margin-bottom:20px;font-style:italic}
+        .testimonial-author{font-size:14px;color:var(--fg-60)}.testimonial-author strong{color:var(--fg);font-weight:600}
 
-        /* SECTIONS */
-        .section { padding: 160px 60px; position: relative; z-index: 1; }
-        .section-eyebrow { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--fg-dim); margin-bottom: 40px; }
-        .section-heading { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -2px; margin-bottom: 32px; }
-        .section-heading em { font-style: italic; color: var(--fg-muted); }
-        .section-body { font-size: 0.95rem; color: var(--fg-muted); line-height: 1.8; max-width: 600px; }
-        .divider { height: 1px; background: var(--fg-faint); margin: 0 60px; }
-
-        /* ABOUT */
-        .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-
-        /* EXPERTISE */
-        .expertise-list { margin-top: 80px; }
-        .expertise-item { padding: 40px 0; border-top: 1px solid var(--fg-faint); display: grid; grid-template-columns: 60px 240px 1fr; gap: 40px; align-items: start; }
-        .expertise-num { font-family: var(--font-serif); font-size: 1rem; color: var(--fg-dim); font-style: italic; }
-        .expertise-item h3 { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.2px; }
-        .expertise-item p { font-size: 0.88rem; color: var(--fg-muted); line-height: 1.7; max-width: 420px; }
-
-        /* WORK */
-        .work-list { margin-top: 64px; }
-        .work-item { padding: 32px 0; border-top: 1px solid var(--fg-faint); display: grid; grid-template-columns: 1fr auto auto; gap: 32px; align-items: center; cursor: pointer; transition: all 0.3s; }
-        .work-item:last-child { border-bottom: 1px solid var(--fg-faint); }
-        .work-item:hover { padding-left: 16px; }
-        .work-item:hover .work-title { color: var(--fg); }
-        .work-item:hover .work-arrow { opacity: 1; transform: translateX(0); }
-        .work-title { font-family: var(--font-sans); font-size: 1.15rem; font-weight: 600; color: var(--fg-muted); transition: color 0.3s; letter-spacing: -0.2px; }
-        .work-client { font-size: 0.78rem; color: var(--fg-dim); min-width: 120px; text-align: right; }
-        .work-arrow { font-size: 0.9rem; color: var(--fg-dim); opacity: 0; transform: translateX(-8px); transition: all 0.3s; }
-
-        /* Hover detail (follows mouse) */
-        .work-detail { position: fixed; z-index: 500; width: 360px; padding: 28px; background: #111; border: 1px solid var(--fg-faint); border-radius: 16px; pointer-events: none; opacity: 0; transition: opacity 0.25s; }
-        .work-detail.visible { opacity: 1; }
-        .work-detail .wd-scope { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); margin-bottom: 8px; }
-        .work-detail .wd-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
-        .work-detail .wd-meta { font-size: 0.78rem; color: var(--fg-muted); margin-bottom: 14px; }
-        .work-detail .wd-desc { font-size: 0.82rem; color: var(--fg-muted); line-height: 1.7; }
-        .work-detail .wd-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 500; color: var(--fg); margin-top: 14px; transition: gap 0.3s; }
-        .work-detail .wd-link:hover { gap: 10px; }
-
-        /* CTA */
-        .cta-section { padding: 200px 60px; text-align: center; }
-        .cta-heading { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 5.5rem); font-weight: 400; line-height: 1.0; letter-spacing: -2.5px; margin-bottom: 48px; }
-        .cta-heading em { font-style: italic; color: var(--fg-muted); }
+        /* CONTACT */
+        .contact-section{padding:88px 0}
+        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+        .contact-info h2{font-family:var(--heading);font-size:32px;font-weight:500;letter-spacing:-0.03em;margin-bottom:24px}
+        .contact-detail{margin-bottom:14px}
+        .contact-label{font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-40);margin-bottom:2px}
+        .contact-value{font-size:14px;color:var(--fg)}
+        .contact-social{display:flex;gap:8px;margin-top:18px}
+        .contact-social a{width:34px;height:34px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--fg-60);font-weight:600;transition:all 0.2s}
+        .contact-social a:hover{background:var(--blue);color:#fff}
+        .contact-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        .contact-form .full{grid-column:1/-1}
+        .contact-form input,.contact-form textarea{width:100%;padding:13px 16px;border:1.5px solid var(--fg-10);border-radius:14px;font-size:14px;font-family:var(--font);background:var(--bg);transition:border-color 0.2s}
+        .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--blue)}
+        .contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--fg-40)}
+        .contact-form textarea{resize:vertical;min-height:90px}
+        .contact-note{font-size:11px;color:var(--fg-40);margin-top:8px;grid-column:1/-1}
 
         /* FOOTER */
-        footer { padding: 80px 60px 40px; border-top: 1px solid var(--fg-faint); }
-        .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 80px; }
-        .footer-brand { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; }
-        .footer-cta { max-width: 360px; }
-        .footer-cta p { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; line-height: 1.35; margin-bottom: 24px; letter-spacing: -0.5px; }
-        .footer-email { font-size: 0.9rem; color: var(--fg-muted); cursor: pointer; transition: color 0.3s; display: inline-flex; align-items: center; gap: 8px; }
-        .footer-email:hover { color: var(--fg); }
-        .footer-email-copied { font-size: 0.7rem; font-weight: 500; color: var(--fg-dim); opacity: 0; transition: opacity 0.3s; }
-        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--fg-faint); }
-        .footer-copy { font-size: 0.72rem; color: var(--fg-dim); }
-        .footer-nav { display: flex; gap: 28px; list-style: none; }
-        .footer-nav a { font-size: 0.75rem; color: var(--fg-dim); transition: color 0.3s; }
-        .footer-nav a:hover { color: var(--fg); }
+        footer{background:var(--fg);color:var(--white);padding:40px 0 24px}
+        .footer-inner{display:flex;justify-content:space-between;align-items:center}
+        .footer-brand{font-size:15px;font-weight:600}
+        .footer-copy{font-size:11px;color:rgba(255,255,255,0.35)}
+        .footer-nav{display:flex;gap:20px;list-style:none}
+        .footer-nav a{font-size:12px;color:rgba(255,255,255,0.5);transition:color 0.2s}
+        .footer-nav a:hover{color:#fff}
 
-        
-        /* WORK FILTERS */
-        .work-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 48px; margin-bottom: 12px; }
-        .filter-tab {
-            font-family: var(--font-sans); font-size: 0.78rem; font-weight: 500;
-            color: var(--fg-dim); background: transparent;
-            border: 1px solid var(--fg-faint); border-radius: 980px;
-            padding: 8px 20px; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
-        }
-        .filter-tab:hover { color: var(--fg-muted); border-color: var(--fg-dim); }
-        .filter-tab.active { color: var(--fg); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); }
-
-        .work-count { font-size: 0.72rem; color: var(--fg-dim); margin-bottom: 8px; letter-spacing: 0.05em; }
-
-        /* Work item hide/show animation */
-        .work-item { max-height: 100px; overflow: hidden; transition: all 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s, max-height 0.4s; }
-        .work-item.hidden { opacity: 0; max-height: 0; padding: 0; border-top-color: transparent; margin: 0; }
-
-        /* ANIMATIONS */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.9s cubic-bezier(0.16,1,0.3,1); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .rd1 { transition-delay: 0.1s; } .rd2 { transition-delay: 0.2s; }
-        .rd3 { transition-delay: 0.3s; } .rd4 { transition-delay: 0.4s; }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .about-section { grid-template-columns: 1fr; gap: 40px; }
-            .expertise-item { grid-template-columns: 40px 1fr; gap: 20px; }
-            .expertise-item p { grid-column: 1 / -1; margin-left: 60px; }
-        }
-        @media (max-width: 768px) {
-            nav { padding: 20px 24px; }
-            nav.scrolled { padding: 16px 24px; }
-            .nav-links { display: none; }
-            .menu-btn { display: block; }
-            .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--fg-faint); }
-            .hero { padding: 0 24px 60px; }
-            .hero-scroll { display: none; }
-            .hero-heading { font-size: clamp(1.8rem, 8vw, 2.6rem); }
-            .hero-actions { flex-direction: column; align-items: flex-start; }
-            .section { padding: 100px 24px; }
-            .divider { margin: 0 24px; }
-            .expertise-item { grid-template-columns: 1fr; gap: 8px; }
-            .expertise-item p { margin-left: 0; grid-column: auto; }
-            .expertise-num { display: none; }
-            .work-item { grid-template-columns: 1fr auto; }
-            .work-client { display: none; }
-            .work-detail { display: none !important; }
-            .thought-item { grid-template-columns: 70px 1fr auto; gap: 16px; }
-            .thought-title { font-size: 1.05rem; }
-            .cta-section { padding: 120px 24px; }
-            footer { padding: 60px 24px 32px; }
-            .footer-top { flex-direction: column; gap: 48px; }
-            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-        }
-    
-        /* Thoughts */
-        .thoughts-list { margin-top: 64px; }
-        .thought-item { display: grid; grid-template-columns: 100px 1fr auto; gap: 32px; align-items: center; padding: 32px 0; border-top: 1px solid var(--fg-faint); transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit; }
-        .thought-item:last-child { border-bottom: 1px solid var(--fg-faint); }
-        .thought-item:hover { padding-left: 16px; }
-        .thought-item:hover .thought-title { color: var(--fg); }
-        .thought-item:hover .thought-arrow { opacity: 1; transform: translateX(0); }
-        .thought-date { font-size: 0.75rem; color: var(--fg-dim); font-weight: 500; }
-        .thought-title { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 600; color: var(--fg-muted); transition: color 0.3s; letter-spacing: -0.2px; }
-        .thought-arrow { font-size: 0.9rem; color: var(--fg-dim); opacity: 0; transform: translateX(-8px); transition: all 0.3s; }
-
-        /* Mobile bottom sheet */
-        .mobile-sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-        .mobile-sheet-overlay.active { opacity: 1; pointer-events: auto; }
-        .mobile-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-top: 1px solid rgba(255,255,255,0.08); border-radius: 20px 20px 0 0; z-index: 2001; padding: 32px 28px 40px; max-height: 70vh; overflow-y: auto; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
-        .mobile-sheet-overlay.active .mobile-sheet { transform: translateY(0); }
-        .mobile-sheet-handle { width: 36px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin: 0 auto 24px; }
-        .mobile-sheet .ms-scope { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); margin-bottom: 10px; }
-        .mobile-sheet .ms-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
-        .mobile-sheet .ms-meta { font-size: 0.82rem; color: var(--fg-muted); margin-bottom: 18px; }
-        .mobile-sheet .ms-desc { font-size: 0.9rem; color: var(--fg-muted); line-height: 1.75; margin-bottom: 20px; }
-        .mobile-sheet .ms-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 500; color: var(--fg); transition: gap 0.3s; pointer-events: auto; position: relative; z-index: 10; padding: 12px 0; }
-        .mobile-sheet .ms-link:hover { gap: 10px; }
-        .mobile-sheet .ms-link::after { content: ''; position: absolute; inset: -8px; }
-
-        /* Theme toggle */
-        .nav-right { display: flex; align-items: center; gap: 12px; }
-        
-        
-
-        /* ===== LIGHT MODE ===== */
-        body, nav, .divider, footer { transition: background 0.4s, color 0.4s, border-color 0.4s; }
-    
-    
-        /* Section depth - alternating dark tones */
-        .section:nth-of-type(odd) { background: rgba(255,255,255,0.025); }
-        .section:nth-of-type(even) { background: transparent; }
-
-        /* Gradient-tinted dividers */
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(100,140,255,0.2) 20%, 
-                rgba(140,100,220,0.25) 50%, 
-                rgba(80,180,200,0.15) 80%, 
-                transparent 100%) !important;
-        }
-
-        
-    
-    
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(200,120,50,0.2) 20%, 
-                rgba(180,80,60,0.25) 50%, 
-                rgba(140,60,120,0.18) 80%, 
-                transparent 100%) !important;
-        }
-    
-    
-        .divider { position: relative; z-index: 1; }
-        .cta-section { position: relative; z-index: 1; }
-        footer { position: relative; z-index: 1; }
-        nav { z-index: 1000; }
-        
-        /* Scroll-triggered supernova burst */
-        .supernova {
-            position: fixed; top: 50%; left: 50%;
-            width: 0; height: 0; border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(100,150,255,0.1) 40%, transparent 70%);
-            transform: translate(-50%, -50%);
-            z-index: 2; pointer-events: none;
-            opacity: 0;
-        }
-        .supernova.flash {
-            animation: supernovaFlash 1.2s cubic-bezier(0.16,1,0.3,1) forwards;
-        }
-        @keyframes supernovaFlash {
-            0% { width: 0; height: 0; opacity: 0.8; }
-            40% { width: 120vw; height: 120vw; opacity: 0.3; }
-            100% { width: 200vw; height: 200vw; opacity: 0; }
-        }
-
-        /* Text glow on hover for section headings */
-        .section-heading { transition: text-shadow 0.5s ease; }
-        .section-heading:hover { text-shadow: 0 0 40px rgba(255,180,100,0.15), 0 0 80px rgba(200,150,255,0.08); }
-        .cta-heading { transition: text-shadow 0.5s ease; }
-        .cta-heading:hover { text-shadow: 0 0 60px rgba(255,180,100,0.2), 0 0 120px rgba(200,150,255,0.1); }
-
-        /* Hero title parallax drift */
-        .hero-heading { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
-        
-        /* Click burst canvas */
-        .click-canvas {
-            position: fixed; inset: 0;
-            z-index: 9998; pointer-events: none;
-        }
-        </style>
+        .reveal{opacity:0;transform:translateY(14px);transition:all 0.55s cubic-bezier(0.16,1,0.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+        .rd1{transition-delay:0.05s}.rd2{transition-delay:0.1s}.rd3{transition-delay:0.15s}.rd4{transition-delay:0.2s}
+        @media(max-width:768px){.container{padding:0 20px}nav{padding:14px 20px}.nav-links{display:none}.menu-btn{display:block}.hero{padding:40px 0 32px}.hero h1{font-size:32px}.stats{grid-template-columns:1fr;gap:16px}.stat-value{font-size:28px}.section{padding:56px 0}.expertise-top{grid-template-columns:1fr}.services-layout,.portfolio-grid,.blog-grid,.contact-grid{grid-template-columns:1fr}.services-grid{grid-template-columns:1fr}.contact-form{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:16px;align-items:flex-start}.blog-section{margin:0 -20px;padding:56px 20px;border-radius:24px}.portfolio-header{flex-direction:column;gap:12px}}
+    </style>
 </head>
 <body>
-    <div class="supernova" id="supernova"></div>
-    <div class="page-aurora"><canvas id="auroraCanvas"></canvas></div>
 
-    <!-- Floating detail card -->
-    <div class="work-detail" id="workDetail">
-        <div class="wd-scope" id="wdScope"></div>
-        <div class="wd-title" id="wdTitle"></div>
-        <div class="wd-meta" id="wdMeta"></div>
-        <div class="wd-desc" id="wdDesc"></div>
-        <a href="javascript:void(0)" class="wd-link" id="wdLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
+    <div class="nav-wrap"><nav><a href="index.html" class="nav-brand">Dylan Lam</a><ul class="nav-links" id="navLinks"><li><a href="about.html">About</a></li><li><a href="#services">Services</a></li><li><a href="works.html">Work</a></li><li><a href="#contact">Contact</a></li></ul><div style="display:flex;gap:8px;align-items:center"><a href="#contact" class="btn btn-primary">Contact</a><a href="about.html" class="btn btn-secondary">About</a><button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button></div></nav></div>
+
+    <div class="container">
+
+    <section class="hero reveal">
+        <h1>Building the<br>next generation<br>of <span>business systems.</span></h1>
+        <p>I connect strategy, data, and operations to help businesses scale with confidence. Currently driving advertiser growth at Amazon Ads across Southeast Asia.</p>
+        <div class="hero-actions"><a href="#contact" class="btn btn-primary">Contact</a><a href="about.html" class="btn btn-secondary">About</a></div>
+    </section>
+
+    <div class="stats reveal">
+        <div class="stat"><div class="stat-value">30+</div><div class="stat-label">Projects delivered across industries</div></div>
+        <div class="stat"><div class="stat-value">10+</div><div class="stat-label">Cross-functional teams coordinated</div></div>
+        <div class="stat"><div class="stat-value">6+</div><div class="stat-label">Years of hands-on experience</div></div>
     </div>
 
-    <!-- NAV -->
-    <nav id="navbar">
-        <a href="#hero" class="nav-brand">Dylan Lam.</a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">About</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#thoughts">Thoughts</a></li>
-            <li><a href="#contact">Contact</a></li>
-            </ul>
-        <div class="nav-right">
-            <a href="#contact" class="pill"><span class="pill-inner">Get in Touch</span></a>
-            
-            <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <section class="section" id="about">
+        <span class="badge reveal">Expertise</span>
+        <div class="expertise-top reveal">
+            <h2 class="section-heading">What I bring to the table</h2>
+            <p class="section-desc">I operate across sales, data, project management, and system design. From building AI agents adopted across markets to launching flagship stores coordinating 10+ teams — I bring order to chaos and turn insights into action.</p>
         </div>
-    </nav>
+        <div class="expertise-img reveal rd1"><div class="silk-canvas">
+            <svg viewBox="0 0 1200 400" preserveAspectRatio="none"><path d="M0,160 C200,220 400,100 600,180 C800,260 1000,120 1200,200 L1200,400 L0,400Z" fill="rgba(1,97,254,0.045)"></path></svg>
+            <svg viewBox="0 0 1200 400" preserveAspectRatio="none"><path d="M0,200 C150,140 350,260 600,180 C850,100 1050,240 1200,160 L1200,400 L0,400Z" fill="rgba(167,139,250,0.035)"></path></svg>
+            <svg viewBox="0 0 1200 400" preserveAspectRatio="none"><path d="M0,180 C250,250 450,120 700,200 C950,280 1100,140 1200,180 L1200,400 L0,400Z" fill="rgba(96,165,250,0.04)"></path></svg>
+        </div></div>
+        <div class="expertise-btn reveal rd2"><a href="#contact" class="btn btn-primary">Contact →</a></div>
+    </section>
 
-    <!-- HERO -->
-    <section class="hero" id="hero">
-        
-        <div class="hero-scroll">Scroll down</div>
-        <div class="hero-content">
-            <h1 class="hero-heading" id="heroHeading">Building the<br>next generation<br>of <em>business systems.</em></h1>
-            <div class="hero-actions">
-                <a href="#contact" class="pill pill-white"><span class="pill-inner">Get in Touch</span></a>
-                <a href="#about" class="pill"><span class="pill-inner">Learn More</span></a>
+    <section class="section" id="services">
+        <span class="badge reveal">Services</span>
+        <div class="services-layout">
+            <div class="services-left reveal">
+                <h2 class="section-heading">What I can help you with</h2>
+                <p class="section-desc">Focused on your unique needs, I deliver solutions that blend deep industry knowledge and cutting-edge strategies.</p>
+                <a href="works.html" class="btn btn-primary btn-sm">See my work →</a>
+            </div>
+            <div class="services-grid" id="serviceGrid">
+                <div class="service-card highlight" data-svc="0"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18" stroke="#fff" stroke-width="2" fill="none"></path><path d="M7 14l4-4 4 4 5-5" stroke="#fff" stroke-width="2" fill="none"></path></svg></div><h3>Sales &amp; Account Management</h3><p>Building trust, closing deals, and making partnerships last.</p></div>
+                <div class="service-card" data-svc="1"><div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="5" height="14" rx="1" fill="#fff"></rect><rect x="10" y="8" width="5" height="11" rx="1" fill="#fff"></rect><rect x="17" y="3" width="5" height="16" rx="1" fill="#fff"></rect></svg></div><h3>Data &amp; Business Analytics</h3><p>Turning messy data into simple stories and confident decisions.</p></div>
+                <div class="service-card" data-svc="2"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="#fff"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#fff" stroke-width="1.5" fill="none"></path></svg></div><h3>Project Management</h3><p>Managing cross-functional teams across Design, Build, and Ops.</p></div>
+                <div class="service-card" data-svc="3"><div class="service-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1" fill="#fff"></rect><rect x="14" y="4" width="6" height="6" rx="1" fill="#fff"></rect><rect x="4" y="14" width="6" height="6" rx="1" fill="#fff"></rect><rect x="14" y="14" width="6" height="6" rx="1" fill="#fff"></rect></svg></div><h3>System Design</h3><p>Designing digital ecosystems for operations, CRM, and project tracking.</p></div>
             </div>
         </div>
-        <p class="hero-sub reveal rd3">I connect strategy, data, and operations to help businesses scale with confidence. Currently driving advertiser growth at Amazon Ads across Southeast Asia.</p>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- ABOUT -->
-    <section class="section section-glow glow-right" id="about">
-        <div class="about-section">
-            <div class="reveal">
-                <p class="section-eyebrow">About</p>
-                <h2 class="section-heading">A strategic thinker<br>who thrives at the<br>intersection of <em>structure</em><br>and <em>creativity.</em></h2>
+    <section class="section" id="work">
+        <div class="portfolio-header reveal"><div><span class="badge">Portfolio</span><h2 class="section-heading">Real Results, Real Impact</h2></div></div>
+        <div class="portfolio-grid reveal">
+            <div class="portfolio-card">
+                <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom1"></div></div>
+                <h3>Clair Optimization Agent</h3>
+                <p>Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions — replacing hours of manual work per report.</p>
+                <div class="portfolio-tags"><span class="portfolio-tag">AI Agent</span><span class="portfolio-tag">Data &amp; Analytics</span><span class="portfolio-tag">Amazon Ads</span></div>
             </div>
-            <div class="reveal rd2">
-                <p class="section-body">I operate across sales, data, project management, and system design. From building AI agents adopted across markets to launching flagship stores coordinating 10+ teams - I bring order to chaos and turn insights into action.</p>
+            <div class="portfolio-card">
+                <div class="portfolio-card-img"><div class="bloom-canvas bloom-canvas-alt" id="bloom2"></div></div>
+                <h3>Clair Visual Agent</h3>
+                <p>Built an AI Agent that translates campaign intent into visual generation prompts, adopted across Vietnam, Singapore &amp; Taiwan markets.</p>
+                <div class="portfolio-tags"><span class="portfolio-tag">AI Agent</span><span class="portfolio-tag">Creative</span><span class="portfolio-tag">Multi-market</span></div>
+            </div>
+            <div class="portfolio-card">
+                <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom3"></div></div>
+                <h3>Apple Social Video</h3>
+                <p>Managed the strategy and concept phase for an Apple commission, ensuring strict brand compliance for the Shot on iPhone campaign.</p>
+                <div class="portfolio-tags"><span class="portfolio-tag">Project Management</span><span class="portfolio-tag">Sales</span><span class="portfolio-tag">Apple</span></div>
+            </div>
+            <div class="portfolio-card">
+                <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom4"></div></div>
+                <h3>MUJI Box</h3>
+                <p>Led strategic partnership negotiations to secure the MUJI Box project, closing the deal in 1 month.</p>
+                <div class="portfolio-tags"><span class="portfolio-tag">Sales</span><span class="portfolio-tag">Partnership</span><span class="portfolio-tag">MUJI</span></div>
             </div>
         </div>
-        <div class="expertise-list">
-            <div class="expertise-item reveal"><span class="expertise-num">01</span><h3>Sales &amp; Account Management</h3><p>Building trust, closing deals, and making partnerships last. Expertise in high-value client retention and revenue growth.</p></div>
-            <div class="expertise-item reveal rd1"><span class="expertise-num">02</span><h3>Data &amp; Business Analytics</h3><p>Turning messy data into simple stories. Dashboards, models, and reporting that power confident decisions.</p></div>
-            <div class="expertise-item reveal rd2"><span class="expertise-num">03</span><h3>Project Management</h3><p>Managing cross-functional teams across Design, Build, and Ops to ensure ideas succeed in the real world.</p></div>
-            <div class="expertise-item reveal rd3"><span class="expertise-num">04</span><h3>Notion System Design</h3><p>Designing effortless digital ecosystems for internal operations, CRM, and project tracking.</p></div>
-        </div>
+        <div class="reveal" style="text-align:center;margin-top:36px"><a href="works.html" class="btn btn-dark">All projects →</a></div>
     </section>
 
-    <div class="divider"></div>
+    <div class="testimonial reveal">
+        <p class="testimonial-text">"I bring clarity to complex problems, breaking down barriers and delivering solutions that turn into real, tangible outcomes — driving measurable growth for the teams I work with."</p>
+        <div class="testimonial-author"><strong>Dylan Lam</strong> — Amazon Ads, Southeast Asia</div>
+    </div>
 
-    <!-- WORK -->
-    <section class="section section-glow glow-left" id="work">
-        <div class="reveal">
-            <p class="section-eyebrow">Selected Work</p>
-            <h2 class="section-heading">Trusted by<br><em>leading brands</em><br>across industries.</h2>
-        </div>
-
-        <!-- Filter tabs -->
-        <div class="work-filters reveal rd1">
-            <button class="filter-tab active" data-filter="highlight">Highlight</button>
-            <button class="filter-tab" data-filter="all">All</button>
-            <button class="filter-tab" data-filter="data">Data &amp; Analytics</button>
-            <button class="filter-tab" data-filter="pm">Project Management</button>
-            <button class="filter-tab" data-filter="sales">Sales</button>
-            <button class="filter-tab" data-filter="notion">Notion System</button>
-        </div>
-
-        <div class="work-count reveal rd2"><span id="visibleCount">5</span> projects</div>
-
-        <div class="work-list" id="workList">
-            <div class="work-item" data-idx="0" data-cat="data highlight"><span class="work-title">AI Agent for Program Pitch Deck</span><span class="work-client">Amazon, 2025</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="1" data-cat="data"><span class="work-title">Visual Generation AI Prompt Agent</span><span class="work-client">Amazon, 2025</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="2" data-cat="data"><span class="work-title">Business Dashboard</span><span class="work-client">Amazon, 2025</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="3" data-cat="data"><span class="work-title">Efficiency Enhancement Tool</span><span class="work-client">Amazon, 2025</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="4" data-cat="pm sales highlight"><span class="work-title">Apple Social Video</span><span class="work-client">Apple, 2024</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="5" data-cat="notion"><span class="work-title">Project Management System</span><span class="work-client">Filian TV, 2025</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="6" data-cat="sales highlight"><span class="work-title">MUJI Box</span><span class="work-client">MUJI, 2024</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="7" data-cat="pm sales"><span class="work-title">MAMMAM Eatery &amp; Lounge</span><span class="work-client">Vietcetera, 2024</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="8" data-cat="pm sales"><span class="work-title">Lang Spa</span><span class="work-client">Lang Spa, 2024</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="9" data-cat="pm sales"><span class="work-title">Vero Rebrand &amp; Web Identity</span><span class="work-client">Vero ASEAN, 2024</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="10" data-cat="pm"><span class="work-title">Bakes Store #4</span><span class="work-client">The Lab Concepts, 2024</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="11" data-cat="pm sales"><span class="work-title">EVA Exhibition</span><span class="work-client">Sunlife Insurance, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="12" data-cat="notion"><span class="work-title">Breakthrough Energy Website</span><span class="work-client">GNS Studio, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="13" data-cat="pm sales highlight"><span class="work-title">Yingtao Brand Identity</span><span class="work-client">August Hospitality, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="14" data-cat="pm sales highlight"><span class="work-title">Bakes Flagship Store</span><span class="work-client">The Lab Concepts, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="15" data-cat="pm sales"><span class="work-title">Mami Cocktails</span><span class="work-client">86Proof Hospitality, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="16" data-cat="pm sales"><span class="work-title">Bitis 40Y Exhibition</span><span class="work-client">Bitis / Dentsu, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="17" data-cat="pm sales"><span class="work-title">Du (Enough) Exhibition</span><span class="work-client">Sunlife Insurance, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="18" data-cat="pm"><span class="work-title">Sunlife Hanoi Head Office</span><span class="work-client">Sunlife Insurance, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="19" data-cat="data"><span class="work-title">Sales System Setup</span><span class="work-client">The Lab, 2023</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="20" data-cat="pm"><span class="work-title">B34CH NFT</span><span class="work-client">OP3N, 2022</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="21" data-cat="pm"><span class="work-title">Shadow Lounge</span><span class="work-client">The Lab Concepts, 2022</span><span class="work-arrow">&nearr;</span></div>
-            <div class="work-item" data-idx="22" data-cat="pm sales"><span class="work-title">Love Is Hard. HIV Prevention Is Easy.</span><span class="work-client">HAIVN + US CDC, 2022</span><span class="work-arrow">&nearr;</span></div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- THOUGHTS -->
-    <section class="section section-glow glow-center" id="thoughts">
-        <div class="reveal">
-            <p class="section-eyebrow">Thoughts</p>
-            <h2 class="section-heading">Recent<br><em>writing.</em></h2>
-        </div>
-        <div class="thoughts-list">
-            <a href="https://www.linkedin.com/posts/dylanlamwork_amazonads-generativeai-creativestrategy-activity-7435508959567945729-hKDL?utm_source=share&utm_medium=member_desktop" target="_blank" class="thought-item reveal">
-                <span class="thought-date">Nov 2025</span>
-                <span class="thought-title">Making AI creative generation accessible for everyone</span>
-                <span class="thought-arrow">&nearr;</span>
-            </a>
-            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-ownership-earntrust-activity-7359058206247018496-xImq?utm_source=share&utm_medium=member_desktop" target="_blank" class="thought-item reveal rd1">
-                <span class="thought-date">Aug 2025</span>
-                <span class="thought-title">Interview vs. Reality: My first year at Amazon</span>
-                <span class="thought-arrow">&nearr;</span>
-            </a>
-            <a href="https://www.linkedin.com/posts/dylanlamwork_sales-diarypov-advertising-activity-7320280215987851264-UuWm" target="_blank" class="thought-item reveal rd2">
-                <span class="thought-date">Apr 2025</span>
-                <span class="thought-title">Making others' jobs easier</span>
-                <span class="thought-arrow">&nearr;</span>
-            </a>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- Mobile bottom sheet -->
-    <div class="mobile-sheet-overlay" id="mobileSheet">
-        <div class="mobile-sheet">
-            <div class="mobile-sheet-handle"></div>
-            <div class="ms-scope" id="msScope"></div>
-            <div class="ms-title" id="msTitle"></div>
-            <div class="ms-meta" id="msMeta"></div>
-            <div class="ms-desc" id="msDesc"></div>
-            <a href="javascript:void(0)" class="ms-link" id="msLink" target="_blank" style="display:none;">View Project <span>&rarr;</span></a>
+    <div class="contact-section" id="contact">
+        <span class="badge reveal">Contact</span>
+        <div class="contact-grid">
+            <div class="contact-info reveal"><h2>Reach Out Today</h2><div class="contact-detail"><div class="contact-label">Email</div><div class="contact-value">dylanlamwork@gmail.com</div></div><div class="contact-detail"><div class="contact-label">Location</div><div class="contact-value">Ho Chi Minh City, Vietnam</div></div><div class="contact-detail"><div class="contact-label">Currently</div><div class="contact-value">Amazon Ads, Southeast Asia</div></div><div class="contact-social"><a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">in</a><a href="mailto:dylanlamwork@gmail.com">✉</a></div></div>
+            <form class="contact-form reveal rd1" id="contactForm"><input type="text" name="name" placeholder="Your name" required=""><input type="text" name="lastname" placeholder="Last name"><input type="email" name="email" placeholder="Email address" class="full" required=""><textarea name="message" placeholder="Tell me about your project..." class="full" required=""></textarea><button type="submit" class="btn btn-primary full" style="justify-content:center">Submit</button><p class="contact-note">This opens your email client with the message pre-filled. No data is stored.</p></form>
         </div>
     </div>
 
-    <!-- CTA -->
-    <section class="cta-section section-glow glow-center" id="contact">
-        <div class="reveal">
-            <h2 class="cta-heading">Ready to<br><em>build something</em><br>that matters?</h2>
-            <a href="mailto:dylanlamwork@gmail.com" class="pill pill-white"><span class="pill-inner">Get in Touch</span></a>
-        </div>
-    </section>
+    </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-brand">Dylan Lam.</div>
-            <div class="footer-cta">
-                <p>Speak to your next<br>strategic partner today.</p>
-                <span class="footer-email" id="copyEmail">
-                    dylanlamwork@gmail.com
-                    <span class="footer-email-copied" id="copiedLabel">Copied</span>
-                </span>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span class="footer-copy">&copy; 2025 Dylan Lam. All rights reserved.</span>
-            <ul class="footer-nav">
-                <li><a href="#about">About</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a></li>
-                <li><a href="mailto:dylanlamwork@gmail.com">Email</a></li>
-            </ul>
-        </div>
-    </footer>
+    <footer><div class="container"><div class="footer-inner"><div class="footer-brand">Dylan Lam</div><ul class="footer-nav"><li><a href="about.html">About</a></li><li><a href="works.html">Work</a></li><li><a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a></li><li><a href="mailto:dylanlamwork@gmail.com">Email</a></li></ul><span class="footer-copy">© 2025 Dylan Lam. All rights reserved.</span></div></div></footer>
 
-    <canvas class="click-canvas" id="clickCanvas"></canvas>
+<script>
+// Nav
+document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));
 
-    <script>
-    const P = [{"t": "AI Agent for Program Pitch Deck", "c": "Amazon", "y": "2025", "s": "Data & Business Analytics", "d": "Built an AI Agent to generate Pitch Deck for one of the biggest Annual Advertiser Program of Amazon Ads, adopted by VN & CN folks.", "l": null}, {"t": "Visual Generation AI Prompt Agent", "c": "Amazon", "y": "2025", "s": "Data & Business Analytics", "d": "Built an AI Agent to generate concepts & prompts for visual generation in any AI Gen tools, adopted in Vietnam, Singapore & Taiwan markets.", "l": "https://partyrock.aws/u/dylanvn/W5zqTBkL7/AdPrompt-Lab-Advanced-V4.2%253A-Creative-AI-for-Amazon-Ads-(Beta)"}, {"t": "Business Dashboard", "c": "Amazon", "y": "2025", "s": "Data & Business Analytics", "d": "Co-built a business dashboard on PowerBI and Amazon Quicksight, integrating with AI Agent to analyze and provide business insights for actions.", "l": null}, {"t": "Efficiency Enhancement Tool", "c": "Amazon", "y": "2025", "s": "Data & Business Analytics", "d": "Built a lead-identification tool using Excel and advanced data analytics. Reduced qualification time by 80%.", "l": null}, {"t": "Apple Social Video", "c": "Apple", "y": "2024", "s": "Project Management, Sales", "d": "Managed the strategy and concept phase for an Apple commission, ensuring strict brand compliance while coordinating with production teams for the Shot on iPhone campaign.", "l": "https://www.instagram.com/reel/DGyQDyRP71N/"}, {"t": "Project Management System", "c": "Filian TV", "y": "2025", "s": "Notion System", "d": "Designed and implemented a comprehensive Project Management System on Notion for content production workflows.", "l": null}, {"t": "MUJI Box", "c": "MUJI", "y": "2024", "s": "Sales & Account Management", "d": "Led strategic partnership negotiations to secure the MUJI Box project, closing the deal in 1 month.", "l": "https://www.thelabsaigon.com/work/muji-box"}, {"t": "MAMMAM Eatery & Lounge", "c": "Vietcetera", "y": "2024", "s": "Project Management, Sales", "d": "Oversaw the end-to-end launch of a new F&B concept within a 6-month timeline.", "l": "https://www.behance.net/gallery/222633137/MAMMAM-Eatery-Lounge"}, {"t": "Lang Spa", "c": "Lang Spa", "y": "2024", "s": "Project Management, Sales", "d": "Managed partnership and design delivery, ensuring the brand vision of relaxation and community.", "l": "https://www.behance.net/gallery/218543295/Lang-Spa"}, {"t": "Vero Rebrand & Web Identity", "c": "Vero ASEAN", "y": "2024", "s": "Project Management, Sales", "d": "Led the strategic rebrand delivery and website update, unifying services across SE Asia.", "l": "https://www.behance.net/gallery/205330085/Vero-Rebrand-Web-Identity"}, {"t": "Bakes Store #4", "c": "The Lab Concepts", "y": "2024", "s": "Project Management", "d": "Managed the rollout of Bakes first mall location, coordinating between Vincom and internal design teams.", "l": "https://www.linkedin.com/feed/update/urn:li:activity:7204748271401992192"}, {"t": "EVA Exhibition", "c": "Sunlife Insurance", "y": "2023", "s": "Project Management, Sales", "d": "Orchestrated logistics and artist coordination for an experiential event on Virtual Identity.", "l": "https://www.behance.net/gallery/172040899/EVA-EXHIBITION"}, {"t": "Breakthrough Energy Website", "c": "GNS Studio", "y": "2023", "s": "Notion System", "d": "Created a comprehensive Project Management system on Notion for the Breakthrough Energy project.", "l": "https://transition.breakthroughenergy.org/"}, {"t": "Yingtao Brand Identity", "c": "August Hospitality", "y": "2023", "s": "Project Management, Sales", "d": "Led project delivery for a high-stakes brand identity project in NYC for a Michelin-star contender.", "l": "https://www.instagram.com/p/Cx5bjiJv2w5/"}, {"t": "Bakes Flagship Store", "c": "The Lab Concepts", "y": "2023", "s": "Project Management, Sales", "d": "Directed the full design rollout for a 1,000sqm flagship bakery in Thao Dien, coordinating 10+ cross-functional teams across design, construction, and operations. Delivered on time with a new design system balancing everyday warmth with special occasion flair.", "l": "https://www.behance.net/gallery/173479823/BAKES-FLAGSHIP"}, {"t": "Mami Cocktails", "c": "86Proof Hospitality", "y": "2023", "s": "Project Management, Sales", "d": "Managed client communications and project timelines for a bold hospitality concept.", "l": "https://www.behance.net/gallery/197607065/Mami-Cocktails"}, {"t": "Bitis 40Y Exhibition", "c": "Bitis / Dentsu", "y": "2023", "s": "Project Management, Sales", "d": "Commissioned by Dentsu to manage the design and build of Bitis 40 Years Anniversary exhibition.", "l": "https://www.behance.net/gallery/168537349/Bitis-40-Years-Exhibition"}, {"t": "Du (Enough) Exhibition", "c": "Sunlife Insurance", "y": "2023", "s": "Project Management, Sales", "d": "Coordinated artists and production for an interactive visual exhibition exploring life necessities.", "l": "https://www.behance.net/gallery/166677079/DU-EXHIBITION"}, {"t": "Sunlife Hanoi Head Office", "c": "Sunlife Insurance", "y": "2023", "s": "Project Management", "d": "Led the project management for Sunlife flagship Hanoi HQ build.", "l": "https://www.behance.net/gallery/189261513/Y-LOUNGE-SUNLIFE-HN-HQ"}, {"t": "Sales System Setup", "c": "The Lab", "y": "2023", "s": "Data & Business Analytics", "d": "Developed in-house tools for cash flow and CRM that scaled internal operations.", "l": null}, {"t": "B34CH NFT", "c": "OP3N", "y": "2022", "s": "Project Management", "d": "Managed the launch of a generative art NFT project with code artists and partners.", "l": null}, {"t": "Shadow Lounge", "c": "The Lab Concepts", "y": "2022", "s": "Project Management", "d": "Managed brand identity development highlighting the unseen creativity behind processes.", "l": "https://www.behance.net/gallery/165324263/SHADOW-LOUNGE-BRANDING"}, {"t": "Love Is Hard. HIV Prevention Is Easy.", "c": "HAIVN + US CDC", "y": "2022", "s": "Project Management, Sales", "d": "Managed social campaigns and exhibition components for the US CDC & HAIVN partnership.", "l": "https://www.behance.net/gallery/139885003/LOVE-IS-HARD-HIV-PREVENTION-IS-EASY"}];
-
-    // NAV
-    const nb = document.getElementById('navbar');
-    window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 80));
-    document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active')));
-
-    // HERO WORD REVEAL
-    const heroH = document.getElementById('heroHeading');
-    if (heroH) {
-        let wordIdx = 0;
-        heroH.innerHTML = heroH.innerHTML.replace(/(<br>|<\/?em>)|([^\s<]+)/g, (match, tag, word) => {
-            if (tag) return tag;
-            const delay = 0.06 * wordIdx++;
-            return '<span class="word"><span class="word-inner" style="animation-delay:' + delay.toFixed(2) + 's">' + word + '</span></span>';
+// Bloom orbs
+(function(){
+    const orbs1=[{x:20,y:30,w:180,col:'rgba(167,139,250,0.35)'},{x:55,y:45,w:160,col:'rgba(96,165,250,0.3)'},{x:40,y:60,w:140,col:'rgba(251,146,60,0.2)'},{x:72,y:25,w:120,col:'rgba(52,211,153,0.25)'}];
+    const orbs2=[{x:25,y:35,w:170,col:'rgba(139,92,246,0.3)'},{x:60,y:50,w:150,col:'rgba(34,211,238,0.25)'},{x:45,y:25,w:130,col:'rgba(244,114,182,0.2)'},{x:70,y:65,w:110,col:'rgba(96,165,250,0.25)'}];
+    function makeOrbs(el,data){
+        if(!el)return;
+        data.forEach((o,i)=>{
+            const d=document.createElement('div');d.className='bloom-orb';
+            d.style.cssText=`left:${o.x}%;top:${o.y}%;width:${o.w}px;height:${o.w}px;background:${o.col};animation-delay:${i*1.8}s;animation-duration:${7+i*1.5}s`;
+            el.appendChild(d);
         });
     }
-
-    // SCROLL REVEAL
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-    // SMOOTH SCROLL
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        if (a.getAttribute('target') === '_blank') return;
-        a.addEventListener('click', e => {
-            var href = a.getAttribute('href');
-            if (!href || href.length < 2 || !href.startsWith('#')) return;
-            e.preventDefault();
-            var t = document.querySelector(href);
-            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
-
-    // COPY EMAIL
-    document.getElementById('copyEmail').addEventListener('click', () => {
-        navigator.clipboard.writeText('dylanlamwork@gmail.com');
-        const label = document.getElementById('copiedLabel');
-        label.style.opacity = '1';
-        setTimeout(() => { label.style.opacity = '0'; }, 2000);
-    });
-
-    // WORK HOVER DETAIL (follows mouse)
-    const detail = document.getElementById('workDetail');
-    let currentIdx = -1;
-    document.querySelectorAll('.work-item').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const idx = parseInt(item.dataset.idx);
-            if (idx === currentIdx) return;
-            currentIdx = idx;
-            const p = P[idx];
-            document.getElementById('wdScope').textContent = p.s;
-            document.getElementById('wdTitle').textContent = p.t;
-            document.getElementById('wdMeta').textContent = p.c + ' - ' + p.y;
-            document.getElementById('wdDesc').textContent = p.d;
-            const link = document.getElementById('wdLink');
-            if (p.l) { link.href = p.l; link.style.display = 'inline-flex'; }
-            else { link.style.display = 'none'; }
-            detail.classList.add('visible');
-        });
-        item.addEventListener('mousemove', e => {
-            const x = e.clientX + 24;
-            const y = e.clientY - 20;
-            detail.style.left = Math.min(x, window.innerWidth - 400) + 'px';
-            detail.style.top = Math.min(y, window.innerHeight - 280) + 'px';
-        });
-        item.addEventListener('mouseleave', () => { detail.classList.remove('visible'); currentIdx = -1; });
-        item.addEventListener('click', function() {
-                var idx = parseInt(item.dataset.idx);
-                var p = P[idx]; if (!p) return;
-                if (window.innerWidth <= 1024) {
-                    var sheet = document.getElementById('mobileSheet');
-                    if (!sheet) return;
-                    document.getElementById('msScope').textContent = p.s;
-                    document.getElementById('msTitle').textContent = p.t;
-                    document.getElementById('msMeta').textContent = p.c + ' - ' + p.y;
-                    document.getElementById('msDesc').textContent = p.d;
-                    var lnk = document.getElementById('msLink');
-                    if (p.l) { lnk.href = p.l; lnk.style.display = 'inline-flex'; } else { lnk.style.display = 'none'; }
-                    sheet.classList.add('active');
-                } else { if (p.l) window.open(p.l, '_blank'); }
-            });
-    });
-
-    
-
-    // ===== MOBILE SHEET CLOSE =====
-    (function() {
-        var sheet = document.getElementById('mobileSheet');
-        if (!sheet) return;
-        sheet.addEventListener('click', function(e) { if (e.target === sheet) sheet.classList.remove('active'); });
-        var innerSheet = sheet.querySelector('.mobile-sheet');
-        if (innerSheet) innerSheet.addEventListener('click', function(e) { e.stopPropagation(); });
-        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') sheet.classList.remove('active'); });
-    })();
-
-    // ===== INTERSTELLAR AURORA + STARS + SHOOTING STARS + DUST + PARALLAX =====
-    (function() {
-        var canvas = document.getElementById('auroraCanvas');
-        if (!canvas) return;
-        var ctx = canvas.getContext('2d');
-        var dpr = window.devicePixelRatio || 1;
-        var W, H, time = 0;
-        var mouseX = 0.5, mouseY = 0.5, targetMX = 0.5, targetMY = 0.5, mouseActive = false;
-        var scrollY = 0;
-        var pageHeight = 1;
-
-        // === STARS ===
-        var stars = [];
-        var STAR_COUNT = 300;
-
-        // === COSMIC DUST ===
-        var dust = [];
-        var DUST_COUNT = 120;
-
-        // === SHOOTING STARS ===
-        var shooters = [];
-        var lastShooter = 0;
-        var SHOOTER_INTERVAL = 2500; // ms between shooters
-
-        function resize() {
-            var r = canvas.getBoundingClientRect();
-            W = r.width; H = r.height;
-            canvas.width = W * dpr; canvas.height = H * dpr;
-            canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            pageHeight = Math.max(document.body.scrollHeight, H);
-
-            if (stars.length === 0) {
-                for (var i = 0; i < STAR_COUNT; i++) {
-                    stars.push({
-                        x: Math.random() * W,
-                        y: Math.random() * H,
-                        r: Math.random() * 1.5 + 0.3,
-                        alpha: Math.random() * 0.6 + 0.1,
-                        twinkle: Math.random() * Math.PI * 2,
-                        speed: Math.random() * 0.3 + 0.1,
-                        depth: Math.random() // 0=far, 1=near (for parallax)
-                    });
-                }
-            }
-            if (dust.length === 0) {
-                for (var j = 0; j < DUST_COUNT; j++) {
-                    dust.push({
-                        x: Math.random() * W,
-                        y: Math.random() * H,
-                        r: Math.random() * 0.8 + 0.2,
-                        alpha: Math.random() * 0.15 + 0.03,
-                        vx: Math.random() * 0.15 + 0.02,
-                        vy: Math.random() * 0.08 - 0.04,
-                        depth: Math.random() * 0.5
-                    });
-                }
-            }
-        }
-        resize();
-        window.addEventListener('resize', function() { stars = []; dust = []; resize(); });
-        window.addEventListener('scroll', function() { scrollY = window.scrollY || window.pageYOffset; });
-
-        // Nebula blobs
-        var blobs = [
-            { hue:220, sat:55, li:18, x:0.3, y:0.35, rx:0.7, ry:0.4, sx:0.25, sy:0.18, ph:0, a:0.30, dr:0.12, pSpeed:0.08 },
-            { hue:250, sat:45, li:15, x:0.7, y:0.2, rx:0.55, ry:0.35, sx:0.2, sy:0.15, ph:2.0, a:0.22, dr:0.1, pSpeed:0.06 },
-            { hue:280, sat:40, li:20, x:0.5, y:0.6, rx:0.6, ry:0.35, sx:0.3, sy:0.2, ph:3.5, a:0.18, dr:0.15, pSpeed:0.1 },
-            { hue:190, sat:50, li:22, x:0.15, y:0.7, rx:0.4, ry:0.3, sx:0.22, sy:0.28, ph:5.0, a:0.14, dr:0.08, pSpeed:0.05 },
-            { hue:30, sat:60, li:35, x:0.85, y:0.45, rx:0.25, ry:0.2, sx:0.15, sy:0.12, ph:1.5, a:0.12, dr:0.06, pSpeed:0.04 },
-            { hue:260, sat:35, li:12, x:0.4, y:0.15, rx:0.5, ry:0.25, sx:0.18, sy:0.22, ph:4.2, a:0.20, dr:0.1, pSpeed:0.07 },
-            { hue:350, sat:40, li:18, x:0.6, y:0.8, rx:0.35, ry:0.25, sx:0.28, sy:0.2, ph:2.8, a:0.10, dr:0.12, pSpeed:0.09 },
-            { hue:210, sat:50, li:20, x:0.2, y:0.5, rx:0.45, ry:0.35, sx:0.2, sy:0.15, ph:6.0, a:0.16, dr:0.09, pSpeed:0.06 }
-        ];
-
-        // Spawn a shooting star
-        function spawnShooter() {
-            var startX = Math.random() * W * 0.8;
-            var startY = Math.random() * H * 0.4;
-            var angle = Math.PI * 0.15 + Math.random() * Math.PI * 0.2; // angled downward-right
-            var speed = 8 + Math.random() * 12;
-            var len = 80 + Math.random() * 120;
-            shooters.push({
-                x: startX, y: startY,
-                vx: Math.cos(angle) * speed,
-                vy: Math.sin(angle) * speed,
-                life: 1,
-                decay: 0.015 + Math.random() * 0.01,
-                len: len,
-                alpha: 0.4 + Math.random() * 0.4
-            });
-        }
-
-        function draw() {
-            time += 0.006;
-            var now = Date.now();
-            mouseX += (targetMX - mouseX) * 0.02;
-            mouseY += (targetMY - mouseY) * 0.02;
-
-            // Scroll-based parallax factor (0 at top, 1 at bottom)
-            var scrollFactor = scrollY / Math.max(pageHeight - H, 1);
-
-            ctx.clearRect(0, 0, W, H);
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, W, H);
-
-            // ---- STAR FIELD with parallax ----
-            for (var s = 0; s < stars.length; s++) {
-                var star = stars[s];
-                star.twinkle += star.speed * 0.02;
-                var twinkleAlpha = star.alpha * (0.5 + Math.sin(star.twinkle) * 0.5);
-
-                // Parallax: deeper stars move less
-                var pOffset = scrollY * (0.02 + star.depth * 0.06);
-                var sy = ((star.y + pOffset) % (H + 20)) - 10;
-
-                ctx.beginPath();
-                ctx.arc(star.x, sy, star.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,' + twinkleAlpha.toFixed(3) + ')';
-                ctx.fill();
-
-                if (star.r > 1.2) {
-                    ctx.beginPath();
-                    ctx.arc(star.x, sy, star.r * 3, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(200,220,255,' + (twinkleAlpha * 0.06).toFixed(4) + ')';
-                    ctx.fill();
-                }
-            }
-
-            // ---- COSMIC DUST (drifting particles) ----
-            for (var d = 0; d < dust.length; d++) {
-                var p = dust[d];
-                p.x += p.vx;
-                p.y += p.vy;
-
-                // Parallax on dust too
-                var dustY = ((p.y + scrollY * (0.01 + p.depth * 0.03)) % (H + 20)) - 10;
-
-                // Wrap horizontally
-                if (p.x > W + 10) p.x = -10;
-                if (p.x < -10) p.x = W + 10;
-
-                ctx.beginPath();
-                ctx.arc(p.x, dustY, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(180,200,255,' + p.alpha.toFixed(3) + ')';
-                ctx.fill();
-            }
-
-            // ---- SHOOTING STARS ----
-            if (now - lastShooter > SHOOTER_INTERVAL + Math.random() * 2000) {
-                spawnShooter();
-                lastShooter = now;
-            }
-
-            for (var k = shooters.length - 1; k >= 0; k--) {
-                var sh = shooters[k];
-                sh.x += sh.vx;
-                sh.y += sh.vy;
-                sh.life -= sh.decay;
-
-                if (sh.life <= 0) {
-                    shooters.splice(k, 1);
-                    continue;
-                }
-
-                // Draw trail
-                var tailX = sh.x - (sh.vx / Math.sqrt(sh.vx*sh.vx + sh.vy*sh.vy)) * sh.len * sh.life;
-                var tailY = sh.y - (sh.vy / Math.sqrt(sh.vx*sh.vx + sh.vy*sh.vy)) * sh.len * sh.life;
-
-                var grad = ctx.createLinearGradient(tailX, tailY, sh.x, sh.y);
-                grad.addColorStop(0, 'rgba(255,255,255,0)');
-                grad.addColorStop(0.6, 'rgba(255,255,255,' + (sh.alpha * sh.life * 0.3).toFixed(3) + ')');
-                grad.addColorStop(1, 'rgba(255,255,255,' + (sh.alpha * sh.life).toFixed(3) + ')');
-
-                ctx.beginPath();
-                ctx.moveTo(tailX, tailY);
-                ctx.lineTo(sh.x, sh.y);
-                ctx.strokeStyle = grad;
-                ctx.lineWidth = 1.2 * sh.life;
-                ctx.stroke();
-
-                // Bright head
-                ctx.beginPath();
-                ctx.arc(sh.x, sh.y, 1.5 * sh.life, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,' + (sh.alpha * sh.life).toFixed(3) + ')';
-                ctx.fill();
-            }
-
-            // ---- NEBULA with scroll parallax ----
-            ctx.globalCompositeOperation = 'screen';
-
-            for (var i = 0; i < blobs.length; i++) {
-                var b = blobs[i], t = time + b.ph;
-
-                var cx = b.x + Math.sin(t * b.sx) * b.dr + Math.cos(t * b.sx * 0.6 + 1.3) * b.dr * 0.5;
-                var cy = b.y + Math.cos(t * b.sy) * b.dr * 0.7 + Math.sin(t * b.sy * 0.5 + 0.8) * b.dr * 0.4;
-
-                // Scroll parallax per blob (each moves at different speed)
-                cy = cy - scrollFactor * b.pSpeed;
-
-                if (mouseActive) {
-                    cx += (mouseX - cx) * 0.06;
-                    cy += (mouseY - cy) * 0.04;
-                }
-
-                cx = Math.max(-0.3, Math.min(1.3, cx));
-                cy = Math.max(-0.3, Math.min(1.3, cy));
-
-                var breathe = 1 + Math.sin(t * 0.8) * 0.15 + Math.sin(t * 1.3) * 0.08;
-                var rx = b.rx * W * breathe;
-                var ry = b.ry * H * breathe;
-                var hue = b.hue + Math.sin(t * 0.2) * 12 + Math.cos(t * 0.35) * 8;
-                var alpha = b.a * (0.85 + Math.sin(t * 0.5 + b.ph) * 0.15);
-
-                var gx = cx * W, gy = cy * H, maxR = Math.max(rx, ry);
-                var grd = ctx.createRadialGradient(gx, gy, 0, gx, gy, maxR);
-                var col = 'hsla(' + Math.round(hue) + ',' + b.sat + '%,' + b.li + '%,';
-                grd.addColorStop(0, col + (alpha * 1.4) + ')');
-                grd.addColorStop(0.15, col + (alpha * 1.1) + ')');
-                grd.addColorStop(0.4, col + (alpha * 0.6) + ')');
-                grd.addColorStop(0.7, col + (alpha * 0.2) + ')');
-                grd.addColorStop(1, col + '0)');
-
-                ctx.save();
-                ctx.translate(gx, gy);
-                ctx.rotate(t * 0.08 + b.ph);
-                ctx.scale(1, ry / Math.max(rx, 1));
-                ctx.translate(-gx, -gy);
-                ctx.fillStyle = grd;
-                ctx.beginPath();
-                ctx.arc(gx, gy, rx, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-
-            ctx.globalCompositeOperation = 'source-over';
-
-            // Vignette
-            var vig = ctx.createRadialGradient(W * 0.5, H * 0.5, W * 0.15, W * 0.5, H * 0.5, W * 0.85);
-            vig.addColorStop(0, 'rgba(0,0,0,0)');
-            vig.addColorStop(1, 'rgba(0,0,0,0.35)');
-            ctx.fillStyle = vig;
-            ctx.fillRect(0, 0, W, H);
-
-            requestAnimationFrame(draw);
-        }
-        draw();
-
-        document.addEventListener('mousemove', function(e) {
-            targetMX = e.clientX / W;
-            targetMY = e.clientY / H;
-            mouseActive = true;
-        });
-        document.addEventListener('touchmove', function(e) {
-            targetMX = e.touches[0].clientX / W;
-            targetMY = e.touches[0].clientY / H;
-            mouseActive = true;
-        }, { passive: true });
-        document.addEventListener('touchend', function() { mouseActive = false; });
-    })();
-    
-    // WORK FILTER TABS
-    var filterTabs = document.querySelectorAll('.filter-tab');
-    var workItems = document.querySelectorAll('.work-item');
-    var visibleCount = document.getElementById('visibleCount');
-
-    function applyFilter(filter) {
-        var count = 0;
-        workItems.forEach(function(item) {
-            var cats = item.getAttribute('data-cat') || '';
-            var show = filter === 'all' || cats.indexOf(filter) !== -1;
-            if (show) { item.classList.remove('hidden'); count++; }
-            else { item.classList.add('hidden'); }
-        });
-        visibleCount.textContent = count;
-    }
-
-    filterTabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-            filterTabs.forEach(function(t) { t.classList.remove('active'); });
-            tab.classList.add('active');
-            applyFilter(tab.getAttribute('data-filter'));
-        });
-    });
-
-    // Default: show highlights on load
-    applyFilter('highlight');
-
-    
-
-    // ===== SUPERNOVA BURST (one-time on scroll past hero) =====
-    (function() {
-        var nova = document.getElementById('supernova');
-        var triggered = false;
-        window.addEventListener('scroll', function() {
-            if (triggered) return;
-            var scrollY = window.scrollY || window.pageYOffset;
-            if (scrollY > window.innerHeight * 0.7) {
-                triggered = true;
-                if (nova) {
-                    nova.classList.add('flash');
-                    setTimeout(function() { nova.remove(); }, 1500);
-                }
-            }
-        });
-    })();
-
-    // ===== HERO TITLE PARALLAX DRIFT =====
-    (function() {
-        var heading = document.querySelector('.hero-heading');
-        if (!heading || window.innerWidth < 768) return;
-        document.addEventListener('mousemove', function(e) {
-            var mx = (e.clientX / window.innerWidth - 0.5) * 2;
-            var my = (e.clientY / window.innerHeight - 0.5) * 2;
-            heading.style.transform = 'translate(' + (mx * 8) + 'px, ' + (my * 5) + 'px)';
-        });
-    })();
-
-    
-
-    // ===== STELLAR BURST ON CLICK =====
-    (function() {
-        var canvas = document.getElementById('clickCanvas');
-        if (!canvas) return;
-        var ctx = canvas.getContext('2d');
-        var dpr = window.devicePixelRatio || 1;
-        var W, H;
-        var bursts = [];
-
-        function resize() {
-            W = window.innerWidth; H = window.innerHeight;
-            canvas.width = W * dpr; canvas.height = H * dpr;
-            canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        // Particle class
-        function Spark(x, y) {
-            var angle = Math.random() * Math.PI * 2;
-            var speed = 1 + Math.random() * 4;
-            var hue = [220, 250, 280, 30, 190][Math.floor(Math.random() * 5)];
-            this.x = x;
-            this.y = y;
-            this.vx = Math.cos(angle) * speed;
-            this.vy = Math.sin(angle) * speed;
-            this.life = 1;
-            this.decay = 0.015 + Math.random() * 0.02;
-            this.r = 1 + Math.random() * 2;
-            this.hue = hue;
-            this.sat = 50 + Math.random() * 30;
-            this.li = 40 + Math.random() * 30;
-        }
-
-        function spawnBurst(x, y) {
-            var count = 12 + Math.floor(Math.random() * 10);
-            for (var i = 0; i < count; i++) {
-                bursts.push(new Spark(x, y));
-            }
-        }
-
-        // Listen for clicks on the whole document
-        document.addEventListener('click', function(e) {
-            // Don't burst on interactive elements
-            var tag = e.target.tagName.toLowerCase();
-            if (tag === 'a' || tag === 'button' || tag === 'input' || tag === 'select') return;
-            if (e.target.closest('a') || e.target.closest('button')) return;
-            spawnBurst(e.clientX, e.clientY);
-        });
-
-        function draw() {
-            ctx.clearRect(0, 0, W, H);
-
-            for (var i = bursts.length - 1; i >= 0; i--) {
-                var p = bursts[i];
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vx *= 0.96;
-                p.vy *= 0.96;
-                p.vy += 0.02; // slight gravity
-                p.life -= p.decay;
-
-                if (p.life <= 0) {
-                    bursts.splice(i, 1);
-                    continue;
-                }
-
-                var alpha = p.life * 0.8;
-
-                // Glow
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r * 3 * p.life, 0, Math.PI * 2);
-                ctx.fillStyle = 'hsla(' + p.hue + ',' + p.sat + '%,' + p.li + '%,' + (alpha * 0.15).toFixed(3) + ')';
-                ctx.fill();
-
-                // Core
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2);
-                ctx.fillStyle = 'hsla(' + p.hue + ',' + p.sat + '%,' + (p.li + 20) + '%,' + alpha.toFixed(3) + ')';
-                ctx.fill();
-
-                // Bright center for first frames
-                if (p.life > 0.7) {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r * 0.5, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(255,255,255,' + ((p.life - 0.7) * 2).toFixed(3) + ')';
-                    ctx.fill();
-                }
-            }
-
-            if (bursts.length > 0) requestAnimationFrame(draw);
-            else setTimeout(function() { requestAnimationFrame(draw); }, 100);
-        }
-        draw();
-    })();
-
-    </script>
-</body>
-</html>
+    makeOrbs(document.getElementById('bloom1'),orbs1);
+    makeOrbs(document.getElementById('bloom2'),orbs2);
+    // Apple + MUJI blooms
+    const orbs3=[{x:30,y:35,w:160,col:'rgba(59,130,246,0.3)'},{x:60,y:50,w:140,col:'rgba(168,85,247,0.25)'},{x:45,y:25,w:120,col:'rgba(34,197,94,0.2)'},{x:75,y:60,w:100,col:'rgba(251,146,60,0.2)'}];
+    const orbs4=[{x:25,y:40,w:150,col:'rgba(236,72,153,0.25)'},{x:55,y:30,w:130,col:'rgba(99,102,241,0.3)'},{x:70,y:55,w:110,col:'rgba(52,211,153,0.2)'},{x:35,y:65,w:100,col:'rgba(251,191,36,0.2)'}];
+    makeOrbs(document.getElementById('bloom3'),orbs3);
+    makeOrbs(document.getElementById('bloom4'),orbs4);
+})();
+
+// Reveal
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.04});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(!h||h.length<2)return;e.preventDefault();document.querySelector(h)?.scrollIntoView({behavior:'smooth'})})});
+
+// Service highlight cycling
+let activeService=0;
+setInterval(()=>{document.querySelectorAll('.service-card').forEach(c=>c.classList.remove('highlight'));activeService=(activeService+1)%4;document.querySelector(`[data-svc="${activeService}"]`).classList.add('highlight')},2500);
+
+// Contact form → mailto
+document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();const fd=new FormData(this);const name=fd.get('name')||'';const email=fd.get('email')||'';const msg=fd.get('message')||'';const subject=encodeURIComponent('Website inquiry from '+name);const body=encodeURIComponent('From: '+name+' ('+email+')\n\n'+msg);window.location.href='mailto:dylanlamwork@gmail.com?subject='+subject+'&body='+body;});
+</script>
+
+
+</body></html>
