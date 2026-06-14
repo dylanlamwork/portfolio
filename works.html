@@ -342,8 +342,8 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         body{font-family:var(--font);color:var(--fg);background:var(--white);line-height:1.4;-webkit-font-smoothing:antialiased}
         a{color:inherit;text-decoration:none}::selection{background:var(--blue-light)}
         .container{max-width:100%;margin:0 auto;padding:0 clamp(20px, 5vw, 80px)}
-        .nav-wrap{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--fg-10);position:sticky}
-        nav{max-width:100%;margin:0 auto;padding:18px clamp(20px, 5vw, 80px);display:flex;align-items:center;justify-content:space-between}
+        .nav-wrap{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--fg-10)}
+        nav{max-width:100%;margin:0 auto;padding:18px clamp(20px, 5vw, 80px);display:flex;align-items:center;justify-content:space-between;position:relative}
         .nav-brand{font-size:18px;font-weight:600;letter-spacing:-0.03em}
         .nav-links{display:flex;gap:28px;list-style:none}
         .nav-links a{font-size:14px;font-weight:500;color:var(--fg-60);transition:color 0.2s}
@@ -361,10 +361,10 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .page-header p{font-size:15px;color:var(--fg-60);line-height:150%;max-width:480px}
 
         /* FILTERS */
-        .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;padding:12px 20px;border-radius:100px;background:var(--bg);position:sticky;top:80px;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,0.04);border:1px solid var(--fg-10)}
-        .filter-tab{font-family:var(--font);font-size:13px;font-weight:500;color:var(--fg-60);background:var(--bg);border:none;border-radius:100px;padding:8px 16px;cursor:pointer;transition:all 0.2s}
-        .filter-tab:hover{background:#e8eaee;color:var(--fg)}
-        .filter-tab.active{background:var(--fg);color:var(--white)}
+        .filters{display:flex;gap:8px;flex-wrap:nowrap;margin-bottom:32px;padding:10px 16px;border-radius:14px;background:var(--bg);position:sticky;top:72px;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,0.04);border:1px solid var(--fg-10);overflow-x:auto;-webkit-overflow-scrolling:touch}
+        .filter-tab{font-family:var(--font);font-size:12px;font-weight:500;color:var(--fg-60);background:var(--white);border:1.5px solid var(--fg-10);border-radius:10px;padding:7px 14px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+        .filter-tab:hover{border-color:var(--fg-40);color:var(--fg)}
+        .filter-tab.active{background:var(--fg);color:var(--white);border-color:var(--fg)}
         .project-count{font-size:13px;color:var(--fg-40);margin-bottom:28px}
 
         /* PROJECT GRID */
@@ -470,6 +470,9 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     <footer><div class="container"><div class="footer-inner"><div class="footer-brand">Dylan Lam</div><ul class="footer-nav"><li><a href="about.html">About</a></li><li><a href="works.html">Work</a></li><li><a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a></li><li><a href="mailto:dylanlamwork@gmail.com">Email</a></li></ul><span class="footer-copy">© 2025 Dylan Lam. All rights reserved.</span></div></div></footer>
 
 <script>
+// Mobile menu
+document.getElementById('menuBtn').addEventListener('click',function(){document.querySelector('.nav-links').classList.toggle('active')});
+
 const P=[
     {"t":"Clair Optimization Agent","c":"Amazon Ads","y":"2025","d":"Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions — replacing hours of manual work.","l":null,"tags":["data","featured"]},
     {"t":"Clair Visual Agent","c":"Amazon Ads","y":"2025","d":"Built an AI Agent that translates campaign intent into visual generation prompts, adopted across Vietnam, Singapore & Taiwan markets.","l":"https://dylanlamwork.github.io/clairvisual/","tags":["data","featured"]},
@@ -543,7 +546,7 @@ P.forEach((p,i)=>{
             <div class="project-meta">${p.c} — ${p.y}</div>
             <p>${p.d}</p>
             <div class="project-tags">${tagsHTML}</div>
-            ${hasLink?'<div class="view-label">View project ↗</div>':''}
+            ${hasLink?'<div class="view-label">View project</div>':''}
         </div>
     `;
     card.appendChild(wrapper);
