@@ -370,12 +370,10 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .expertise-img{width:100%;aspect-ratio:16/8;border-radius:20px;background:var(--bg);overflow:hidden;margin-bottom:28px;position:relative}
         .expertise-btn{text-align:center}
 
-        /* SILK FABRIC — Expertise */
-        .silk-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:linear-gradient(160deg,#f8f9fc,#eef1f8)}
-        .silk-canvas svg{position:absolute;width:200%;height:100%;animation:silkFlow 12s ease-in-out infinite}
-        .silk-canvas svg:nth-child(2){animation-duration:15s;animation-delay:1.5s}
-        .silk-canvas svg:nth-child(3){animation-duration:18s;animation-delay:3s}
-        @keyframes silkFlow{0%{transform:translateX(0) rotate(0deg)}50%{transform:translateX(-12%) rotate(0.3deg)}100%{transform:translateX(0) rotate(0deg)}}
+        /* EXPERTISE VISUAL — Liquid Lava Blobs */
+        .expertise-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:#fafbfd}
+        .goo-wrapper{width:100%;height:100%;position:relative;filter:url(#goo)}
+        .blob{position:absolute;border-radius:50%;will-change:transform}
 
         /* GRADIENT BLOOM — Portfolio */
         .bloom-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:#fafbfd}
@@ -493,11 +491,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             <h2 class="section-heading">What I bring to the table</h2>
             <p class="section-desc">I operate across sales, data, project management, and system design. From building AI agents adopted across markets to launching flagship stores coordinating 10+ teams — I bring order to chaos and turn insights into action.</p>
         </div>
-        <div class="expertise-img reveal rd1"><div class="silk-canvas">
-            <svg viewBox="0 0 1200 400" preserveAspectRatio="none"><path d="M0,160 C200,220 400,100 600,180 C800,260 1000,120 1200,200 L1200,400 L0,400Z" fill="rgba(1,97,254,0.045)"></path></svg>
-            <svg viewBox="0 0 1200 400" preserveAspectRatio="none"><path d="M0,200 C150,140 350,260 600,180 C850,100 1050,240 1200,160 L1200,400 L0,400Z" fill="rgba(167,139,250,0.035)"></path></svg>
-            <svg viewBox="0 0 1200 400" preserveAspectRatio="none"><path d="M0,180 C250,250 450,120 700,200 C950,280 1100,140 1200,180 L1200,400 L0,400Z" fill="rgba(96,165,250,0.04)"></path></svg>
-        </div></div>
+        <div class="expertise-img reveal rd1"><div class="expertise-canvas"><svg style="position:absolute;width:0;height:0"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur"></feGaussianBlur><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10" result="goo"></feColorMatrix><feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite></filter></defs></svg><div class="goo-wrapper" id="expertiseViz"></div></div></div>
         <div class="expertise-btn reveal rd2"><a href="#contact" class="btn btn-primary">Contact →</a></div>
     </section>
 
@@ -577,6 +571,35 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     <footer><div class="container"><div class="footer-inner"><div class="footer-brand">Dylan Lam</div><ul class="footer-nav"><li><a href="about.html">About</a></li><li><a href="works.html">Work</a></li><li><a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a></li><li><a href="mailto:dylanlamwork@gmail.com">Email</a></li></ul><span class="footer-copy">© 2025 Dylan Lam. All rights reserved.</span></div></div></footer>
 
 <script>
+// Expertise visual — liquid lava blobs
+(function(){
+    const c=document.getElementById('expertiseViz');if(!c)return;
+    const COLORS=['rgba(99,102,241,','rgba(20,184,166,','rgba(251,146,60,','rgba(168,85,247,'];
+    const blobs=[];
+    for(let i=0;i<7;i++){
+        const blob=document.createElement('div');blob.className='blob';
+        const size=70+Math.random()*50;
+        blob.style.width=size+'px';blob.style.height=size+'px';
+        blob.style.background=COLORS[i%4]+'0.45)';
+        c.appendChild(blob);
+        blobs.push({el:blob,x:Math.random()*80+10,y:Math.random()*60+20,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,size:size});
+    }
+    function anim(){
+        blobs.forEach(b=>{
+            b.x+=b.vx;b.y+=b.vy;
+            if(b.x<5||b.x>90)b.vx*=-1;
+            if(b.y<5||b.y>85)b.vy*=-1;
+            b.vx+=(Math.random()-0.5)*0.04;
+            b.vy+=(Math.random()-0.5)*0.04;
+            b.vx=Math.max(-0.6,Math.min(0.6,b.vx));
+            b.vy=Math.max(-0.6,Math.min(0.6,b.vy));
+            b.el.style.left=b.x+'%';b.el.style.top=b.y+'%';
+        });
+        requestAnimationFrame(anim);
+    }
+    anim();
+})();
+
 // Nav
 document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));
 
