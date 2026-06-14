@@ -360,7 +360,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .page-header p{font-size:15px;color:var(--fg-60);line-height:150%;max-width:480px}
 
         /* FILTERS */
-        .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--fg-10)}
+        .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;padding:12px 20px;border-radius:100px;background:var(--bg);position:sticky;top:80px;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,0.04);border:1px solid var(--fg-10)}
         .filter-tab{font-family:var(--font);font-size:13px;font-weight:500;color:var(--fg-60);background:var(--bg);border:none;border-radius:100px;padding:8px 16px;cursor:pointer;transition:all 0.2s}
         .filter-tab:hover{background:#e8eaee;color:var(--fg)}
         .filter-tab.active{background:var(--fg);color:var(--white)}
@@ -389,6 +389,9 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .project-card-link .view-label{font-size:12px;font-weight:500;color:var(--blue);margin-top:10px;opacity:0;transition:opacity 0.2s}
         .project-card:hover .view-label{opacity:1}
 
+        .featured-badge{position:absolute;top:12px;left:12px;font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--blue);background:var(--blue-light);padding:4px 10px;border-radius:100px;z-index:2}
+        .project-card-img{position:relative}
+
         /* BLOOM VISUALS */
         .bloom-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:#fafbfd}
         .bloom-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:bloomFloat 8s ease infinite;mix-blend-mode:multiply}
@@ -405,11 +408,29 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 
         .reveal{opacity:0;transform:translateY(14px);transition:all 0.55s cubic-bezier(0.16,1,0.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
 
+        @media(max-width:1024px){
+            .container{padding:0 32px}nav{padding:16px 32px}
+            .project-grid{gap:20px}
+        }
         @media(max-width:768px){
-            .container{padding:0 20px}nav{padding:14px 20px}.nav-links{display:none}.menu-btn{display:block}
+            .container{padding:0 20px}nav{padding:14px 20px}
+            .nav-links{display:none}.menu-btn{display:block}
             .page-header{padding:40px 0 24px}.page-header h1{font-size:30px}
             .project-grid{grid-template-columns:1fr;gap:20px}
+            .featured-grid{grid-template-columns:1fr}
             .footer-inner{flex-direction:column;gap:16px;align-items:flex-start}
+            .filters{gap:6px}
+            .filter-tab{font-size:12px;padding:7px 12px}
+            .legend{gap:10px}
+            .legend-item{font-size:11px}
+        }
+        @media(max-width:480px){
+            .container{padding:0 16px}nav{padding:12px 16px}
+            .page-header h1{font-size:26px}
+            .page-header p{font-size:14px}
+            .project-card-body h3{font-size:14px}
+            .project-card-body p{font-size:12px}
+            .project-card-img{aspect-ratio:3/2}
         }
     </style>
 </head>
@@ -430,13 +451,14 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 
         <div class="filters reveal" id="filters">
             <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="featured">Featured</button>
             <button class="filter-tab" data-filter="data">Data &amp; AI</button>
             <button class="filter-tab" data-filter="pm">Project Management</button>
             <button class="filter-tab" data-filter="sales">Sales</button>
             <button class="filter-tab" data-filter="notion">System Design</button>
         </div>
 
-        <div class="project-count reveal"><span id="count">23</span> projects</div>
+                <div class="project-count reveal"><span id="count">23</span> projects</div>
 
         <div class="project-grid" id="projectGrid"></div>
     </div>
@@ -445,8 +467,8 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 
 <script>
 const P=[
-    {"t":"Clair Optimization Agent","c":"Amazon Ads","y":"2025","d":"Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions — replacing hours of manual work.","l":null,"tags":["data"]},
-    {"t":"Clair Visual Agent","c":"Amazon Ads","y":"2025","d":"Built an AI Agent that translates campaign intent into visual generation prompts, adopted across Vietnam, Singapore & Taiwan markets.","l":"https://dylanlamwork.github.io/clairvisual/","tags":["data"]},
+    {"t":"Clair Optimization Agent","c":"Amazon Ads","y":"2025","d":"Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions — replacing hours of manual work.","l":null,"tags":["data","featured"]},
+    {"t":"Clair Visual Agent","c":"Amazon Ads","y":"2025","d":"Built an AI Agent that translates campaign intent into visual generation prompts, adopted across Vietnam, Singapore & Taiwan markets.","l":"https://dylanlamwork.github.io/clairvisual/","tags":["data","featured"]},
     {"t":"AI Agent for Program Pitch Deck","c":"Amazon","y":"2025","d":"Built an AI Agent to generate Pitch Decks for one of the biggest Annual Advertiser Programs of Amazon Ads, adopted by VN & CN teams.","l":null,"tags":["data"]},
     {"t":"Business Dashboard","c":"Amazon","y":"2025","d":"Co-built a business dashboard on PowerBI and Amazon QuickSight, integrating with AI Agent to analyze and provide business insights for actions.","l":null,"tags":["data"]},
     {"t":"Efficiency Enhancement Tool","c":"Amazon","y":"2025","d":"Built a lead-identification tool using Excel and advanced data analytics. Reduced qualification time by 80%.","l":null,"tags":["data"]},
@@ -477,8 +499,8 @@ const TAG_COLORS = {
     sales: {r:251,g:146, b:60},   // Amber
     notion:{r:168,g:85,  b:247},  // Purple
 };
-const TAG_LABELS = {data:'Data & AI', pm:'Project Management', sales:'Sales', notion:'System Design'};
-const TAG_CLASSES = {data:'tag-data', pm:'tag-pm', sales:'tag-sales', notion:'tag-system'};
+const TAG_LABELS = {data:'Data & AI', pm:'Project Management', sales:'Sales', notion:'System Design', featured:'Featured'};
+const TAG_CLASSES = {data:'tag-data', pm:'tag-pm', sales:'tag-sales', notion:'tag-system', featured:'tag-data'};
 
 // Orb positions (randomized per card)
 const ORB_POS = [
@@ -501,15 +523,17 @@ P.forEach((p,i)=>{
     const orbColors=[];
     p.tags.forEach(tag=>{
         const c=TAG_COLORS[tag];
+        if(!c)return;
         orbColors.push(`rgba(${c.r},${c.g},${c.b},0.35)`);
         orbColors.push(`rgba(${c.r},${c.g},${c.b},0.2)`);
     });
 
     // Build tags HTML
-    const tagsHTML=p.tags.map(tag=>`<span class="project-tag ${TAG_CLASSES[tag]}">${TAG_LABELS[tag]}</span>`).join('');
+    const tagsHTML=p.tags.filter(t=>t!=='featured').map(tag=>`<span class="project-tag ${TAG_CLASSES[tag]}">${TAG_LABELS[tag]}</span>`).join('');
 
+    const featBadge=p.tags.includes('featured')?'<span class="featured-badge">Featured</span>':'';
     wrapper.innerHTML=`
-        <div class="project-card-img"><div class="bloom-canvas" id="bloom-${i}"></div></div>
+        <div class="project-card-img">${featBadge}<div class="bloom-canvas" id="bloom-${i}"></div></div>
         <div class="project-card-body">
             <h3>${p.t}</h3>
             <div class="project-meta">${p.c} — ${p.y}</div>
