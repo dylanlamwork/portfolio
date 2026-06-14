@@ -343,7 +343,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         a{color:inherit;text-decoration:none}::selection{background:var(--blue-light)}
         .container{max-width:100%;margin:0 auto;padding:0 clamp(20px, 5vw, 80px)}
         .nav-wrap{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--fg-10);position:sticky;width:100%}
-        nav{max-width:100%;margin:0 auto;padding:18px clamp(20px, 5vw, 80px);display:flex;align-items:center;justify-content:space-between}
+        nav{max-width:100%;margin:0 auto;padding:18px clamp(20px, 5vw, 80px);display:flex;align-items:center;justify-content:space-between;position:relative}
         .nav-brand{font-size:18px;font-weight:600;letter-spacing:-0.03em}
         .nav-links{display:flex;gap:28px;list-style:none}
         .nav-links a{font-size:14px;font-weight:500;color:var(--fg-60);transition:color 0.2s}
@@ -397,8 +397,8 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 
         /* PORTFOLIO */
         .portfolio-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px}
-        .portfolio-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:900px}
-        .portfolio-card-img{width:100%;aspect-ratio:2/1;border-radius:14px;overflow:hidden;margin-bottom:10px}
+        .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:18px}
+        .portfolio-card-img{width:100%;aspect-ratio:5/3;border-radius:14px;overflow:hidden;margin-bottom:10px}
         .portfolio-card h3{font-size:14px;font-weight:600;margin-bottom:5px}
         .portfolio-card p{font-size:12px;color:var(--fg-60);line-height:145%;margin-bottom:10px}
         .portfolio-tags{display:flex;gap:8px;flex-wrap:wrap}
@@ -480,7 +480,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     <section class="hero reveal">
         <h1>Dylan Lam<br><span>Strategy, Data &amp;<br>Systems.</span></h1>
         <p>I build AI tools, close partnerships, and design systems that make teams move faster. Currently a Global Partner Manager at Amazon, driving growth across Southeast Asia.</p>
-        <div class="hero-actions"><a href="#contact" class="btn btn-primary">Let's talk →</a><a href="works.html" class="btn btn-secondary">See my work</a></div>
+        <div class="hero-actions"><a href="#contact" class="btn btn-primary">Let's talk</a><a href="works.html" class="btn btn-secondary">See my work</a></div>
     </section>
 
     <div class="stats reveal">
@@ -496,7 +496,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             <p class="section-desc">I operate across sales, data, project management, and system design. From building AI agents adopted across markets to launching flagship stores coordinating 10+ teams — I bring order to chaos and turn insights into action.</p>
         </div>
         <div class="expertise-img reveal rd1"><div class="expertise-canvas"><svg style="position:absolute;width:0;height:0"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur"></feGaussianBlur><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10" result="goo"></feColorMatrix><feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite></filter></defs></svg><div class="goo-wrapper" id="expertiseViz"></div></div></div>
-        <div class="expertise-btn reveal rd2"><a href="#contact" class="btn btn-primary">Contact →</a></div>
+        <div class="expertise-btn reveal rd2"><a href="#contact" class="btn btn-primary">Contact</a></div>
     </section>
 
     <section class="section" id="how-i-work">
@@ -505,7 +505,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             <div class="services-left reveal">
                 <h2 class="section-heading">How I work with teams</h2>
                 <p class="section-desc">Focused on your unique needs, I deliver solutions that blend deep industry knowledge and cutting-edge strategies.</p>
-                <a href="works.html" class="btn btn-primary btn-sm">See my work →</a>
+                <a href="works.html" class="btn btn-primary btn-sm">See my work</a>
             </div>
             <div class="services-grid" id="serviceGrid">
                 <div class="service-card highlight" data-svc="0"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18" stroke="#fff" stroke-width="2" fill="none"></path><path d="M7 14l4-4 4 4 5-5" stroke="#fff" stroke-width="2" fill="none"></path></svg></div><h3>Sales &amp; Account Management</h3><p>Building trust, closing deals, and making partnerships last.</p></div>
@@ -544,7 +544,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
                 <div class="portfolio-tags"><span class="portfolio-tag tag-sales">Sales</span></div>
             </div>
         </div>
-        <div class="reveal" style="text-align:center;margin-top:36px"><a href="works.html" class="btn btn-dark">All projects →</a></div>
+        <div class="reveal" style="text-align:center;margin-top:36px"><a href="works.html" class="btn btn-dark">All projects</a></div>
     </section>
 
     <div class="section reveal" id="writing" style="padding-bottom:0">
@@ -559,7 +559,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     <div class="reveal" style="text-align:center;padding:72px 0">
         <h2 class="section-heading" style="max-width:100%;text-align:center;margin:0 auto 14px">Interested in working together?</h2>
         <p class="section-desc" style="max-width:100%;text-align:center;margin:0 auto 24px">I'm always open to conversations — whether it's a project, a partnership, or an exchange of ideas.</p>
-        <a href="#contact" class="btn btn-primary">Get in touch →</a>
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
     </div>
 
     <div class="contact-section" id="contact">
