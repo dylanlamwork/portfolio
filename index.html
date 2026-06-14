@@ -404,11 +404,10 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .portfolio-card p{font-size:13px;color:var(--fg-60);line-height:145%;margin-bottom:12px}
         .portfolio-tags{display:flex;gap:8px;flex-wrap:wrap}
         .portfolio-tag{font-size:11px;font-weight:500;color:var(--fg-60);border:1.5px solid var(--fg-10);padding:5px 12px;border-radius:100px}
-
-        /* TESTIMONIAL */
-        .testimonial{padding:72px 0}
-        .testimonial-text{font-family:var(--heading);font-size:20px;font-weight:400;line-height:160%;letter-spacing:-0.01em;color:var(--fg-80);max-width:700px;margin-bottom:20px;font-style:italic}
-        .testimonial-author{font-size:14px;color:var(--fg-60)}.testimonial-author strong{color:var(--fg);font-weight:600}
+        .tag-data{color:rgb(99,102,241);border-color:rgba(99,102,241,0.3);background:rgba(99,102,241,0.05)}
+        .tag-pm{color:rgb(20,184,166);border-color:rgba(20,184,166,0.3);background:rgba(20,184,166,0.05)}
+        .tag-sales{color:rgb(251,146,60);border-color:rgba(251,146,60,0.3);background:rgba(251,146,60,0.05)}
+        .tag-system{color:rgb(168,85,247);border-color:rgba(168,85,247,0.3);background:rgba(168,85,247,0.05)}
 
         /* CONTACT */
         .contact-section{padding:88px 0}
@@ -439,19 +438,47 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 
         .reveal{opacity:0;transform:translateY(14px);transition:all 0.55s cubic-bezier(0.16,1,0.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
         .rd1{transition-delay:0.05s}.rd2{transition-delay:0.1s}.rd3{transition-delay:0.15s}.rd4{transition-delay:0.2s}
-        @media(max-width:768px){.container{padding:0 20px}nav{padding:14px 20px}.nav-links{display:none}.menu-btn{display:block}.hero{padding:40px 0 32px}.hero h1{font-size:32px}.stats{grid-template-columns:1fr;gap:16px}.stat-value{font-size:28px}.section{padding:56px 0}.expertise-top{grid-template-columns:1fr}.services-layout,.portfolio-grid,.blog-grid,.contact-grid{grid-template-columns:1fr}.services-grid{grid-template-columns:1fr}.contact-form{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:16px;align-items:flex-start}.blog-section{margin:0 -20px;padding:56px 20px;border-radius:24px}.portfolio-header{flex-direction:column;gap:12px}}
+        @media(max-width:1024px){
+            .container{padding:0 32px}nav{padding:16px 32px}
+            .hero h1{font-size:44px}
+            .expertise-top{grid-template-columns:1fr}
+            .services-layout{grid-template-columns:1fr;gap:32px}
+            .portfolio-grid{gap:18px}
+            .contact-grid{gap:36px}
+        }
+        @media(max-width:768px){
+            .container{padding:0 20px}nav{padding:14px 20px}
+            .nav-links{display:none}.menu-btn{display:block}
+            .hero{padding:40px 0 32px}.hero h1{font-size:32px}
+            .stats{grid-template-columns:1fr;gap:16px}.stat-value{font-size:32px}
+            .section{padding:56px 0}
+            .services-layout,.portfolio-grid,.contact-grid{grid-template-columns:1fr}
+            .services-grid{grid-template-columns:1fr}
+            .contact-form{grid-template-columns:1fr}
+            .footer-inner{flex-direction:column;gap:16px;align-items:flex-start}
+            .portfolio-header{flex-direction:column;gap:12px}
+            .expertise-img{aspect-ratio:16/10}
+        }
+        @media(max-width:480px){
+            .container{padding:0 16px}nav{padding:12px 16px}
+            .hero h1{font-size:28px}
+            .stat-value{font-size:28px}
+            .section-heading{font-size:28px}
+            .btn{padding:10px 18px;font-size:13px}
+            .portfolio-card-img{aspect-ratio:3/2}
+        }
     </style>
 </head>
 <body>
 
-    <div class="nav-wrap"><nav><a href="index.html" class="nav-brand">Dylan Lam</a><ul class="nav-links" id="navLinks"><li><a href="about.html">About</a></li><li><a href="#services">Services</a></li><li><a href="works.html">Work</a></li><li><a href="#contact">Contact</a></li></ul><div style="display:flex;gap:8px;align-items:center"><a href="#contact" class="btn btn-primary">Contact</a><a href="about.html" class="btn btn-secondary">About</a><button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button></div></nav></div>
+    <div class="nav-wrap"><nav><a href="index.html" class="nav-brand">Dylan Lam</a><ul class="nav-links" id="navLinks"><li><a href="about.html">About</a></li><li><a href="#how-i-work">How I work</a></li><li><a href="works.html">Work</a></li><li><a href="#contact">Contact</a></li></ul><div style="display:flex;gap:8px;align-items:center"><a href="#contact" class="btn btn-primary">Contact</a><a href="about.html" class="btn btn-secondary">About</a><button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button></div></nav></div>
 
     <div class="container">
 
     <section class="hero reveal">
-        <h1>Building the<br>next generation<br>of <span>business systems.</span></h1>
-        <p>I connect strategy, data, and operations to help businesses scale with confidence. Currently driving advertiser growth at Amazon Ads across Southeast Asia.</p>
-        <div class="hero-actions"><a href="#contact" class="btn btn-primary">Contact</a><a href="about.html" class="btn btn-secondary">About</a></div>
+        <h1>Dylan Lam<br><span>Strategy, Data &amp;<br>Systems.</span></h1>
+        <p>I build AI tools, close partnerships, and design systems that make teams move faster. Currently a Global Partner Manager at Amazon, driving growth across Southeast Asia.</p>
+        <div class="hero-actions"><a href="#contact" class="btn btn-primary">Let's talk →</a><a href="works.html" class="btn btn-secondary">See my work</a></div>
     </section>
 
     <div class="stats reveal">
@@ -474,11 +501,11 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         <div class="expertise-btn reveal rd2"><a href="#contact" class="btn btn-primary">Contact →</a></div>
     </section>
 
-    <section class="section" id="services">
-        <span class="badge reveal">Services</span>
+    <section class="section" id="how-i-work">
+        <span class="badge reveal">How I work</span>
         <div class="services-layout">
             <div class="services-left reveal">
-                <h2 class="section-heading">What I can help you with</h2>
+                <h2 class="section-heading">How I work with teams</h2>
                 <p class="section-desc">Focused on your unique needs, I deliver solutions that blend deep industry knowledge and cutting-edge strategies.</p>
                 <a href="works.html" class="btn btn-primary btn-sm">See my work →</a>
             </div>
@@ -498,33 +525,43 @@ a { color: var(--color-link, var(--color-primary)); }</style>
                 <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom1"></div></div>
                 <h3>Clair Optimization Agent</h3>
                 <p>Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions — replacing hours of manual work per report.</p>
-                <div class="portfolio-tags"><span class="portfolio-tag">AI Agent</span><span class="portfolio-tag">Data &amp; Analytics</span><span class="portfolio-tag">Amazon Ads</span></div>
+                <div class="portfolio-tags"><span class="portfolio-tag tag-data">Data &amp; AI</span></div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-card-img"><div class="bloom-canvas bloom-canvas-alt" id="bloom2"></div></div>
                 <h3>Clair Visual Agent</h3>
                 <p>Built an AI Agent that translates campaign intent into visual generation prompts, adopted across Vietnam, Singapore &amp; Taiwan markets.</p>
-                <div class="portfolio-tags"><span class="portfolio-tag">AI Agent</span><span class="portfolio-tag">Creative</span><span class="portfolio-tag">Multi-market</span></div>
+                <div class="portfolio-tags"><span class="portfolio-tag tag-data">Data &amp; AI</span></div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom3"></div></div>
                 <h3>Apple Social Video</h3>
                 <p>Managed the strategy and concept phase for an Apple commission, ensuring strict brand compliance for the Shot on iPhone campaign.</p>
-                <div class="portfolio-tags"><span class="portfolio-tag">Project Management</span><span class="portfolio-tag">Sales</span><span class="portfolio-tag">Apple</span></div>
+                <div class="portfolio-tags"><span class="portfolio-tag tag-pm">Project Management</span><span class="portfolio-tag tag-sales">Sales</span></div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom4"></div></div>
                 <h3>MUJI Box</h3>
                 <p>Led strategic partnership negotiations to secure the MUJI Box project, closing the deal in 1 month.</p>
-                <div class="portfolio-tags"><span class="portfolio-tag">Sales</span><span class="portfolio-tag">Partnership</span><span class="portfolio-tag">MUJI</span></div>
+                <div class="portfolio-tags"><span class="portfolio-tag tag-sales">Sales</span></div>
             </div>
         </div>
         <div class="reveal" style="text-align:center;margin-top:36px"><a href="works.html" class="btn btn-dark">All projects →</a></div>
     </section>
 
-    <div class="testimonial reveal">
-        <p class="testimonial-text">"I bring clarity to complex problems, breaking down barriers and delivering solutions that turn into real, tangible outcomes — driving measurable growth for the teams I work with."</p>
-        <div class="testimonial-author"><strong>Dylan Lam</strong> — Amazon Ads, Southeast Asia</div>
+    <div class="section reveal" id="writing" style="padding-bottom:0">
+        <span class="badge">Writing</span>
+        <h2 class="section-heading">Featured on LinkedIn</h2>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px">
+            <a href="https://www.linkedin.com/posts/dylanlamwork_amazonads-generativeai-creativestrategy-activity-7435508959567945729-hKDL" target="_blank" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-radius:14px;transition:all 0.2s"><div><div style="font-size:14px;font-weight:500;margin-bottom:3px">Making AI creative generation accessible for everyone</div><div style="font-size:12px;color:var(--fg-40)">November 2025</div></div><span style="font-size:14px;color:var(--blue)">↗</span></a>
+            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-ownership-earntrust-activity-7359058206247018496-xImq" target="_blank" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-radius:14px;transition:all 0.2s"><div><div style="font-size:14px;font-weight:500;margin-bottom:3px">Interview vs. Reality: My first year at Amazon</div><div style="font-size:12px;color:var(--fg-40)">August 2025</div></div><span style="font-size:14px;color:var(--blue)">↗</span></a>
+        </div>
+    </div>
+
+    <div class="reveal" style="text-align:center;padding:72px 0">
+        <h2 class="section-heading" style="max-width:100%;text-align:center;margin:0 auto 14px">Interested in working together?</h2>
+        <p class="section-desc" style="max-width:100%;text-align:center;margin:0 auto 24px">I'm always open to conversations — whether it's a project, a partnership, or an exchange of ideas.</p>
+        <a href="#contact" class="btn btn-primary">Get in touch →</a>
     </div>
 
     <div class="contact-section" id="contact">
@@ -545,8 +582,14 @@ document.getElementById('menuBtn').addEventListener('click',()=>document.getElem
 
 // Bloom orbs
 (function(){
-    const orbs1=[{x:20,y:30,w:180,col:'rgba(167,139,250,0.35)'},{x:55,y:45,w:160,col:'rgba(96,165,250,0.3)'},{x:40,y:60,w:140,col:'rgba(251,146,60,0.2)'},{x:72,y:25,w:120,col:'rgba(52,211,153,0.25)'}];
-    const orbs2=[{x:25,y:35,w:170,col:'rgba(139,92,246,0.3)'},{x:60,y:50,w:150,col:'rgba(34,211,238,0.25)'},{x:45,y:25,w:130,col:'rgba(244,114,182,0.2)'},{x:70,y:65,w:110,col:'rgba(96,165,250,0.25)'}];
+    // Clair Optimization — Data & AI (indigo)
+    const orbs1=[{x:20,y:30,w:180,col:'rgba(99,102,241,0.35)'},{x:55,y:45,w:160,col:'rgba(99,102,241,0.2)'},{x:40,y:60,w:130,col:'rgba(99,102,241,0.15)'},{x:72,y:25,w:110,col:'rgba(99,102,241,0.1)'}];
+    // Clair Visual — Data & AI (indigo, shifted)
+    const orbs2=[{x:25,y:35,w:170,col:'rgba(99,102,241,0.3)'},{x:60,y:50,w:145,col:'rgba(99,102,241,0.2)'},{x:45,y:25,w:120,col:'rgba(99,102,241,0.15)'},{x:70,y:65,w:100,col:'rgba(99,102,241,0.1)'}];
+    // Apple — PM (teal) + Sales (amber)
+    const orbs3=[{x:25,y:30,w:160,col:'rgba(20,184,166,0.35)'},{x:60,y:50,w:140,col:'rgba(20,184,166,0.2)'},{x:45,y:25,w:130,col:'rgba(251,146,60,0.35)'},{x:72,y:60,w:110,col:'rgba(251,146,60,0.2)'}];
+    // MUJI — Sales (amber)
+    const orbs4=[{x:25,y:35,w:160,col:'rgba(251,146,60,0.35)'},{x:55,y:50,w:140,col:'rgba(251,146,60,0.2)'},{x:70,y:30,w:120,col:'rgba(251,146,60,0.15)'},{x:35,y:65,w:100,col:'rgba(251,146,60,0.1)'}];
     function makeOrbs(el,data){
         if(!el)return;
         data.forEach((o,i)=>{
@@ -557,9 +600,6 @@ document.getElementById('menuBtn').addEventListener('click',()=>document.getElem
     }
     makeOrbs(document.getElementById('bloom1'),orbs1);
     makeOrbs(document.getElementById('bloom2'),orbs2);
-    // Apple + MUJI blooms
-    const orbs3=[{x:30,y:35,w:160,col:'rgba(59,130,246,0.3)'},{x:60,y:50,w:140,col:'rgba(168,85,247,0.25)'},{x:45,y:25,w:120,col:'rgba(34,197,94,0.2)'},{x:75,y:60,w:100,col:'rgba(251,146,60,0.2)'}];
-    const orbs4=[{x:25,y:40,w:150,col:'rgba(236,72,153,0.25)'},{x:55,y:30,w:130,col:'rgba(99,102,241,0.3)'},{x:70,y:55,w:110,col:'rgba(52,211,153,0.2)'},{x:35,y:65,w:100,col:'rgba(251,191,36,0.2)'}];
     makeOrbs(document.getElementById('bloom3'),orbs3);
     makeOrbs(document.getElementById('bloom4'),orbs4);
 })();
