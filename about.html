@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en"><head><style id="qw-theme">:root {
+  --color-bg: #faf9fc;
+  --color-text: #1a1a1a;
+  --color-navbar-bg: #f9f9fb;
+  --color-bg-chat-view: #fcfcfd;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f9fafb;
+  --color-bg-hover: #f3f4f6;
+  --color-surface: #f9fafb;
+  --color-surface-hover: #f3f4f6;
+  --color-surface-active: #e5e7eb;
+  --color-border: rgba(0, 0, 0, .12);
+  --color-border-light: rgba(0, 0, 0, .06);
+  --color-border-strong: #d1d5db;
+  --color-primary: #4200db;
+  --color-primary-dark: #35009e;
+  --color-primary-light: #8575ff;
+  --color-primary-bg: #e8e6ff;
+  --color-primary-hover-border: #35009e;
+  --color-nav-icon-active: #4200db;
+  --color-nav-hover-border: #4200db;
+  --color-primary-alpha-3: color-mix(in srgb, #4200db 3%, transparent);
+  --color-primary-alpha-5: color-mix(in srgb, #4200db 5%, transparent);
+  --color-primary-alpha-8: color-mix(in srgb, #4200db 8%, transparent);
+  --color-primary-alpha-12: color-mix(in srgb, #4200db 12%, transparent);
+  --color-primary-alpha-15: color-mix(in srgb, #4200db 15%, transparent);
+  --color-primary-alpha-20: color-mix(in srgb, #4200db 20%, transparent);
+  --color-primary-alpha-25: color-mix(in srgb, #4200db 25%, transparent);
+  --color-primary-alpha-30: color-mix(in srgb, #4200db 30%, transparent);
+  --color-primary-alpha-40: color-mix(in srgb, #4200db 40%, transparent);
+  --color-primary-alpha-50: color-mix(in srgb, #4200db 50%, transparent);
+  --color-primary-alpha-60: color-mix(in srgb, #4200db 60%, transparent);
+  --color-primary-subtle: color-mix(in srgb, #4200db 12%, transparent);
+  --color-primary-border: color-mix(in srgb, #4200db 30%, transparent);
+  --color-focus-ring: color-mix(in srgb, #4200db 50%, transparent);
+  --color-sidebar-hover: color-mix(in srgb, #4200db 12%, transparent);
+  --color-accent: #4200db;
+  --color-accent-foreground: #4200db;
+  --color-accent-dark: #35009e;
+  --color-accent-light: #e8e6ff;
+  --color-accent-inverse: #ffffff;
+  --color-link: #4200db;
+  --color-primary-gradient-end: #e8e6ff;
+  --color-primary-bg-solid: #e8e6ff;
+  --color-user-bubble: #F3F3F7;
+  --color-text-secondary: #5e5e5e;
+  --color-text-tertiary: #656871;
+  --color-text-muted: #9ca3af;
+  --color-text-on-primary: #ffffff;
+  --color-success: #00802f;
+  --color-success-dark: #00471e;
+  --color-success-light: #d9ffd6;
+  --color-success-hover: #005c26;
+  --color-success-bg: #e6f5eb;
+  --color-success-border: #b3d9bf;
+  --color-success-foreground: #00802f;
+  --color-success-dark-foreground: #00471e;
+  --color-success-text: #00471e;
+  --color-error: #db0000;
+  --color-error-dark: #700000;
+  --color-error-light: #ffe0e0;
+  --color-error-hover: #ffe0e0;
+  --color-error-bg: #fceaea;
+  --color-error-border: #f2cccc;
+  --color-error-active-border: #db0000;
+  --color-error-foreground: #db0000;
+  --color-error-dark-foreground: #700000;
+  --color-error-inverse: #ffffff;
+  --color-error-text: #700000;
+  --color-warning: #f2b100;
+  --color-warning-dark: #573a00;
+  --color-warning-light: #fffbbd;
+  --color-warning-hover: #db9200;
+  --color-warning-bg: #fef7e6;
+  --color-warning-border: #f9dfa3;
+  --color-warning-foreground: #f2b100;
+  --color-warning-dark-foreground: #573a00;
+  --color-warning-inverse: #573a00;
+  --color-surface-warning: #fffbbd;
+  --color-text-warning: #573a00;
+  --color-info: #006ce0;
+  --color-info-dark: #002a66;
+  --color-info-light: #d1f1ff;
+  --color-info-hover: #003b8f;
+  --color-info-bg: #ebf3fc;
+  --color-info-border: #b3d1f0;
+  --color-info-foreground: #006ce0;
+  --color-info-dark-foreground: #002a66;
+  --color-info-inverse: #ffffff;
+  --color-overlay: rgba(0, 0, 0, .5);
+  --color-shadow: rgba(0, 0, 0, .08);
+  --color-hover: rgba(0, 0, 0, .05);
+  --color-tooltip-bg: rgba(0, 0, 0, .85);
+  --color-tooltip-text: #ffffff;
+  --color-voice-purple: #8575ff;
+  --color-voice-purple-dark: #4200db;
+  --color-voice-purple-light: #8575ff;
+  --color-voice-red: #db0000;
+  --color-voice-red-dark: #700000;
+  --color-voice-amber: #f2b100;
+  --color-voice-purple-glow: rgba(66, 0, 219, .4);
+  --color-voice-red-glow: rgba(219, 0, 0, .4);
+  --font-sans: "Amazon Ember", "Helvetica Neue", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "Monaco", "Menlo", "Consolas", monospace;
+  --text-2xs: .5625rem;
+  --text-xs: .625rem;
+  --text-sm: .6875rem;
+  --text-base: .75rem;
+  --text-md: .8125rem;
+  --text-lg: .875rem;
+  --text-xl: 1rem;
+  --text-2xl: 1.125rem;
+  --text-3xl: 1.25rem;
+  --text-4xl: 1.5rem;
+  --text-5xl: 2rem;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-card: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 8px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, .08);
+  --color-success-bg-solid: #d9ffd6;
+  --color-error-bg-solid: #ffe0e0;
+  --color-error-border-solid: #ffe0e0;
+  --color-warning-bg-solid: #fffbbd;
+  --color-warning-text: #573a00;
+  --color-info-bg-solid: #d1f1ff;
+  --color-info-bg-solid-alt: #d1f1ff;
+  --color-info-text: #002a66;
+  --color-info-text-alt: #002a66;
+  --color-emerald: #10b981;
+  --color-teal: #4ecdc4;
+  --color-code-bg: #F3F3F7;
+  --color-code-header-bg: #f1f3f5;
+  --color-code-text: #24292e;
+  --color-code-border: #e1e4e8;
+  --color-code-muted: #6a737d;
+  --color-inline-code-bg: #F3F3F7;
+  --color-inline-code-text: #24292e;
+  --color-inline-code-border: #e1e4e8;
+  --color-scrollbar-thumb: #d1d5db;
+  --color-scrollbar-track: transparent;
+  --color-graph-node-text: #333333;
+  --color-graph-node-text-dim: #7F8C8D;
+  --color-graph-edge-default: #95A5A6;
+  --color-graph-edge-cross: #E67E22;
+  --color-graph-edge-text: #666666;
+  --color-graph-edge-stroke: #ffffff;
+  --color-graph-highlight-bg: #FF6B6B;
+  --color-graph-highlight-border: #E74C3C;
+  --color-graph-search-bg: #FFD700;
+  --color-graph-search-border: #FFA500;
+  --color-graph-focus-border: #C0392B;
+  --color-graph-external-border: #95A5A6;
+  --color-graph-cat-file: #3498DB;
+  --color-graph-cat-folder: #7F8C8D;
+  --color-graph-cat-file-aggregate: #2980B9;
+  --color-graph-cat-class: #9B59B6;
+  --color-graph-cat-function: #2ECC71;
+  --color-graph-cat-method: #1ABC9C;
+  --color-graph-cat-variable: #F39C12;
+  --color-graph-cat-import: #D35400;
+  --color-graph-cat-module: #5B6ABF;
+  --color-graph-cat-concept: #E74C3C;
+  --color-graph-cat-person: #FF6B6B;
+  --color-graph-cat-org: #4ECDC4;
+  --color-graph-cat-organization: #4ECDC4;
+  --color-graph-cat-product: #A29BFE;
+  --color-graph-cat-metric: #FD79A8;
+  --color-graph-cat-location: #34495E;
+  --color-graph-cat-date: #E056A0;
+  --color-graph-cat-code: #3498DB;
+  --color-graph-cat-doc: #7F8C8D;
+  --color-graph-cat-url: #00B894;
+  --color-graph-cat-email: #6C5CE7;
+  --color-graph-cat-unknown: #BDC3C7;
+  --color-graph-rel-contains: #BDC3C7;
+  --color-graph-rel-extends: #9B59B6;
+  --color-graph-rel-implements: #3498DB;
+  --color-graph-rel-imports: #E67E22;
+  --color-graph-rel-uses: #2ECC71;
+  --color-graph-rel-calls: #27AE60;
+  --color-graph-rel-references: #F39C12;
+  --color-graph-rel-related-to: #95A5A6;
+  --color-graph-rel-works-on: #E74C3C;
+  --color-graph-rel-owns: #1ABC9C;
+  --color-graph-rel-depends-on: #E67E22;
+  --color-graph-rel-parent-of: #BDC3C7;
+  --qs-content: #fff;
+  --qs-main: #fff;
+  --qs-primary-foreground: #131920;
+  --qs-secondary-foreground: #656871;
+  --qs-tertiary-foreground: #9ca3af;
+  --qs-placeholder-foreground: #8c8c94;
+  --qs-divider: #dedee3;
+  --qs-default-border: #8c8c94;
+  --qs-neutral-soft: #b4b4bb;
+  --qs-neutral-gray-50: #f9fafb;
+  --qs-tertiary-background: #f9fafb;
+  --qs-action-hover: #f3f3f7;
+  --qs-primary-default: #4200db;
+  --qs-primary-dark: #35009e;
+  --qs-primary-light: #e8e6ff;
+  --qs-success-default: #00802f;
+  --qs-error-default: #db0000;
+  --qs-font-sans: "Amazon Ember", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  --qs-font-family: "Amazon Ember", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  --qs-font-base-letter-spacing: .15px;
+  --qs-shadow-sm: 0 0 2px 0 #00000029, 0 0 4px 0 #00000029;
+  --qs-shadow-md: 0 0 2px 0 #00000029, 0 2px 8px 1px #00000029;
+  --qs-shadow-lg: 0 4px 16px 4px #00000029, 0 2px 6px 1px #00000029;
+  --qs-shadow-xl: 0 4px 8px 2px #00000029, 0 6px 20px 4px #00000029;
+  --qs-width-modal-sm: 384px;
+  --qs-width-modal-md: 600px;
+  --qs-width-modal-lg: 1136px;
+  --qs-grid-gap: 16px;
+  --qs-grid-gap-xl: 24px;
+  --qs-primary-medium: #8575ff;
+  --qs-primary-inverse: #fff;
+  --qs-neutral-lightest: #f9f9fb;
+  --qs-neutral-light: #f3f3f7;
+  --qs-neutral-default: #dedee3;
+  --qs-neutral-medium: #8c8c94;
+  --qs-neutral-deep: #656871;
+  --qs-neutral-dark: #333843;
+  --qs-neutral-strong: #131920;
+  --qs-neutral-white: #fff;
+  --qs-neutral-black: #000;
+  --qs-success-medium: #005c26;
+  --qs-success-dark: #00471e;
+  --qs-success-light: #d9ffd6;
+  --qs-success-inverse: #fff;
+  --qs-info-default: #006ce0;
+  --qs-info-medium: #003b8f;
+  --qs-info-dark: #002a66;
+  --qs-info-light: #d1f1ff;
+  --qs-info-inverse: #fff;
+  --qs-warning-default: #f2b100;
+  --qs-warning-medium: #db9200;
+  --qs-warning-dark: #573a00;
+  --qs-warning-light: #fffbbd;
+  --qs-warning-inverse: #573a00;
+  --qs-warning-experimental: #f2b100;
+  --qs-warning-experimental-light: #fffbbd;
+  --qs-warning-experimental-light-foreground: #fffbbd;
+  --qs-error-medium: #900;
+  --qs-error-dark: #700000;
+  --qs-error-light: #ffe0e0;
+  --qs-error-inverse: #fff;
+  --qs-connection-default: #db3300;
+  --qs-connection-soft: #ff997a;
+  --qs-connection-light: #ffe0d6;
+  --qs-connection-dark: #661800;
+  --qs-automation-default: #b3008f;
+  --qs-automation-medium: #d600ba;
+  --qs-automation-soft: #ff94f1;
+  --qs-automation-light: #ffe0fb;
+  --qs-automation-dark: #660052;
+  --qs-insight-default: #a000b8;
+  --qs-insight-soft: #f299ff;
+  --qs-insight-light: #fce6ff;
+  --qs-insight-dark: #590066;
+  --qs-visualization-default: #7300e5;
+  --qs-visualization-soft: #d4a8ff;
+  --qs-visualization-light: #f2e5ff;
+  --qs-visualization-dark: #45008a;
+  --qs-spice: #ff9800;
+  --qs-coachmark: #006ce0;
+  --qs-brand: #fff;
+  --qs-brand-foreground: #131920;
+  --qs-brand-navbar: #131920;
+  --qs-brand-navbar-foreground: #fff;
+  --qs-brand-navbar-light: #dedee3;
+  --qs-brand-navbar-dark: #000;
+  --qs-application-navbar: #4200db;
+  --qs-application-navbar-foreground: #fff;
+  --qs-application-navbar-light: #e8e6ff;
+  --qs-application-navbar-dark: #35009e;
+  --qs-dimension: #4200db;
+  --qs-dimension-foreground: #fff;
+  --qs-dimension-experimental: #4200db;
+  --qs-dimension-experimental-foreground: #4200db;
+  --qs-measure: #00802f;
+  --qs-measure-foreground: #fff;
+  --qs-measure-experimental: #f2b100;
+  --qs-measure-experimental-foreground: #f2b100;
+  --qs-content-inverse: #333843;
+  --qs-content-inverse-active: #131920;
+  --qs-secondary: #dedee3;
+  --qs-disabled: #8c8c94;
+  --qs-divider-light: #f3f3f7;
+  --qs-hover-border: #333843;
+  --qs-active-border: #4200db;
+  --qs-disabled-border: #dedee3;
+  --qs-error-border: #ffe0e0;
+  --qs-error-active-border: #db0000;
+  --qs-disabled-foreground: #b4b4bb;
+  --qs-primary-inverse-foreground: #fff;
+  --qs-error-foreground: #db0000;
+  --qs-contrast-foreground: #131920;
+  --qs-main-foreground: #131920;
+  --qs-action-disabled: #f3f3f7;
+  --qs-action-active: #e8e6ff;
+  --qs-default-badge: #b4b4bb;
+  --qs-tag-default: #dedee3;
+  --qs-tag-soft-border: #b4b4bb;
+  --qs-focus-offset: 1px;
+  --qs-toggle-tile-sm: calc(.25rem * 8);
+  --qs-toggle-tile-md: calc(.25rem * 12);
+  --qs-toggle-tile-lg: calc(.25rem * 15);
+  --qs-shadow-pin-right: inset 4px 0 4px -4px #00000029;
+  --qs-shadow-pin-left: inset -4px 0 4px -4px #00000029;
+  --react-pdf-text-layer: 1;
+  --highlight-bg-color: rgba(180, 0, 170, 1);
+  --highlight-selected-bg-color: rgba(0, 100, 0, 1);
+  --react-pdf-annotation-layer: 1;
+  --annotation-unfocused-field-background: url("data:image/svg+xml;charset=UTF-8,<svg width='1px' height='1px' xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' style='fill:rgba(0, 54, 255, 0.13);'/></svg>");
+  --input-focus-border-color: Highlight;
+  --input-focus-outline: 1px solid Canvas;
+  --input-unfocused-border-color: transparent;
+  --input-disabled-border-color: transparent;
+  --input-hover-border-color: black;
+  --link-outline: none;
+  color-scheme: light;
+}
+body { background: var(--color-bg); color: var(--color-text); }
+a { color: var(--color-link, var(--color-primary)); }</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Dylan Lam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="[REDACTED_CONN_STRING]://300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="[REDACTED_CONN_STRING]://300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--fg:#111;--fg-80:#111c;--fg-60:#1119;--fg-40:#1116;--fg-20:#1113;--fg-10:#1111111a;--white:#fff;--bg:#f6f7f9;--blue:#0047cc;--blue-light:#e8f0ff;--font:"Inter",sans-serif;--heading:"DM Sans","Inter",sans-serif}
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font);color:var(--fg);background:var(--white);line-height:1.4;-webkit-font-smoothing:antialiased}
+        a{color:inherit;text-decoration:none}::selection{background:var(--blue-light)}
+        .container{max-width:1100px;margin:0 auto;padding:0 48px}
+        .nav-wrap{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--fg-10)}
+        nav{max-width:1100px;margin:0 auto;padding:18px 48px;display:flex;align-items:center;justify-content:space-between}
+        .nav-brand{font-size:18px;font-weight:600;letter-spacing:-0.03em}
+        .nav-links{display:flex;gap:28px;list-style:none}
+        .nav-links a{font-size:14px;font-weight:500;color:var(--fg-60);transition:color 0.2s}
+        .nav-links a:hover{color:var(--fg)}
+        .nav-links a.active{color:var(--fg)}
+        .btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--font);font-size:14px;font-weight:500;padding:11px 22px;border-radius:100px;border:none;cursor:pointer;transition:all 0.2s}
+        .btn-primary{background:var(--blue);color:var(--white)}.btn-primary:hover{background:#003aa3}
+        .btn-secondary{background:var(--white);color:var(--fg);border:1.5px solid var(--fg-10)}.btn-secondary:hover{background:var(--bg)}
+        .menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+        .menu-btn span{display:block;width:20px;height:2px;background:var(--fg);margin:4px 0;border-radius:1px}
+
+        /* PAGE */
+        .page-header{padding:64px 0 20px}
+        .page-header h1{font-family:var(--heading);font-size:44px;font-weight:500;letter-spacing:-0.03em;margin-bottom:12px}
+        .page-header p{font-size:15px;color:var(--fg-60);line-height:150%;max-width:520px}
+
+        /* INTRO SECTION */
+        .intro{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding:48px 0 72px;align-items:start}
+        .intro-text h2{font-family:var(--heading);font-size:28px;font-weight:500;letter-spacing:-0.02em;margin-bottom:16px}
+        .intro-text p{font-size:15px;line-height:170%;color:var(--fg-60);margin-bottom:16px}
+        .intro-text p strong{color:var(--fg);font-weight:500}
+        .intro-visual{aspect-ratio:1/1;border-radius:24px;overflow:hidden;position:relative;background:#fafbfd}
+        .bloom-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:bloomFloat 8s ease infinite;mix-blend-mode:multiply}
+        @keyframes bloomFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(15px,-20px) scale(1.05)}66%{transform:translate(-10px,10px) scale(0.95)}}
+
+        /* PHILOSOPHY */
+        .philosophy{padding:72px 0;border-top:1px solid var(--fg-10)}
+        .philosophy h2{font-family:var(--heading);font-size:28px;font-weight:500;letter-spacing:-0.02em;margin-bottom:32px}
+        .principles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+        .principle{background:var(--bg);border-radius:20px;padding:28px 24px}
+        .principle-num{font-family:var(--heading);font-size:32px;font-weight:500;color:var(--blue);margin-bottom:12px}
+        .principle h3{font-size:15px;font-weight:600;margin-bottom:8px}
+        .principle p{font-size:13px;line-height:150%;color:var(--fg-60)}
+
+        /* TIMELINE */
+        .timeline-section{padding:72px 0;border-top:1px solid var(--fg-10)}
+        .timeline-section h2{font-family:var(--heading);font-size:28px;font-weight:500;letter-spacing:-0.02em;margin-bottom:40px}
+        .timeline{position:relative;padding-left:32px}
+        .timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1.5px;background:var(--fg-10)}
+        .tl-item{position:relative;margin-bottom:36px}
+        .tl-item:last-child{margin-bottom:0}
+        .tl-item::before{content:'';position:absolute;left:-32px;top:8px;width:16px;height:16px;border-radius:50%;border:2px solid var(--fg-20);background:var(--white)}
+        .tl-item.current::before{border-color:var(--blue);background:var(--blue-light)}
+        .tl-year{font-size:12px;font-weight:600;color:var(--fg-40);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px}
+        .tl-role{font-family:var(--heading);font-size:16px;font-weight:600;margin-bottom:2px}
+        .tl-company{font-size:14px;color:var(--fg-60);margin-bottom:6px}
+        .tl-desc{font-size:13px;color:var(--fg-40);line-height:145%}
+
+        /* TOOLS */
+        .tools-section{padding:72px 0;border-top:1px solid var(--fg-10)}
+        .tools-section h2{font-family:var(--heading);font-size:28px;font-weight:500;letter-spacing:-0.02em;margin-bottom:12px}
+        .tools-section>p{font-size:15px;color:var(--fg-60);margin-bottom:32px}
+        .tools-grid{display:flex;flex-wrap:wrap;gap:10px}
+        .tool-pill{font-size:13px;font-weight:500;color:var(--fg-60);background:var(--bg);padding:8px 16px;border-radius:100px;transition:all 0.2s}
+        .tool-pill:hover{background:var(--blue-light);color:var(--blue)}
+
+        /* CTA */
+        .cta-section{padding:72px 0;text-align:center;border-top:1px solid var(--fg-10)}
+        .cta-section h2{font-family:var(--heading);font-size:28px;font-weight:500;letter-spacing:-0.02em;margin-bottom:12px}
+        .cta-section p{font-size:15px;color:var(--fg-60);margin-bottom:24px}
+
+        /* FOOTER */
+        footer{background:var(--fg);color:var(--white);padding:40px 0 24px}
+        .footer-inner{display:flex;justify-content:space-between;align-items:center}
+        .footer-brand{font-size:15px;font-weight:600}
+        .footer-copy{font-size:11px;color:rgba(255,255,255,0.35)}
+        .footer-nav{display:flex;gap:20px;list-style:none}
+        .footer-nav a{font-size:12px;color:rgba(255,255,255,0.5);transition:color 0.2s}
+        .footer-nav a:hover{color:#fff}
+
+        .reveal{opacity:0;transform:translateY(14px);transition:all 0.55s cubic-bezier(0.16,1,0.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+        .rd1{transition-delay:0.05s}.rd2{transition-delay:0.1s}.rd3{transition-delay:0.15s}
+
+        @media(max-width:768px){
+            .container{padding:0 20px}nav{padding:14px 20px}.nav-links{display:none}.menu-btn{display:block}
+            .page-header{padding:40px 0 16px}.page-header h1{font-size:30px}
+            .intro{grid-template-columns:1fr;gap:32px}
+            .intro-visual{aspect-ratio:16/10}
+            .principles{grid-template-columns:1fr}
+            .footer-inner{flex-direction:column;gap:16px;align-items:flex-start}
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-wrap"><nav><a href="index.html" class="nav-brand">Dylan Lam</a><ul class="nav-links"><li><a href="about.html" class="active">About</a></li><li><a href="index.html#services">Services</a></li><li><a href="works.html">Work</a></li><li><a href="index.html#contact">Contact</a></li></ul><div style="display:flex;gap:8px;align-items:center"><a href="index.html#contact" class="btn btn-primary">Contact</a><button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button></div></nav></div>
+
+    <div class="container">
+        <div class="page-header reveal">
+            <h1>About</h1>
+            <p>I build systems that make businesses work better — connecting strategy, data, and execution across teams.</p>
+        </div>
+
+        <div class="intro">
+            <div class="intro-text reveal">
+                <h2>Hi, I'm Dylan.</h2>
+                <p>I'm currently a <strong>Global Partner Manager at Amazon</strong>, driving advertiser growth through partner-led strategies and operational improvements across Southeast Asia. I've delivered 5 consecutive quarters of KPI overperformance and co-built 4 Data &amp; AI solutions scaled across countries.</p>
+                <p>Before Amazon, I spent nearly 3 years at <strong>The Lab</strong> — a company of creatives — where I progressed from Account Executive to Strategic Partnership Manager. I managed clients like Apple, MUJI, Vero, Sunlife, and Bitis, drove 40% of annual company revenue, and launched a 1,000sqm flagship bakery coordinating 10+ teams.</p>
+                <p>I started my career at <strong>PMAX Vietnam</strong> in digital advertising, co-managing campaigns for FE CREDIT, VPBank &amp; VAS Education, and winning Gold &amp; Bronze at SMARTIES Vietnam 2021.</p>
+                <p>What drives me: <strong>taking complex, messy problems and turning them into clear systems that teams can actually use</strong>. Whether that's an AI agent that replaces hours of manual analysis, a partnership strategy for an international brand, or an operational system that scales across markets.</p>
+                <p>I don't just deliver — I make the delivery process better for next time.</p>
+            </div>
+            <div class="intro-visual reveal rd1" id="aboutBloom"></div>
+        </div>
+
+        <div class="philosophy reveal">
+            <h2>How I work</h2>
+            <div class="principles">
+                <div class="principle reveal rd1">
+                    <div class="principle-num">01</div>
+                    <h3>Show, not tell</h3>
+                    <p>I prove with evidence — real outcomes, real numbers, real projects. No fluff, no buzzwords.</p>
+                </div>
+                <div class="principle reveal rd2">
+                    <div class="principle-num">02</div>
+                    <h3>Systems over heroics</h3>
+                    <p>A good system beats a great individual effort every time. I build repeatable processes, not one-off saves.</p>
+                </div>
+                <div class="principle reveal rd3">
+                    <div class="principle-num">03</div>
+                    <h3>Clarity is kindness</h3>
+                    <p>Complex work doesn't need complex communication. I keep stakeholders aligned by keeping things simple.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section reveal">
+            <h2>Journey so far</h2>
+            <div class="timeline">
+                <div class="tl-item current">
+                    <div class="tl-year">Sep 2024 — Present</div>
+                    <div class="tl-role">Global Partner Manager</div>
+                    <div class="tl-company">Amazon — Ho Chi Minh City, Vietnam</div>
+                    <div class="tl-desc">Delivered 5 consecutive quarters of KPI overperformance through partner-led growth. Co-built and scaled 4 Data &amp; AI solutions across countries and cross-functional teams.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">Jan 2024 — Aug 2024</div>
+                    <div class="tl-role">Strategic Partnership Manager</div>
+                    <div class="tl-company">The Lab — Ho Chi Minh City, Vietnam</div>
+                    <div class="tl-desc">Clients: Apple, MUJI, Vero, Lang Spa, Mâm Mâm Restaurant. Led partnership strategy and delivery at a company of creatives.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">Nov 2022 — Jan 2024</div>
+                    <div class="tl-role">Senior Strategic Partnership</div>
+                    <div class="tl-company">The Lab — Ho Chi Minh City, Vietnam</div>
+                    <div class="tl-desc">Clients: Yingtao (NYC Michelin), Bitis, Sunlife, Mami Cocktail. Drove 40% of annual company revenue, launched a 1,000sqm bakery coordinating 10+ teams.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">Nov 2021 — Nov 2022</div>
+                    <div class="tl-role">Account / Strategic Partnership Executive</div>
+                    <div class="tl-company">The Lab — Ho Chi Minh City, Vietnam</div>
+                    <div class="tl-desc">Clients: US CDC - HAIVN, OP3N, Kei Concepts. Hit 180% of Q4 revenue KPIs, onboarded a U.S. client into ongoing partnerships.</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-year">May 2020 — Jul 2021</div>
+                    <div class="tl-role">Account Executive → Senior Account Executive</div>
+                    <div class="tl-company">PMAX Vietnam — Ho Chi Minh City, Vietnam</div>
+                    <div class="tl-desc">Co-managed digital ad campaigns for FE CREDIT, VPBank &amp; VAS Education. Built real-time dashboards. SMARTIES Vietnam 2021 Gold &amp; Bronze winner.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tools-section reveal">
+            <h2>Tools &amp; systems I work with</h2>
+            <p>A mix of platforms, self-built tools, and AI agents I've created.</p>
+            <div class="tools-grid">
+                <span class="tool-pill">Clair Optimization Agent</span>
+                <span class="tool-pill">Clair Visual Agent</span>
+                <span class="tool-pill">Self-built AI tools</span>
+                <span class="tool-pill">Excel / Sheets</span>
+                <span class="tool-pill">PowerBI</span>
+                <span class="tool-pill">QuickSight</span>
+                <span class="tool-pill">Notion</span>
+                <span class="tool-pill">HTML / CSS / JS</span>
+                <span class="tool-pill">Prompt Engineering</span>
+                <span class="tool-pill">Data Visualization</span>
+                <span class="tool-pill">Google Data Studio</span>
+            </div>
+        </div>
+
+        <div class="cta-section reveal">
+            <h2>Want to work together?</h2>
+            <p>I'm always open to interesting conversations — whether it's a project, a collaboration, or just an exchange of ideas.</p>
+            <a href="index.html#contact" class="btn btn-primary">Get in touch →</a>
+        </div>
+    </div>
+
+    <footer><div class="container"><div class="footer-inner"><div class="footer-brand">Dylan Lam</div><ul class="footer-nav"><li><a href="about.html">About</a></li><li><a href="works.html">Work</a></li><li><a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a></li><li><a href="mailto:dylanlamwork@gmail.com">Email</a></li></ul><span class="footer-copy">© 2025 Dylan Lam. All rights reserved.</span></div></div></footer>
+
+<script>
+// Bloom visual
+(function(){
+    const c=document.getElementById('aboutBloom');
+    const orbs=[
+        {x:25,y:30,w:180,col:'rgba(167,139,250,0.3)'},
+        {x:60,y:45,w:160,col:'rgba(96,165,250,0.25)'},
+        {x:40,y:65,w:140,col:'rgba(52,211,153,0.2)'},
+        {x:70,y:25,w:120,col:'rgba(251,146,60,0.18)'},
+        {x:50,y:50,w:100,col:'rgba(244,114,182,0.15)'}
+    ];
+    orbs.forEach((o,i)=>{
+        const el=document.createElement('div');el.className='bloom-orb';
+        el.style.cssText=`left:${o.x}%;top:${o.y}%;width:${o.w}px;height:${o.w}px;background:${o.col};animation-delay:${i*1.6}s;animation-duration:${7+i*1.2}s`;
+        c.appendChild(el);
+    });
+})();
+
+// Nav
+document.getElementById('menuBtn').addEventListener('click',()=>document.querySelector('.nav-links').classList.toggle('active'));
+
+// Reveal
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.04});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+
+</body></html>
