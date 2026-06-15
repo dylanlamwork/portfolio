@@ -333,8 +333,8 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     <title>Dylan Lam</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="[REDACTED_CONN_STRING]://300;400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link href="[REDACTED_CONN_STRING]://300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         :root{--fg:#111;--fg-80:#111c;--fg-60:#1119;--fg-40:#1116;--fg-20:#1113;--fg-10:#1111111a;--white:#fff;--bg:#f6f7f9;--blue:#0047cc;--blue-light:#e8f0ff;--font:"Inter",sans-serif;--heading:"DM Sans","Inter",sans-serif}
@@ -342,54 +342,93 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         body{font-family:var(--font);color:var(--fg);background:var(--white);line-height:1.4;-webkit-font-smoothing:antialiased}
         a{color:inherit;text-decoration:none}::selection{background:var(--blue-light)}
         .container{max-width:100%;margin:0 auto;padding:0 clamp(20px, 5vw, 80px)}
-        .nav-wrap{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--fg-10);position:sticky;width:100%}
+
+        /* NAV */
+        .nav-wrap{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--fg-10);width:100%}
         nav{max-width:100%;margin:0 auto;padding:18px clamp(20px, 5vw, 80px);display:flex;align-items:center;justify-content:space-between;position:relative}
         .nav-brand{font-size:18px;font-weight:600;letter-spacing:-0.03em}
         .nav-links{display:flex;gap:28px;list-style:none}
         .nav-links a{font-size:14px;font-weight:500;color:var(--fg-60);transition:color 0.2s}
         .nav-links a:hover{color:var(--fg)}
         .btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--font);font-size:14px;font-weight:500;padding:11px 22px;border-radius:100px;border:none;cursor:pointer;transition:all 0.2s}
-        .btn-primary{background:var(--blue);color:var(--white)}.btn-primary:hover{background:#003aa3}
+        .btn-primary{background:linear-gradient(135deg,#6366f1,#2563eb);color:var(--white);box-shadow:0 2px 8px rgba(99,102,241,0.25)}.btn-primary:hover{background:linear-gradient(135deg,#4f46e5,#1d4ed8);box-shadow:0 4px 14px rgba(99,102,241,0.35)}
         .btn-secondary{background:var(--white);color:var(--fg);border:1.5px solid var(--fg-10)}.btn-secondary:hover{background:var(--bg)}
-        .btn-dark{background:var(--fg);color:var(--white)}.btn-dark:hover{background:#333}
-        .btn-sm{padding:9px 18px;font-size:13px}
+        .btn-dark{background:linear-gradient(135deg,#6366f1,#2563eb);color:var(--white);box-shadow:0 2px 8px rgba(99,102,241,0.25)}.btn-dark:hover{background:linear-gradient(135deg,#4f46e5,#1d4ed8);box-shadow:0 4px 14px rgba(99,102,241,0.35)}
         .menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
         .menu-btn span{display:block;width:20px;height:2px;background:var(--fg);margin:4px 0;border-radius:1px}
         .badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:6px 16px;border:1.5px solid var(--fg-20);border-radius:100px;margin-bottom:24px;color:var(--fg)}
+
+        /* HERO */
         .hero{padding:72px 0 56px;max-width:65%}
         .hero h1{font-family:var(--heading);font-size:clamp(32px, 4vw, 58px);font-weight:500;line-height:115%;letter-spacing:-0.03em;margin-bottom:20px}
         .hero h1 span{color:var(--fg-40)}
         .hero p{font-size:15px;line-height:150%;color:var(--fg-60);max-width:100%;margin-bottom:28px}
         .hero-actions{display:flex;gap:10px}
+
+        /* STATS */
         .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0}
         .stat-value{font-family:var(--heading);font-size:clamp(28px, 3.2vw, 48px);font-weight:500;letter-spacing:-0.03em;line-height:120%;margin-bottom:4px}
         .stat-label{font-size:13px;color:var(--fg-60);line-height:140%;max-width:160px}
+
+        /* SECTIONS */
         .section{padding:88px 0}
+        .section-alt{background:#eef0f4;margin:0 calc(-1 * clamp(20px, 5vw, 80px));padding-left:clamp(20px, 5vw, 80px);padding-right:clamp(20px, 5vw, 80px)}
+        .section-dark{background:#0a1628;color:#fff;margin:0 calc(-1 * clamp(20px, 5vw, 80px));padding-left:clamp(20px, 5vw, 80px);padding-right:clamp(20px, 5vw, 80px)}
+        .section-dark .badge{border-color:rgba(255,255,255,0.2);color:#fff}
+        .section-dark .section-heading{color:#fff}
+        .section-dark .section-desc{color:rgba(255,255,255,0.6)}
+        .section-dark .service-card{background:rgba(255,255,255,0.06)}
+        .section-dark .service-card p{color:rgba(255,255,255,0.5)}
+        .section-dark .service-card h3{color:#fff}
+        .section-dark .btn-primary{background:linear-gradient(135deg,#6366f1,#2563eb);color:#fff;box-shadow:0 2px 8px rgba(99,102,241,0.3)}
+        .section-dark .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.2)}
+
+        .section-dark .portfolio-tag{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
+        .section-dark .writing-link{background:rgba(255,255,255,0.06)}
+        .section-dark .writing-link:hover{background:rgba(255,255,255,0.1)}
+        .section-dark .writing-title{color:#fff}
+        .section-dark .writing-date{color:rgba(255,255,255,0.4)}
+        .section-dark .contact-info h2{color:#fff}
+        .section-dark .contact-label{color:rgba(255,255,255,0.4)}
+        .section-dark .contact-value{color:#fff}
+        .section-dark .contact-social a{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6)}
+        .section-dark .contact-social a:hover{background:var(--blue);color:#fff}
+        .section-dark .contact-form input,.section-dark .contact-form textarea{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:#fff}
+        .section-dark .contact-form input::placeholder,.section-dark .contact-form textarea::placeholder{color:rgba(255,255,255,0.35)}
+        .section-dark .contact-note{color:rgba(255,255,255,0.35)}
+
+
         .section-heading{font-family:var(--heading);font-size:clamp(26px, 2.8vw, 38px);font-weight:500;line-height:125%;letter-spacing:-0.03em;margin-bottom:14px;max-width:440px}
         .section-desc{font-size:15px;line-height:150%;color:var(--fg-60);max-width:480px}
         .expertise-top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-bottom:32px}
-        .expertise-img{width:100%;aspect-ratio:16/8;border-radius:20px;background:var(--bg);overflow:hidden;margin-bottom:28px;position:relative}
         .expertise-btn{text-align:center}
 
-        /* EXPERTISE VISUAL — Liquid Lava Blobs */
-        .expertise-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:#fafbfd}
-        .goo-wrapper{width:100%;height:100%;position:relative;filter:url(#goo)}
-        .blob{position:absolute;border-radius:50%;will-change:transform}
+        /* AMBIENT LIQUID */
+        .ambient-liquid{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2;pointer-events:none;overflow:hidden;opacity:0.55}
+        .ambient-liquid .goo-wrapper{width:100%;height:100%;position:relative;filter:url(#goo)}
+        .blob{position:absolute;border-radius:50%;will-change:transform;pointer-events:auto;cursor:default;transition:transform 0.4s,opacity 0.3s}
+        .blob:hover{transform:scale(1.3)!important;opacity:0.85}
 
-        /* GRADIENT BLOOM — Portfolio */
-        .bloom-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:#fafbfd}
-        .bloom-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:bloomFloat 8s ease infinite;mix-blend-mode:multiply}
-        @keyframes bloomFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(15px,-20px) scale(1.05)}66%{transform:translate(-10px,10px) scale(0.95)}}
-        .bloom-canvas-alt{background:#fafaff}
+        .blob-tooltip{position:fixed;background:var(--white);border-radius:10px;padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,0.1);border:1px solid var(--fg-10);font-size:12px;font-weight:500;color:var(--fg);pointer-events:none;z-index:20;opacity:0;transition:opacity 0.2s;white-space:nowrap;display:flex;flex-direction:column;gap:5px}
+        .blob-tooltip.visible{opacity:1}
+        .blob-tooltip .tt-row{display:flex;align-items:center;gap:6px}
+        .blob-tooltip .tt-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
         /* SERVICES */
         .services-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
         .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
         .service-card{background:var(--bg);border-radius:20px;padding:28px 24px;transition:all 0.4s}
-        .service-card.highlight{background:var(--blue);color:#fff}
-        .service-card.highlight .service-icon{background:rgba(255,255,255,0.2)}
-        .service-card.highlight p{color:rgba(255,255,255,0.75)}
-        .service-icon{width:40px;height:40px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+        .service-card[data-svc="0"]:hover{background:#fb923c;color:#fff}
+        .service-card[data-svc="1"]:hover{background:#6366f1;color:#fff}
+        .service-card[data-svc="2"]:hover{background:#14b8a6;color:#fff}
+        .service-card[data-svc="3"]:hover{background:#a855f7;color:#fff}
+        .service-card:hover .service-icon{background:rgba(255,255,255,0.2)}
+        .service-card:hover p{color:rgba(255,255,255,0.75)}
+        .service-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+        .service-icon.icon-sales{background:#fb923c}
+        .service-icon.icon-data{background:#6366f1}
+        .service-icon.icon-pm{background:#14b8a6}
+        .service-icon.icon-system{background:#a855f7}
         .service-icon svg{width:18px;height:18px;fill:#fff}
         .service-card h3{font-size:15px;font-weight:600;margin-bottom:6px}
         .service-card p{font-size:13px;line-height:140%;color:var(--fg-60)}
@@ -398,7 +437,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         /* PORTFOLIO */
         .portfolio-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px}
         .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:18px}
-        .portfolio-card-img{width:100%;aspect-ratio:5/3;border-radius:14px;overflow:hidden;margin-bottom:10px}
+        .portfolio-card-img{width:100%;aspect-ratio:5/3;border-radius:14px;overflow:hidden;margin-bottom:10px;position:relative}
         .portfolio-card h3{font-size:14px;font-weight:600;margin-bottom:5px}
         .portfolio-card p{font-size:12px;color:var(--fg-60);line-height:145%;margin-bottom:10px}
         .portfolio-tags{display:flex;gap:8px;flex-wrap:wrap}
@@ -407,6 +446,16 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .tag-pm{color:rgb(20,184,166);border-color:rgba(20,184,166,0.3);background:rgba(20,184,166,0.05)}
         .tag-sales{color:rgb(251,146,60);border-color:rgba(251,146,60,0.3);background:rgba(251,146,60,0.05)}
         .tag-system{color:rgb(168,85,247);border-color:rgba(168,85,247,0.3);background:rgba(168,85,247,0.05)}
+        .bloom-canvas{width:100%;height:100%;position:relative;overflow:hidden;background:#fafbfd}
+        .bloom-orb{position:absolute;border-radius:50%;filter:blur(40px);animation:bloomFloat 8s ease infinite;mix-blend-mode:multiply}
+        @keyframes bloomFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(15px,-20px) scale(1.05)}66%{transform:translate(-10px,10px) scale(0.95)}}
+
+        /* WRITING */
+        .writing-section{padding:48px 0}
+        .writing-link{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-radius:14px;transition:all 0.2s;margin-bottom:10px}
+        .writing-link:hover{background:#eef0f4}
+        .writing-title{font-size:14px;font-weight:500;margin-bottom:3px}
+        .writing-date{font-size:12px;color:var(--fg-40)}
 
         /* CONTACT */
         .contact-section{padding:88px 0}
@@ -427,29 +476,30 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .contact-note{font-size:11px;color:var(--fg-40);margin-top:8px;grid-column:1/-1}
 
         /* FOOTER */
-        footer{background:var(--fg);color:var(--white);padding:40px 0 24px}
+        footer{background:var(--white);color:var(--fg);padding:40px 0 24px;border-top:1px solid var(--fg-10)}
         .footer-inner{display:flex;justify-content:space-between;align-items:center}
         .footer-brand{font-size:15px;font-weight:600}
-        .footer-copy{font-size:11px;color:rgba(255,255,255,0.35)}
+        .footer-copy{font-size:11px;color:var(--fg-40)}
         .footer-nav{display:flex;gap:20px;list-style:none}
-        .footer-nav a{font-size:12px;color:rgba(255,255,255,0.5);transition:color 0.2s}
-        .footer-nav a:hover{color:#fff}
+        .footer-nav a{font-size:12px;color:var(--fg-40);transition:color 0.2s}
+        .footer-nav a:hover{color:var(--fg)}
 
+        /* ANIMATIONS */
         .reveal{opacity:0;transform:translateY(14px);transition:all 0.55s cubic-bezier(0.16,1,0.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
         .rd1{transition-delay:0.05s}.rd2{transition-delay:0.1s}.rd3{transition-delay:0.15s}.rd4{transition-delay:0.2s}
-        
+
+        /* MOBILE NAV */
         .nav-links.active{display:flex!important;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--white);padding:20px;gap:16px;border-bottom:1px solid var(--fg-10);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
         .nav-links.active a{font-size:16px}
+
+        /* RESPONSIVE */
         @media(max-width:1024px){
-            .container{padding:0 24px}nav{padding:16px 24px}
-            .hero h1{font-size:44px}
+            .hero{max-width:80%}
             .expertise-top{grid-template-columns:1fr}
             .services-layout{grid-template-columns:1fr;gap:32px}
-            .portfolio-grid{gap:18px}
             .contact-grid{gap:36px}
         }
         @media(max-width:768px){
-            .container{padding:0 16px}nav{padding:14px 16px}
             .nav-links{display:none}.menu-btn{display:block}
             .hero{padding:40px 0 32px;max-width:100%}.hero h1{font-size:28px}
             .stats{grid-template-columns:1fr;gap:16px}.stat-value{font-size:32px}
@@ -459,19 +509,20 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             .contact-form{grid-template-columns:1fr}
             .footer-inner{flex-direction:column;gap:16px;align-items:flex-start}
             .portfolio-header{flex-direction:column;gap:12px}
-            .expertise-img{aspect-ratio:16/10}
         }
         @media(max-width:480px){
-            .container{padding:0 16px}nav{padding:12px 16px}
-            .hero h1{font-size:28px}
+            .hero h1{font-size:26px}
             .stat-value{font-size:28px}
-            .section-heading{font-size:28px}
+            .section-heading{font-size:24px}
             .btn{padding:10px 18px;font-size:13px}
-            .portfolio-card-img{aspect-ratio:3/2}
         }
     </style>
 </head>
 <body>
+    <!-- Ambient liquid background -->
+    <svg style="position:absolute;width:0;height:0"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blur"></feGaussianBlur><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="goo"></feColorMatrix><feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite></filter></defs></svg>
+    <div class="ambient-liquid" id="ambientLiquid"><div class="goo-wrapper" id="ambientGoo"></div></div>
+    <div class="blob-tooltip" id="blobTooltip"></div>
 
     <div class="nav-wrap"><nav><a href="index.html" class="nav-brand">Dylan Lam</a><ul class="nav-links" id="navLinks"><li><a href="about.html">About</a></li><li><a href="#how-i-work">How I work</a></li><li><a href="works.html">Work</a></li><li><a href="#contact">Contact</a></li></ul><div style="display:flex;gap:8px;align-items:center"><a href="#contact" class="btn btn-primary">Contact</a><a href="about.html" class="btn btn-secondary">About</a><button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button></div></nav></div>
 
@@ -479,7 +530,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 
     <section class="hero reveal">
         <h1>Dylan Lam<br><span>Strategy, Data &amp;<br>Systems.</span></h1>
-        <p>I build AI tools, close partnerships, and design systems that make teams move faster. Currently a Global Partner Manager at Amazon, driving growth across Southeast Asia.</p>
+        <p>AI tools. Partnerships. Systems that make teams move faster.<br>Currently at Amazon Ads, driving advertiser growth across Southeast Asia.</p>
         <div class="hero-actions"><a href="#contact" class="btn btn-primary">Let's talk</a><a href="works.html" class="btn btn-secondary">See my work</a></div>
     </section>
 
@@ -489,70 +540,62 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         <div class="stat"><div class="stat-value">6+</div><div class="stat-label">Years of hands-on experience</div></div>
     </div>
 
-    <section class="section" id="about">
-        <span class="badge reveal">Expertise</span>
-        <div class="expertise-top reveal">
-            <h2 class="section-heading">What I bring to the table</h2>
-            <p class="section-desc">I operate across sales, data, project management, and system design. From building AI agents adopted across markets to launching flagship stores coordinating 10+ teams — I bring order to chaos and turn insights into action.</p>
-        </div>
-        <div class="expertise-img reveal rd1"><div class="expertise-canvas"><svg style="position:absolute;width:0;height:0"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur"></feGaussianBlur><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10" result="goo"></feColorMatrix><feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite></filter></defs></svg><div class="goo-wrapper" id="expertiseViz"></div></div></div>
-        <div class="expertise-btn reveal rd2"><a href="#contact" class="btn btn-primary">Contact</a></div>
-    </section>
-
-    <section class="section" id="how-i-work">
+    <section class="section section-dark" id="how-i-work">
         <span class="badge reveal">How I work</span>
         <div class="services-layout">
             <div class="services-left reveal">
-                <h2 class="section-heading">How I work with teams</h2>
-                <p class="section-desc">Focused on your unique needs, I deliver solutions that blend deep industry knowledge and cutting-edge strategies.</p>
-                <a href="works.html" class="btn btn-primary btn-sm">See my work</a>
+                <h2 class="section-heading">What I bring to the table</h2>
+                <p class="section-desc">I'd rather build a system once than explain a spreadsheet twice. Four disciplines, one person, no handoff friction.</p>
+                <a href="works.html" class="btn btn-primary">See my work</a>
+                <a href="about.html" class="btn btn-secondary" style="margin-top:10px;margin-left:10px">About me</a>
             </div>
             <div class="services-grid" id="serviceGrid">
-                <div class="service-card highlight" data-svc="0"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18" stroke="#fff" stroke-width="2" fill="none"></path><path d="M7 14l4-4 4 4 5-5" stroke="#fff" stroke-width="2" fill="none"></path></svg></div><h3>Sales &amp; Account Management</h3><p>Building trust, closing deals, and making partnerships last.</p></div>
-                <div class="service-card" data-svc="1"><div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="5" height="14" rx="1" fill="#fff"></rect><rect x="10" y="8" width="5" height="11" rx="1" fill="#fff"></rect><rect x="17" y="3" width="5" height="16" rx="1" fill="#fff"></rect></svg></div><h3>Data &amp; Business Analytics</h3><p>Turning messy data into simple stories and confident decisions.</p></div>
-                <div class="service-card" data-svc="2"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="#fff"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#fff" stroke-width="1.5" fill="none"></path></svg></div><h3>Project Management</h3><p>Managing cross-functional teams across Design, Build, and Ops.</p></div>
-                <div class="service-card" data-svc="3"><div class="service-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1" fill="#fff"></rect><rect x="14" y="4" width="6" height="6" rx="1" fill="#fff"></rect><rect x="4" y="14" width="6" height="6" rx="1" fill="#fff"></rect><rect x="14" y="14" width="6" height="6" rx="1" fill="#fff"></rect></svg></div><h3>System Design</h3><p>Designing digital ecosystems for operations, CRM, and project tracking.</p></div>
+                <div class="service-card" data-svc="0"><div class="service-icon icon-sales"><svg viewBox="0 0 24 24"><path d="M3 3v18h18" stroke="#fff" stroke-width="2" fill="none"></path><path d="M7 14l4-4 4 4 5-5" stroke="#fff" stroke-width="2" fill="none"></path></svg></div><h3>Sales &amp; Account Management</h3><p>I close deals by making the value obvious — then I stick around to prove it.</p></div>
+                <div class="service-card" data-svc="1"><div class="service-icon icon-data"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="5" height="14" rx="1" fill="#fff"></rect><rect x="10" y="8" width="5" height="11" rx="1" fill="#fff"></rect><rect x="17" y="3" width="5" height="16" rx="1" fill="#fff"></rect></svg></div><h3>Data Analytics &amp; AI</h3><p>I build AI agents that do the math and the writing — so teams own the relationship.</p></div>
+                <div class="service-card" data-svc="2"><div class="service-icon icon-pm"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="#fff"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#fff" stroke-width="1.5" fill="none"></path></svg></div><h3>Project Management</h3><p>10+ teams, one timeline, zero excuses. I keep things moving.</p></div>
+                <div class="service-card" data-svc="3"><div class="service-icon icon-system"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1" fill="#fff"></rect><rect x="14" y="4" width="6" height="6" rx="1" fill="#fff"></rect><rect x="4" y="14" width="6" height="6" rx="1" fill="#fff"></rect><rect x="14" y="14" width="6" height="6" rx="1" fill="#fff"></rect></svg></div><h3>System Design</h3><p>The best process is the one nobody has to think about. I build those.</p></div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="work">
+    <section class="section section-alt" id="work">
         <div class="portfolio-header reveal"><div><span class="badge">Portfolio</span><h2 class="section-heading">Real Results, Real Impact</h2></div></div>
         <div class="portfolio-grid reveal">
             <div class="portfolio-card">
                 <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom1"></div></div>
                 <h3>Clair Optimization Agent</h3>
-                <p>Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions — replacing hours of manual work per report.</p>
-                <div class="portfolio-tags"><span class="portfolio-tag tag-data">Data &amp; AI</span></div>
+                <p>Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions.</p>
+                <div class="portfolio-tags"><span class="portfolio-tag tag-data">Data Analytics &amp; AI</span></div>
             </div>
             <div class="portfolio-card">
-                <div class="portfolio-card-img"><div class="bloom-canvas bloom-canvas-alt" id="bloom2"></div></div>
+                <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom2"></div></div>
                 <h3>Clair Visual Agent</h3>
                 <p>Built an AI Agent that translates campaign intent into visual generation prompts, adopted across Vietnam, Singapore &amp; Taiwan markets.</p>
-                <div class="portfolio-tags"><span class="portfolio-tag tag-data">Data &amp; AI</span></div>
+                <div class="portfolio-tags"><span class="portfolio-tag tag-data">Data Analytics &amp; AI</span></div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom3"></div></div>
                 <h3>Apple Social Video</h3>
                 <p>Managed the strategy and concept phase for an Apple commission, ensuring strict brand compliance for the Shot on iPhone campaign.</p>
-                <div class="portfolio-tags"><span class="portfolio-tag tag-pm">Project Management</span><span class="portfolio-tag tag-sales">Sales</span></div>
+                <div class="portfolio-tags"><span class="portfolio-tag tag-pm">Project Management</span><span class="portfolio-tag tag-sales">Sales &amp; Account Management</span></div>
             </div>
             <div class="portfolio-card">
                 <div class="portfolio-card-img"><div class="bloom-canvas" id="bloom4"></div></div>
                 <h3>MUJI Box</h3>
                 <p>Led strategic partnership negotiations to secure the MUJI Box project, closing the deal in 1 month.</p>
-                <div class="portfolio-tags"><span class="portfolio-tag tag-sales">Sales</span></div>
+                <div class="portfolio-tags"><span class="portfolio-tag tag-sales">Sales &amp; Account Management</span></div>
             </div>
         </div>
         <div class="reveal" style="text-align:center;margin-top:36px"><a href="works.html" class="btn btn-dark">All projects</a></div>
     </section>
 
-    <div class="section reveal" id="writing" style="padding-bottom:0">
+    <div class="section-dark" style="padding-top:72px;padding-bottom:88px">
+    <div class="writing-section reveal" id="writing">
         <span class="badge">Writing</span>
         <h2 class="section-heading">Featured on LinkedIn</h2>
-        <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px">
-            <a href="https://www.linkedin.com/posts/dylanlamwork_amazonads-generativeai-creativestrategy-activity-7435508959567945729-hKDL" target="_blank" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-radius:14px;transition:all 0.2s"><div><div style="font-size:14px;font-weight:500;margin-bottom:3px">Making AI creative generation accessible for everyone</div><div style="font-size:12px;color:var(--fg-40)">November 2025</div></div></a>
-            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-ownership-earntrust-activity-7359058206247018496-xImq" target="_blank" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-radius:14px;transition:all 0.2s"><div><div style="font-size:14px;font-weight:500;margin-bottom:3px">Interview vs. Reality: My first year at Amazon</div><div style="font-size:12px;color:var(--fg-40)">August 2025</div></div></a>
+        <div style="margin-top:20px">
+            <a href="https://www.linkedin.com/posts/dylanlamwork_amazonads-generativeai-creativestrategy-activity-7435508959567945729-hKDL" target="_blank" class="writing-link"><div><div class="writing-title">Making AI creative generation accessible for everyone</div><div class="writing-date">November 2025</div></div></a>
+            <a href="https://www.linkedin.com/posts/dylanlamwork_inventandsimplify-ownership-earntrust-activity-7359058206247018496-xImq" target="_blank" class="writing-link"><div><div class="writing-title">Interview vs. Reality: My first year at Amazon</div><div class="writing-date">August 2025</div></div></a>
         </div>
     </div>
 
@@ -571,32 +614,42 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     </div>
 
     </div>
+    </div>
 
     <footer><div class="container"><div class="footer-inner"><div class="footer-brand">Dylan Lam</div><ul class="footer-nav"><li><a href="about.html">About</a></li><li><a href="works.html">Work</a></li><li><a href="https://www.linkedin.com/in/dylanlamwork/" target="_blank">LinkedIn</a></li><li><a href="mailto:dylanlamwork@gmail.com">Email</a></li></ul><span class="footer-copy">© 2025 Dylan Lam. All rights reserved.</span></div></div></footer>
 
 <script>
-// Expertise visual — liquid lava blobs
+// Nav mobile menu
+document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));
+
+// Ambient liquid — page-wide background blobs (slow, fluid)
+var btt=document.getElementById('blobTooltip');
+var BLOB_LABELS=['Data Analytics & AI','Project Management','Sales & Account Management','System Design','Data Analytics & AI','Project Management','Sales & Account Management','System Design'];
+var BLOB_COLORS=['#6366f1','#14b8a6','#fb923c','#a855f7','#6366f1','#14b8a6','#fb923c','#a855f7'];
+var blobs=[];
 (function(){
-    const c=document.getElementById('expertiseViz');if(!c)return;
+    const c=document.getElementById('ambientGoo');if(!c)return;
     const COLORS=['rgba(99,102,241,','rgba(20,184,166,','rgba(251,146,60,','rgba(168,85,247,'];
-    const blobs=[];
-    for(let i=0;i<7;i++){
-        const blob=document.createElement('div');blob.className='blob';
-        const size=70+Math.random()*50;
+    for(let i=0;i<8;i++){
+        const blob=document.createElement('div');blob.className='blob';blob.dataset.idx=i;
+        const size=120+Math.random()*100;
         blob.style.width=size+'px';blob.style.height=size+'px';
-        blob.style.background=COLORS[i%4]+'0.45)';
+        blob.style.background=COLORS[i%4]+'0.35)';
+        blob.addEventListener('mouseenter',function(e){showBlobTooltip(e)});
+        blob.addEventListener('mousemove',function(e){showBlobTooltip(e)});
+        blob.addEventListener('mouseleave',function(){btt.classList.remove('visible');btt.innerHTML='';});
         c.appendChild(blob);
-        blobs.push({el:blob,x:Math.random()*80+10,y:Math.random()*60+20,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,size:size});
+        blobs.push({el:blob,x:Math.random()*80+10,y:Math.random()*70+15,vx:(Math.random()-0.5)*0.08,vy:(Math.random()-0.5)*0.08});
     }
     function anim(){
         blobs.forEach(b=>{
             b.x+=b.vx;b.y+=b.vy;
-            if(b.x<5||b.x>90)b.vx*=-1;
-            if(b.y<5||b.y>85)b.vy*=-1;
-            b.vx+=(Math.random()-0.5)*0.04;
-            b.vy+=(Math.random()-0.5)*0.04;
-            b.vx=Math.max(-0.6,Math.min(0.6,b.vx));
-            b.vy=Math.max(-0.6,Math.min(0.6,b.vy));
+            if(b.x<0||b.x>92)b.vx*=-1;
+            if(b.y<0||b.y>90)b.vy*=-1;
+            b.vx+=(Math.random()-0.5)*0.003;
+            b.vy+=(Math.random()-0.5)*0.003;
+            b.vx=Math.max(-0.1,Math.min(0.1,b.vx));
+            b.vy=Math.max(-0.1,Math.min(0.1,b.vy));
             b.el.style.left=b.x+'%';b.el.style.top=b.y+'%';
         });
         requestAnimationFrame(anim);
@@ -604,24 +657,41 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     anim();
 })();
 
-// Nav
-document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));
 
-// Bloom orbs
+
+// Blob tooltip helpers
+function getBlobsAtPoint(x,y){
+    var hits=[];var seen={};
+    blobs.forEach(function(b,i){
+        var r=b.el.getBoundingClientRect();
+        var cx=r.left+r.width/2,cy=r.top+r.height/2;
+        var dist=Math.sqrt((x-cx)*(x-cx)+(y-cy)*(y-cy));
+        if(dist<r.width/2+10){
+            var label=BLOB_LABELS[i];
+            if(!seen[label]){seen[label]=true;hits.push({label:label,color:BLOB_COLORS[i]});}
+        }
+    });
+    return hits;
+}
+function showBlobTooltip(e){
+    var hits=getBlobsAtPoint(e.clientX,e.clientY);
+    if(hits.length===0){btt.classList.remove('visible');btt.innerHTML='';return;}
+    btt.innerHTML=hits.map(function(h){return '<div class="tt-row"><span class="tt-dot" style="background:'+h.color+'"></span>'+h.label+'</div>';}).join('');
+    btt.style.left=(e.clientX+14)+'px';btt.style.top=(e.clientY-36-(hits.length-1)*20)+'px';
+    btt.classList.add('visible');
+}
+
+// Bloom orbs for portfolio cards
 (function(){
-    // Clair Optimization — Data & AI (indigo)
     const orbs1=[{x:20,y:30,w:180,col:'rgba(99,102,241,0.35)'},{x:55,y:45,w:160,col:'rgba(99,102,241,0.2)'},{x:40,y:60,w:130,col:'rgba(99,102,241,0.15)'},{x:72,y:25,w:110,col:'rgba(99,102,241,0.1)'}];
-    // Clair Visual — Data & AI (indigo, shifted)
     const orbs2=[{x:25,y:35,w:170,col:'rgba(99,102,241,0.3)'},{x:60,y:50,w:145,col:'rgba(99,102,241,0.2)'},{x:45,y:25,w:120,col:'rgba(99,102,241,0.15)'},{x:70,y:65,w:100,col:'rgba(99,102,241,0.1)'}];
-    // Apple — PM (teal) + Sales (amber)
     const orbs3=[{x:25,y:30,w:160,col:'rgba(20,184,166,0.35)'},{x:60,y:50,w:140,col:'rgba(20,184,166,0.2)'},{x:45,y:25,w:130,col:'rgba(251,146,60,0.35)'},{x:72,y:60,w:110,col:'rgba(251,146,60,0.2)'}];
-    // MUJI — Sales (amber)
     const orbs4=[{x:25,y:35,w:160,col:'rgba(251,146,60,0.35)'},{x:55,y:50,w:140,col:'rgba(251,146,60,0.2)'},{x:70,y:30,w:120,col:'rgba(251,146,60,0.15)'},{x:35,y:65,w:100,col:'rgba(251,146,60,0.1)'}];
     function makeOrbs(el,data){
         if(!el)return;
-        data.forEach((o,i)=>{
-            const d=document.createElement('div');d.className='bloom-orb';
-            d.style.cssText=`left:${o.x}%;top:${o.y}%;width:${o.w}px;height:${o.w}px;background:${o.col};animation-delay:${i*1.8}s;animation-duration:${7+i*1.5}s`;
+        data.forEach(function(o,i){
+            var d=document.createElement('div');d.className='bloom-orb';
+            d.style.cssText='left:'+o.x+'%;top:'+o.y+'%;width:'+o.w+'px;height:'+o.w+'px;background:'+o.col+';animation-delay:'+i*1.8+'s;animation-duration:'+(7+i*1.5)+'s';
             el.appendChild(d);
         });
     }
@@ -631,19 +701,17 @@ document.getElementById('menuBtn').addEventListener('click',()=>document.getElem
     makeOrbs(document.getElementById('bloom4'),orbs4);
 })();
 
-// Reveal
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.04});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Reveal on scroll
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.04});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+
 // Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(!h||h.length<2)return;e.preventDefault();document.querySelector(h)?.scrollIntoView({behavior:'smooth'})})});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var h=a.getAttribute('href');if(!h||h.length<2)return;e.preventDefault();var el=document.querySelector(h);if(el)el.scrollIntoView({behavior:'smooth'})})});
 
-// Service highlight cycling
-let activeService=0;
-setInterval(()=>{document.querySelectorAll('.service-card').forEach(c=>c.classList.remove('highlight'));activeService=(activeService+1)%4;document.querySelector(`[data-svc="${activeService}"]`).classList.add('highlight')},2500);
 
-// Contact form → mailto
-document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();const fd=new FormData(this);const name=fd.get('name')||'';const email=fd.get('email')||'';const msg=fd.get('message')||'';const subject=encodeURIComponent('Website inquiry from '+name);const body=encodeURIComponent('From: '+name+' ('+email+')\n\n'+msg);window.location.href='mailto:dylanlamwork@gmail.com?subject='+subject+'&body='+body;});
+
+// Contact form mailto
+document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();var fd=new FormData(this);var name=fd.get('name')||'';var email=fd.get('email')||'';var msg=fd.get('message')||'';var subject=encodeURIComponent('Website inquiry from '+name);var body=encodeURIComponent('From: '+name+' ('+email+')\n\n'+msg);window.location.href='mailto:dylanlamwork@gmail.com?subject='+subject+'&body='+body;});
 </script>
-
 
 </body></html>
