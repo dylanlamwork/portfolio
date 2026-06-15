@@ -350,7 +350,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .nav-links a:hover{color:var(--fg)}
         .nav-links a.active{color:var(--fg)}
         .btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--font);font-size:14px;font-weight:500;padding:11px 22px;border-radius:100px;border:none;cursor:pointer;transition:all 0.2s}
-        .btn-primary{background:var(--blue);color:var(--white)}.btn-primary:hover{background:#003aa3}
+        .btn-primary{background:linear-gradient(135deg,#6366f1,#2563eb);color:#fff;box-shadow:0 2px 8px rgba(99,102,241,0.25)}.btn-primary:hover{background:linear-gradient(135deg,#4f46e5,#1d4ed8);box-shadow:0 4px 14px rgba(99,102,241,0.35)}
         .btn-secondary{background:var(--white);color:var(--fg);border:1.5px solid var(--fg-10)}.btn-secondary:hover{background:var(--bg)}
         .menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
         .menu-btn span{display:block;width:20px;height:2px;background:var(--fg);margin:4px 0;border-radius:1px}
@@ -446,9 +446,9 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             <h1>Work</h1>
             <p>A selection of projects across sales, data, project management, and system design — spanning 6+ years and 30+ collaborations.</p>
             <div class="legend">
-                <div class="legend-item"><div class="legend-dot" style="background:rgb(99,102,241)"></div>Data &amp; AI</div>
+                <div class="legend-item"><div class="legend-dot" style="background:rgb(99,102,241)"></div>Data Analytics &amp; AI</div>
                 <div class="legend-item"><div class="legend-dot" style="background:rgb(20,184,166)"></div>Project Management</div>
-                <div class="legend-item"><div class="legend-dot" style="background:rgb(251,146,60)"></div>Sales</div>
+                <div class="legend-item"><div class="legend-dot" style="background:rgb(251,146,60)"></div>Sales &amp; Account Management</div>
                 <div class="legend-item"><div class="legend-dot" style="background:rgb(168,85,247)"></div>System Design</div>
             </div>
         </div>
@@ -456,9 +456,9 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         <div class="filters reveal" id="filters">
             <button class="filter-tab active" data-filter="all">All</button>
             <button class="filter-tab" data-filter="featured">Featured</button>
-            <button class="filter-tab" data-filter="data">Data &amp; AI</button>
+            <button class="filter-tab" data-filter="data">Data Analytics &amp; AI</button>
             <button class="filter-tab" data-filter="pm">Project Management</button>
-            <button class="filter-tab" data-filter="sales">Sales</button>
+            <button class="filter-tab" data-filter="sales">Sales &amp; Account Management</button>
             <button class="filter-tab" data-filter="notion">System Design</button>
         </div>
 
@@ -474,7 +474,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 document.getElementById('menuBtn').addEventListener('click',function(){document.querySelector('.nav-links').classList.toggle('active')});
 
 const P=[
-    {"t":"Clair Optimization Agent","c":"Amazon Ads","y":"2026","d":"Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions — replacing hours of manual work.","l":null,"tags":["data","featured"]},
+    {"t":"Clair Optimization Agent","c":"Amazon Ads","y":"2025","d":"Built an AI-powered analysis agent that reads advertiser data, runs 18 analysis layers, and delivers client-ready reports with specific actions — replacing hours of manual work.","l":null,"tags":["data","featured"]},
     {"t":"Clair Visual Agent","c":"Amazon Ads","y":"2025","d":"Built an AI Agent that translates campaign intent into visual generation prompts, adopted across Vietnam, Singapore & Taiwan markets.","l":"https://dylanlamwork.github.io/clairvisual/","tags":["data","featured"]},
     {"t":"AI Agent for Program Pitch Deck","c":"Amazon","y":"2025","d":"Built an AI Agent to generate Pitch Decks for one of the biggest Annual Advertiser Programs of Amazon Ads, adopted by VN & CN teams.","l":null,"tags":["data"]},
     {"t":"Business Dashboard","c":"Amazon","y":"2025","d":"Co-built a business dashboard on PowerBI and Amazon QuickSight, integrating with AI Agent to analyze and provide business insights for actions.","l":null,"tags":["data"]},
@@ -506,7 +506,7 @@ const TAG_COLORS = {
     sales: {r:251,g:146, b:60},   // Amber
     notion:{r:168,g:85,  b:247},  // Purple
 };
-const TAG_LABELS = {data:'Data & AI', pm:'Project Management', sales:'Sales', notion:'System Design', featured:'Featured'};
+const TAG_LABELS = {data:'Data Analytics & AI', pm:'Project Management', sales:'Sales & Account Management', notion:'System Design', featured:'Featured'};
 const TAG_CLASSES = {data:'tag-data', pm:'tag-pm', sales:'tag-sales', notion:'tag-system', featured:'tag-data'};
 
 // Orb positions (randomized per card)
