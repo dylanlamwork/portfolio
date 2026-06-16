@@ -371,10 +371,10 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .stat-label{font-size:13px;color:var(--fg-60);line-height:140%;max-width:160px}
 
         /* SECTIONS */
-        .section{padding:clamp(60px, 10vh, 120px) 0;min-height:100vh;box-sizing:border-box}
+        .section{padding:clamp(60px, 10vh, 120px) 0}
         .section-alt{background:#eef0f4;width:100vw;position:relative;left:50%;transform:translateX(-50%);padding-left:clamp(20px, 5vw, 80px);padding-right:clamp(20px, 5vw, 80px)}
         .section-dark{background:#eef1f6;color:var(--fg);width:100vw;position:relative;left:50%;transform:translateX(-50%);padding-left:clamp(20px, 5vw, 80px);padding-right:clamp(20px, 5vw, 80px)}
-        .section-dark-bottom{padding-top:clamp(60px, 10vh, 120px);padding-bottom:clamp(60px, 10vh, 120px);min-height:100vh;box-sizing:border-box}
+        .section-dark-bottom{padding-top:clamp(60px, 10vh, 120px);padding-bottom:clamp(60px, 10vh, 120px)}
         .section-dark .service-card{background:#fff}
         .section-dark .writing-link{background:#fff}
         .section-dark .writing-link:hover{background:#f8f9fb}
@@ -495,7 +495,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             .contact-form{grid-template-columns:1fr}
             .footer-inner{flex-direction:column;gap:16px;align-items:flex-start}
             .portfolio-header{flex-direction:column;gap:12px}
-            .ambient-liquid{pointer-events:none!important;opacity:0.35}
+            .ambient-liquid{display:none}
             .blob{pointer-events:none!important}
             .blob-tooltip{display:none}
             .section-dark{width:100%;left:0;transform:none;padding-left:16px;padding-right:16px}
