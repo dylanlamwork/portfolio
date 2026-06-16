@@ -359,14 +359,14 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:6px 16px;border:1.5px solid var(--fg-20);border-radius:100px;margin-bottom:24px;color:var(--fg);align-self:flex-start;width:fit-content}
 
         /* HERO */
-        .hero{padding:72px 0 56px;max-width:65%}
-        .hero h1{font-family:var(--heading);font-size:clamp(32px, 4vw, 58px);font-weight:500;line-height:115%;letter-spacing:-0.03em;margin-bottom:20px}
+        .hero{padding:clamp(32px, 5vh, 72px) 0 clamp(24px, 3vh, 48px);max-width:65%}
+        .hero h1{font-family:var(--heading);font-size:clamp(32px, 4vw, 58px);font-weight:500;line-height:115%;letter-spacing:-0.03em;margin-bottom:clamp(12px, 1.5vh, 20px)}
         .hero h1 span{color:var(--fg-40)}
-        .hero p{font-size:15px;line-height:150%;color:var(--fg-60);max-width:100%;margin-bottom:28px}
+        .hero p{font-size:15px;line-height:150%;color:var(--fg-60);max-width:100%;margin-bottom:clamp(16px, 2vh, 28px)}
         .hero-actions{display:flex;gap:10px}
 
         /* STATS */
-        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0}
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:clamp(20px, 3vh, 44px) 0}
         .stat-value{font-family:var(--heading);font-size:clamp(28px, 3.2vw, 48px);font-weight:500;letter-spacing:-0.03em;line-height:120%;margin-bottom:4px}
         .stat-label{font-size:13px;color:var(--fg-60);line-height:140%;max-width:160px}
 
