@@ -495,7 +495,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             .contact-form{grid-template-columns:1fr}
             .footer-inner{flex-direction:column;gap:16px;align-items:flex-start}
             .portfolio-header{flex-direction:column;gap:12px}
-            .ambient-liquid{pointer-events:none!important;opacity:0.3;transform:scale(0.7);transform-origin:center center}
+            .ambient-liquid{pointer-events:none!important;opacity:0.35}
             .blob{pointer-events:none!important}
             .blob-tooltip{display:none}
             .section-dark{width:100%;left:0;transform:none;padding-left:16px;padding-right:16px}
@@ -508,7 +508,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             .section-heading{font-size:24px}
             .btn{padding:10px 18px;font-size:13px}
             .services-grid{grid-template-columns:1fr}
-            .ambient-liquid{opacity:0.25;transform:scale(0.6)}
+            .ambient-liquid{opacity:0.3}
         }
     </style>
 </head>
@@ -626,14 +626,14 @@ var blobs=[];
     const COLORS=['rgba(99,102,241,','rgba(20,184,166,','rgba(251,146,60,','rgba(168,85,247,'];
     for(let i=0;i<8;i++){
         const blob=document.createElement('div');blob.className='blob';blob.dataset.idx=i;
-        const size=120+Math.random()*100;
+        const isMobile=window.innerWidth<768;const size=isMobile?(60+Math.random()*50):(120+Math.random()*100);
         blob.style.width=size+'px';blob.style.height=size+'px';
         blob.style.background=COLORS[i%4]+'0.35)';
         blob.addEventListener('mouseenter',function(e){showBlobTooltip(e)});
         blob.addEventListener('mousemove',function(e){showBlobTooltip(e)});
         blob.addEventListener('mouseleave',function(){btt.classList.remove('visible');btt.innerHTML='';});
         c.appendChild(blob);
-        blobs.push({el:blob,x:Math.random()*80+10,y:Math.random()*70+15,vx:(Math.random()-0.5)*0.08,vy:(Math.random()-0.5)*0.08});
+        var spread=isMobile?50:80;var offset=isMobile?25:10;blobs.push({el:blob,x:Math.random()*spread+offset,y:Math.random()*spread+offset,vx:(Math.random()-0.5)*0.08,vy:(Math.random()-0.5)*0.08});
     }
     function anim(){
         blobs.forEach(b=>{
