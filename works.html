@@ -368,10 +368,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .nav-links a:hover{color:var(--text)}
 .nav-cta{justify-self:end;font-size:clamp(12px,1vw,14px);padding:8px 16px;border-radius:var(--radius);background:var(--accent);color:#fff;text-decoration:none;font-weight:500;transition:opacity 0.3s}
 .nav-cta:hover{opacity:0.85}
-.menu-btn{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;position:relative}
-.menu-btn span{display:block;width:100%;height:2px;background:var(--text);border-radius:2px;position:absolute;left:0;transition:0.3s}
-.menu-btn span:nth-child(1){top:0}.menu-btn span:nth-child(2){top:9px}.menu-btn span:nth-child(3){top:18px}
-
 /* HERO */
 .page-hero{padding-top:clamp(120px,15vh,160px);padding-bottom:clamp(40px,6vh,60px)}
 .page-hero h1{font-family:var(--display);font-size:clamp(36px,6vw,80px);font-weight:var(--fw-display);letter-spacing:-0.04em;line-height:1.05;margin-bottom:16px}
@@ -428,19 +424,62 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 
 /* RESPONSIVE */
 @media(max-width:768px){
-    .nav-inner{display:flex;padding:0 24px}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    .filters{flex-wrap:wrap}
+
+    
     .nav-brand{justify-self:start;font-family:var(--display);font-size:clamp(14px,1.2vw,16px);font-weight:500;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
-    .nav-links{display:none;position:fixed;top:61px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);flex-direction:column;padding:24px;gap:20px;z-index:200;align-items:center}
-    .nav-links.active{display:flex}
-    .nav-cta{display:none}
-    .menu-btn{display:block}
+    
+    
+    
+    
 }
 @media(max-width:768px){
     .project-row{grid-template-columns:1fr auto;gap:8px}
     .proj-scope{grid-column:1/-1}
     .footer{flex-direction:column;gap:16px;text-align:center}
-    .filters{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+    .filters{flex-wrap:wrap}
 }
+
+
+
+
+
+
+
+
+/* Menu button — hidden on desktop */
+.menu-btn{display:none}
+.menu-btn span{display:block;width:100%;height:2px;border-radius:1px;transition:0.3s}
+
+/* MOBILE NAV — Option A: Classic + Full-width Light Panel */
+@media(max-width:768px){
+    .nav-inner{display:flex!important;padding:0 24px;height:60px;align-items:center}
+    .nav-links{display:none!important;position:absolute;top:60px;left:0;width:100%;background:#fff;flex-direction:column;padding:28px 24px;gap:16px;z-index:300;align-items:flex-start;box-shadow:0 12px 40px rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.06)}
+    .nav-links.active{display:flex!important}
+    .nav-links a{font-family:var(--display);font-size:22px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:-0.02em;line-height:1.5}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-cta{display:none!important}
+    .menu-btn{display:flex!important;flex-direction:column;justify-content:space-between;width:26px;height:18px;margin-left:auto;z-index:400;background:none!important;border:none!important;cursor:pointer;padding:0}
+    .menu-btn span{display:block!important;width:100%;height:2px;background:var(--text)!important;border-radius:1px;position:static!important;transform:none!important;margin:0}
+}
+
 </style>
 </head>
 <body>
@@ -452,7 +491,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
         <a href="about.html">About</a>
         <a href="index.html#contact">Contact</a>
     </div>
-    <a href="index.html#contact" class="nav-cta">Get in touch ↗</a>
+    <a href="index.html#contact" class="nav-cta">Get in touch <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M3 9L9 3M9 3H4M9 3v5"></path></svg></a>
     <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
 </div></nav>
 
@@ -754,7 +793,7 @@ function renderProjects(filter){
             <div class="proj-name">${p.t}</div>
             <div class="proj-scope">${scope}</div>
             <div class="proj-year">${p.y}</div>
-            ${p.l?`<a href="${p.l}" target="_blank" class="proj-link">↗</a>`:`<div class="proj-link"></div>`}
+            ${p.l?`<a href="${p.l}" target="_blank" class="proj-link"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M3 9L9 3M9 3H4M9 3v5"/></svg></a>`:`<div class="proj-link"></div>`}
             <div class="proj-desc">${p.d}</div>
         `;
         if(p.l){row.addEventListener('click',()=>window.open(p.l,'_blank'))}
