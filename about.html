@@ -1,623 +1,403 @@
 <!DOCTYPE html>
-<html lang="en"><head><style id="qw-theme">:root {
-  --color-bg: #faf9fc;
-  --color-text: #131920;
-  --color-navbar-bg: #f9f9fb;
-  --color-bg-chat-view: #fcfcfd;
-  --color-bg-secondary: #ffffff;
-  --color-bg-tertiary: #f9fafb;
-  --color-bg-hover: #f3f4f6;
-  --color-surface: #f9fafb;
-  --color-surface-hover: #f3f4f6;
-  --color-surface-active: #e5e7eb;
-  --color-border: rgba(0, 0, 0, .12);
-  --color-border-light: rgba(0, 0, 0, .06);
-  --color-border-strong: #d1d5db;
-  --color-primary: #4200db;
-  --color-primary-dark: #35009e;
-  --color-primary-light: #8575ff;
-  --color-primary-bg: #e8e6ff;
-  --color-primary-hover-border: #35009e;
-  --color-nav-icon-active: #4200db;
-  --color-nav-hover-border: #4200db;
-  --color-primary-alpha-3: color-mix(in srgb, #4200db 3%, transparent);
-  --color-primary-alpha-5: color-mix(in srgb, #4200db 5%, transparent);
-  --color-primary-alpha-8: color-mix(in srgb, #4200db 8%, transparent);
-  --color-primary-alpha-12: color-mix(in srgb, #4200db 12%, transparent);
-  --color-primary-alpha-15: color-mix(in srgb, #4200db 15%, transparent);
-  --color-primary-alpha-20: color-mix(in srgb, #4200db 20%, transparent);
-  --color-primary-alpha-25: color-mix(in srgb, #4200db 25%, transparent);
-  --color-primary-alpha-30: color-mix(in srgb, #4200db 30%, transparent);
-  --color-primary-alpha-40: color-mix(in srgb, #4200db 40%, transparent);
-  --color-primary-alpha-50: color-mix(in srgb, #4200db 50%, transparent);
-  --color-primary-alpha-60: color-mix(in srgb, #4200db 60%, transparent);
-  --color-primary-subtle: color-mix(in srgb, #4200db 12%, transparent);
-  --color-primary-border: color-mix(in srgb, #4200db 30%, transparent);
-  --color-focus-ring: color-mix(in srgb, #4200db 50%, transparent);
-  --color-sidebar-hover: color-mix(in srgb, #4200db 12%, transparent);
-  --color-accent: #4200db;
-  --color-accent-foreground: #4200db;
-  --color-accent-dark: #35009e;
-  --color-accent-light: #e8e6ff;
-  --color-accent-inverse: #ffffff;
-  --color-link: #4200db;
-  --color-primary-gradient-end: #e8e6ff;
-  --color-primary-bg-solid: #e8e6ff;
-  --color-user-bubble: #F3F3F7;
-  --color-user-bubble-text: #131920;
-  --color-text-secondary: #5e5e5e;
-  --color-text-tertiary: #656871;
-  --color-text-muted: #9ca3af;
-  --color-text-on-primary: #ffffff;
-  --color-success: #00802f;
-  --color-success-dark: #00471e;
-  --color-success-light: #d9ffd6;
-  --color-success-hover: #005c26;
-  --color-success-bg: #e6f5eb;
-  --color-success-border: #b3d9bf;
-  --color-success-foreground: #00802f;
-  --color-success-dark-foreground: #00471e;
-  --color-success-text: #00471e;
-  --color-error: #db0000;
-  --color-error-dark: #700000;
-  --color-error-light: #ffe0e0;
-  --color-error-hover: #ffe0e0;
-  --color-error-bg: #fceaea;
-  --color-error-border: #f2cccc;
-  --color-error-active-border: #db0000;
-  --color-error-foreground: #db0000;
-  --color-error-dark-foreground: #700000;
-  --color-error-inverse: #ffffff;
-  --color-error-text: #700000;
-  --color-warning: #f2b100;
-  --color-warning-dark: #573a00;
-  --color-warning-light: #fffbbd;
-  --color-warning-hover: #db9200;
-  --color-warning-bg: #fef7e6;
-  --color-warning-border: #f9dfa3;
-  --color-warning-foreground: #f2b100;
-  --color-warning-dark-foreground: #573a00;
-  --color-warning-inverse: #573a00;
-  --color-surface-warning: #fffbbd;
-  --color-text-warning: #573a00;
-  --color-info: #006ce0;
-  --color-info-dark: #002a66;
-  --color-info-light: #d1f1ff;
-  --color-info-hover: #003b8f;
-  --color-info-bg: #ebf3fc;
-  --color-info-border: #b3d1f0;
-  --color-info-foreground: #006ce0;
-  --color-info-dark-foreground: #002a66;
-  --color-info-inverse: #ffffff;
-  --color-overlay: rgba(0, 0, 0, .5);
-  --color-shadow: rgba(0, 0, 0, .08);
-  --color-hover: rgba(0, 0, 0, .05);
-  --color-tooltip-bg: rgba(0, 0, 0, .85);
-  --color-tooltip-text: #ffffff;
-  --color-voice-purple: #8575ff;
-  --color-voice-purple-dark: #4200db;
-  --color-voice-purple-light: #8575ff;
-  --color-voice-red: #db0000;
-  --color-voice-red-dark: #700000;
-  --color-voice-amber: #f2b100;
-  --color-voice-purple-glow: rgba(66, 0, 219, .4);
-  --color-voice-red-glow: rgba(219, 0, 0, .4);
-  --font-sans: "Amazon Ember", "Helvetica Neue", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: "SF Mono", "Monaco", "Menlo", "Consolas", monospace;
-  --text-2xs: .5625rem;
-  --text-xs: .625rem;
-  --text-sm: .6875rem;
-  --text-base: .75rem;
-  --text-md: .8125rem;
-  --text-lg: .875rem;
-  --text-xl: 1rem;
-  --text-2xl: 1.125rem;
-  --text-3xl: 1.25rem;
-  --text-4xl: 1.5rem;
-  --text-5xl: 2rem;
-  --spacing-1: calc(.25rem * 1);
-  --spacing-1-5: calc(.25rem * 1.5);
-  --spacing-2: calc(.25rem * 2);
-  --spacing-3: calc(.25rem * 3);
-  --spacing-4: calc(.25rem * 4);
-  --spacing-5: calc(.25rem * 5);
-  --spacing-6: calc(.25rem * 6);
-  --spacing-7: calc(.25rem * 7);
-  --spacing-8: calc(.25rem * 8);
-  --spacing-9: calc(.25rem * 9);
-  --spacing-10: calc(.25rem * 10);
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-card: 12px;
-  --radius-lg: 16px;
-  --radius-pill: 8px;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, .08);
-  --color-success-bg-solid: #d9ffd6;
-  --color-error-bg-solid: #ffe0e0;
-  --color-error-border-solid: #ffe0e0;
-  --color-warning-bg-solid: #fffbbd;
-  --color-warning-text: #573a00;
-  --color-info-bg-solid: #d1f1ff;
-  --color-info-bg-solid-alt: #d1f1ff;
-  --color-info-text: #002a66;
-  --color-info-text-alt: #002a66;
-  --color-emerald: #10b981;
-  --color-teal: #4ecdc4;
-  --color-code-bg: #F3F3F7;
-  --color-code-header-bg: #f1f3f5;
-  --color-code-text: #24292e;
-  --color-code-border: #e1e4e8;
-  --color-code-muted: #6a737d;
-  --color-inline-code-bg: #F3F3F7;
-  --color-inline-code-text: #24292e;
-  --color-inline-code-border: #e1e4e8;
-  --color-scrollbar-thumb: #d1d5db;
-  --color-scrollbar-track: transparent;
-  --color-graph-node-text: #333333;
-  --color-graph-node-text-dim: #7F8C8D;
-  --color-graph-edge-default: #95A5A6;
-  --color-graph-edge-cross: #E67E22;
-  --color-graph-edge-text: #666666;
-  --color-graph-edge-stroke: #ffffff;
-  --color-graph-highlight-bg: #FF6B6B;
-  --color-graph-highlight-border: #E74C3C;
-  --color-graph-search-bg: #FFD700;
-  --color-graph-search-border: #FFA500;
-  --color-graph-focus-border: #C0392B;
-  --color-graph-external-border: #95A5A6;
-  --color-graph-cat-file: #3498DB;
-  --color-graph-cat-folder: #7F8C8D;
-  --color-graph-cat-file-aggregate: #2980B9;
-  --color-graph-cat-class: #9B59B6;
-  --color-graph-cat-function: #2ECC71;
-  --color-graph-cat-method: #1ABC9C;
-  --color-graph-cat-variable: #F39C12;
-  --color-graph-cat-import: #D35400;
-  --color-graph-cat-module: #5B6ABF;
-  --color-graph-cat-concept: #E74C3C;
-  --color-graph-cat-person: #FF6B6B;
-  --color-graph-cat-org: #4ECDC4;
-  --color-graph-cat-organization: #4ECDC4;
-  --color-graph-cat-product: #A29BFE;
-  --color-graph-cat-metric: #FD79A8;
-  --color-graph-cat-location: #34495E;
-  --color-graph-cat-date: #E056A0;
-  --color-graph-cat-code: #3498DB;
-  --color-graph-cat-doc: #7F8C8D;
-  --color-graph-cat-url: #00B894;
-  --color-graph-cat-email: #6C5CE7;
-  --color-graph-cat-unknown: #BDC3C7;
-  --color-graph-rel-contains: #BDC3C7;
-  --color-graph-rel-extends: #9B59B6;
-  --color-graph-rel-implements: #3498DB;
-  --color-graph-rel-imports: #E67E22;
-  --color-graph-rel-uses: #2ECC71;
-  --color-graph-rel-calls: #27AE60;
-  --color-graph-rel-references: #F39C12;
-  --color-graph-rel-related-to: #95A5A6;
-  --color-graph-rel-works-on: #E74C3C;
-  --color-graph-rel-owns: #1ABC9C;
-  --color-graph-rel-depends-on: #E67E22;
-  --color-graph-rel-parent-of: #BDC3C7;
-  --qs-content: #fff;
-  --qs-main: #fff;
-  --qs-primary-foreground: #131920;
-  --qs-secondary-foreground: #656871;
-  --qs-tertiary-foreground: #9ca3af;
-  --qs-placeholder-foreground: #8c8c94;
-  --qs-divider: #dedee3;
-  --qs-default-border: #8c8c94;
-  --qs-neutral-soft: #b4b4bb;
-  --qs-neutral-gray-50: #f9fafb;
-  --qs-tertiary-background: #f9fafb;
-  --qs-action-hover: #f3f3f7;
-  --qs-primary-default: #4200db;
-  --qs-primary-dark: #35009e;
-  --qs-primary-light: #e8e6ff;
-  --qs-success-default: #00802f;
-  --qs-error-default: #db0000;
-  --qs-font-sans: "Amazon Ember", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  --qs-font-family: "Amazon Ember", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  --qs-font-base-letter-spacing: .15px;
-  --qs-shadow-sm: 0 0 2px 0 #00000029, 0 0 4px 0 #00000029;
-  --qs-shadow-md: 0 0 2px 0 #00000029, 0 2px 8px 1px #00000029;
-  --qs-shadow-lg: 0 4px 16px 4px #00000029, 0 2px 6px 1px #00000029;
-  --qs-shadow-xl: 0 4px 8px 2px #00000029, 0 6px 20px 4px #00000029;
-  --qs-width-modal-sm: 384px;
-  --qs-width-modal-md: 600px;
-  --qs-width-modal-lg: 1136px;
-  --qs-grid-gap: 16px;
-  --qs-grid-gap-xl: 24px;
-  --qs-primary-medium: #8575ff;
-  --qs-primary-inverse: #fff;
-  --qs-neutral-lightest: #f9f9fb;
-  --qs-neutral-light: #f3f3f7;
-  --qs-neutral-default: #dedee3;
-  --qs-neutral-medium: #8c8c94;
-  --qs-neutral-deep: #656871;
-  --qs-neutral-dark: #333843;
-  --qs-neutral-strong: #131920;
-  --qs-neutral-white: #fff;
-  --qs-neutral-black: #000;
-  --qs-success-medium: #005c26;
-  --qs-success-dark: #00471e;
-  --qs-success-light: #d9ffd6;
-  --qs-success-inverse: #fff;
-  --qs-info-default: #006ce0;
-  --qs-info-medium: #003b8f;
-  --qs-info-dark: #002a66;
-  --qs-info-light: #d1f1ff;
-  --qs-info-inverse: #fff;
-  --qs-warning-default: #f2b100;
-  --qs-warning-medium: #db9200;
-  --qs-warning-dark: #573a00;
-  --qs-warning-light: #fffbbd;
-  --qs-warning-inverse: #573a00;
-  --qs-warning-experimental: #f2b100;
-  --qs-warning-experimental-light: #fffbbd;
-  --qs-warning-experimental-light-foreground: #fffbbd;
-  --qs-error-medium: #900;
-  --qs-error-dark: #700000;
-  --qs-error-light: #ffe0e0;
-  --qs-error-inverse: #fff;
-  --qs-connection-default: #db3300;
-  --qs-connection-soft: #ff997a;
-  --qs-connection-light: #ffe0d6;
-  --qs-connection-dark: #661800;
-  --qs-automation-default: #b3008f;
-  --qs-automation-medium: #d600ba;
-  --qs-automation-soft: #ff94f1;
-  --qs-automation-light: #ffe0fb;
-  --qs-automation-dark: #660052;
-  --qs-insight-default: #a000b8;
-  --qs-insight-soft: #f299ff;
-  --qs-insight-light: #fce6ff;
-  --qs-insight-dark: #590066;
-  --qs-visualization-default: #7300e5;
-  --qs-visualization-soft: #d4a8ff;
-  --qs-visualization-light: #f2e5ff;
-  --qs-visualization-dark: #45008a;
-  --qs-spice: #ff9800;
-  --qs-coachmark: #006ce0;
-  --qs-brand: #fff;
-  --qs-brand-foreground: #131920;
-  --qs-brand-navbar: #131920;
-  --qs-brand-navbar-foreground: #fff;
-  --qs-brand-navbar-light: #dedee3;
-  --qs-brand-navbar-dark: #000;
-  --qs-application-navbar: #4200db;
-  --qs-application-navbar-foreground: #fff;
-  --qs-application-navbar-light: #e8e6ff;
-  --qs-application-navbar-dark: #35009e;
-  --qs-dimension: #4200db;
-  --qs-dimension-foreground: #fff;
-  --qs-dimension-experimental: #4200db;
-  --qs-dimension-experimental-foreground: #4200db;
-  --qs-measure: #00802f;
-  --qs-measure-foreground: #fff;
-  --qs-measure-experimental: #f2b100;
-  --qs-measure-experimental-foreground: #f2b100;
-  --qs-content-inverse: #333843;
-  --qs-content-inverse-active: #131920;
-  --qs-secondary: #dedee3;
-  --qs-disabled: #8c8c94;
-  --qs-divider-light: #f3f3f7;
-  --qs-hover-border: #333843;
-  --qs-active-border: #4200db;
-  --qs-disabled-border: #dedee3;
-  --qs-error-border: #ffe0e0;
-  --qs-error-active-border: #db0000;
-  --qs-disabled-foreground: #b4b4bb;
-  --qs-primary-inverse-foreground: #fff;
-  --qs-error-foreground: #db0000;
-  --qs-contrast-foreground: #131920;
-  --qs-main-foreground: #131920;
-  --qs-main-secondary-foreground: #656871;
-  --qs-action-disabled: #f3f3f7;
-  --qs-action-active: #e8e6ff;
-  --qs-default-badge: #dedee3;
-  --qs-tag-default: #dedee3;
-  --qs-tag-soft-border: #b4b4bb;
-  --qs-focus-offset: 1px;
-  --qs-toggle-tile-sm: calc(.25rem * 8);
-  --qs-toggle-tile-md: calc(.25rem * 12);
-  --qs-toggle-tile-lg: calc(.25rem * 15);
-  --qs-shadow-pin-right: inset 4px 0 4px -4px #00000029;
-  --qs-shadow-pin-left: inset -4px 0 4px -4px #00000029;
-  --react-pdf-text-layer: 1;
-  --highlight-bg-color: rgba(180, 0, 170, 1);
-  --highlight-selected-bg-color: rgba(0, 100, 0, 1);
-  --react-pdf-annotation-layer: 1;
-  --annotation-unfocused-field-background: url("data:image/svg+xml;charset=UTF-8,<svg width='1px' height='1px' xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' style='fill:rgba(0, 54, 255, 0.13);'/></svg>");
-  --input-focus-border-color: Highlight;
-  --input-focus-outline: 1px solid Canvas;
-  --input-unfocused-border-color: transparent;
-  --input-disabled-border-color: transparent;
-  --input-hover-border-color: black;
-  --link-outline: none;
-  color-scheme: light;
-}
-body { background: var(--color-bg); color: var(--color-text); }
-a { color: var(--color-link, var(--color-primary)); }</style>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>About — Dylan Lam</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="[REDACTED_CONN_STRING]://300;400;500;600;700&amp;family=Sora:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="alternate icon" href="icon-64.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
-    --bg:#f6f6f6;--surface:#eeeeee;--border:rgba(0,0,0,0.08);
-    --text:#151515;--text-sub:#7a7a7a;--text-muted:rgba(0,0,0,0.35);
-    --accent:#6644ff;--accent-glow:rgba(102,68,255,0.2);
-    --font:'Inter',sans-serif;--display:'Sora','Inter',sans-serif;
-    --fw-body:410;--fw-display:400;--radius:6px;--max-w:1199px;
+  --ink:#0c0c0c; --grey-1:#585858; --grey-2:#8f9091;
+  --line:#dcdcdc; --line-2:#e6e6e8; --bg:#fafafa;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'Fragment Mono',ui-monospace,monospace;
+  --opsz-d:'opsz' 32; --opsz-t:'opsz' 16;
+  --maxw:none; --gut:clamp(20px,2.6vw,56px);
+  --col-gap:clamp(14px,1.5vw,22px);   /* same column gutter as works.html */
+
+  /* ═══ TYPE SCALE — six steps, used everywhere, no ad-hoc sizes ═══
+     display  giant word          fit-to-width, 700
+     h1       page statement      clamp(22px,2.7vw,38px)  600
+     h2       titles & headings   clamp(17px,1.8vw,25px)  600   <- job titles AND discipline headings
+     h3       list emphasis       clamp(16px,1.55vw,22px) 600
+     body     prose              clamp(14px,1.15vw,16px) 400
+     meta     mono labels        10.5px / 11px           400   */
+  --t-h1:clamp(22px,2.7vw,38px);
+  --t-h2:clamp(17px,1.8vw,25px);
+  --t-body:clamp(14px,1.15vw,16px);
+  --t-small:14px;
+  --t-meta:10.5px;
+  --w-body:400; --w-mid:500; --w-display:600; --w-bold:700;
+  --ls-h1:-0.038em; --ls-h2:-0.03em; --ls-body:-0.008em;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;letter-spacing:0.02em;font-weight:410;overflow-x:hidden}
-.container{max-width:100%;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
+html,body{min-height:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;font-weight:var(--w-body);
+  font-variation-settings:var(--opsz-t);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  display:flex;flex-direction:column;min-height:100vh}
+body.lock{overflow:hidden}
+main{flex:1 0 auto}
+.wrap{max-width:var(--maxw);width:100%;margin:0 auto;padding:0 var(--gut)}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06)}
-.nav-inner{max-width:100%;padding:0 clamp(24px,5vw,64px);height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
-.nav-brand{justify-self:start;font-family:var(--display);font-size:clamp(14px,1.2vw,16px);font-weight:500;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
-.nav-links{justify-self:center;display:flex;gap:clamp(16px,2.5vw,32px)}
-.nav-links a{font-size:clamp(12px,1vw,14px);color:var(--text-sub);text-decoration:none;font-weight:410;transition:color 0.3s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{justify-self:end;font-size:clamp(12px,1vw,14px);padding:8px 16px;border-radius:var(--radius);background:var(--accent);color:#fff;text-decoration:none;font-weight:500;transition:opacity 0.3s}
-.nav-cta:hover{opacity:0.85}
-/* HERO */
-.page-hero{padding-top:clamp(120px,15vh,160px);padding-bottom:clamp(40px,6vh,80px)}
-.page-hero h1{font-family:var(--display);font-size:clamp(36px,6vw,80px);font-weight:var(--fw-display);letter-spacing:-0.04em;line-height:1.05;margin-bottom:24px}
-.page-hero .subtitle{font-size:clamp(16px,1.4vw,20px);color:var(--text-sub);max-width:600px;line-height:1.6}
+/* ═══ TYPE PRIMITIVES ═══ */
+.t-h1{font-size:var(--t-h1);font-weight:var(--w-display);letter-spacing:var(--ls-h1);
+  line-height:1.1;font-variation-settings:var(--opsz-d)}
+.t-h2{font-size:var(--t-h2);font-weight:var(--w-display);letter-spacing:var(--ls-h2);
+  line-height:1.18;font-variation-settings:var(--opsz-d)}
+.t-body{font-size:var(--t-body);font-weight:var(--w-body);letter-spacing:var(--ls-body);
+  line-height:1.6;color:var(--grey-1)}
+.t-meta{font-family:var(--mono);font-size:var(--t-meta);letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--grey-2)}
 
-/* SECTIONS */
-.section{padding:clamp(60px,10vh,120px) 0}
-.section-label{font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-sub);margin-bottom:20px}
-.section-head{font-family:var(--display);font-size:clamp(28px,4vw,48px);font-weight:var(--fw-display);letter-spacing:-0.03em;line-height:1.1;margin-bottom:clamp(24px,4vh,48px)}
-.section-divider{border:none;border-top:1px solid var(--border);margin:0}
+/* ═══ NAV (Rice pattern) ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(250,250,250,.82);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line-2)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);height:64px;display:flex;align-items:center}
+.brand{font-size:15px;font-weight:var(--w-display);letter-spacing:-0.02em;color:var(--ink);
+  text-decoration:none;font-variation-settings:var(--opsz-d)}
+.menu-toggle{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--ink);background:none;border:none;cursor:pointer;padding:8px 0;
+  transition:opacity .25s}
+.menu-toggle:hover{opacity:.5}
+.underlay{position:fixed;inset:0;background:rgba(12,12,12,.45);opacity:0;visibility:hidden;
+  transition:opacity .5s ease,visibility .5s;z-index:400;cursor:pointer}
+.underlay.on{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(480px,86vw);background:#0c0c0c;z-index:500;
+  padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;justify-content:space-between;
+  transform:translateX(100%);transition:transform .62s cubic-bezier(.16,1,.3,1)}
+.drawer.on{transform:none}
+.drawer-top{display:flex;align-items:center;justify-content:flex-end;height:26px;margin-bottom:auto}
+.drawer-close{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);background:none;border:none;cursor:pointer;transition:color .25s}
+.drawer-close:hover{color:#fff}
+.drawer-links{display:flex;flex-direction:column;gap:clamp(2px,0.5vh,6px);margin:auto 0}
+.drawer-links a{font-size:clamp(34px,4.6vw,60px);font-weight:var(--w-display);letter-spacing:-0.045em;
+  line-height:1.06;font-variation-settings:var(--opsz-d);color:#fff;text-decoration:none;transition:opacity .3s}
+.drawer-links a:hover{opacity:.35}
+.drawer-links a.on{color:var(--grey-2)}
+.drawer-info{display:grid;gap:16px}
+.drawer-info .di-k{font-family:var(--mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:5px}
+.drawer-info .di-v,.drawer-info .di-v a{font-size:var(--t-small);color:rgba(255,255,255,.85);
+  text-decoration:none;letter-spacing:-0.01em;transition:opacity .25s}
+.drawer-info .di-v a:hover{opacity:.5}
+.drawer-social{display:flex;gap:18px}
 
-/* HOW I WORK */
-.principles{display:flex;flex-direction:column;gap:clamp(32px,5vh,56px)}
-.principle{display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,40px);align-items:start}
-.principle-num{font-family:var(--display);font-size:clamp(14px,1.2vw,16px);font-weight:500;color:var(--text-muted);padding-top:4px}
-.principle h3{font-family:var(--display);font-size:clamp(18px,1.8vw,24px);font-weight:500;letter-spacing:-0.02em;margin-bottom:8px}
-.principle p{color:var(--text-sub);font-size:clamp(14px,1.2vw,16px);line-height:1.6;max-width:600px}
+/* ═══ HERO ═══ */
+.hero{padding-top:clamp(84px,11vh,120px);padding-bottom:clamp(6px,1.2vh,14px)}
+.bigword{display:block;width:max-content;white-space:nowrap;font-weight:var(--w-bold);
+  letter-spacing:-0.055em;line-height:0.78;font-variation-settings:var(--opsz-d);
+  color:var(--ink);margin-left:-0.04em}
 
-/* TIMELINE */
-.timeline{display:flex;flex-direction:column;gap:0}
-.tl-item{display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,4vw,64px);padding:clamp(24px,3vh,40px) 0;border-bottom:1px solid var(--border)}
-.tl-item:first-child{border-top:1px solid var(--border)}
-.tl-year{font-size:clamp(12px,1vw,14px);color:var(--text-sub);font-weight:410;padding-top:4px}
-.tl-right{display:flex;flex-direction:column;gap:6px}
-.tl-role{font-family:var(--display);font-size:clamp(16px,1.4vw,20px);font-weight:500;letter-spacing:-0.02em}
-.tl-company{font-size:clamp(12px,1vw,14px);color:var(--text-sub)}
-.tl-desc{font-size:clamp(13px,1.1vw,15px);color:var(--text-sub);line-height:1.6;margin-top:8px}
-.tl-item.current .tl-role::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:10px;vertical-align:middle}
+/* ═══ THE ONE ROW UNIT — every section is this shape ═══ */
+.rows{padding-top:clamp(30px,4.5vh,56px)}
 
-/* TOOLS */
-.tools-grid{display:flex;flex-wrap:wrap;gap:10px}
-.tool-pill{padding:10px 18px;border-radius:var(--radius);border:1px solid var(--border);font-size:clamp(12px,1vw,14px);font-weight:410;color:var(--text-sub);transition:all 0.3s}
-.tool-pill:hover{border-color:var(--accent);color:var(--accent);background:rgba(102,68,255,0.03)}
+/* intro supporting paragraph */
+.item-d{margin-top:9px;max-width:62ch}
 
-/* CTA */
-.cta-section{padding:clamp(60px,10vh,100px) 0;text-align:center}
-.cta-section h2{font-family:var(--display);font-size:clamp(28px,4vw,48px);font-weight:var(--fw-display);letter-spacing:-0.03em;margin-bottom:16px}
-.cta-section p{color:var(--text-sub);margin-bottom:32px;font-size:clamp(14px,1.2vw,16px)}
-.btn-primary{display:inline-block;padding:14px 28px;border-radius:var(--radius);background:var(--accent);color:#fff;text-decoration:none;font-size:clamp(13px,1vw,15px);font-weight:500;transition:opacity 0.3s}
-.btn-primary:hover{opacity:0.85}
+/* ═══ RICE SERVICES ROW ═══════════════════════════════════════════
+   Label and content at the SAME type step (--t-h2); hairlines only
+   between rows — none at the start or end of a group. Content formula: [name / comma list] — [value sentence].
+   Same 4-column grid as .row and works.html — one rhythm site-wide. */
+/* group header sits in column 1, aligned with the row labels below it */
+.rgroup{padding:clamp(26px,3.6vh,46px) 0 0}
+.grp-lab{padding-bottom:clamp(14px,1.8vh,20px)}
+/* Rice row on the SAME 4-col grid as works.html: label 1/4, content 3/4 */
+.rrow{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--col-gap);
+  padding:clamp(18px,2.4vh,28px) 0;align-items:start}
+.rrow + .rrow{border-top:1px solid var(--line)}   /* separators only BETWEEN rows */
+.rr-lab{grid-column:1}
+.rr-body{grid-column:2 / -1}
+.rr-lab,.rr-body{font-size:var(--t-h2);font-weight:var(--w-display);letter-spacing:var(--ls-h2);
+  line-height:1.28;font-variation-settings:var(--opsz-d);color:var(--ink)}
+.rr-lab{font-variant-numeric:tabular-nums}
+.rr-body{max-width:56ch}
+.rr-body .dim{color:var(--grey-2)}
 
-/* FOOTER */
-.footer{display:flex;justify-content:space-between;align-items:center;padding-top:32px;padding-bottom:32px;border-top:1px solid var(--border);font-size:clamp(11px,0.9vw,13px);color:var(--text-sub)}
-.footer-links{display:flex;gap:24px}
-.footer-links a{color:var(--text-sub);text-decoration:none;transition:color 0.3s}
-.footer-links a:hover{color:var(--text)}
+/* ═══ FOOTER ═══ */
+footer.wrap{padding-top:clamp(120px,22vh,260px);padding-bottom:clamp(30px,4.5vh,48px);flex-shrink:0}
+.f-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px 32px;align-items:start}
+.f-cell{font-size:clamp(13px,1.05vw,15px);font-weight:var(--w-mid);letter-spacing:-0.015em;
+  line-height:1.45;color:var(--ink)}
+.f-cell.end{text-align:right}
+.f-cell a{display:block;color:var(--ink);text-decoration:none;transition:opacity .25s}
+.f-cell a:hover{opacity:.5}
+.f-cell .t{font-variant-numeric:tabular-nums}
 
-/* ANIMATIONS */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
-.reveal.visible{opacity:1;transform:none}
-.stagger .reveal:nth-child(1){transition-delay:0.05s}
-.stagger .reveal:nth-child(2){transition-delay:0.1s}
-.stagger .reveal:nth-child(3){transition-delay:0.15s}
-.stagger .reveal:nth-child(4){transition-delay:0.2s}
-.stagger .reveal:nth-child(5){transition-delay:0.25s}
+.reveal{opacity:0;transform:translateY(18px);
+  transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
 
-/* RESPONSIVE */
-@media(max-width:768px){
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-
-    
-    .nav-brand{justify-self:start;font-family:var(--display);font-size:clamp(14px,1.2vw,16px);font-weight:500;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
-    
-    
-    
-    
+@media(max-width:900px){
+  .rrow{grid-template-columns:1fr;gap:10px}
+  .rr-lab,.rr-body{grid-column:1 / -1}
+  .rr-body{max-width:none}
 }
 @media(max-width:768px){
-    .tl-item{grid-template-columns:1fr;gap:8px}
-    .tl-year{font-size:12px}
-    .principle{grid-template-columns:1fr}
-    .principle-num{display:none}
-    .footer{flex-direction:column;gap:16px;text-align:center}
+  .drawer{width:100%;padding:20px}
+  .f-row{grid-template-columns:1fr 1fr}
+  .f-cell.end{text-align:left}
 }
 
+/* ═══════════ NAV — RICE SPEC ═══════════
+   Verified against thisisrice.com/wp-content/themes/thisisrice/public/css/app.7c6feb.css
+   .t-title ladder:  >=1920 40/48   <=1919 34/40   <=1679 30/36
+                     <=1403 24/28   <=1152 16/20   <=1023 20/24   (weight 400, no tracking)
+   Header: 8-col grid, items-baseline, opaque, no border, no blur.
+   py 30/21/18/15/12/15 (Rice). Horizontal padding uses var(--gut) instead of
+   their px 40/20/10 so the mark and Menu land on the SAME gutter as page
+   content — Rice can use 40 because their content grid uses 40 too.
+   Brand col 1. Menu pinned to the last column, justify-end, so it lands on
+   the page right gutter (deviation from Rice, who place it on the 50% line).
+   text-grey #BEBEBE. Page links live in the drawer — same as Rice.
 
+   BRAND: Dylan's own mark (logo.svg) replaces the wordmark. Because .nav-in is
+   align-items:baseline and the logo image is a block, the badge's bottom edge lands
+   on Menu's text baseline. Rice fade their brand to grey on hover; a fixed-
+   colour badge can't, so opacity is the equivalent.
+   Alternates, one-line src swap: logo-ink.svg (site tokens), logo-mono.svg. */
+:root{--rice-grey:#BEBEBE;--nav-h:108px;--logo-h:32px}
 
+nav{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:none}
+.nav-in{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));align-items:baseline;
+  height:auto;gap:40px;padding:30px var(--gut)}
+.nav-in>*{min-width:0}
 
+.brand{grid-column:1;display:inline-block;font-size:0;line-height:0;text-decoration:none;
+  transition:opacity .3s}
+.brand:hover{opacity:.55}
+.brand img{height:var(--logo-h);width:auto;display:block}
 
+.menu-toggle{grid-column:8;justify-self:end;margin-left:0;padding:0;
+  font-family:var(--sans);font-size:40px;line-height:48px;font-weight:500;letter-spacing:0;
+  text-transform:none;color:var(--ink);background:none;border:none;cursor:pointer;
+  font-variation-settings:var(--opsz-d);transition:color .3s}
+.menu-toggle:hover{color:var(--rice-grey);opacity:1}
 
+/* fixed nav is padding-driven (44-108px), so clearance tracks --nav-h */
+.hero{padding-top:calc(var(--nav-h) + clamp(24px,4vh,56px));padding-bottom:clamp(6px,1.2vh,14px)}
 
-
-/* Menu button — hidden on desktop */
-.menu-btn{display:none}
-.menu-btn span{display:block;width:100%;height:2px;border-radius:1px;transition:0.3s}
-
-/* MOBILE NAV — Option A: Classic + Full-width Light Panel */
-@media(max-width:768px){
-    .nav-inner{display:flex!important;padding:0 24px;height:60px;align-items:center}
-    .nav-links{display:none!important;position:absolute;top:60px;left:0;width:100%;background:#fff;flex-direction:column;padding:28px 24px;gap:16px;z-index:300;align-items:flex-start;box-shadow:0 12px 40px rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.06)}
-    .nav-links.active{display:flex!important}
-    .nav-links a{font-family:var(--display);font-size:22px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:-0.02em;line-height:1.5}
-    .nav-links a:hover{color:var(--accent)}
-    .nav-cta{display:none!important}
-    .menu-btn{display:flex!important;flex-direction:column;justify-content:space-between;width:26px;height:18px;margin-left:auto;z-index:400;background:none!important;border:none!important;cursor:pointer;padding:0}
-    .menu-btn span{display:block!important;width:100%;height:2px;background:var(--text)!important;border-radius:1px;position:static!important;transform:none!important;margin:0}
+@media(max-width:1919px){   /* gig */
+  :root{--nav-h:82px;--logo-h:28px}
+  .nav-in{gap:20px;padding:21px var(--gut)}
+  .menu-toggle{font-size:34px;line-height:40px}
 }
-
+@media(max-width:1679px){   /* mas */
+  :root{--nav-h:72px;--logo-h:25px}
+  .nav-in{padding:18px var(--gut)}
+  .menu-toggle{font-size:30px;line-height:36px}
+}
+@media(max-width:1403px){   /* lar */
+  :root{--nav-h:58px;--logo-h:21px}
+  .nav-in{padding:15px var(--gut)}
+  .menu-toggle{font-size:24px;line-height:28px}
+}
+@media(max-width:1152px){   /* med */
+  :root{--nav-h:44px;--logo-h:15px}
+  .nav-in{gap:10px;padding:12px var(--gut)}
+  .menu-toggle{font-size:16px;line-height:20px}
+}
+@media(max-width:1023px){   /* tab — Rice drop to 4 cols, Menu hard right */
+  :root{--nav-h:54px;--logo-h:18px}
+  .nav-in{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:15px var(--gut)}
+  .menu-toggle{grid-column:4;justify-self:end}
+  .menu-toggle{font-size:20px;line-height:24px}
+}
 </style>
 </head>
 <body>
 
-<nav><div class="nav-inner">
-    <a href="index.html" class="nav-brand">Dylan Lam</a>
-    <div class="nav-links" id="navLinks">
-        <a href="works.html">Works</a>
-        <a href="about.html">About</a>
-        <a href="index.html#contact">Contact</a>
-    </div>
-    <a href="index.html#contact" class="nav-cta">Get in touch <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M3 9L9 3M9 3H4M9 3v5"></path></svg></a>
-    <button class="menu-btn" id="menuBtn"><span></span><span></span><span></span></button>
+<nav><div class="nav-in">
+  <a href="index.html" class="brand" aria-label="Dylan Lam — home"><img src="mark.svg" alt="Dylan Lam" width="32" height="32"></a>
+  <button class="menu-toggle" id="menuBtn">Menu</button>
 </div></nav>
 
-<main class="container">
-
-<section class="page-hero reveal">
-    <h1>Hi, I'm Dylan.</h1>
-    <p class="subtitle">I build AI tools, grow partnerships, and design systems that help teams move faster. Currently at Amazon Ads, driving advertiser growth across Southeast Asia.</p>
-</section>
-
-<hr class="section-divider">
-
-<section class="section">
-    <div class="section-label">Philosophy</div>
-    <h2 class="section-head">How I work</h2>
-    <div class="principles stagger">
-        <div class="principle reveal">
-            <div class="principle-num">01.</div>
-            <div><h3>Show, not tell</h3><p>I prove with evidence - real outcomes, real numbers, real projects. No claims without proof.</p></div>
-        </div>
-        <div class="principle reveal">
-            <div class="principle-num">02.</div>
-            <div><h3>Systems over heroics</h3><p>A good system beats a great individual effort every time. I build processes that run without me.</p></div>
-        </div>
-        <div class="principle reveal">
-            <div class="principle-num">03.</div>
-            <div><h3>Clarity is kindness</h3><p>Complex work doesn't need complex communication. I keep stakeholders informed with zero ambiguity.</p></div>
-        </div>
+<div class="underlay" id="underlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-top"><button class="drawer-close" id="closeBtn">Close</button></div>
+  <div class="drawer-links">
+    <a href="index.html">Home</a>
+    <a href="works.html">Work</a>
+    <a href="about.html" class="on">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <div class="drawer-info">
+    <div><div class="di-k">Email</div><div class="di-v"><a href="mailto:dylanlamwork@gmail.com">dylanlamwork@gmail.com</a></div></div>
+    <div><div class="di-k">Based in</div><div class="di-v">Ho Chi Minh City, Vietnam</div></div>
+    <div class="drawer-social">
+      <div class="di-v"><a href="https://linkedin.com/in/dylanlamwork" target="_blank" rel="noopener">LinkedIn</a></div>
     </div>
-</section>
+  </div>
+</aside>
 
-<hr class="section-divider">
+<main class="wrap">
 
-<section class="section">
-    <div class="section-label">Experience</div>
-    <h2 class="section-head">Journey so far</h2>
-    <div class="timeline stagger">
-        <div class="tl-item current reveal">
-            <div class="tl-year">Sep 2024 - Present</div>
-            <div class="tl-right">
-                <div class="tl-role">Global Partner Manager</div>
-                <div class="tl-company">Amazon - Ho Chi Minh City, Vietnam</div>
-                <div class="tl-desc">Delivered 5 consecutive quarters of KPI overperformance through partner-led growth. Co-built and scaled 4 Data &amp; AI solutions across countries and cross-functional teams.</div>
-            </div>
+  <section class="hero"><h1 class="bigword">About</h1></section>
+
+  <div class="rows">
+
+    <!-- INTRO — no label; the opening statement needs no announcing.
+         Sits in cols 2-4 so it aligns with every content column below. -->
+    <div class="rgroup">
+      <div class="rrow" style="border-top:none">
+        <div class="rr-lab"></div>
+        <div class="rr-body" style="max-width:34ch">
+          <p class="t-h1">I turn messy commercial problems into systems that keep working after I leave the room.</p>
+          <p class="t-body item-d" style="max-width:56ch">Six years across partnerships, delivery, and data tooling — nearly three in a Saigon creative studio, now at Amazon Ads driving advertiser growth across Southeast Asia. I tend to be the person who asks why the number moved before anyone argues about what to do next.</p>
         </div>
-        <div class="tl-item reveal">
-            <div class="tl-year">Jan 2024 - Aug 2024</div>
-            <div class="tl-right">
-                <div class="tl-role">Strategic Partnership Manager</div>
-                <div class="tl-company">The Lab - Ho Chi Minh City, Vietnam</div>
-                <div class="tl-desc">Clients: Apple, MUJI, Vero, Lang Spa, Mam Mam Restaurant. Led partnership strategy and delivery at a company of creatives.</div>
-            </div>
-        </div>
-        <div class="tl-item reveal">
-            <div class="tl-year">Nov 2022 - Jan 2024</div>
-            <div class="tl-right">
-                <div class="tl-role">Senior Strategic Partnership</div>
-                <div class="tl-company">The Lab - Ho Chi Minh City, Vietnam</div>
-                <div class="tl-desc">Clients: Yingtao (NYC Michelin), Bitis, Sunlife, Mami Cocktail. Drove 40% of annual company revenue, launched a 1,000sqm bakery coordinating 10+ teams.</div>
-            </div>
-        </div>
-        <div class="tl-item reveal">
-            <div class="tl-year">Nov 2021 - Nov 2022</div>
-            <div class="tl-right">
-                <div class="tl-role">Account / Strategic Partnership Executive</div>
-                <div class="tl-company">The Lab - Ho Chi Minh City, Vietnam</div>
-                <div class="tl-desc">Clients: US CDC - HAIVN, OP3N, Kei Concepts. Hit 180% of Q4 revenue KPIs, onboarded a U.S. client into ongoing partnerships.</div>
-            </div>
-        </div>
-        <div class="tl-item reveal">
-            <div class="tl-year">May 2020 - Jul 2021</div>
-            <div class="tl-right">
-                <div class="tl-role">Account Executive → Senior Account Executive</div>
-                <div class="tl-company">PMAX Vietnam - Ho Chi Minh City, Vietnam</div>
-                <div class="tl-desc">Co-managed digital ad campaigns for FE CREDIT, VPBank &amp; VAS Education. Built real-time dashboards. SMARTIES Vietnam 2021 Gold &amp; Bronze winner.</div>
-            </div>
-        </div>
+      </div>
     </div>
-</section>
-
-<hr class="section-divider">
-
-<section class="section">
-    <div class="section-label">Toolkit</div>
-    <h2 class="section-head">Tools &amp; systems I work with</h2>
-    <div class="tools-grid stagger">
-        <div class="tool-pill reveal">Clair Optimization Agent</div>
-        <div class="tool-pill reveal">Clair Visual Prompt Assistant</div>
-        <div class="tool-pill reveal">Self-built AI tools</div>
-        <div class="tool-pill reveal">Excel / Sheets</div>
-        <div class="tool-pill reveal">PowerBI</div>
-        <div class="tool-pill reveal">QuickSight</div>
-        <div class="tool-pill reveal">Notion</div>
-        <div class="tool-pill reveal">HTML / CSS / JS</div>
-        <div class="tool-pill reveal">Prompt Engineering</div>
-        <div class="tool-pill reveal">Data Visualization</div>
-        <div class="tool-pill reveal">Google Data Studio</div>
+    <!-- EXPERIENCE — Rice rows. Label = date (unique per row, chronological).
+         Content sourced verbatim from LinkedIn; no claim added or amplified. -->
+    <div class="rgroup">
+      <div class="grp-lab t-meta">Experience</div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Sep 2024 — Now</div>
+        <div class="rr-body">Global Partner Manager, Amazon<span class="dim">—Delivered five consecutive quarters of KPI overperformance through partner-led growth and operational improvements. Co-built and scaled four Data &amp; AI solutions across countries and cross-functional teams, one adopted into a globally used dashboard. Scope expanded from Vietnam to Southeast Asia, Jan 2026.</span></div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Jan — Aug 2024</div>
+        <div class="rr-body">Strategic Partnership Manager, The Lab<span class="dim">—Led an F&amp;B business launch in under four months. Built and analysed CRM data to guide 2024 strategy, and ran communication workshops to improve cross-functional alignment. Clients: Apple, MUJI, Vero, Lang Spa, M&acirc;m M&acirc;m.</span></div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Nov 2022 — Jan 2024</div>
+        <div class="rr-body">Senior Strategic Partnership, The Lab<span class="dim">—Drove 40% of annual company revenue. Launched a 1,000sqm bakery by coordinating 10+ teams, and built Notion-based dashboards to streamline project oversight. Employee of the Month, Nov 2023. Clients: Yingtao (NYC Michelin), Biti&rsquo;s, Sunlife, Mami Cocktail.</span></div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Nov 2021 — Nov 2022</div>
+        <div class="rr-body">Account &amp; Strategic Partnership Executive, The Lab<span class="dim">—Hit 180% of Q4 revenue KPIs. Onboarded a US client into ongoing partnerships, and developed in-house cash flow and CRM tools that scaled internal operations. Clients: US CDC &mdash; HAIVN, OP3N, Kei Concepts.</span></div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Apr — Jul 2021</div>
+        <div class="rr-body">Senior Account Executive, PMAX Vietnam<span class="dim">—Spearheaded campaign launches with custom work plans, built internal productivity tools, and ranked among the top 3 accounts in Q2 2021 for performance. On Scan &amp; Pay: main account PIC, project team lead, and script writer for the competition entry &mdash; SMARTIES Vietnam 2021 Gold &amp; Bronze winner.</span></div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Aug 2020 — Mar 2021</div>
+        <div class="rr-body">Account Executive, PMAX Vietnam<span class="dim">—Co-managed digital ad campaigns for FE CREDIT, VPBank and VAS Education. Built real-time dashboards in Google Data Studio, and helped develop standout content for the PMAX Tet 2021 campaign.</span></div>
+      </div>
     </div>
-</section>
 
-<hr class="section-divider">
+    <!-- WHAT I DO — Rice's Services section, 1:1 -->
+    <div class="rgroup">
+      <div class="grp-lab t-meta">What I do</div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Data &amp; AI</div>
+        <div class="rr-body">AI agent design, Analytics tooling, Dashboard architecture, Reporting automation<span class="dim">—Turning advertiser data into decisions teams actually act on.</span></div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Project Management</div>
+        <div class="rr-body">Multi-team coordination, Build timelines, Vendor management, Launch delivery<span class="dim">—Holding many teams to one timeline, without the drama.</span></div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Commercial</div>
+        <div class="rr-body">Partnership negotiation, Account management, CRM &amp; pipeline design, Internal ops systems<span class="dim">—Making the value obvious, then proving it after signature.</span></div>
+      </div>
+    </div>
+    <!-- PRINCIPLES — Rice rows; the explanations return as the content side -->
+    <div class="rgroup">
+      <div class="grp-lab t-meta">Principles</div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Show, don't tell</div>
+        <div class="rr-body dim">Real outcomes, real numbers, real projects. No claims without proof.</div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Systems over heroics</div>
+        <div class="rr-body dim">A good system beats a great individual effort. I build processes that run without me.</div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Clarity is kindness</div>
+        <div class="rr-body dim">Complex work doesn't need complex communication.</div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Root cause before remedy</div>
+        <div class="rr-body dim">Symptoms are cheap to treat and expensive to keep treating.</div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Ship, then refine</div>
+        <div class="rr-body dim">A working draft in front of people beats a perfect plan in my head.</div>
+      </div>
+      <div class="rrow reveal">
+        <div class="rr-lab">Own the mistake early</div>
+        <div class="rr-body dim">Trust is built on the corrections, not the wins.</div>
+      </div>
+    </div>
 
-<section class="cta-section reveal">
-    <h2>Want to work together?</h2>
-    <p>I'm always open to new opportunities, partnerships, or exchanging ideas.</p>
-    <a href="index.html#contact" class="btn-primary">Get in touch <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M3 9L9 3M9 3H4M9 3v5"></path></svg></a>
-</section>
+  </div>
 
 </main>
 
-<footer class="footer container">
-    <div class="footer-left">© 2025 Dylan Lam. Ho Chi Minh City, Vietnam.</div>
-    <div class="footer-links"><a href="works.html">Works</a><a href="about.html">About</a><a href="index.html#contact">Contact</a></div>
+<footer class="wrap">
+  <div class="f-row">
+    <div class="f-cell" data-tz="Asia/Ho_Chi_Minh">
+      <div class="l1">Ho Chi Minh City <span class="t"></span></div><div class="l2"></div>
+    </div>
+    <div class="f-cell" data-tz="Asia/Singapore">
+      <div class="l1">Singapore <span class="t"></span></div><div class="l2"></div>
+    </div>
+    <div class="f-cell">
+      <a href="https://linkedin.com/in/dylanlamwork" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:dylanlamwork@gmail.com">Email</a>
+    </div>
+    <div class="f-cell end">&copy;2026 Dylan Lam</div>
+  </div>
 </footer>
 
 <script>
-// Mobile menu
-document.getElementById('menuBtn').addEventListener('click',()=>{
-    document.getElementById('navLinks').classList.toggle('active');
-});
+/* principles — statements, no numbering */
 
-// Reveal on scroll
-const obs=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* fit the giant word */
+function fitWord(){
+  const el=document.querySelector('.bigword'); if(!el) return;
+  const cw=el.parentElement.clientWidth; if(!cw) return;
+  const PROBE=400;
+  el.style.fontSize=PROBE+'px';
+  const w=el.getBoundingClientRect().width; if(!w) return;
+  const size=PROBE*cw/w;
+  el.style.fontSize=size+'px';
+  /* Descender-aware spacing. A line-height below 1.0 makes the box SHORTER
+     than the glyphs, so descenders (y, g, p, j, q) hang outside it and collide
+     with whatever follows. Inter's content area is ~1.21em, so the overflow is
+     (1.21 - lineHeight) / 2 on each side. Reserve the lower half as padding.
+     Self-correcting: works for any word, descender or not, at any viewport. */
+  const lh=parseFloat(getComputedStyle(el).lineHeight)/size;
+  el.style.paddingBottom=Math.max(0,(1.21-lh)/2*size)+'px';
+}
+addEventListener('resize',fitWord);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitWord);
+fitWord();
+
+/* nav drawer */
+const drawer=document.getElementById('drawer'),under=document.getElementById('underlay');
+const openMenu=()=>{drawer.classList.add('on');under.classList.add('on');document.body.classList.add('lock')};
+const shutMenu=()=>{drawer.classList.remove('on');under.classList.remove('on');document.body.classList.remove('lock')};
+document.getElementById('menuBtn').addEventListener('click',openMenu);
+document.getElementById('closeBtn').addEventListener('click',shutMenu);
+under.addEventListener('click',shutMenu);
+addEventListener('keydown',e=>{if(e.key==='Escape')shutMenu()});
+document.querySelectorAll('.drawer-links a').forEach(a=>a.addEventListener('click',shutMenu));
+
+/* footer clocks */
+function clocks(){
+  document.querySelectorAll('.f-cell[data-tz]').forEach(function(cell){
+    var tz=cell.dataset.tz, now=new Date();
+    cell.querySelector('.t').textContent=now.toLocaleTimeString('en-US',
+      {timeZone:tz,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+    var date=now.toLocaleDateString('en-US',
+      {timeZone:tz,weekday:'long',month:'short',day:'2-digit',year:'numeric'});
+    var off=new Intl.DateTimeFormat('en-US',{timeZone:tz,timeZoneName:'longOffset'})
+      .formatToParts(now).find(function(p){return p.type==='timeZoneName'}).value;
+    cell.querySelector('.l2').textContent=date+' ('+off+')';
+  });
+}
+clocks();setInterval(clocks,1000);
 </script>
-
 </body></html>
