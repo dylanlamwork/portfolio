@@ -138,10 +138,12 @@ footer.wrap{padding-top:clamp(120px,22vh,260px);padding-bottom:clamp(30px,4.5vh,
 .f-cell a:hover{opacity:.5}
 .f-cell .t{font-variant-numeric:tabular-nums}
 
-@media(max-width:1400px){ .grid{grid-template-columns:repeat(3,1fr)} }
-    @media(max-width:1000px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    /* Two states only: 4 columns everywhere, 1 column on phones.
+   680px is the measured floor for 4-up (card ~150px, title still fits the
+   banner). Above it every laptop and tablet gets 4 -- including iPad portrait
+   at 768px and phones in landscape. Below it, one full-width card. */
+@media(max-width:680px){ .grid{grid-template-columns:1fr} }
 @media(max-width:768px){
-  .grid{grid-template-columns:1fr}
   .fcount{display:none}
   .f-row{grid-template-columns:1fr 1fr}
   .f-cell.end{text-align:left}

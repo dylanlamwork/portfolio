@@ -133,7 +133,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(250,250,250,
 .intro-d{margin-top:clamp(14px,2.2vh,24px);max-width:54ch}
 
 /* ═══ STATS — mono proof row, no colour ═══ */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--col-gap);
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--col-gap);
   padding:clamp(30px,4.4vh,56px) 0 0}
 .stat .sn{font-size:var(--t-stat);font-weight:var(--w-bold);letter-spacing:-0.045em;
   line-height:1;font-variation-settings:var(--opsz-d);font-variant-numeric:tabular-nums}
@@ -194,15 +194,17 @@ footer.wrap{padding-top:clamp(120px,22vh,260px);padding-bottom:clamp(30px,4.5vh,
   transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:none}
 
-@media(max-width:1400px){ .grid{grid-template-columns:repeat(3,1fr)} }
-@media(max-width:1000px){ .grid{grid-template-columns:repeat(2,1fr)} }
 @media(max-width:900px){
   .rrow{grid-template-columns:1fr;gap:10px}
   .rr-lab,.rr-body,.cform{grid-column:1 / -1}
   .stats{grid-template-columns:repeat(2,1fr);gap:26px var(--col-gap)}
 }
+/* Two states only: 4 columns everywhere, 1 column on phones.
+   680px is the measured floor for 4-up (card ~150px, title still fits the
+   banner). Above it every laptop and tablet gets 4 -- including iPad portrait
+   at 768px and phones in landscape. Below it, one full-width card. */
+@media(max-width:680px){ .grid{grid-template-columns:1fr} }
 @media(max-width:768px){
-  .grid{grid-template-columns:1fr}
   .drawer{width:100%;padding:20px}
   .f-row{grid-template-columns:1fr 1fr}
   .f-cell.end{text-align:left}
@@ -312,6 +314,7 @@ nav{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;borde
     <div class="stats">
       <div class="stat reveal"><div class="sn">30+</div><div class="sl t-meta">Projects delivered</div></div>
       <div class="stat reveal"><div class="sn">10+</div><div class="sl t-meta">Teams coordinated</div></div>
+      <div class="stat reveal"><div class="sn">4</div><div class="sl t-meta">Data &amp; AI tools</div></div>
       <div class="stat reveal"><div class="sn">6+</div><div class="sl t-meta">Years experience</div></div>
     </div>
   </div>
