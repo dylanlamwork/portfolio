@@ -3,6 +3,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dylan Lam — Strategy, Data &amp; Systems</title>
+<meta name="description" content="Dylan Lam, Global Partner Manager at Amazon Ads. Strategy, data, and the systems in between: AI tools, partnerships, and systems that help teams move faster.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dylan Lam">
+<meta property="og:title" content="Dylan Lam — Strategy, Data & Systems">
+<meta property="og:description" content="Dylan Lam, Global Partner Manager at Amazon Ads. Strategy, data, and the systems in between: AI tools, partnerships, and systems that help teams move faster.">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<meta name="twitter:title" content="Dylan Lam — Strategy, Data & Systems">
+<meta name="twitter:description" content="Dylan Lam, Global Partner Manager at Amazon Ads. Strategy, data, and the systems in between: AI tools, partnerships, and systems that help teams move faster.">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="alternate icon" href="icon-64.png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -18,8 +30,8 @@
   --opsz-d:'opsz' 32; --opsz-t:'opsz' 16;
   --maxw:none; --gut:clamp(20px,2.6vw,56px);
   --col-gap:clamp(14px,1.5vw,22px);   /* same column gutter as works.html */
-  /* card banner colours — identical tokens to works.html */
-  --bn-data:#4B2ED6; --bn-pm:#0E7A6E; --bn-sales:#B0500C; --bn-system:#7A2FBF;
+  /* card banner colours — water palette, identical tokens to works.html */
+  --bn-data:#1F4E79; --bn-pm:#0F6E6A; --bn-sales:#8A5A2B; --bn-system:#3B4A3F;
 
   /* ═══ TYPE SCALE — the five shared steps (identical to about.html), plus two
    homepage-only steps above them: --t-hero for the positioning statement and
@@ -47,10 +59,6 @@ main{flex:1 0 auto}
 /* ═══ TYPE PRIMITIVES ═══ */
 .t-hero{font-size:var(--t-hero);font-weight:var(--w-display);letter-spacing:-0.042em;
   line-height:1.06;font-variation-settings:var(--opsz-d);color:var(--ink)}
-.t-h1{font-size:var(--t-h1);font-weight:var(--w-display);letter-spacing:var(--ls-h1);
-  line-height:1.1;font-variation-settings:var(--opsz-d)}
-.t-h2{font-size:var(--t-h2);font-weight:var(--w-display);letter-spacing:var(--ls-h2);
-  line-height:1.18;font-variation-settings:var(--opsz-d)}
 .t-body{font-size:var(--t-body);font-weight:var(--w-body);letter-spacing:var(--ls-body);
   line-height:1.6;color:var(--grey-1)}
 .t-meta{font-family:var(--mono);font-size:var(--t-meta);letter-spacing:0.06em;
@@ -95,6 +103,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(250,250,250,
 .bigword{display:block;width:max-content;white-space:nowrap;font-weight:var(--w-bold);
   letter-spacing:-0.055em;line-height:0.78;font-variation-settings:var(--opsz-d);
   color:var(--ink);margin-left:-0.04em}
+/* hand-kerned at display size. A kerning table built for 12px is wrong at 600px: these four pairs are
+   set by eye once. D·y closes; y·l closest — the tail tucks under the l; l·a wants a hair of air; a·n closes. */
+.bigword i{font-style:normal;display:inline-block;letter-spacing:0}
+.bigword .k1{margin-right:-.045em}.bigword .k2{margin-right:-.075em}.bigword .k3{margin-right:-.03em}.bigword .k4{margin-right:-.05em}
 
 /* ═══ SECTION GROUP + RICE ROW — identical system to about.html ═══ */
 /* Section rhythm. Rice's section scale is 60/120/240px and Lab's is 120px;
@@ -274,6 +286,65 @@ nav{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;borde
   .menu-toggle{grid-column:4;justify-self:end}
   .menu-toggle{font-size:20px;line-height:24px}
 }
+
+/* ═══ KEYBOARD FOCUS ═══ Visible ring for keyboard users only (:focus-visible),
+   so mouse clicks stay clean. Inputs already change border colour on focus. */
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+.drawer :focus-visible{outline-color:#fff}
+input:focus-visible,textarea:focus-visible{outline:none}
+
+/* ═══ REDUCED MOTION ═══ Honour the OS setting: no fades, no slides, no smooth
+   scroll. Elements that start hidden for the scroll-reveal are shown at once. */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;
+    animation-iteration-count:1!important;scroll-behavior:auto!important}
+  .reveal,.tile{opacity:1!important;transform:none!important}
+}
+
+/* ═══ WATER — the hero's material. One fixed WebGL layer under the page, fades to paper
+   as the hero scrolls out. Layout, type and spacing are untouched; this is behind them. ═══ */
+#water{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:1;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 38%,rgba(0,0,0,0) 72%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 38%,rgba(0,0,0,0) 72%)}
+main.wrap{position:relative;z-index:1}
+.hero .bigword{mix-blend-mode:multiply;opacity:.96}
+body.nogl #water{display:none}
+body.nogl .hero .bigword{mix-blend-mode:normal}
+@media(prefers-reduced-motion:reduce){#water{display:none}.hero .bigword{mix-blend-mode:normal}}
+
+/* ═══ TRACES — the surface appears once; its consequences appear everywhere.
+   One easing for all of it: fast, then settle. Nothing moves at the speed of its input. ═══ */
+:root{--settle:cubic-bezier(.16,1,.3,1)}
+
+/* 1 · cards: lift and settle; colour deepens one step (shallow → deep) */
+.tile .canvas{transition:transform .9s var(--settle),filter .9s var(--settle)}
+.tile:hover .canvas{transform:translateY(-5px);filter:brightness(.92)}
+
+/* 2 · reveals settle with a hair of overshoot instead of a plain ease */
+.reveal{transition:opacity .9s var(--settle),transform 1.1s linear(0,.009,.035 2.1%,.141,.281 6.7%,.723 12.9%,.938 16.7%,1.017,1.077,1.121,1.149 24.3%,1.159,1.163,1.161,1.154 29.9%,1.129 32.8%,1.051 39.6%,1.017 43.1%,.991,.977 51%,.974 53.8%,.975 57.1%,.997 69.8%,1.003 76.9%,1.004 83.8%,1)}
+
+/* 3 · the last ripple: one hairline ring expands from the Email label when the row enters view. Once. */
+.rr-lab.ring{position:relative}
+.rr-lab.ring::after{content:"";position:absolute;left:-14px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;border:1px solid var(--ink);opacity:0;transform:scale(1);pointer-events:none}
+.rr-lab.ring.go::after{animation:ring 1.6s var(--settle) 1 forwards}
+@keyframes ring{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(9)}}
+
+/* 4 · the float: the mark in the footer, bobbing once on load */
+.f-cell .mark{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:10px;border-radius:4px;background:var(--ink);position:relative}
+.f-cell .mark::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:var(--bg)}
+.f-cell .mark.bob{animation:bob 2.4s var(--settle) 1}
+@keyframes bob{0%{transform:translateY(0)}18%{transform:translateY(-6px) rotate(-6deg)}42%{transform:translateY(2px) rotate(3deg)}68%{transform:translateY(-1px) rotate(-1deg)}100%{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.rr-lab.ring.go::after,.f-cell .mark.bob{animation:none}}
+
+/* ═══ NAV FEATHER — over the hero the nav's hard hairline becomes a 14px fade into the water, so the bar sits ON
+   the surface rather than cutting it. Once the hero scrolls away (body.past-hero) the hairline returns. ═══ */
+nav{border-bottom-color:transparent;transition:border-bottom-color .5s var(--settle,ease)}
+nav::after{content:"";position:absolute;left:0;right:0;top:100%;height:14px;pointer-events:none;
+  background:linear-gradient(rgba(250,250,250,.82),rgba(250,250,250,0));opacity:1;transition:opacity .5s var(--settle,ease)}
+body.past-hero nav{border-bottom-color:var(--line-2)}
+body.past-hero nav::after{opacity:0}
+body.nogl nav{border-bottom-color:var(--line-2)}body.nogl nav::after{display:none}
+@media(prefers-reduced-motion:reduce){nav{border-bottom-color:var(--line-2)}nav::after{display:none}}
 </style>
 </head>
 <body>
@@ -301,9 +372,10 @@ nav{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;borde
   </div>
 </aside>
 
+<canvas id="water" aria-hidden="true"></canvas>
 <main class="wrap">
 
-  <section class="hero"><h1 class="bigword">Dylan</h1></section>
+  <section class="hero"><h1 class="bigword" aria-label="Dylan"><span aria-hidden="true"><i class="k1">D</i><i class="k2">y</i><i class="k3">l</i><i class="k4">a</i><i>n</i></span></h1></section>
 
   <!-- INTRO — statement spans full width, same as the Work filter row -->
   <div class="intro">
@@ -356,7 +428,7 @@ nav{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;borde
     <div class="grp-lab t-meta">Contact</div>
     <div class="lead"><p>Open to conversations about partnerships, AI tooling, or a project that needs someone to hold the timeline. <span class="dim">Email is fastest.</span></p></div>
     <div class="rrow reveal">
-      <div class="rr-lab">Email</div>
+      <div class="rr-lab ring" id="ring">Email</div>
       <div class="rr-body"><a class="lnk" href="mailto:dylanlamwork@gmail.com">dylanlamwork@gmail.com</a></div>
     </div>
     <div class="rrow reveal">
@@ -392,7 +464,7 @@ nav{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;borde
       <a href="https://linkedin.com/in/dylanlamwork" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:dylanlamwork@gmail.com">Email</a>
     </div>
-    <div class="f-cell end">&copy;2026 Dylan Lam</div>
+    <div class="f-cell end"><span class="mark" id="float"></span>&copy;2026 Dylan Lam</div>
   </div>
 </footer>
 
@@ -495,5 +567,76 @@ function clocks(){
   });
 }
 clocks();setInterval(clocks,1000);
+</script>
+
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.169.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+/* ═══ WATER TOKENS ═══ */
+const SEG=300, SIZE=120, DAMP=0.986, DROP_R=2.0, DROP_F=0.42, PULSE_F=2.2, SWELL=0.11, TILT_MAX=0.3, LERP=0.08;
+const cv=document.getElementById('water');
+if(matchMedia('(prefers-reduced-motion:reduce)').matches||innerWidth<700){cv.remove();document.body.classList.add('nogl')}
+else{
+let renderer;try{renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true,powerPreference:'high-performance'})}catch(e){document.body.classList.add('nogl');cv.remove()}
+if(renderer){
+renderer.setPixelRatio(Math.min(1.5,devicePixelRatio||1));
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,1,0.1,300);
+const N=SEG+1,hA=new Float32Array(N*N),hB=new Float32Array(N*N);let cur=hA,prev=hB;
+function step(){for(let y=1;y<N-1;y++){const r=y*N;for(let x=1;x<N-1;x++){const i=r+x;cur[i]=((prev[i-1]+prev[i+1]+prev[i-N]+prev[i+N])*0.5-cur[i])*DAMP}}const t=cur;cur=prev;prev=t}
+function drop(wx,wz,r,f){const gx=(wx/SIZE+0.5)*SEG,gy=(wz/SIZE+0.5)*SEG,R=r*SEG/SIZE;
+  for(let y=Math.max(1,gy-R|0);y<Math.min(N-1,gy+R+1);y++)for(let x=Math.max(1,gx-R|0);x<Math.min(N-1,gx+R+1);x++){const d=Math.hypot(x-gx,y-gy);if(d<R){const k=Math.cos(d/R*Math.PI/2);prev[y*N+x]-=k*k*f}}}
+const geo=new THREE.PlaneGeometry(SIZE,SIZE,SEG,SEG);geo.rotateX(-Math.PI/2);const pos=geo.attributes.position;
+const mat=new THREE.MeshPhysicalMaterial({color:0xe6eef2,roughness:0.22,metalness:0,clearcoat:0.8,clearcoatRoughness:0.28,sheen:0.5,sheenColor:new THREE.Color(0xdfe9ee),transmission:0,
+  specularColor:new THREE.Color(0xf4f8fa),specularIntensity:1.0});
+/* vertex colour by height: troughs deeper (#cfdde4), crests paler (#f1f6f8) */
+const colA=new THREE.Color(0xcfdde4),colB=new THREE.Color(0xf1f6f8),tmp=new THREE.Color();
+const cols=new Float32Array((SEG+1)*(SEG+1)*3);geo.setAttribute('color',new THREE.BufferAttribute(cols,3));mat.vertexColors=true;mat.color.set(0xffffff);
+
+scene.add(new THREE.Mesh(geo,mat));
+const key=new THREE.DirectionalLight(0xfbfdff,2.2);key.position.set(-18,22,14);scene.add(key);
+const rim=new THREE.DirectionalLight(0xffffff,0.8);rim.position.set(20,10,-18);scene.add(rim);
+scene.add(new THREE.HemisphereLight(0xf2f7fa,0xcdd9df,1.15));
+/* the one dot — an ink disc afloat, bobbing with the surface */
+const one=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,0.12,40),new THREE.MeshStandardMaterial({color:0x0c0c0c,roughness:0.45}));scene.add(one);
+const OX=-SIZE*0.14,OZ=SIZE*0.11;
+const ray=new THREE.Raycaster(),ndc=new THREE.Vector2(9,9),plane=new THREE.Plane(new THREE.Vector3(0,1,0),0),hit=new THREE.Vector3(),last=new THREE.Vector3(1e3,0,1e3);
+let tilt=0,T=0,moved=false,nextDrop=2,heroH=innerHeight;
+addEventListener('mousemove',e=>{ndc.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);moved=true});
+addEventListener('mouseleave',()=>ndc.set(9,9));
+addEventListener('mousedown',e=>{if(e.target.closest('a,button,input,textarea'))return;if(scrollY>heroH*0.6)return;ray.setFromCamera(ndc,cam);if(ray.ray.intersectPlane(plane,hit))drop(hit.x,hit.z,DROP_R*1.6,PULSE_F)});
+function resize(){renderer.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();const he=document.querySelector('.hero');heroH=he?he.offsetTop+he.offsetHeight:innerHeight}
+function hAt(wx,wz){const gx=Math.round((wx/SIZE+0.5)*SEG),gy=Math.round((wz/SIZE+0.5)*SEG);return cur[Math.min(N-1,Math.max(0,gy))*N+Math.min(N-1,Math.max(0,gx))]}
+function frame(){
+  T+=0.016;
+  const p=Math.min(1,Math.max(0,scrollY/heroH));          // 0 at top, 1 when the hero has scrolled away
+  tilt+=(p*TILT_MAX-tilt)*LERP;
+  const dist=38+p*12,el=0.92-tilt;
+  cam.position.set(Math.sin(0.16)*dist*Math.cos(el),dist*Math.sin(el),Math.cos(0.16)*dist*Math.cos(el));cam.lookAt(0,0,0);
+  cv.style.opacity=String(Math.max(0,1-p*1.7));
+  if(cv.style.opacity==='0'){requestAnimationFrame(frame);return}  // nothing visible — skip the sim
+  if(moved&&p<0.7){ray.setFromCamera(ndc,cam);if(ray.ray.intersectPlane(plane,hit)){const d=hit.distanceTo(last);if(d>0.35){drop(hit.x,hit.z,DROP_R,DROP_F*Math.min(1,d/2));last.copy(hit)}}}
+  if(T>nextDrop){drop((Math.random()-.5)*SIZE*0.4,(Math.random()-.5)*SIZE*0.4,1.4,0.8);nextDrop=T+3+Math.random()*4}
+  step();
+  const a=pos.array;for(let i=0,k=0;i<N*N;i++,k+=3){a[k+1]=cur[i]+Math.sin(T*0.5+a[k]*0.12)*Math.cos(T*0.37+a[k+2]*0.1)*SWELL}
+  pos.needsUpdate=true;geo.computeVertexNormals();
+  for(let i=0,k=0;i<N*N;i++,k+=3){const t=Math.min(1,Math.max(0,(a[k+1]+0.9)/1.8));tmp.copy(colA).lerp(colB,t);cols[k]=tmp.r;cols[k+1]=tmp.g;cols[k+2]=tmp.b}geo.attributes.color.needsUpdate=true;
+  one.position.set(OX,hAt(OX,OZ)+0.06,OZ);one.rotation.z=hAt(OX+1,OZ)-hAt(OX-1,OZ);one.rotation.x=-(hAt(OX,OZ+1)-hAt(OX,OZ-1));
+  renderer.render(scene,cam);requestAnimationFrame(frame)}
+resize();addEventListener('resize',resize);frame();
+}}
+</script>
+
+<script>
+(function(){
+  var ring=document.getElementById('ring'),fl=document.getElementById('float');
+  if(ring)new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){setTimeout(function(){ring.classList.add('go')},350);o.unobserve(ring)}})},{threshold:.6}).observe(ring);
+  if(fl)new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){fl.classList.add('bob');o.unobserve(fl)}})},{threshold:.5}).observe(fl);
+})();
+</script>
+
+<script>
+(function(){var he=document.querySelector('.hero');if(!he)return;
+  function upd(){var b=he.getBoundingClientRect().bottom;document.body.classList.toggle('past-hero',b<120)}
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
 </script>
 </body></html>
